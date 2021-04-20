@@ -1,0 +1,23 @@
+.jobApplyFieldsWrapper {
+  padding: 1rem;
+  .jobContetHeading {
+    margin-bottom: 0px;
+  }
+  .jobContetPara {
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .buttonAlignmant {
+    // width: 80%;
+    margin-bottom: 1rem;
+  }
+  .buttonAlignmant:hover {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+
+  .jobApplyFields {
+    padding-left: 10%;
+    padding: 2rem 0rem;
+  }
+}

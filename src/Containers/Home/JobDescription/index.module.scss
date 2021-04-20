@@ -1,0 +1,29 @@
+.JobDescriptionWrapper {
+  padding: 2rem;
+  .introWrapper {
+    .logoImg {
+      width: 100%;
+    }
+    .noMargin {
+      margin-bottom: 0px;
+      margin-top: 10px;
+    }
+  }
+
+  .jobItem li {
+    margin-top: 2rem !important;
+  }
+
+  .jobItem {
+    list-style: none !important;
+  }
+
+  .jobItem li::before {
+    content: "\2022";
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+}

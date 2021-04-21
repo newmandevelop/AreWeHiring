@@ -9,6 +9,8 @@ const Routing = () => {
       <Switch>
         {/* <PrivateRoute exact path="/" component={Home} /> */}
         <Route exact path="/" component={Home} />
+        <Route exact path="/jobs/:id" component={Home} />
+
         <Redirect to="/" />
       </Switch>
     </CustomLayout>

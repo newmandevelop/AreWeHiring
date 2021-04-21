@@ -3,8 +3,9 @@ import { Row, Col, Typography, Divider } from "antd";
 import companyLogo from "../../../assets/companyName.png";
 import styles from "./index.module.scss";
 
-const JobDescription = () => {
+const JobDescription = (data: any) => {
   const { Title, Text, Paragraph } = Typography;
+  const { nameOfJob, company, location, description } = data.data;
   return (
     <div className={styles.JobDescriptionWrapper}>
       <Row className={styles.introWrapper}>
@@ -15,47 +16,45 @@ const JobDescription = () => {
           <Title level={4} className={styles.noMargin}>
             Job Title
           </Title>
-          <Text> Graphic Designer</Text>
+          <Text>{nameOfJob}</Text>
 
           <Title level={4} className={styles.noMargin}>
             Company{" "}
           </Title>
-          <Text> Kayo </Text>
+          <Text> {company} </Text>
           <Title level={4} className={styles.noMargin}>
             Location
           </Title>
-          <Text> USA </Text>
+          <Text> {location} </Text>
         </Col>
       </Row>
       <Divider style={{ marginTop: "2rem" }} />
       <Row justify="end" style={{ marginTop: "2rem" }}>
         <Col span={23}>
           <Title level={4}>Job Summary</Title>
-          <Typography style={{ width: "90%" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </Typography>
+          <Typography style={{ width: "90%" }}>{description}</Typography>
         </Col>
         <Divider style={{ marginTop: "2rem" }} />
 
         <Col span={23}>
           <Title level={4}>In this role you will</Title>
           <Paragraph ellipsis={false}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Paragraph>
           <Paragraph ellipsis={false}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Paragraph>
         </Col>
       </Row>

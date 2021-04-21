@@ -1,20 +1,24 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance } from "axios";
 
 const createAxiosInstance = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_MOCK_URL,
+    baseURL: "http://104.236.34.83:8080/api/",
     timeout: 12000,
-  })
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
   instance.interceptors.request.use(
-    config => {
+    (config) => {
       // config.headers.Authorization = ''
-      return { ...config }
+      return { ...config };
     },
-    error => {
-      return Promise.reject(error)
-    },
-  )
-  return instance
-}
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+  return instance;
+};
 
-export default createAxiosInstance
+export default createAxiosInstance;

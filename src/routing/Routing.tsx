@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import PrivateRoute from './PrivateRouting'
-import Home from "../Containers/Home";
+import Home from "../Containers/JobOverview";
 import CustomLayout from "./../Containers/Layout/index";
 const Routing = () => {
   return (

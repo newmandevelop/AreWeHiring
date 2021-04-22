@@ -1,15 +1,15 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 // import Auth, { IAuthState } from './Containers/Auth/reducers'
-import JobSearch,{IJobSearch} from './Containers/Home/reducers'
+import JobSearch, { IJobSearch } from "./Containers/JobOverview/reducers";
 
 export interface IRootState {
   // authState: IAuthState
-  jobSearch:IJobSearch
+  jobSearch: IJobSearch;
 }
 
 const rootReducer = combineReducers({
   // authState: Auth,
-  jobSearch:JobSearch
-})
+  jobSearch: JobSearch,
+});
 
-export default rootReducer
+export default rootReducer;

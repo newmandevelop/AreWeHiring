@@ -9,7 +9,7 @@ import JobApply from "./JobDetail";
 import { Actions } from "./actions";
 
 import { IRootState } from "../../reducers";
-const Home = ({ history }: RouteComponentProps) => {
+const JobOverview = ({ history }: RouteComponentProps) => {
   const { Title } = Typography;
   const {
     jobData,
@@ -60,4 +60,4 @@ const Home = ({ history }: RouteComponentProps) => {
   );
 };
 
-export default Home;
+export default JobOverview;

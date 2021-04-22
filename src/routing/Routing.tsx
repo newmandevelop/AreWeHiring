@@ -1,15 +1,17 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import PrivateRoute from './PrivateRouting'
-import Home from "../Containers/JobOverview";
+import JobOverview from "../Containers/JobOverview";
 import CustomLayout from "./../Containers/Layout/index";
+import AllJobs from "./../Containers/AllJobs/index";
 const Routing = () => {
   return (
     <CustomLayout>
       <Switch>
         {/* <PrivateRoute exact path="/" component={Home} /> */}
-        <Route exact path="/" component={Home} />
-        <Route exact path="/jobs/:id" component={Home} />
+        <Route exact path="/" component={AllJobs} />
+        <Route exact path="/jobs/:id" component={JobOverview} />
+        <Route exact path="/jobs" component={AllJobs} />
 
         <Redirect to="/" />
       </Switch>

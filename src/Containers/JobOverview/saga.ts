@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import moment from "moment";
 import { ActionTypes, Actions } from "./actions";
 import { JobSearch } from "../../service/index";
 function* searchJobById(action: any) {

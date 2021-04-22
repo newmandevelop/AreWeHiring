@@ -11,9 +11,7 @@ import { Actions } from "./actions";
 import { IRootState } from "../../reducers";
 const JobOverview = ({ history }: RouteComponentProps) => {
   const { Title } = Typography;
-  const { jobData, jobByIdSuccess, jobByIdFailure, jobByIdErrorMessage } = useSelector(
-    (state: IRootState) => state.jobSearch
-  );
+  const { jobData, jobByIdSuccess, jobByIdFailure } = useSelector((state: IRootState) => state.jobSearch);
   const dispatch = useDispatch();
 
   interface ParamTypes {

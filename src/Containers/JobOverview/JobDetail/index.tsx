@@ -16,7 +16,6 @@ const JobApply = (data: any) => {
   } = data.data;
   return (
     <>
-      {console.log(data.data)}
       <div className={styles.jobApplyFieldsWrapper}>
         <div className={styles.jobApplyFields}>
           <Title level={4} className={styles.jobContetHeading}>

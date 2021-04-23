@@ -1,15 +1,15 @@
 /* eslint-disable */
 
 export function setUserSession(email: string) {
-  return sessionStorage.setItem('shell_user', email)
+  return sessionStorage.setItem('hiring_user', email);
 }
 
 export function isUserLoggedIn() {
-  const user = sessionStorage.getItem('shell_user')
-  return user !== null
+  const user = sessionStorage.getItem('hiring_user');
+  return user !== null;
 }
 
 export function logoutUser() {
-  return sessionStorage.removeItem('shell_user')
+  return sessionStorage.removeItem('hiring_user');
 }
 /* eslint-enable */

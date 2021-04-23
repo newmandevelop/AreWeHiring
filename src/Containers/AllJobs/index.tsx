@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
-import styles from "./index.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { Actions } from "./actions";
-import { IRootState } from "../../reducers";
-import moment from "moment";
+import React, { useEffect } from 'react';
+import styles from './index.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions } from './actions';
+import { IRootState } from '../../reducers';
+import moment from 'moment';
+import { Row, Col, Card, Typography, Button } from 'antd';
+import { dateFormat } from '../../utils/general';
 import {
   DollarCircleOutlined,
   CalendarOutlined,
   CarryOutOutlined,
-} from "@ant-design/icons";
-import { Row, Col, Card, Typography, Button } from "antd";
-import jobSearchSaga from "../JobOverview/saga";
+} from '@ant-design/icons';
+
 const { Title, Paragraph } = Typography;
+
 const AllJobs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(Actions.allJobsProgress());
   }, [dispatch]);
-  const { allJobsSuccess, allJobsData, allJobsFailure } = useSelector(
-    (state: IRootState) => state.allJobsSearch
+  const { allJobsSuccess, allJobsData } = useSelector(
+    (state: IRootState) => state.allJobsSearch,
   );
 
   return (
@@ -36,7 +38,7 @@ const AllJobs = () => {
                 sm={22}
                 xs={22}
               >
-                <Card style={{ borderRadius: "10px" }} hoverable>
+                <Card style={{ borderRadius: '10px' }} hoverable>
                   <Title className={styles.jobTitle} title="JobTitle">
                     {job.nameOfJob}
                   </Title>
@@ -46,7 +48,7 @@ const AllJobs = () => {
                   <Paragraph className={styles.firstDetail}>
                     <CarryOutOutlined />
                     <span className={styles.span}>{`${
-                      job.employer ? job.employer : "Recruiter"
+                      job.employer ? job.employer : 'Recruiter'
                     }`}</span>
                   </Paragraph>
                   <Paragraph className={styles.secondDetail}>
@@ -64,8 +66,7 @@ const AllJobs = () => {
                   <Paragraph className={styles.secondDetail}>
                     <CalendarOutlined />
                     <span className={styles.span}>
-                      {" "}
-                      {moment(job.datePosted).format("MMM Do YYYY")}
+                      {moment(job.datePosted).format(dateFormat)}
                     </span>
                   </Paragraph>
                   <Paragraph className={styles.jobDescription}>

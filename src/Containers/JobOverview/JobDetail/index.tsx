@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./index.module.scss";
-import { StarOutlined, BellOutlined } from "@ant-design/icons";
-import { Button, Typography } from "antd";
-import moment from "moment";
+import React from 'react';
+import styles from './index.module.scss';
+import { StarOutlined, BellOutlined } from '@ant-design/icons';
+import { Button, Typography } from 'antd';
+import moment from 'moment';
 const JobApply = (data: any) => {
   const { Title, Text } = Typography;
   const {
@@ -51,7 +51,7 @@ const JobApply = (data: any) => {
             Date Posted
           </Title>
           <Text className={styles.jobContetPara}>
-            {moment(datePosted).format("MMM Do YYYY")}
+            {moment(datePosted).format('MMM Do YYYY')}
           </Text>
         </div>
         <Button
@@ -61,7 +61,7 @@ const JobApply = (data: any) => {
           className={styles.buttonAlignmant}
         >
           Bookmark
-        </Button>{" "}
+        </Button>{' '}
         <Button
           block
           icon={<BellOutlined />}
@@ -79,7 +79,6 @@ const JobApply = (data: any) => {
           Apply
         </Button>
       </div>
-      )
     </>
   );
 };

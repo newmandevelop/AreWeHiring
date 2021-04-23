@@ -14,3 +14,18 @@ export const jobSearchById = (id: any) => {
       throw error.response;
     });
 };
+
+export const allJobsSearch = () => {
+  return axios()
+    .get(`jobs/all`)
+    .then((response) => {
+      if (response && response.data) {
+        return response.data;
+      } else {
+        return null;
+      }
+    })
+    .catch((error) => {
+      throw error.response;
+    });
+};

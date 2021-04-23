@@ -1,63 +1,90 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./index.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { Actions } from "./actions";
+import { IRootState } from "../../reducers";
+import moment from "moment";
 import {
   DollarCircleOutlined,
   CalendarOutlined,
   CarryOutOutlined,
 } from "@ant-design/icons";
 import { Row, Col, Card, Typography, Button } from "antd";
-const { Title, Paragraph, Text } = Typography;
+import jobSearchSaga from "../JobOverview/saga";
+const { Title, Paragraph } = Typography;
 const AllJobs = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Actions.allJobsProgress());
+  }, [dispatch]);
+  const { allJobsSuccess, allJobsData, allJobsFailure } = useSelector(
+    (state: IRootState) => state.allJobsSearch
+  );
+
   return (
     <div className={styles.AllJobsFieldWrapper}>
-      <Row justify="space-around">
-        {[1, 2, 3, 4, 5, 6].map((d) => {
-          return (
-            <Col
-              key={d}
-              className={styles.column}
-              md={9}
-              lg={7}
-              sm={22}
-              xs={22}
-            >
-              <Card style={{ borderRadius: "10px" }} hoverable>
-                <Title className={styles.jobTitle} title="JobTitle">
-                  Hematology Oncology PA/ Nurse Practitioner
-                </Title>
-                <Button className={styles.typeBtn} type="primary">
-                  Full Time
-                </Button>
-                <Paragraph className={styles.firstDetail}>
-                  <CarryOutOutlined />
-                  <span className={styles.span}>Recruiter Here</span>
-                </Paragraph>
-                <Paragraph className={styles.secondDetail}>
-                  <CarryOutOutlined />
-                  <span className={styles.span}>Address</span>
-                </Paragraph>
-                <Paragraph className={styles.secondDetail}>
-                  <DollarCircleOutlined />
-                  <span className={styles.span}>$4000-$5000</span>
-                </Paragraph>
-                <Paragraph className={styles.secondDetail}>
-                  <CalendarOutlined />
-                  <span className={styles.span}>Date here</span>
-                </Paragraph>
-                <Paragraph className={styles.jobDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris
-                </Paragraph>
-                <Button className={styles.applyBtn} type="primary" size="small">
-                  Apply
-                </Button>
-              </Card>
-            </Col>
-          );
-        })}
-      </Row>
+      {console.log(allJobsData)}
+      {allJobsSuccess && (
+        <Row justify="space-around">
+          {allJobsData.map((job: any) => {
+            return (
+              <Col
+                key={job.id}
+                className={styles.column}
+                md={9}
+                lg={7}
+                sm={22}
+                xs={22}
+              >
+                <Card style={{ borderRadius: "10px" }} hoverable>
+                  <Title className={styles.jobTitle} title="JobTitle">
+                    {job.nameOfJob}
+                  </Title>
+                  <Button className={styles.typeBtn} type="primary">
+                    {job.jobType}
+                  </Button>
+                  <Paragraph className={styles.firstDetail}>
+                    <CarryOutOutlined />
+                    <span className={styles.span}>{`${
+                      job.employer ? job.employer : "Recruiter"
+                    }`}</span>
+                  </Paragraph>
+                  <Paragraph className={styles.secondDetail}>
+                    <CarryOutOutlined />
+                    <span className={styles.span}>{job.location}</span>
+                  </Paragraph>
+                  <Paragraph className={styles.secondDetail}>
+                    <DollarCircleOutlined />
+                    <span className={styles.span}>
+                      {job.currencySymbol}
+                      {job.salaryLowerLimit}-{job.currencySymbol}
+                      {job.salaryUpperLimit}
+                    </span>
+                  </Paragraph>
+                  <Paragraph className={styles.secondDetail}>
+                    <CalendarOutlined />
+                    <span className={styles.span}>
+                      {" "}
+                      {moment(job.datePosted).format("MMM Do YYYY")}
+                    </span>
+                  </Paragraph>
+                  <Paragraph className={styles.jobDescription}>
+                    {job.description}
+                  </Paragraph>
+                  <Button
+                    href={`/jobs/${job.id}`}
+                    className={styles.applyBtn}
+                    type="primary"
+                    size="small"
+                  >
+                    Apply
+                  </Button>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      )}
     </div>
   );
 };

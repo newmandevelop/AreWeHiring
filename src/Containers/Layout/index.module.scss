@@ -1,8 +1,11 @@
-$small: 680px;
+$small: 700px;
 .header {
   margin-right: 0px !important;
   padding: 0px 15px !important;
   background-color: #ffffff !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  margin: 1px 0px;
+  z-index: 1;
   .logo {
     color: black;
     font-size: 1.5rem;
@@ -28,5 +31,27 @@ $small: 680px;
     .navLink {
       display: none;
     }
+  }
+}
+.Sider {
+  margin-right: 0px !important;
+  padding: 0px 15px !important;
+  background-color: #ffffff !important;
+
+  .simpleSideLink {
+    font-size: 0.8rem;
+    width: 100%;
+    margin: 0 !important;
+    // background-color: red;
+  }
+  .simpleSideLink:hover {
+    border-right: 3px solid #1890ff;
+    background-color: #e6f7fe;
+  }
+
+  .boldSideLink {
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin: 0 !important;
   }
 }

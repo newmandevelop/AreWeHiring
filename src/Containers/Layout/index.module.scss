@@ -1,0 +1,32 @@
+$small: 680px;
+.header {
+  margin-right: 0px !important;
+  padding: 0px 15px !important;
+  background-color: #ffffff !important;
+  .logo {
+    color: black;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    font-weight: 300;
+    margin-left: 0px;
+  }
+  .navLink {
+    list-style-type: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+  .navLinkItems {
+    float: left;
+    margin-left: 1rem;
+  }
+  .divider {
+    height: 100%;
+  }
+
+  @media screen and (max-width: $small) {
+    .navLink {
+      display: none;
+    }
+  }
+}

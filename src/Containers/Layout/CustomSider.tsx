@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Badge } from 'antd';
 import SiderLinks from './../../Content/SiderLinks.json';
 const { Sider } = Layout;
 const { Item } = Menu;
@@ -24,6 +24,14 @@ const CustomSider = () => {
               }
             >
               {link.name}
+              {/* <Badge
+                style={{
+                  marginLeft: '20px',
+                  backgroundColor: '#3489cf',
+                  fontSize: '10px',
+                }}
+                count={5}
+              /> */}
             </Item>
           );
         })}

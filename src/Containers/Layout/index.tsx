@@ -9,10 +9,10 @@ const CustomLayout = (props: any) => {
     <Layout style={{ backgroundColor: '#f1f2f4' }} {...props}>
       <CustomeHeader {...props}></CustomeHeader>
       <Layout>
-        <CustomSider {...props}>Maaz</CustomSider>
+        <CustomSider {...props} />
         <Content
           style={{
-            padding: '0px 5rem 3rem 5rem',
+            padding: '0px 2rem 3rem 2rem',
             minHeight: 'calc(100vh - 64px)',
           }}
         >

@@ -10,6 +10,7 @@ interface IProps {
   placeholder?: any;
   label?: String;
   icon?: any;
+  type?: boolean;
 }
 
 const InputField = (props: IProps) => {
@@ -18,9 +19,16 @@ const InputField = (props: IProps) => {
       <Text className={styles.label}>{props.label}</Text>
       {props.optional && <Text className={styles.optional}>(Optional)</Text>}
       <div>
-        <Button icon={props.icon} className={styles.button}>
-          {props.name}
-        </Button>
+        {!props.type && (
+          <Button icon={props.icon} className={styles.button}>
+            {props.name}
+          </Button>
+        )}
+        {props.type && (
+          <Button icon={props.icon} size="large" className={styles.btnWithType}>
+            {props.name}
+          </Button>
+        )}
         <Text className={styles.buttonPlaceholder}>{props.placeholder}</Text>
       </div>
     </div>

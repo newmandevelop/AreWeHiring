@@ -1,9 +1,11 @@
 import React from 'react';
+import { Divider, Typography } from 'antd';
 import InputField from './../../../Components/InputField/index';
 import styles from './index.module.scss';
 import Button from './../../../Components/Button/index';
 import TagsField from './../../../Components/InputFieldsWithTags/index';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import Label from './../../../Components/Label/index';
 const Candidate = () => {
   return (
     <div className={styles.candidateFieldWrapper}>
@@ -64,7 +66,33 @@ const Candidate = () => {
           type="text"
           name="rate"
           placeholder="75"
+        />{' '}
+        <InputField
+          label="Skills"
+          optional={true}
+          type="text"
+          name="skills"
+          placeholder="Comma separate a list of relevant skills"
         />
+        <Divider className={styles.divider} />
+        <Button
+          icon={<PlusCircleOutlined />}
+          placeholder="Optionally provide links to any of your websites or social network profiles"
+          label="URL(s)"
+          optional
+          name="Add URL"
+        />
+        <Divider className={styles.divider} />
+        <Button
+          icon={<PlusCircleOutlined />}
+          label="Education"
+          optional
+          name="Add Education"
+        />
+        <Divider className={styles.divider} />
+        <div className={styles.experience}>
+          <Label label="Experience" optional />
+        </div>
       </div>
     </div>
   );

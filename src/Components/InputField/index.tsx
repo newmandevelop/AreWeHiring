@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Input } from 'antd';
 import styles from './index.module.scss';
-const { Text } = Typography;
+import Label from './../Label/index';
 interface IProps {
   name?: any;
   value?: any;
@@ -15,8 +15,7 @@ interface IProps {
 const InputField = (props: IProps) => {
   return (
     <div className={styles.inputFieldWrapper}>
-      <Text className={styles.label}>{props.label}</Text>
-      {props.optional && <Text className={styles.optional}>(Optional)</Text>}
+      <Label optional={props.optional} label={props.label} />
       <Input
         type={props.type}
         name={props.name}

@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Tag, Input, Typography } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
-const { Text } = Typography;
-
+import Label from './../Label/index';
 interface IProps {
   name?: any;
   placeholder?: any;
@@ -29,8 +28,7 @@ const TagsField = (props: IProps) => {
 
   return (
     <div className={styles.tagsInput}>
-      <Text className={styles.label}>{props.label}</Text>
-
+      <Label label={props.label} />
       <div className={styles.input_tag}>
         <ul className={styles.input_tags_list}>
           {tags &&

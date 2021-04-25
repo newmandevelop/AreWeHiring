@@ -3,7 +3,7 @@ $small: 700px;
   margin-right: 0px !important;
   padding: 0px 15px !important;
   background-color: #ffffff !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.2) !important;
   margin: 1px 0px;
   z-index: 2;
   .logo {
@@ -11,7 +11,8 @@ $small: 700px;
     font-size: 1.5rem;
     padding-top: 1rem;
     font-weight: 300;
-    margin-left: 0px;
+    margin-left: 1rem;
+    width: 234px;
   }
   .navLink {
     list-style-type: none;

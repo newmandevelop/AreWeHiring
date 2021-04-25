@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Divider, Menu, Dropdown } from 'antd';
+import { Layout, Divider, Menu, Dropdown, Button } from 'antd';
 import styles from './index.module.scss';
 import user from '../../assets/user.png';
 import {
@@ -28,42 +28,33 @@ const CustomeHeader = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', justifyContent: 'start' }}>
           <h1 className={styles.logo}>AreWeHiring</h1>
-          <Divider className={styles.divider} type="vertical"></Divider>
           <ul className={styles.navLink}>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>
-                <a
-                  className={styles.dropDown}
-                  onClick={e => e.preventDefault()}
-                >
+                <Button type="link" className={styles.dropDown}>
                   Home
-                  <DownOutlined style={{ marginLeft: '0.3rem' }} />
-                </a>
+                </Button>
               </Dropdown>
             </li>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>
-                <a
-                  className={styles.dropDown}
-                  onClick={e => e.preventDefault()}
-                >
+                <Button type="link" className={styles.dropDown}>
                   For Candidates
-                  <DownOutlined style={{ marginLeft: '0.3rem' }} />
-                </a>
+                </Button>
               </Dropdown>
             </li>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>
-                <a
-                  className={styles.dropDown}
-                  onClick={e => e.preventDefault()}
-                >
+                <Button type="link" className={styles.dropDown}>
                   For Employers
-                  <DownOutlined style={{ marginLeft: '0.3rem' }} />
-                </a>
+                </Button>
               </Dropdown>
-            </li>{' '}
-            <li className={styles.navLinkItems}>Blog</li>
+            </li>
+            <Dropdown overlay={menu}>
+              <Button type="link" className={styles.dropDown}>
+                Blog
+              </Button>
+            </Dropdown>
           </ul>
         </div>
         <div style={{ marginRight: '1rem' }}>
@@ -74,7 +65,7 @@ const CustomeHeader = () => {
           ></img>
           <Dropdown overlay={menu}>
             <a className={styles.dropDown} onClick={e => e.preventDefault()}>
-              Hi, Maaz
+              Hi, Richard
               <DownOutlined style={{ marginLeft: '0.3rem' }} />
             </a>
           </Dropdown>

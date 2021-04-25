@@ -1,0 +1,42 @@
+.tagsInput {
+  margin-top: 1.5rem;
+  .input_tag {
+    background: white;
+    border: 1px solid #d6d6d6;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.3rem;
+  }
+  .label {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .input {
+    border: none;
+    width: 100%;
+    background: none;
+    flex-grow: 1;
+    padding: 0;
+    font-size: 0.8rem;
+  }
+
+  .input_tags_list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+  }
+
+  .tagItems {
+    align-items: center;
+    display: flex;
+    font-weight: 300;
+  }
+  .deleteIcon {
+    margin-right: 0.3rem;
+  }
+}

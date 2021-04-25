@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography, Input } from 'antd';
 import styles from './index.module.scss';
-const { Password, Search, TextArea } = Input;
 const { Text } = Typography;
 interface IProps {
   name?: any;

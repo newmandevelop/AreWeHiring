@@ -1,16 +1,18 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { Typography, Breadcrumb } from 'antd';
+import Candidate from './Candidate/index';
 const { Text, Title, Paragraph } = Typography;
 const { Item } = Breadcrumb;
-const Dashboard = () => {
+const Dashboard = (props: any) => {
   return (
-    <div className={styles.dashboard}>
+    <div className={styles.dashboard} {...props}>
       <div>
         <Title className={styles.title}>Candidate Dashboard</Title>
         <Breadcrumb separator=">">
           <Item>Home</Item>
-          <Item>Dashboard Name</Item>
+          <Item>Candidate Name</Item>
+          <Candidate></Candidate>
         </Breadcrumb>
       </div>
     </div>

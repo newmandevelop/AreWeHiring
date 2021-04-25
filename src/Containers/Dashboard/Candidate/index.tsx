@@ -90,9 +90,47 @@ const Candidate = () => {
           name="Add Education"
         />
         <Divider className={styles.divider} />
+        <Label label="Experience" optional />
         <div className={styles.experience}>
-          <Label label="Experience" optional />
+          <InputField
+            label="Employer"
+            name="employer"
+            type="text"
+            placeholder="Rex Recruiting"
+          />
+          <InputField
+            label="Job Title"
+            name="jobtitle"
+            type="text"
+            placeholder="Job Title"
+          />
+          <InputField
+            label="Start/End date"
+            name="date"
+            type="text"
+            placeholder="2019 - Present"
+          />
+          <InputField
+            label="Notes"
+            name="notes"
+            optional
+            type="text"
+            placeholder="Jonathon founded Rex Recruiting to leverage his Insurance, Finance, Healthcare, and Manufacturing staf ng experience to grow, staff and innovate the
+            technology companies that are reshaping these industries. (Fintech, Insurtech, Healthcare Technology, Robotics Process Automation, Compliance &
+            26
+            Cybersecurity)"
+            textarea
+          />
         </div>
+        <Button icon={<PlusCircleOutlined />} name="Add Experience" />
+        <Divider className={styles.divider} />
+        <Button
+          icon={<UploadOutlined />}
+          placeholder="Optionally upload your resume for employers to view. Max. file size: 50 MB"
+          label="Resume File"
+          optional
+          name="Browse"
+        />
       </div>
     </div>
   );

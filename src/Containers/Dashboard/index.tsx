@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import { Typography, Breadcrumb } from 'antd';
 import Candidate from './Candidate/index';
-const { Text, Title, Paragraph } = Typography;
+const { Title } = Typography;
 const { Item } = Breadcrumb;
 const Dashboard = (props: any) => {
   return (

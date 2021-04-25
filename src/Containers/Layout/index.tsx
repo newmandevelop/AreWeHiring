@@ -1,8 +1,8 @@
 import React from 'react';
 import CustomeHeader from './CustomHeader';
 import CustomSider from './CustomSider';
-import { Layout, Dropdown } from 'antd';
-const { Content, Footer, Sider } = Layout;
+import { Layout } from 'antd';
+const { Content, Footer } = Layout;
 
 const CustomLayout = (props: any) => {
   return (

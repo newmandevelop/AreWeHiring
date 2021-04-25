@@ -1,13 +1,12 @@
 import React from 'react';
-import { Layout, Divider, Menu, Dropdown, Button } from 'antd';
+import { Layout, Divider, Menu, Dropdown, Button, Typography } from 'antd';
 import styles from './index.module.scss';
 import user from '../../assets/user.png';
-import {
-  UserAddOutlined,
-  SettingOutlined,
-  DownOutlined,
-} from '@ant-design/icons';
+import { DownOutlined } from '@ant-design/icons';
+
 const { Header } = Layout;
+const { Text } = Typography;
+
 const CustomeHeader = () => {
   const menu = () => (
     <Menu>
@@ -60,14 +59,15 @@ const CustomeHeader = () => {
         <div style={{ marginRight: '1rem' }}>
           <Divider className={styles.divider} type="vertical"></Divider>
           <img
+            alt=""
             src={user}
             style={{ width: '25px', marginRight: '0.5rem' }}
-          ></img>
+          />
           <Dropdown overlay={menu}>
-            <a className={styles.dropDown} onClick={e => e.preventDefault()}>
+            <Text className={styles.dropDown}>
               Hi, Richard
               <DownOutlined style={{ marginLeft: '0.3rem' }} />
-            </a>
+            </Text>
           </Dropdown>
         </div>
       </div>

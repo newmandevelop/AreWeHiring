@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { Layout, Menu, Badge } from 'antd';
+import { Layout, Menu } from 'antd';
 import SiderLinks from './../../Content/SiderLinks.json';
 const { Sider } = Layout;
 const { Item } = Menu;

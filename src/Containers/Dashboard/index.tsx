@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import { Typography, Breadcrumb } from 'antd';
 import Candidate from './Candidate/index';
-const { Text, Title, Paragraph } = Typography;
+const { Text, Title, Paragraph, Link } = Typography;
 const { Item } = Breadcrumb;
 const Dashboard = (props: any) => {
   return (
@@ -12,6 +12,22 @@ const Dashboard = (props: any) => {
         <Breadcrumb separator=">">
           <Item>Home</Item>
           <Item>Candidate Name</Item>
+          <div className={styles.alert}>
+            <div>
+              <Paragraph
+                style={{ fontWeight: 'bold' }}
+                className={styles.alertMessage}
+              >
+                Welcome to Are We Hiring
+              </Paragraph>
+              <Paragraph className={styles.alertMessage}>
+                You are currently signed in as userName
+              </Paragraph>
+            </div>
+            <div>
+              <Link className={styles.signout}>Signout</Link>
+            </div>
+          </div>
           <Candidate></Candidate>
         </Breadcrumb>
       </div>

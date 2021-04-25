@@ -4,4 +4,24 @@
     font-size: 1.5rem;
     font-weight: 200;
   }
+  .alert {
+    background-color: #ddf3fe;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 1rem !important;
+    margin: 3rem 0px !important;
+  }
+  .alertMessage {
+    margin: 0px !important;
+    padding: 0px !important;
+    font-size: 0.8rem;
+    color: #4e8dae;
+    font-weight: 300;
+  }
+  .signout {
+    vertical-align: middle;
+    font-size: 0.8rem;
+    color: #4e8dae;
+    font-weight: 500;
+  }
 }

@@ -55,4 +55,8 @@ $small: 700px;
     font-weight: 800;
     margin: 0 !important;
   }
+
+  @media screen and (max-width: $small) {
+    display: none;
+  }
 }

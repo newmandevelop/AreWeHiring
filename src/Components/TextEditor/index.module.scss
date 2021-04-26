@@ -1,0 +1,17 @@
+.textEditorWrapper {
+  width: 100%;
+  margin-top: 1.5rem;
+  .editor {
+    width: 100% !important;
+    border: 0.1rem solid rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+  }
+  .toolbar {
+    width: 100% !important;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+  }
+  .editorBoard {
+    width: 100% !important;
+    height: 25vh !important;
+  }
+}

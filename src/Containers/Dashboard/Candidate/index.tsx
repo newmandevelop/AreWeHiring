@@ -6,6 +6,7 @@ import Button from './../../../Components/Button/index';
 import TagsField from './../../../Components/InputFieldsWithTags/index';
 import { UploadOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import Label from './../../../Components/Label/index';
+import TextEditor from './../../../Components/TextEditor/index';
 const Candidate = () => {
   return (
     <React.Fragment>
@@ -67,7 +68,8 @@ const Candidate = () => {
             type="text"
             name="rate"
             placeholder="75"
-          />{' '}
+          />
+          <TextEditor label="Resume Content" />
           <InputField
             label="Skills"
             optional={true}

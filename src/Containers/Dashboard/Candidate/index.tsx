@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Typography } from 'antd';
+import { Divider } from 'antd';
 import InputField from './../../../Components/InputField/index';
 import styles from './index.module.scss';
 import Button from './../../../Components/Button/index';

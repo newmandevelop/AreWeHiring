@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import 'draft-js/dist/Draft.css';
-import { Editor, SyntheticKeyboardEvent } from 'react-draft-wysiwyg';
+import { Editor } from 'react-draft-wysiwyg';
 import Label from './../Label/index';
-import {
-  EditorState,
-  getDefaultKeyBinding,
-  KeyBindingUtil,
-  DraftHandleValue,
-} from 'draft-js';
+import { EditorState, DraftHandleValue } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styles from './index.module.scss';
 interface IProps {
@@ -21,15 +16,7 @@ const TextEditor = (props: IProps) => {
   const onEditorStateChange = (editorState: any) => {
     setEditorState(editorState);
   };
-  const { hasCommandModifier } = KeyBindingUtil;
 
-  function myKeyBindingFn(e: SyntheticKeyboardEvent): string | null {
-    console.log('e.keyCode', e.keyCode, hasCommandModifier(e));
-    if (e.keyCode === 13 /* `S` key */ && hasCommandModifier(e)) {
-      return 'myeditor-save';
-    }
-    return getDefaultKeyBinding(e);
-  }
   const handleKeyCommand = (command: string): DraftHandleValue => {
     console.log('command', command);
     if (command === 'myeditor-save') {

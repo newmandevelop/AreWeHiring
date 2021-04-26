@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Input } from 'antd';
+import { Input } from 'antd';
 import styles from './index.module.scss';
 import Label from './../Label/index';
 const { TextArea } = Input;

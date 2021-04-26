@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Tag, Input, Typography } from 'antd';
+import React, { useState } from 'react';
+import { Tag, Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import Label from './../Label/index';

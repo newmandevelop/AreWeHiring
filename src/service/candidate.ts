@@ -45,7 +45,7 @@ export const addCandidate = async (data: any) => {
       resumeContent: null,
       skills,
       profileUrls: urls ? urls : '',
-      education: education ? education[0].name : '',
+      education: education ? education[0].education : '',
       experienceList,
       resumeFile: resumeFile ? resumeFile[0].name : '',
     });

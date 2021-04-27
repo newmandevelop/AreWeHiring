@@ -11,6 +11,7 @@ interface IProps {
   label?: String;
   icon?: any;
   type?: boolean;
+  loading?: boolean;
   disabled?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
 }
@@ -39,6 +40,7 @@ const InputField = (props: IProps) => {
             disabled={props.disabled}
             className={styles.btnWithType}
             htmlType={props.htmlType}
+            loading={props.loading}
           >
             {props.name}
           </Button>

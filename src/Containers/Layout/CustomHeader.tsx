@@ -36,11 +36,13 @@ const CustomeHeader = () => {
               </Dropdown>
             </li>
             <li className={styles.navLinkItems}>
-              <Dropdown overlay={menu}>
-                <Button type="link" className={styles.dropDown}>
-                  For Candidates
-                </Button>
-              </Dropdown>
+              <Button
+                type="link"
+                href="/dashboard/candidate"
+                className={styles.dropDown}
+              >
+                For Candidates
+              </Button>
             </li>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>

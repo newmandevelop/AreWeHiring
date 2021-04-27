@@ -11,9 +11,9 @@ export const addCandidate = async (data: any) => {
     location,
     photo,
     video,
-    resumeCategory,
+    // resumeCategory,
     minimumRate,
-    resumeContent,
+    // resumeContent,
     skills,
     profileUrls,
     education,
@@ -23,13 +23,20 @@ export const addCandidate = async (data: any) => {
   interface IProps {
     url: string;
   }
+  interface IProps2 {
+    education: string;
+  }
   const urls = <Array<string>>[];
   profileUrls &&
-    (await profileUrls.map((url: IProps) => {
-      console.log(url.url);
+    profileUrls.map((url: IProps) => {
       urls.push(url['url']);
-    }));
-  console.log(urls);
+    });
+  const educationList = <Array<string>>[];
+  education &&
+    education.map((edu: IProps2) => {
+      educationList.push(edu.education);
+    });
+
   try {
     const response = await axios().post('candidates/save', {
       email,
@@ -40,22 +47,22 @@ export const addCandidate = async (data: any) => {
       location,
       photo: photo ? photo[0].name : '',
       video,
-      resumeCategory: '',
+      resumeCategory: [''],
       minimumRate,
-      resumeContent: null,
+      resumeContent: '',
       skills,
       profileUrls: urls ? urls : '',
-      education: education ? education[0].education : '',
+      education: educationList ? educationList : '',
       experienceList,
       resumeFile: resumeFile ? resumeFile[0].name : '',
     });
 
-    if (response && response.data) {
-      return response.data;
+    if (response) {
+      return response;
     } else {
       return null;
     }
   } catch (error) {
-    throw error.response;
+    throw error;
   }
 };

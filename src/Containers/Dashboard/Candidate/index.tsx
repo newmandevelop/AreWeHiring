@@ -1,9 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Divider, Form, Upload, Space } from 'antd';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Divider, Form, Upload, Space, notification } from 'antd';
 import InputField from './../../../Components/InputField/index';
 import styles from './index.module.scss';
 import { Actions } from './actions';
+import { IRootState } from './../../../reducers';
 import Button from './../../../Components/Button/index';
 import TagsField from './../../../Components/InputFieldsWithTags/index';
 import {
@@ -14,6 +15,7 @@ import {
 import Label from './../../../Components/Label/index';
 import TextEditor from './../../../Components/TextEditor/index';
 import Rules from './../../../Content/Rules.json';
+
 const { Item, List } = Form;
 const formItemLayout = {
   labelCol: {
@@ -26,6 +28,12 @@ const formItemLayout = {
 
 const Candidate = () => {
   let dispatch = useDispatch();
+  const {
+    addCandidateErrorMessage,
+    addCandidateProgress,
+    addCandidateFailure,
+    addCandidateSuccess,
+  } = useSelector((state: IRootState) => state.candidate);
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     dispatch(
@@ -34,6 +42,15 @@ const Candidate = () => {
       }),
     );
   };
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
   const normFile = (e: any) => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
@@ -41,7 +58,18 @@ const Candidate = () => {
     }
     return e && e.fileList;
   };
-  const { name, professionalTitle, location, resumeCategory } = Rules;
+  const onReset = () => {
+    form.resetFields();
+  };
+  useEffect(() => {
+    if (addCandidateSuccess) {
+      onReset();
+      openNotificationWithIcon('success', 'Candidate Added Successfully');
+    } else if (addCandidateFailure) {
+      openNotificationWithIcon('error', addCandidateErrorMessage);
+    }
+  }, [addCandidateSuccess, addCandidateFailure]);
+  const { name, professionalTitle, location } = Rules;
   return (
     <React.Fragment>
       <Form
@@ -348,7 +376,15 @@ const Candidate = () => {
             </Upload>
           </Item>
         </main>
-        <Button htmlType="submit" name="Save Changes" type />
+        <div style={{ display: 'flex' }}>
+          <Button
+            loading={addCandidateProgress}
+            htmlType="submit"
+            name="Save Changes"
+            type
+          />
+          <Button htmlType="button" onClick={onReset} name="Reset" type />
+        </div>
       </Form>
     </React.Fragment>
   );

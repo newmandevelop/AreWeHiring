@@ -14,7 +14,8 @@ const Routing = () => {
         <Route exact path="/jobs" component={AllJobs} />
 
         <Route exact path="/jobs/:id" component={JobOverview} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        {/* <Route exact path="/dashboard" component={Dashboard} /> */}
+        <Route exact path="/dashboard/candidate" component={Dashboard} />
 
         <Redirect to="/" />
       </Switch>

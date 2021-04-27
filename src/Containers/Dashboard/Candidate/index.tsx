@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Divider, Form, Upload, Space } from 'antd';
 import InputField from './../../../Components/InputField/index';
 import styles from './index.module.scss';
+import { Actions } from './actions';
 import Button from './../../../Components/Button/index';
 import TagsField from './../../../Components/InputFieldsWithTags/index';
 import {
@@ -22,22 +24,15 @@ const formItemLayout = {
   },
 };
 
-// const tailFormItemLayout = {
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//       offset: 0,
-//     },
-//     sm: {
-//       span: 16,
-//       offset: 8,
-//     },
-//   },
-// };
 const Candidate = () => {
+  let dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    dispatch(
+      Actions.addCandidateProgress({
+        data: values,
+      }),
+    );
   };
   const normFile = (e: any) => {
     console.log('Upload event:', e);
@@ -57,18 +52,37 @@ const Candidate = () => {
         scrollToFirstError
       >
         <main className={styles.candidateFieldWrapper}>
-          {/* Name Field */}
-          <Item name="Full Name" rules={name}>
+          {/*First Name Field */}
+          <Item name="firstName" rules={name}>
             <InputField
-              label="Your Name"
+              label="First Name"
               name="name"
               type="text"
               placeholder="Jonathan Palmeri"
             />
           </Item>
+          {/*Last Name Field */}
+          <Item name="lastName" rules={name}>
+            <InputField
+              label="Last Name"
+              name="name"
+              type="text"
+              placeholder="Jonathan Palmeri"
+            />
+          </Item>
+          {/*Middle Name Field */}
+          <Item name="middleName">
+            <InputField
+              label="Middle Name"
+              name="name"
+              type="text"
+              optional
+              placeholder="Jonathan Palmeri"
+            />
+          </Item>
           {/* Email Field */}
           <Item
-            name="Email"
+            name="email"
             rules={[
               {
                 type: 'email',
@@ -88,7 +102,7 @@ const Candidate = () => {
             />
           </Item>
           {/* Professional Title Field */}
-          <Item name="Professional Title" rules={professionalTitle}>
+          <Item name="professionalTitle" rules={professionalTitle}>
             <InputField
               label="Professional Title"
               name="professionalTitle"
@@ -97,7 +111,7 @@ const Candidate = () => {
             />
           </Item>
           {/* Location Field */}
-          <Item name="Location" rules={location}>
+          <Item name="location" rules={location}>
             <InputField
               label="Location"
               name="location"
@@ -107,7 +121,7 @@ const Candidate = () => {
           </Item>
           {/* Upload Image Button */}
           <Item
-            name="upload"
+            name="photo"
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >
@@ -122,7 +136,7 @@ const Candidate = () => {
             </Upload>
           </Item>
           {/* Video Field */}
-          <Item name="Video">
+          <Item name="video">
             <InputField
               label="Video"
               optional={true}
@@ -132,7 +146,7 @@ const Candidate = () => {
             />
           </Item>
           {/* Tags Input Field */}
-          <Item name="Resume Category">
+          <Item name="resumeCategory">
             <TagsField
               name="resumeCategory"
               placeholder="Enter Keyword"
@@ -140,7 +154,7 @@ const Candidate = () => {
             />
           </Item>
           {/* Minimum rate Field */}
-          <Item name="Rate">
+          <Item name="minimumRate">
             <InputField
               label="Minimum rate/h ($)"
               optional={true}
@@ -150,11 +164,11 @@ const Candidate = () => {
             />
           </Item>
           {/* Resume Content Fields */}
-          <Item name="Resume Content">
+          <Item name="resumeContent">
             <TextEditor label="Resume Content" />
           </Item>
           {/* Skills Field */}
-          <Item name="Skills">
+          <Item name="skills">
             <InputField
               label="Skills"
               optional={true}
@@ -165,7 +179,7 @@ const Candidate = () => {
           </Item>
           <Divider className={styles.divider} />
           {/*Video Url Field*/}
-          <List name="Url">
+          <List name="profileUrls">
             {(fields, { add, remove }) => (
               <>
                 <Form.Item>
@@ -201,7 +215,7 @@ const Candidate = () => {
           </List>
           <Divider className={styles.divider} />
           {/*Education Field*/}
-          <List name="Education">
+          <List name="education">
             {(fields, { add, remove }) => (
               <>
                 <Form.Item>
@@ -238,7 +252,7 @@ const Candidate = () => {
           <Divider className={styles.divider} />
           {/*Experience Fields*/}
           <Label label="Experience" optional />
-          <List name="Experience">
+          <List name="experienceList">
             {(fields, { add, remove }) => (
               <>
                 {' '}
@@ -261,8 +275,8 @@ const Candidate = () => {
                       <Form.Item
                         {...restField}
                         style={{ width: '100%' }}
-                        name={[name, 'jobtitle']}
-                        fieldKey={[fieldKey, 'jobtitle']}
+                        name={[name, 'jobTitle']}
+                        fieldKey={[fieldKey, 'jobTitle']}
                       >
                         <InputField
                           label="Job Title"
@@ -274,8 +288,8 @@ const Candidate = () => {
                       <Form.Item
                         {...restField}
                         style={{ width: '100%' }}
-                        name={[name, 'date']}
-                        fieldKey={[fieldKey, 'date']}
+                        name={[name, 'startEndDate']}
+                        fieldKey={[fieldKey, 'startEndDate']}
                       >
                         <InputField
                           label="Start/End date"
@@ -319,7 +333,7 @@ const Candidate = () => {
           <Divider className={styles.divider} />
           {/* Upload Image Button */}
           <Item
-            name="resume"
+            name="resumeFile"
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >

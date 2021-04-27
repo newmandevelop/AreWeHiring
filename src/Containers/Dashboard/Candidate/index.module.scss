@@ -13,4 +13,14 @@
     padding: 0.5rem 2rem;
     padding-bottom: 2rem;
   }
+  .space {
+    display: flex;
+    :first-child {
+      width: 100%;
+    }
+  }
+
+  .formItem {
+    width: '100%';
+  }
 }

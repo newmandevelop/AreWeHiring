@@ -11,6 +11,8 @@ interface IProps {
   label?: String;
   icon?: any;
   type?: boolean;
+  disabled?: boolean;
+  htmlType?: 'button' | 'submit' | 'reset';
 }
 
 const InputField = (props: IProps) => {
@@ -20,12 +22,24 @@ const InputField = (props: IProps) => {
       {props.optional && <Text className={styles.optional}>(Optional)</Text>}
       <div>
         {!props.type && (
-          <Button icon={props.icon} className={styles.button}>
+          <Button
+            onClick={props.onClick}
+            icon={props.icon}
+            className={styles.button}
+            disabled={props.disabled}
+          >
             {props.name}
           </Button>
         )}
         {props.type && (
-          <Button icon={props.icon} size="large" className={styles.btnWithType}>
+          <Button
+            onClick={props.onClick}
+            icon={props.icon}
+            size="large"
+            disabled={props.disabled}
+            className={styles.btnWithType}
+            htmlType={props.htmlType}
+          >
             {props.name}
           </Button>
         )}

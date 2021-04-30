@@ -11,11 +11,7 @@ const CustomeHeader = () => {
   const menu = () => (
     <Menu>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <a target="_blank" rel="noopener noreferrer">
           Item
         </a>
       </Menu.Item>
@@ -29,11 +25,9 @@ const CustomeHeader = () => {
           <h1 className={styles.logo}>AreWeHiring</h1>
           <ul className={styles.navLink}>
             <li className={styles.navLinkItems}>
-              <Dropdown overlay={menu}>
-                <Button type="link" className={styles.dropDown}>
-                  Home
-                </Button>
-              </Dropdown>
+              <Button href="/dashboard" type="link" className={styles.dropDown}>
+                Home
+              </Button>
             </li>
             <li className={styles.navLinkItems}>
               <Button

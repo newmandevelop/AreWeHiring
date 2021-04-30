@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Divider, Form, Upload, Space, notification } from 'antd';
 import InputField from './../../../Components/InputField/index';
@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import Label from './../../../Components/Label/index';
 import TextEditor from './../../../Components/TextEditor/index';
-import Rules from './../../../Content/Rules.json';
+import Rules from './rules.json';
 
 const { Item, List } = Form;
 const formItemLayout = {
@@ -58,9 +58,11 @@ const Candidate = () => {
     }
     return e && e.fileList;
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onReset = () => {
     form.resetFields();
   };
+
   useEffect(() => {
     if (addCandidateSuccess) {
       onReset();
@@ -68,7 +70,12 @@ const Candidate = () => {
     } else if (addCandidateFailure) {
       openNotificationWithIcon('error', addCandidateErrorMessage);
     }
-  }, [addCandidateSuccess, addCandidateFailure]);
+  }, [
+    addCandidateSuccess,
+    addCandidateFailure,
+    onReset,
+    addCandidateErrorMessage,
+  ]);
   const { name, professionalTitle, location } = Rules;
   return (
     <React.Fragment>
@@ -383,7 +390,7 @@ const Candidate = () => {
             name="Save Changes"
             type
           />
-          <Button htmlType="button" onClick={onReset} name="Reset" type />
+          <Button htmlType="button" onClick={onReset} name="Reset" />
         </div>
       </Form>
     </React.Fragment>

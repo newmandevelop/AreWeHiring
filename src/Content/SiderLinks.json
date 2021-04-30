@@ -1,61 +1,74 @@
 {
-    "links":[
-        {
-            "name":"Main",
-            "link":"",
-            "type":"bold"
-        },{
-            "name":"Dashboard",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Messages",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Employer",
-            "link":"",
-            "type":"bold"
-        },{
-            "name":"Manage Jobs",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Submit Job",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Candidate",
-            "link":"",
-            "type":"bold"
-        },{
-            "name":"Manage Resumes",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Add Resume",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"My Applications",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Account",
-            "link":"",
-            "type":"bold"
-        },{
-            "name":"My Profile",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"My Orders",
-            "link":"",
-            "type":"simple"
-        },{
-            "name":"Logout",
-            "link":"",
-            "type":"simple"
-        }
-    ]
+  "links": [
+    {
+      "name": "Main",
+      "link": "",
+      "type": "bold"
+    },
+    {
+      "name": "Dashboard",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Messages",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Employer",
+      "link": "",
+      "type": "bold"
+    },
+    {
+      "name": "Manage Jobs",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Submit Job",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Candidate",
+      "link": "",
+      "type": "bold"
+    },
+    {
+      "name": "Manage Resumes",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Add Resume",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "My Applications",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Account",
+      "link": "",
+      "type": "bold"
+    },
+    {
+      "name": "My Profile",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "My Orders",
+      "link": "",
+      "type": "simple"
+    },
+    {
+      "name": "Logout",
+      "link": "",
+      "type": "simple"
+    }
+  ]
 }

@@ -25,7 +25,7 @@ const tailFormItemLayout = {
     },
   },
 };
-const RegistrationForm = (props: any) => {
+const Login = (props: any) => {
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
@@ -52,12 +52,12 @@ const RegistrationForm = (props: any) => {
   };
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '80%' }}>
+      <div className="cardWidth">
         <div className="card card-2">
           <div className="card-heading"></div>
 
           <div className="card-body">
-            <Title level={2}>Registration Form</Title>
+            <Title level={2}>Login Form</Title>
             <Form
               {...formItemLayout}
               form={form}
@@ -65,32 +65,6 @@ const RegistrationForm = (props: any) => {
               onFinish={onFinish}
               scrollToFirstError
             >
-              <Form.Item
-                name="firstName"
-                label="First Name"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your First Name!',
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="lastName"
-                label="LastName"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your Last Name!',
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
               <Form.Item
                 name="email"
                 label="E-mail"
@@ -122,36 +96,9 @@ const RegistrationForm = (props: any) => {
                 <Input.Password />
               </Form.Item>
 
-              <Form.Item
-                name="confirm"
-                label="Confirm Password"
-                dependencies={['password']}
-                hasFeedback
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please confirm your password!',
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue('password') === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(
-                          'The two passwords that you entered do not match!',
-                        ),
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
-                  Register
+                  Login
                 </Button>
               </Form.Item>
             </Form>
@@ -161,4 +108,4 @@ const RegistrationForm = (props: any) => {
     </div>
   );
 };
-export default RegistrationForm;
+export default Login;

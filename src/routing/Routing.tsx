@@ -6,6 +6,7 @@ import CustomLayout from './../Containers/Layout/index';
 import AllJobs from './../Containers/AllJobs/index';
 import Dashboard from './../Containers/Dashboard/index';
 import RegistrationForm from '../Containers/SignUp';
+import Login from '../Containers/Login';
 const Routing = () => {
   return (
     <Switch>
@@ -17,6 +18,7 @@ const Routing = () => {
       {/* <Route exact path="/dashboard" component={Dashboard} /> */}
       <Route exact path="/dashboard/candidate" component={Dashboard} />
       <Route exact path="/registration" component={RegistrationForm} />
+      <Route exact path="/login" component={Login} />
 
       <Redirect to="/" />
     </Switch>

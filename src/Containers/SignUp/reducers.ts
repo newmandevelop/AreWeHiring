@@ -45,6 +45,7 @@ export default (state = initialState, action: Action) => {
         signUpProgress: false,
         signUpSuccess: true,
         signUpFailure: false,
+        signUpErrorMessage: action.payload,
       };
     }
     case ActionTypes.SIGNUP_FAILURE: {

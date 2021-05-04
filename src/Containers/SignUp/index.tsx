@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { Form, Input, Button, Typography } from 'antd';
+import { Form, Input, Button, Typography, notification } from 'antd';
 import { Actions } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
@@ -28,16 +28,25 @@ const tailFormItemLayout = {
     },
   },
 };
+
 const RegistrationForm = (props: any) => {
   const [form] = Form.useForm();
   let dispatch = useDispatch();
-  const {
-    signUpProgress,
-    signUpSuccess,
-    signUpFailure,
-    signUpErrorMessage,
-  } = useSelector((state: IRootState) => state.authState);
-
+  const { signUpSuccess, signUpFailure, signUpErrorMessage } = useSelector(
+    (state: IRootState) => state.authState,
+  );
+  const onReset = () => {
+    form.resetFields();
+  };
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
   const onFinish = (values: any) => {
     dispatch(
       Actions.signUpProgress({
@@ -45,6 +54,14 @@ const RegistrationForm = (props: any) => {
       }),
     );
   };
+  useEffect(() => {
+    if (signUpSuccess) {
+      onReset();
+      openNotificationWithIcon('success', 'SignUp Successfully');
+    } else if (signUpFailure) {
+      openNotificationWithIcon('error', signUpErrorMessage);
+    }
+  }, [signUpSuccess, signUpFailure]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>

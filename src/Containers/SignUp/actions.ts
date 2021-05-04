@@ -16,6 +16,7 @@ export interface SignUpProgress {
 
 export interface SignUpSuccess {
   type: ActionTypes.SIGNUP_SUCCESS;
+  payload: any;
 }
 
 export interface SignUpFailure {
@@ -56,9 +57,10 @@ function signUpProgress(payload: any): SignUpProgress {
   };
 }
 
-function signUpSuccess(): SignUpSuccess {
+function signUpSuccess(payload: any): SignUpSuccess {
   return {
     type: ActionTypes.SIGNUP_SUCCESS,
+    payload,
   };
 }
 

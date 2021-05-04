@@ -18,12 +18,10 @@ function* signUp(action: any) {
         Authentication.signUp,
         signUp,
       );
-      console.log(response);
+      yield put(Actions.signUpSuccess(response.data));
     }
-    yield put(Actions.signUpSuccess());
   } catch (error) {
-    console.log('err', error);
-    yield put(Actions.signUpFailure(error && error.message));
+    yield put(Actions.signUpFailure(error && error.response.data.message));
   }
 }
 

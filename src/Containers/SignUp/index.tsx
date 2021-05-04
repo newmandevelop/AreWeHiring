@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './index.scss';
 import { Form, Input, Button, Typography } from 'antd';
+import { Actions } from './actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from '../../reducers';
 const { Title } = Typography;
 const { Item } = Form;
 const formItemLayout = {
@@ -27,29 +30,22 @@ const tailFormItemLayout = {
 };
 const RegistrationForm = (props: any) => {
   const [form] = Form.useForm();
+  let dispatch = useDispatch();
+  const {
+    signUpProgress,
+    signUpSuccess,
+    signUpFailure,
+    signUpErrorMessage,
+  } = useSelector((state: IRootState) => state.authState);
+
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    dispatch(
+      Actions.signUpProgress({
+        signUp: values,
+      }),
+    );
   };
-  const [state, setState] = useState({
-    email: '',
-    password: '',
-  });
-  const handleChange = (e: any) => {
-    const { id, value } = e.target;
-    setState(prevState => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-  const handleSubmitClick = (e: any) => {
-    e.preventDefault();
-    // if (state.password === state.confirmPassword) {
-    //   sendDetailsToServer();
-    // } else {
-    //   props.showError('Passwords do not match');
-    // }
-    console.log('hello');
-  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '80%' }}>

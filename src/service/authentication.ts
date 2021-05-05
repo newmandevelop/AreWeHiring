@@ -1,23 +1,21 @@
 import axios from './axiosConfig';
 
-export const login = (loginData: any) => {
-  return axios()
-    .get('/login')
-    .then(response => {
-      if (response && response.data) {
-        const responseData = response.data;
-        const loginExist = responseData.find(
-          (item: any) =>
-            item.email === loginData.email &&
-            item.password === loginData.password,
-        );
-        console.log('loginExit', loginExist);
-        return loginExist;
+export const login = async (loginData: any) => {
+  if (loginData) {
+    const { email, password } = loginData;
+    try {
+      const response = await axios().post('/users/login', {
+        email,
+        password,
+      });
+
+      if (response) {
+        return response;
       }
-    })
-    .catch(error => {
-      throw error.response;
-    });
+    } catch (error) {
+      throw error;
+    }
+  }
 };
 
 export const signUp = async (signUp: any) => {

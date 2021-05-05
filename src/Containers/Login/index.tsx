@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { Form, Input, Button, Typography } from 'antd';
+import { Actions } from './../SignUp/actions';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from '../../reducers';
+import { Form, Input, Button, Typography, notification } from 'antd';
 const { Title } = Typography;
 const { Item } = Form;
 const formItemLayout = {
@@ -27,29 +31,35 @@ const tailFormItemLayout = {
 };
 const Login = (props: any) => {
   const [form] = Form.useForm();
+  let dispatch = useDispatch();
+
+  const { loginErrorMessage, loginFailure, loginSuccess } = useSelector(
+    (state: IRootState) => state.authState,
+  );
+  const onReset = () => {
+    form.resetFields();
+  };
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    dispatch(
+      Actions.loginProgress({
+        login: values,
+      }),
+    );
   };
   const [state, setState] = useState({
     email: '',
     password: '',
   });
-  const handleChange = (e: any) => {
-    const { id, value } = e.target;
-    setState(prevState => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-  const handleSubmitClick = (e: any) => {
-    e.preventDefault();
-    // if (state.password === state.confirmPassword) {
-    //   sendDetailsToServer();
-    // } else {
-    //   props.showError('Passwords do not match');
-    // }
-    console.log('hello');
-  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div className="cardWidth">

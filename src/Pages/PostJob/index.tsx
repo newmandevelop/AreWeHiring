@@ -1,10 +1,15 @@
 import React, { useRef } from 'react';
 import Dashboard from '../../Containers/Dashboard';
-import { Divider, Form, Upload, notification, Typography } from 'antd';
+import { FormInstance } from 'antd/lib/form';
+import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
 import styles from './index.module.scss';
 import Rules from './rules.json';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { UploadOutlined } from '@ant-design/icons';
+import {
+  UploadOutlined,
+  MinusCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormItem } from '../../Containers/FormItem/index';
 import { IRootState } from '../../reducers';
@@ -65,17 +70,18 @@ const PostJob = () => {
         onFinish={onFinish}
         scrollToFirstError
       >
+        <Title ellipsis={false} level={4}>
+          Job Details
+        </Title>
         <main className={styles.jobPostFieldWrapper}>
-          <Title ellipsis={false} level={4}>
-            Job Details
-          </Title>{' '}
           {/*Company Name Field */}
           {FormItem({
             name: 'company',
             label: 'Company',
             type: 'text',
             placeholder: 'Select Company',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: ['Amazon Inc'],
           })}
           {/*JobTitle Field */}
           {FormItem({
@@ -90,6 +96,7 @@ const PostJob = () => {
             name: 'location',
             label: 'Location',
             type: 'text',
+            optional: true,
             placeholder: 'e.g London',
             fieldType: 'input',
           })}
@@ -99,7 +106,8 @@ const PostJob = () => {
             label: 'Job Type',
             type: 'text',
             placeholder: 'FULL TIME',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: ['FULLTIME'],
           })}
           {/* Job Category Field */}
           {FormItem({
@@ -123,7 +131,8 @@ const PostJob = () => {
             label: 'Recruiter Type',
             optional: true,
             placeholder: 'Enter Recruiter Type',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: ['EMPLOYER', 'AGENCY'],
           })}
           {/* Recruiter Type Input Field */}
           {FormItem({
@@ -131,7 +140,8 @@ const PostJob = () => {
             label: 'Employer',
             optional: true,
             placeholder: 'Enter Employer',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: ['Amazon Inc'],
           })}
           {/*Industry Input Field */}
           {FormItem({
@@ -139,7 +149,13 @@ const PostJob = () => {
             label: 'Industry',
             optional: true,
             placeholder: 'Enter Industry',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: [
+              'Computer Software',
+              'Accounting',
+              'Banking',
+              'Biotechnology',
+            ],
           })}
           {/* Description Fields */}
           {FormItem({
@@ -148,12 +164,58 @@ const PostJob = () => {
 
             fieldType: 'editor',
           })}
+          <Form.List name="rolesAndResponsibilities">
+            {(fields, { add, remove }) => (
+              <>
+                {FormItem({
+                  icon: <PlusCircleOutlined />,
+                  label: 'Add Roles and Responsibility',
+                  optional: true,
+                  onClick: () => add(),
+                  name: 'Add Role and Responsibility',
+                  fieldType: 'button',
+                })}
+
+                {fields.map(({ key, name, fieldKey, ...restField }) => (
+                  <Space key={key} className={styles.space}>
+                    {FormItem({
+                      name: [name, 'rolesAndResponsibilities'],
+                      type: 'text',
+                      placeholder: 'Enter Role',
+                      fieldType: 'input',
+                      fieldKey: [fieldKey, 'url'],
+                    })}
+
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+              </>
+            )}
+          </Form.List>
           {/*Application Field */}
           {FormItem({
             name: 'application',
             label: 'Application Email/URL',
             type: 'text',
             placeholder: 'j.borchardt2021@gmail.com',
+            fieldType: 'input',
+          })}
+          {/* Minimum rate Field */}
+          {FormItem({
+            name: 'closingDate',
+            label: 'Expiry Date',
+            type: 'date',
+            optional: true,
+            placeholder: 'e.g 20',
+            fieldType: 'input',
+          })}
+          {/* Minimum rate Field */}
+          {FormItem({
+            name: 'openingDate',
+            label: 'Opening Date',
+            type: 'date',
+            optional: true,
+            placeholder: 'e.g 20',
             fieldType: 'input',
           })}
           {/* Minimum rate Field */}
@@ -251,7 +313,6 @@ const PostJob = () => {
           />
           <Divider />
         </main>
-
         <div style={{ display: 'flex' }}>
           <Button
             // loading={addCandidateProgress}

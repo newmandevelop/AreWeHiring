@@ -2,12 +2,13 @@ import React from 'react';
 
 import InputField from '../../Components/InputField';
 import Button from '../../Components/Button';
-import TextEditor from '../../Components/TextEditor/index';
-import TagsField from '../../Components/InputFieldsWithTags/index';
-import { Form } from 'antd';
+import TextEditor from '../../Components/TextEditor';
+import TagsField from '../../Components/InputFieldsWithTags';
+import DropDown from '../../Components/DropDown';
+import { Dropdown, Form } from 'antd';
 const { Item } = Form;
 interface IProps {
-  name?: string;
+  name?: string | any;
   value?: any;
   onChange?: any;
   optional?: true | false;
@@ -17,18 +18,20 @@ interface IProps {
   textarea?: boolean;
   onClick?: any;
   icon?: any;
+  options?: string[];
   btnType?: boolean;
   rules?: [];
   loading?: boolean;
   disabled?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
-  fieldType?: 'button' | 'input' | 'editor' | 'tagField' | 'textArea';
+  fieldType?: 'button' | 'input' | 'editor' | 'tagField' | 'dropDown';
+  fieldKey?: any;
 }
 export const FormItem = (props: IProps) => {
   switch (props.fieldType) {
     case 'input':
       return (
-        <Item name={props.name}>
+        <Item fieldKey={props.fieldKey} name={props.name}>
           <InputField
             label={props.label}
             name={props.name}
@@ -70,7 +73,20 @@ export const FormItem = (props: IProps) => {
           <TagsField
             label={props.label}
             name={props.name}
+            optional={props.optional}
             placeholder={props.placeholder}
+          />
+        </Item>
+      );
+    case 'dropDown':
+      return (
+        <Item name={props.name}>
+          <DropDown
+            label={props.label}
+            optional={props.optional}
+            placeholder={props.placeholder}
+            options={props.options}
+            onChange={props.onChange}
           />
         </Item>
       );

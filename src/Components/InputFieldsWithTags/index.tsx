@@ -7,6 +7,7 @@ interface IProps {
   name?: any;
   placeholder?: any;
   label?: String;
+  optional?: boolean;
 }
 const TagsField = (props: IProps) => {
   const [tags, setTags] = useState<Array<string>>([]);
@@ -28,7 +29,7 @@ const TagsField = (props: IProps) => {
 
   return (
     <div className={styles.tagsInput}>
-      <Label label={props.label} />
+      <Label optional={props.optional} label={props.label} />
       <div className={styles.input_tag}>
         <ul className={styles.input_tags_list}>
           {tags &&

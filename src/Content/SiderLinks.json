@@ -27,7 +27,7 @@
     },
     {
       "name": "Submit Job",
-      "link": "",
+      "link": "/dashboard/employee/post-job",
       "type": "simple"
     },
     {

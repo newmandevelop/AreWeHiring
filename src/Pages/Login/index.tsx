@@ -5,7 +5,7 @@ import { Actions } from '../SignUp/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
 import { Form, Input, Button, Typography, notification } from 'antd';
-const { Title } = Typography;
+const { Title, Text, Link } = Typography;
 const { Item } = Form;
 const formItemLayout = {
   labelCol: {
@@ -112,6 +112,9 @@ const Login = (props: any) => {
                 </Button>
               </Form.Item>
             </Form>
+            <Text>
+              Don't have an account <Link href="/registration">Create one</Link>
+            </Text>
           </div>
         </div>
       </div>

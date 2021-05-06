@@ -61,7 +61,7 @@ const RegistrationForm = (props: any) => {
     } else if (signUpFailure) {
       openNotificationWithIcon('error', signUpErrorMessage);
     }
-  }, [signUpSuccess, signUpFailure]);
+  }, [signUpSuccess, signUpFailure, onReset, signUpErrorMessage]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>

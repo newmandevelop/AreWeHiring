@@ -9,7 +9,7 @@ interface IProps {
   onChange?: any;
   optional?: true | false;
   placeholder?: any;
-  type?: 'text';
+  type?: 'text' | 'date';
   label?: String;
   textarea?: boolean;
 }

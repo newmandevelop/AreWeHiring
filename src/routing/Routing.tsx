@@ -5,6 +5,7 @@ import JobOverview from '../Pages/JobOverview';
 import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
 import RegistrationForm from '../Pages/SignUp';
+import PostJob from '../Pages/PostJob';
 import Login from '../Pages/Login';
 const Routing = () => {
   return (
@@ -15,6 +16,8 @@ const Routing = () => {
 
       <Route exact path="/jobs/:id" component={JobOverview} />
       <Route exact path="/dashboard/candidate" component={Candidate} />
+      <Route exact path="/dashboard/employee/post-job" component={PostJob} />
+
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
 

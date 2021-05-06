@@ -1,0 +1,30 @@
+{
+  "name": [
+    {
+      "required": true,
+      " message": "Please input your Name!",
+      "whitespace": true
+    }
+  ],
+  "professionalTitle": [
+    {
+      "required": true,
+      " message": "Please input your Professional Title!",
+      "whitespace": true
+    }
+  ],
+  "location": [
+    {
+      "required": true,
+      " message": "Please input your Location!",
+      "whitespace": true
+    }
+  ],
+  "resumeCategory": [
+    {
+      "required": true,
+      " message": "Please input your Resume Category!",
+      "whitespace": true
+    }
+  ]
+}

@@ -5,12 +5,20 @@ import Candidate from '../../Pages/Candidate/index';
 import CustomLayout from './../../Containers/Layout';
 const { Title, Paragraph, Link } = Typography;
 const { Item } = Breadcrumb;
-const Dashboard = (props: any) => {
+
+interface IProps {
+  children?: any;
+  dashboardName?: string;
+}
+
+const Dashboard = (props: IProps) => {
   return (
     <CustomLayout>
       <div className={styles.dashboard} {...props}>
         <div>
-          <Title className={styles.title}>Candidate Dashboard</Title>
+          <Title className={styles.title}>
+            {props.dashboardName} Dashboard
+          </Title>
           <Breadcrumb separator=">">
             <Item>Home</Item>
             <Item>Candidate</Item>

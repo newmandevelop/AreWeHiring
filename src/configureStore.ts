@@ -3,10 +3,10 @@ import { all } from 'redux-saga/effects';
 
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';
-import authSaga from './Containers/SignUp/saga';
-import jobSearchSaga from './Containers/JobOverview/saga';
-import allJobsSaga from './Containers/AllJobs/saga';
-import addCandidateSaga from './Containers/Dashboard/Candidate/saga';
+import authSaga from './Pages/SignUp/saga';
+import jobSearchSaga from './Pages/JobOverview/saga';
+import allJobsSaga from './Pages/AllJobs/saga';
+import addCandidateSaga from './Pages/Candidate/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 

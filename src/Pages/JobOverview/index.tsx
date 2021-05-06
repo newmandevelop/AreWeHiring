@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps, useParams } from 'react-router-dom';
 import JobDescription from './JobDescription/index';
 import JobApply from './JobDetail';
+import CustomLayout from '../../Containers/Layout';
 import { Actions } from './actions';
 
 import { IRootState } from '../../reducers';
@@ -30,7 +31,7 @@ const JobOverview = ({ history }: RouteComponentProps) => {
   }, [dispatch, id]);
 
   return (
-    <>
+    <CustomLayout>
       {jobByIdSuccess && !jobByIdFailure && (
         <>
           <Title level={4} style={{ marginTop: '2rem' }}>
@@ -51,7 +52,7 @@ const JobOverview = ({ history }: RouteComponentProps) => {
       {jobByIdFailure && (
         <h1 style={{ textAlign: 'center' }}>Job Not Found With this ID</h1>
       )}
-    </>
+    </CustomLayout>
   );
 };
 

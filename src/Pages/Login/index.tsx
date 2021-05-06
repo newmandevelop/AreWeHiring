@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { Actions } from './../SignUp/actions';
+import { Actions } from '../SignUp/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';

@@ -14,9 +14,10 @@ const CustomSider = () => {
   return (
     <Sider width={250} className={styles.Sider}>
       <Menu className={styles.menu}>
-        {SiderLinks.links.map((link: Links) => {
+        {SiderLinks.links.map((link: Links, index) => {
           return (
             <Item
+              key={index}
               className={
                 link.type === 'simple'
                   ? styles.simpleSideLink

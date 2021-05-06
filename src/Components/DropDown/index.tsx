@@ -21,7 +21,7 @@ const DropDown = (props: IProps) => {
       >
         {props.options?.map((d, i) => {
           return (
-            <Option className={styles.option} value={d}>
+            <Option key={i} className={styles.option} value={d}>
               {d}
             </Option>
           );

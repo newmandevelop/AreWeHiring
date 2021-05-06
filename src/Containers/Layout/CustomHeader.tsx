@@ -49,7 +49,10 @@ const CustomeHeader = () => {
               <Button type="link" className={styles.dropDown}>
                 Blog
               </Button>
-            </Dropdown>
+            </Dropdown>{' '}
+            <Button href="/login" type="link" className={styles.dropDown}>
+              Login
+            </Button>
           </ul>
         </div>
         <div style={{ marginRight: '1rem' }}>

@@ -1,24 +1,15 @@
 import React, { useRef } from 'react';
 import Dashboard from '../../Containers/Dashboard';
-import { Divider, Form, Upload, Space, notification, Typography } from 'antd';
+import { Divider, Form, Upload, notification, Typography } from 'antd';
 import styles from './index.module.scss';
 import Rules from './rules.json';
 import ReCAPTCHA from 'react-google-recaptcha';
-
-import {
-  UploadOutlined,
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-} from '@ant-design/icons';
-import TagsField from '../../Components/InputFieldsWithTags/index';
-import Label from '../../Components/Label/index';
-import TextEditor from '../../Components/TextEditor/index';
-import InputField from '../../Components/InputField';
+import { UploadOutlined } from '@ant-design/icons';
+import { FormItem } from '../../Containers/FormItem/index';
 import Button from '../../Components/Button';
 const { Item, List } = Form;
 const { Title } = Typography;
 const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-const DELAY = 1500;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -56,7 +47,6 @@ const PostJob = () => {
     }
     return e && e.fileList;
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onReset = () => {
     form.resetFields();
   };
@@ -75,83 +65,102 @@ const PostJob = () => {
           <Title ellipsis={false} level={4}>
             Job Details
           </Title>{' '}
-          {/*First Name Field */}
-          <Item name="company" rules={name}>
-            <InputField
-              label="Company"
-              name="company"
-              type="text"
-              placeholder="Select Company"
-            />
-          </Item>
-          {/*Last Name Field */}
-          <Item name="jobTitle" rules={name}>
-            <InputField
-              label="Job Title"
-              name="jobTitle"
-              type="text"
-              placeholder="Enter Job Title"
-            />
-          </Item>
+          {/*Company Name Field */}
+          {FormItem({
+            name: 'company',
+            label: 'Company',
+            type: 'text',
+            placeholder: 'Select Company',
+            fieldType: 'input',
+          })}
+          {/*JobTitle Field */}
+          {FormItem({
+            name: 'jobTitle',
+            label: 'Job Title',
+            type: 'text',
+            placeholder: 'Enter Job Title',
+            fieldType: 'input',
+          })}
           {/* Location Field */}
-          <Item name="location">
-            <InputField
-              label="Location"
-              optional
-              name="location"
-              type="text"
-              placeholder="e.g London"
-            />
-          </Item>
-          {/*Middle Name Field */}
-          <Item name="jobType">
-            <InputField
-              label="Job Type"
-              name="jobType"
-              type="text"
-              placeholder="FULL TIME"
-            />
-          </Item>
-          {/* Professional Title Field */}
-          <Item name="jobCategory" rules={professionalTitle}>
-            <InputField
-              label="Job Category"
-              name="jobCategory"
-              type="text"
-              placeholder="Choose a Category"
-            />
-          </Item>
-          {/* Tags Input Field */}
-          <Item name="jobTags">
-            <TagsField
-              name="jobTags"
-              placeholder="e.g PHP, Social Media Management"
-              label="Job Tags"
-            />
-          </Item>
-          {/* Resume Content Fields */}
-          <Item name="description">
-            <TextEditor label="Description" />
-          </Item>
+          {FormItem({
+            name: 'location',
+            label: 'Location',
+            type: 'text',
+            placeholder: 'e.g London',
+            fieldType: 'input',
+          })}
+          {/*Job Type Field */}
+          {FormItem({
+            name: 'jobType',
+            label: 'Job Type',
+            type: 'text',
+            placeholder: 'FULL TIME',
+            fieldType: 'input',
+          })}
+          {/* Job Category Field */}
+          {FormItem({
+            name: 'jobCategory',
+            label: 'Job Category',
+            type: 'text',
+            placeholder: 'Choose a Category',
+            fieldType: 'input',
+          })}
+          {/* Job Tags Input Field */}
+          {FormItem({
+            name: 'jobTags',
+            label: 'Job Tags',
+            optional: true,
+            placeholder: 'e.g PHP, Social Media Management',
+            fieldType: 'tagField',
+          })}
+          {/* Recruiter Type Input Field */}
+          {FormItem({
+            name: 'recruiterType',
+            label: 'Recruiter Type',
+            optional: true,
+            placeholder: 'Enter Recruiter Type',
+            fieldType: 'input',
+          })}
+          {/* Recruiter Type Input Field */}
+          {FormItem({
+            name: 'employer',
+            label: 'Employer',
+            optional: true,
+            placeholder: 'Enter Employer',
+            fieldType: 'input',
+          })}
+          {/*Industry Input Field */}
+          {FormItem({
+            name: 'industry',
+            label: 'Industry',
+            optional: true,
+            placeholder: 'Enter Industry',
+            fieldType: 'input',
+          })}
+          {/* Description Fields */}
+          {FormItem({
+            name: 'description',
+            label: 'Description',
+
+            fieldType: 'editor',
+          })}
+          {/*Application Field */}
+          {FormItem({
+            name: 'application',
+            label: 'Application Email/URL',
+            type: 'text',
+            placeholder: 'j.borchardt2021@gmail.com',
+            fieldType: 'input',
+          })}
           {/* Minimum rate Field */}
-          <Item name="applicationEmail_Url">
-            <InputField
-              label="Application Email/URL"
-              type="text"
-              name="application"
-              placeholder="j.borchardt2021@gmail.com"
-            />
-          </Item>
-          {/* Minimum rate Field */}
-          <Item name="minimumRate">
-            <InputField
-              label="Minimum rate/h ($)"
-              optional={true}
-              type="text"
-              name="rate"
-              placeholder="e.g 20"
-            />
-          </Item>
+          {FormItem({
+            name: 'minimumRate',
+            label: 'Minimum rate/h ($)',
+            type: 'text',
+            optional: true,
+            placeholder: 'e.g 20',
+            fieldType: 'input',
+          })}
           {/* Upload Image Button */}
           <Item
             name="logo"
@@ -168,56 +177,51 @@ const PostJob = () => {
               />{' '}
             </Upload>
           </Item>
-          {/* Minimum rate Field */}
-          <Item name="maximumRate">
-            <InputField
-              label="Maximum rate/h ($)"
-              optional={true}
-              type="text"
-              name="rate"
-              placeholder="e.g 50"
-            />
-          </Item>
-          {/* Minimum rate Field */}
-          <Item name="minimumSalary">
-            <InputField
-              label="Minimum Salary/h ($)"
-              optional={true}
-              type="text"
-              name="rate"
-              placeholder="e.g 20000"
-            />
-          </Item>
-          {/* Minimum rate Field */}
-          <Item name="maximumSalary">
-            <InputField
-              label="Maximum Salary/h ($)"
-              optional={true}
-              type="text"
-              name="rate"
-              placeholder="e.g 50000"
-            />
-          </Item>
-          {/* Minimum rate Field */}
-          <Item name="hours">
-            <InputField
-              label="Hours Per Week"
-              optional={true}
-              type="text"
-              name="hours"
-              placeholder="e.g 40"
-            />
-          </Item>
-          {/* Minimum rate Field */}
-          <Item name="external">
-            <InputField
-              label='External "Apply For Job" Link'
-              optional={true}
-              type="text"
-              name="external"
-              placeholder="http://"
-            />
-          </Item>
+          {/* Maximum rate Field */}
+          {FormItem({
+            name: 'maximumRate',
+            label: 'Maximum rate/h ($)',
+            type: 'text',
+            optional: true,
+            placeholder: 'e.g 50',
+            fieldType: 'input',
+          })}
+          {/* Minimum Salary Field */}
+          {FormItem({
+            name: 'minimumSalary',
+            label: 'Minimum Salary/h ($)',
+            type: 'text',
+            optional: true,
+            placeholder: 'e.g 20000',
+            fieldType: 'input',
+          })}
+          {/* Maximum Salary Field */}
+          {FormItem({
+            name: 'maximumSalary',
+            label: 'Maximum Salary/h ($)',
+            type: 'text',
+            optional: true,
+            placeholder: 'e.g 50000',
+            fieldType: 'input',
+          })}
+          {/* Hours Per Week Field */}
+          {FormItem({
+            name: 'hours',
+            label: 'Hours Per Week',
+            type: 'text',
+            optional: true,
+            placeholder: 'e.g 40',
+            fieldType: 'input',
+          })}
+          {/* External "Apply For Job" LinkField */}
+          {FormItem({
+            name: 'external',
+            label: 'External "Apply For Job" Link',
+            type: 'text',
+            optional: true,
+            placeholder: 'http://',
+            fieldType: 'input',
+          })}
           {/* Upload Image Button */}
           <Item
             name="header"

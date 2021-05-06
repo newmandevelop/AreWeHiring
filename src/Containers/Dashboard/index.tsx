@@ -14,7 +14,7 @@ interface IProps {
 const Dashboard = (props: IProps) => {
   return (
     <CustomLayout>
-      <div className={styles.dashboard} {...props}>
+      <div className={styles.dashboard}>
         <div>
           <Title className={styles.title}>
             {props.dashboardName} Dashboard

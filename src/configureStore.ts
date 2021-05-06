@@ -7,6 +7,7 @@ import authSaga from './Pages/SignUp/saga';
 import jobSearchSaga from './Pages/JobOverview/saga';
 import allJobsSaga from './Pages/AllJobs/saga';
 import addCandidateSaga from './Pages/Candidate/saga';
+import addJobSaga from './Pages/PostJob/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -20,7 +21,13 @@ export default function configureStore() {
     composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
   function* rootSaga() {
-    yield all([authSaga(), allJobsSaga(), jobSearchSaga(), addCandidateSaga()]);
+    yield all([
+      authSaga(),
+      allJobsSaga(),
+      jobSearchSaga(),
+      addCandidateSaga(),
+      addJobSaga(),
+    ]);
   }
 
   sagaMiddleware.run(rootSaga);

@@ -1,12 +1,10 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { Candidate } from '../../service/index';
+import { Job } from '../../service/index';
 function* addJob(action: any) {
   const { data } = action.payload;
-  console.log('payload', data);
   try {
-    const response = yield call(Candidate.addCandidate, data);
-    console.log(response);
+    const response = yield call(Job.addJob, data);
     if (response) {
       yield put(Actions.addJobSuccess());
     } else {

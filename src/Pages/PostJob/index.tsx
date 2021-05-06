@@ -5,7 +5,10 @@ import styles from './index.module.scss';
 import Rules from './rules.json';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { UploadOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormItem } from '../../Containers/FormItem/index';
+import { IRootState } from '../../reducers';
+import { Actions } from './actions';
 import Button from '../../Components/Button';
 const { Item, List } = Form;
 const { Title } = Typography;
@@ -20,26 +23,27 @@ const formItemLayout = {
 };
 const PostJob = () => {
   let reCaptchaRef = useRef();
-  // let dispatch = useDispatch();
-  // const {
-  //   addCandidateErrorMessage,
-  //   addCandidateProgress,
-  //   addCandidateFailure,
-  //   addCandidateSuccess,
-  // } = useSelector((state: IRootState) => state.candidate);
+  let dispatch = useDispatch();
+  const { addJobErrorMessage, addJobFailure, addJobSuccess } = useSelector(
+    (state: IRootState) => state.job,
+  );
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    console.log(values);
+    dispatch(
+      Actions.addJobProgress({
+        data: values,
+      }),
+    );
   };
-  // const openNotificationWithIcon = (
-  //   type: 'success' | 'error',
-  //   description: String | null,
-  // ) => {
-  //   notification[type]({
-  //     message: 'Notification Title',
-  //     description: description,
-  //   });
-  // };
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
   const normFile = (e: any) => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {

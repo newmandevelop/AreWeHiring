@@ -13,6 +13,7 @@ export interface IAuthState {
   forgetPasswordSuccess: boolean;
   forgetPasswordFailure: boolean;
   forgetPasswordErrorMessage: undefined | string;
+  userData: Object;
 }
 const initialState: IAuthState = {
   signUpProgress: false,
@@ -27,6 +28,7 @@ const initialState: IAuthState = {
   forgetPasswordSuccess: false,
   forgetPasswordFailure: false,
   forgetPasswordErrorMessage: undefined,
+  userData: {},
 };
 
 export default (state = initialState, action: Action) => {
@@ -71,6 +73,7 @@ export default (state = initialState, action: Action) => {
         loginProgress: false,
         loginSuccess: true,
         loginFailure: false,
+        userData: action.payload,
       };
     }
     case ActionTypes.LOGIN_FAILURE: {

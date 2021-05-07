@@ -30,6 +30,7 @@ export interface LoginProgress {
 
 export interface LoginSuccess {
   type: ActionTypes.LOGIN_SUCCESS;
+  payload: any;
 }
 
 export interface LoginFailure {
@@ -77,9 +78,10 @@ function loginProgress(payload: any): LoginProgress {
   };
 }
 
-function loginSuccess(): LoginSuccess {
+function loginSuccess(payload: any): LoginSuccess {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
+    payload,
   };
 }
 

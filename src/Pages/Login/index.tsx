@@ -37,6 +37,7 @@ const Login = (props: any) => {
     loginFailure,
     loginSuccess,
     loginProgress,
+    userData,
   } = useSelector((state: IRootState) => state.authState);
   const onReset = () => {
     form.resetFields();

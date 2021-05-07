@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Dashboard from '../../Containers/Dashboard';
 import { FormInstance } from 'antd/lib/form';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
@@ -27,18 +27,59 @@ const formItemLayout = {
   },
 };
 const PostJob = () => {
-  let reCaptchaRef = useRef();
   let dispatch = useDispatch();
   const { addJobErrorMessage, addJobFailure, addJobSuccess } = useSelector(
     (state: IRootState) => state.job,
   );
   const [form] = Form.useForm();
+  let formData = new FormData();
+
   const onFinish = (values: any) => {
+    let valueForApi = {
+      nameOfJob: values.jobTitle,
+      company: values.company,
+      description: '',
+      location: values.location,
+      jobType: values.jobType,
+      currencySymbol: '$',
+      salaryLowerLimit: values.minimumSalary,
+      salaryUpperLimit: values.maximumSalary,
+      recruiterType: values.recruiterType,
+      rateLowerLimit: values.minimumRate,
+      rateUpperLimit: values.maximumRate,
+      employer: values.employer,
+      industry: values.industry,
+      rolesAndResponsibilities: [
+        'Collaborate with system engineers, frontend developers and software developers to implement solutions that are aligned with and extend shared platform solutions',
+        'Apply Principals of SDLC methodologies like Lean/Agile/XP, CI, Software and Product Seceurity, Scalability, Documentation Practices, Refactoring and testing techniques',
+      ],
+      datePosted: values.openingDate,
+      expiryDate: values.closingDate,
+      jobCategory: values.jobCategory,
+      jobTags: ['Java'],
+      jobUrl: values.application,
+      hoursPerWeek: values.hours,
+      externalLink: values.external,
+    };
+    formData.append('job', JSON.stringify(valueForApi));
     dispatch(
       Actions.addJobProgress({
-        data: values,
+        data: formData,
       }),
     );
+  };
+
+  const logoProps = {
+    beforeUpload: (file: Blob) => {
+      formData.append('jobLogo', file);
+      return false;
+    },
+  };
+  const headerProps = {
+    beforeUpload: (file: any) => {
+      formData.append('headerImage', file);
+      return false;
+    },
   };
   const openNotificationWithIcon = (
     type: 'success' | 'error',
@@ -78,12 +119,10 @@ const PostJob = () => {
           {FormItem({
             name: 'company',
             label: 'Company',
-            type: 'text',
             placeholder: 'Select Company',
             fieldType: 'dropDown',
             options: ['Amazon Inc'],
           })}
-          {/*JobTitle Field */}
           {FormItem({
             name: 'jobTitle',
             label: 'Job Title',
@@ -164,6 +203,7 @@ const PostJob = () => {
 
             fieldType: 'editor',
           })}
+          {/* Roles and Responsibilities */}
           <Form.List name="rolesAndResponsibilities">
             {(fields, { add, remove }) => (
               <>
@@ -228,19 +268,15 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Upload Image Button */}
-          <Item
-            name="logo"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload name="logo" action="/upload.do" listType="picture">
+          <Item name="jobLogo">
+            <Upload listType="picture" {...logoProps}>
               <Button
                 icon={<UploadOutlined />}
                 placeholder="Maximum file size: 50 MB."
                 label="Logo"
                 optional
                 name="Browse"
-              />{' '}
+              />
             </Upload>
           </Item>
           {/* Maximum rate Field */}
@@ -289,12 +325,8 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Upload Image Button */}
-          <Item
-            name="header"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload name="headerImage" action="/upload.do" listType="picture">
+          <Item name="headerImage">
+            <Upload name="headerImage" {...headerProps} listType="picture">
               <Button
                 icon={<UploadOutlined />}
                 placeholder="The header image size should be atleast 1750x425"
@@ -304,13 +336,7 @@ const PostJob = () => {
               />{' '}
             </Upload>
           </Item>{' '}
-          <ReCAPTCHA
-            // style={{ display: 'inline-block' }}
-            theme="light"
-            sitekey={TEST_SITE_KEY}
-            // onChange={this.handleChange}
-            // asyncScriptOnLoad={this.asyncScriptOnLoad}
-          />
+          <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
           <Divider />
         </main>
         <div style={{ display: 'flex' }}>

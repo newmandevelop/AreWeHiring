@@ -4,9 +4,10 @@ import InputField from '../../Components/InputField';
 import Button from '../../Components/Button';
 import TextEditor from '../../Components/TextEditor';
 import TagsField from '../../Components/InputFieldsWithTags';
-import DropDown from '../../Components/DropDown';
-import { Dropdown, Form } from 'antd';
+import Label from '../../Components/Label';
+import { Form, Select } from 'antd';
 const { Item } = Form;
+const { Option } = Select;
 interface IProps {
   name?: string | any;
   value?: any;
@@ -80,15 +81,24 @@ export const FormItem = (props: IProps) => {
       );
     case 'dropDown':
       return (
-        <Item name={props.name}>
-          <DropDown
-            label={props.label}
-            optional={props.optional}
-            placeholder={props.placeholder}
-            options={props.options}
-            onChange={props.onChange}
-          />
-        </Item>
+        <div style={{ marginTop: '2rem' }}>
+          <Label optional={props.optional} label={props.label} />
+          <Item name={props.name}>
+            <Select
+              style={{ marginTop: '0.3rem' }}
+              placeholder={props.placeholder}
+              allowClear
+            >
+              {props.options?.map((d, i) => {
+                return (
+                  <Option key={i} value={d}>
+                    {d}
+                  </Option>
+                );
+              })}
+            </Select>
+          </Item>
+        </div>
       );
     default:
       return <></>;

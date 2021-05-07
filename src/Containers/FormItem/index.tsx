@@ -20,6 +20,7 @@ interface IProps {
   onClick?: any;
   fileProps?: any;
   icon?: any;
+  fileType?: 'picture' | 'text';
   options?: string[];
   btnType?: boolean;
   rules?: [];
@@ -110,8 +111,12 @@ export const FormItem = (props: IProps) => {
       );
     case 'upload':
       return (
-        <Item name="headerImage">
-          <Upload name="headerImage" {...props.fileProps} listType="picture">
+        <Item name={props.name}>
+          <Upload
+            name={props.name}
+            {...props.fileProps}
+            listType={props.fileType}
+          >
             <Button
               icon={props.icon}
               placeholder={props.placeholder}

@@ -285,6 +285,7 @@ const PostJob = () => {
             label: 'Logo',
             icon: <UploadOutlined />,
             optional: true,
+            fileType: 'picture',
             placeholder: 'Maximum file size: 50 MB.',
             fieldType: 'upload',
             btnName: 'Browse',
@@ -345,6 +346,7 @@ const PostJob = () => {
             placeholder: 'The header image size should be atleast 1750x425',
             fieldType: 'upload',
             btnName: 'Browse',
+            fileType: 'picture',
           })}
 
           <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />

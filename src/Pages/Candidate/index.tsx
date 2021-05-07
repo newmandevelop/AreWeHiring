@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Divider, Form, Upload, Space, notification } from 'antd';
 import InputField from '../../Components/InputField/index';
@@ -8,6 +8,7 @@ import { IRootState } from '../../reducers';
 import Button from '../../Components/Button/index';
 import Dashboard from '../../Containers/Dashboard';
 import TagsField from '../../Components/InputFieldsWithTags/index';
+import { FormItem } from '../../Containers/FormItem';
 import {
   UploadOutlined,
   PlusCircleOutlined,
@@ -16,7 +17,12 @@ import {
 import Label from '../../Components/Label/index';
 import TextEditor from '../../Components/TextEditor/index';
 import Rules from './rules.json';
-
+interface IProps {
+  url: string;
+}
+interface IProps2 {
+  education: string;
+}
 const { Item, List } = Form;
 const formItemLayout = {
   labelCol: {
@@ -29,6 +35,7 @@ const formItemLayout = {
 
 const Candidate = () => {
   let dispatch = useDispatch();
+  var formData = new FormData();
   const {
     addCandidateErrorMessage,
     addCandidateProgress,
@@ -37,11 +44,54 @@ const Candidate = () => {
   } = useSelector((state: IRootState) => state.candidate);
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
+    const urls: string[] = [];
+    const educationList: string[] = [];
+
+    if (values.url)
+      values.url.map((url: IProps) => {
+        urls.push(url.url);
+      });
+    if (values.education)
+      values.education.map((edu: IProps2) => {
+        educationList.push(edu.education);
+      });
+
+    let valueForApi = {
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      middleName: values.middleName,
+      professionalTitle: values.professionalTitle,
+      location: values.location,
+      photo: '',
+      video: '',
+      resumeCategory: [],
+      minimumRate: values.minimumRate,
+      resumeContent: '',
+      skills: values.skills,
+      profileUrls: urls,
+      education: educationList,
+      experienceList: values.experienceList,
+      resumeFile: '',
+    };
+    formData.append('candidate', JSON.stringify(valueForApi));
     dispatch(
       Actions.addCandidateProgress({
-        data: values,
+        data: formData,
       }),
     );
+  };
+  const logoProps = {
+    beforeUpload: (file: Blob) => {
+      formData.append('photoFile', file);
+      return false;
+    },
+  };
+  const resumeProps = {
+    beforeUpload: (file: Blob) => {
+      formData.append('resumeFile', file);
+      return false;
+    },
   };
   const openNotificationWithIcon = (
     type: 'success' | 'error',
@@ -52,14 +102,7 @@ const Candidate = () => {
       description: description,
     });
   };
-  const normFile = (e: any) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const onReset = () => {
     form.resetFields();
   };
@@ -156,22 +199,19 @@ const Candidate = () => {
                 placeholder="United States"
               />
             </Item>
-            {/* Upload Image Button */}
-            <Item
-              name="photo"
-              valuePropName="fileList"
-              getValueFromEvent={normFile}
-            >
-              <Upload name="logo" action="/upload.do" listType="picture">
-                <Button
-                  icon={<UploadOutlined />}
-                  placeholder="Maximum file size: 50 MB."
-                  label="Photo"
-                  optional
-                  name="Browse"
-                />{' '}
-              </Upload>
-            </Item>
+            {/* Upload Logo Image Button */}
+            {FormItem({
+              name: 'photo',
+              fileProps: logoProps,
+              label: 'Photo',
+              icon: <UploadOutlined />,
+              optional: true,
+              fileType: 'picture',
+              placeholder: 'Maximum file size: 50 MB.',
+              fieldType: 'upload',
+              btnName: 'Browse',
+            })}
+
             {/* Video Field */}
             <Item name="video">
               <InputField
@@ -368,22 +408,19 @@ const Candidate = () => {
               )}
             </List>
             <Divider className={styles.divider} />
-            {/* Upload Image Button */}
-            <Item
-              name="resumeFile"
-              valuePropName="fileList"
-              getValueFromEvent={normFile}
-            >
-              <Upload name="logo" action="/upload.do" listType="picture">
-                <Button
-                  icon={<UploadOutlined />}
-                  placeholder="Optionally upload your resume for employers to view. Max. file size: 50 MB"
-                  label="Resume File"
-                  optional
-                  name="Browse"
-                />
-              </Upload>
-            </Item>
+            {/* Upload Resume Button */}
+            {FormItem({
+              name: 'resumeFile',
+              fileProps: resumeProps,
+              label: 'Resume File',
+              icon: <UploadOutlined />,
+              optional: true,
+              fileType: 'text',
+              placeholder:
+                'Optionally upload your resume for employers to view. Max. file size: 50 MB',
+              fieldType: 'upload',
+              btnName: 'Browse',
+            })}
           </main>
           <div style={{ display: 'flex' }}>
             <Button

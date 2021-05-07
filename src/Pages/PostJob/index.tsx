@@ -25,6 +25,9 @@ const formItemLayout = {
     xs: { span: 24 },
   },
 };
+interface IRoles {
+  role: string;
+}
 const PostJob = () => {
   let dispatch = useDispatch();
   const { addJobErrorMessage, addJobFailure, addJobSuccess } = useSelector(
@@ -34,6 +37,11 @@ const PostJob = () => {
   let formData = new FormData();
 
   const onFinish = (values: any) => {
+    let roles: string[] = [];
+    if (values.rolesAndResponsibilities)
+      values.rolesAndResponsibilities.map((d: IRoles) => {
+        roles.push(d.role);
+      });
     let valueForApi = {
       nameOfJob: values.jobTitle,
       company: values.company,
@@ -48,10 +56,7 @@ const PostJob = () => {
       rateUpperLimit: values.maximumRate,
       employer: values.employer,
       industry: values.industry,
-      rolesAndResponsibilities: [
-        'Collaborate with system engineers, frontend developers and software developers to implement solutions that are aligned with and extend shared platform solutions',
-        'Apply Principals of SDLC methodologies like Lean/Agile/XP, CI, Software and Product Seceurity, Scalability, Documentation Practices, Refactoring and testing techniques',
-      ],
+      rolesAndResponsibilities: roles,
       datePosted: values.openingDate,
       expiryDate: values.closingDate,
       jobCategory: values.jobCategory,
@@ -221,11 +226,11 @@ const PostJob = () => {
                 {fields.map(({ key, name, fieldKey, ...restField }) => (
                   <Space key={key} className={styles.space}>
                     {FormItem({
-                      name: [name, 'rolesAndResponsibilities'],
+                      name: [name, 'role'],
                       type: 'text',
                       placeholder: 'Enter Role',
                       fieldType: 'input',
-                      fieldKey: [fieldKey, 'url'],
+                      fieldKey: [fieldKey, 'role'],
                     })}
 
                     <MinusCircleOutlined onClick={() => remove(name)} />

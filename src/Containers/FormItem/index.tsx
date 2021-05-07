@@ -5,7 +5,7 @@ import Button from '../../Components/Button';
 import TextEditor from '../../Components/TextEditor';
 import TagsField from '../../Components/InputFieldsWithTags';
 import Label from '../../Components/Label';
-import { Form, Select } from 'antd';
+import { Form, Select, Upload } from 'antd';
 const { Item } = Form;
 const { Option } = Select;
 interface IProps {
@@ -18,6 +18,7 @@ interface IProps {
   label?: String | any;
   textarea?: boolean;
   onClick?: any;
+  fileProps?: any;
   icon?: any;
   options?: string[];
   btnType?: boolean;
@@ -25,7 +26,14 @@ interface IProps {
   loading?: boolean;
   disabled?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
-  fieldType?: 'button' | 'input' | 'editor' | 'tagField' | 'dropDown';
+  btnName?: string;
+  fieldType?:
+    | 'button'
+    | 'input'
+    | 'editor'
+    | 'tagField'
+    | 'dropDown'
+    | 'upload';
   fieldKey?: any;
 }
 export const FormItem = (props: IProps) => {
@@ -99,6 +107,20 @@ export const FormItem = (props: IProps) => {
             </Select>
           </Item>
         </div>
+      );
+    case 'upload':
+      return (
+        <Item name="headerImage">
+          <Upload name="headerImage" {...props.fileProps} listType="picture">
+            <Button
+              icon={props.icon}
+              placeholder={props.placeholder}
+              label={props.label}
+              optional
+              name={props.btnName}
+            />{' '}
+          </Upload>
+        </Item>
       );
     default:
       return <></>;

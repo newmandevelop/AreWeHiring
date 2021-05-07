@@ -30,11 +30,15 @@ interface IRoles {
 }
 const PostJob = () => {
   let dispatch = useDispatch();
-  const { addJobErrorMessage, addJobFailure, addJobSuccess } = useSelector(
-    (state: IRootState) => state.job,
-  );
   const [form] = Form.useForm();
   let formData = new FormData();
+
+  const {
+    addJobErrorMessage,
+    addJobFailure,
+    addJobSuccess,
+    addJobProgress,
+  } = useSelector((state: IRootState) => state.job);
 
   const onFinish = (values: any) => {
     let roles: string[] = [];
@@ -274,18 +278,18 @@ const PostJob = () => {
             placeholder: 'e.g 20',
             fieldType: 'input',
           })}
-          {/* Upload Image Button */}
-          <Item name="jobLogo">
-            <Upload listType="picture" {...logoProps}>
-              <Button
-                icon={<UploadOutlined />}
-                placeholder="Maximum file size: 50 MB."
-                label="Logo"
-                optional
-                name="Browse"
-              />
-            </Upload>
-          </Item>
+          {/* Upload Logo Image Button */}
+          {FormItem({
+            name: 'jobLogo',
+            fileProps: { ...logoProps },
+            label: 'Logo',
+            icon: <UploadOutlined />,
+            optional: true,
+            placeholder: 'Maximum file size: 50 MB.',
+            fieldType: 'upload',
+            btnName: 'Browse',
+          })}
+
           {/* Maximum rate Field */}
           {FormItem({
             name: 'maximumRate',
@@ -331,24 +335,24 @@ const PostJob = () => {
             placeholder: 'http://',
             fieldType: 'input',
           })}
-          {/* Upload Image Button */}
-          <Item name="headerImage">
-            <Upload name="headerImage" {...headerProps} listType="picture">
-              <Button
-                icon={<UploadOutlined />}
-                placeholder="The header image size should be atleast 1750x425"
-                label="Header Image"
-                optional
-                name="Browse"
-              />{' '}
-            </Upload>
-          </Item>{' '}
+          {/* Upload Header Image Button */}
+          {FormItem({
+            name: 'headerImage',
+            fileProps: { ...headerProps },
+            label: 'Header Image',
+            optional: true,
+            icon: <UploadOutlined />,
+            placeholder: 'The header image size should be atleast 1750x425',
+            fieldType: 'upload',
+            btnName: 'Browse',
+          })}
+
           <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
           <Divider />
         </main>
         <div style={{ display: 'flex' }}>
           <Button
-            // loading={addCandidateProgress}
+            loading={addJobProgress}
             htmlType="submit"
             name="Save Changes"
             type

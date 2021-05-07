@@ -4,11 +4,12 @@ export const login = async (loginData: any) => {
   if (loginData) {
     const { email, password } = loginData;
     try {
+      console.log(loginData);
       const response = await axios().post('/users/login', {
         email,
         password,
       });
-
+      console.log(response);
       if (response) {
         return response;
       }

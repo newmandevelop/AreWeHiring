@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { Actions } from '../SignUp/actions';
-
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
 import { Form, Input, Button, Typography, notification } from 'antd';
 const { Title, Text, Link } = Typography;
-const { Item } = Form;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -32,10 +31,13 @@ const tailFormItemLayout = {
 const Login = (props: any) => {
   const [form] = Form.useForm();
   let dispatch = useDispatch();
-
-  const { loginErrorMessage, loginFailure, loginSuccess } = useSelector(
-    (state: IRootState) => state.authState,
-  );
+  let history = useHistory();
+  const {
+    loginErrorMessage,
+    loginFailure,
+    loginSuccess,
+    loginProgress,
+  } = useSelector((state: IRootState) => state.authState);
   const onReset = () => {
     form.resetFields();
   };
@@ -55,11 +57,16 @@ const Login = (props: any) => {
       }),
     );
   };
-  const [state, setState] = useState({
-    email: '',
-    password: '',
-  });
 
+  useEffect(() => {
+    if (loginSuccess) {
+      onReset();
+      openNotificationWithIcon('success', 'Login Successfully');
+      history.push('/');
+    } else if (loginFailure) {
+      openNotificationWithIcon('error', loginErrorMessage);
+    }
+  }, [loginFailure, loginSuccess]);
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div className="cardWidth">
@@ -107,7 +114,11 @@ const Login = (props: any) => {
               </Form.Item>
 
               <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  loading={loginProgress}
+                  type="primary"
+                  htmlType="submit"
+                >
                   Login
                 </Button>
               </Form.Item>

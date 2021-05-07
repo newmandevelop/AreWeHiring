@@ -33,7 +33,7 @@ function* login(action: any) {
         Authentication.login,
         login,
       );
-      console.log(response);
+      if (response) yield put(Actions.loginSuccess());
     }
   } catch (error) {
     console.log('err', error);

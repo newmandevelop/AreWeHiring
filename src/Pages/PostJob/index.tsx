@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import Dashboard from '../../Containers/Dashboard';
-import { FormInstance } from 'antd/lib/form';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
 import styles from './index.module.scss';
 import Rules from './rules.json';
@@ -90,23 +89,26 @@ const PostJob = () => {
       description: description,
     });
   };
-  const normFile = (e: any) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
+
   const onReset = () => {
     form.resetFields();
   };
-  const { name, professionalTitle, location } = Rules;
+
+  useEffect(() => {
+    if (addJobSuccess) {
+      onReset();
+      openNotificationWithIcon('success', 'Job Added Successfully');
+    } else if (addJobFailure) {
+      openNotificationWithIcon('error', addJobErrorMessage);
+    }
+  }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
   return (
     <Dashboard dashboardName="Employee">
       <Form
         {...formItemLayout}
         form={form}
+        onKeyDown={e => (e.keyCode == 13 ? e.preventDefault() : '')}
         name="addCandidate"
         onFinish={onFinish}
         scrollToFirstError

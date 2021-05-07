@@ -1,10 +1,20 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
 import { Job } from '../../service/index';
+
+export interface ResponseGenerator {
+  config?: any;
+  data?: any;
+  headers?: any;
+  request?: any;
+  status?: number;
+  statusText?: string;
+}
 function* addJob(action: any) {
   const { data } = action.payload;
   try {
-    const response = yield call(Job.addJob, data);
+    const response: ResponseGenerator = yield call(Job.addJob, data);
+    console.log(response);
     if (response) {
       yield put(Actions.addJobSuccess());
     } else {

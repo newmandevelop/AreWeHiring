@@ -2,27 +2,27 @@
   "links": [
     {
       "name": "Main",
-      "link": "",
+      "link": "/dashboard",
       "type": "bold"
     },
     {
       "name": "Dashboard",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "Messages",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "Employer",
-      "link": "",
+      "link": "/jobs",
       "type": "bold"
     },
     {
       "name": "Manage Jobs",
-      "link": "",
+      "link": "/jobs",
       "type": "simple"
     },
     {
@@ -31,43 +31,58 @@
       "type": "simple"
     },
     {
+      "name": "Company",
+      "link": "/dashboard",
+      "type": "bold"
+    },
+    {
+      "name": "Manage Companies",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+    {
+      "name": "Add Company",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+    {
       "name": "Candidate",
-      "link": "",
+      "link": "/dashboard/candidate",
       "type": "bold"
     },
     {
       "name": "Manage Resumes",
-      "link": "",
+      "link": "/dashboard/candidate",
       "type": "simple"
     },
     {
       "name": "Add Resume",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "My Applications",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "Account",
-      "link": "",
+      "link": "/dashboard",
       "type": "bold"
     },
     {
       "name": "My Profile",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "My Orders",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     },
     {
       "name": "Logout",
-      "link": "",
+      "link": "/dashboard",
       "type": "simple"
     }
   ]

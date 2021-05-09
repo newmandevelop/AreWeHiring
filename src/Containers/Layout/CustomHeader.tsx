@@ -40,7 +40,10 @@ const CustomeHeader = () => {
             </li>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>
-                <Button type="link" className={styles.dropDown}>
+                <Button 
+                type="link" 
+                href="/dashboard/employee/post-job"
+                className={styles.dropDown}>
                   For Employers
                 </Button>
               </Dropdown>

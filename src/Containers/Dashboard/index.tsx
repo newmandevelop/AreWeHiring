@@ -16,7 +16,7 @@ const Dashboard = (props: IProps) => {
         <Title className={styles.title}>{props.dashboardName} Dashboard</Title>
         <Breadcrumb separator=">">
           <Item>Home</Item>
-          <Item>Candidate</Item>
+          <Item>{props.dashboardName}</Item>
         </Breadcrumb>{' '}
         <div className={styles.alert}>
           <div>

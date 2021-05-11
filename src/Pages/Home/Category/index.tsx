@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { Row, Col, Typography } from 'antd';
-import data from './category.json';
 import { useSelector } from 'react-redux';
 import PrimaryButton from '../../../Components/PrimaryButton';
 import { IRootState } from '../../../reducers';

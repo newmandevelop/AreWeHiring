@@ -1,7 +1,7 @@
 import { login, signUp } from './authentication';
 import { jobSearchById, allJobsSearch } from './jobSearch';
 import { addCandidate } from './candidate';
-import { addJob, popularCategories } from './jobs';
+import { addJob, popularCategories, recentJobsSearch } from './jobs';
 export const Authentication = {
   login,
   signUp,
@@ -17,4 +17,5 @@ export const Candidate = {
 export const Job = {
   addJob,
   popularCategories,
+  recentJobsSearch,
 };

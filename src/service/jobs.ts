@@ -27,3 +27,16 @@ export const popularCategories = async () => {
     throw error.response;
   }
 };
+
+export const recentJobsSearch = async () => {
+  try {
+    const response = await axios().get(`jobs/recentJobs`);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error.response;
+  }
+};

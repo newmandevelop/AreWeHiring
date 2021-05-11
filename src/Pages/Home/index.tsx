@@ -6,11 +6,13 @@ import styles from './index.module.scss';
 import { Typography, Divider } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Actions as jobCategoryAction } from './Category/actions';
+import { Actions as recentJobs } from './RecentJobs/actions';
 const { Title, Text } = Typography;
 const Home = () => {
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(jobCategoryAction.jobCategoriesProgress());
+    dispatch(recentJobs.recentJobsProgress());
   }, []);
 
   return (

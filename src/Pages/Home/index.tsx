@@ -15,13 +15,13 @@ const Home = () => {
   return (
     <div className={styles.homeWrapper}>
       <JobSearch />
-      <div className={styles.popularCategories}>
-        <Title className={styles.categoryText}>Popular Categories</Title>
+      <div className={styles.homePadding}>
+        <Title className={styles.homeCategoryText}>Popular Categories</Title>
         <Category />
       </div>
       <Divider plain />
-      <div className={styles.popularCategories}>
-        <Title className={styles.categoryText}>Recent Jobs</Title>
+      <div className={styles.homePadding}>
+        <Title className={styles.homeCategoryText}>Recent Jobs</Title>
         <RecentJobs />
       </div>
     </div>

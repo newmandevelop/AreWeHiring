@@ -1,0 +1,18 @@
+.tagWrapper {
+  border-radius: 3px;
+  font-size: 0.7rem;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  color: #888;
+  padding: 0.4rem 0.8rem;
+  line-height: 18px;
+  font-weight: 300;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    color: #f1630d !important;
+    border: 1px solid #f1630d;
+    background-color: #fef6f0;
+  }
+}

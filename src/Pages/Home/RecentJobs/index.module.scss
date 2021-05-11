@@ -1,0 +1,36 @@
+.recent_jobs_Wrapper {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+
+  .recentJobCard {
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+
+    .recentJobImage {
+      max-width: 100%;
+    }
+
+    .infoContainer {
+      padding: 1rem 0rem;
+
+      .title {
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        font-weight: 300;
+      }
+      .jobDetail {
+        display: flex;
+        margin-top: 1rem;
+
+        .detail2 {
+          margin-left: 1rem;
+        }
+        .detail3 {
+          margin-left: 1rem;
+        }
+        .detail4 {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+}

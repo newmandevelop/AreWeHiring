@@ -122,7 +122,7 @@ const Candidate = () => {
   ]);
   const { name, professionalTitle, location } = Rules;
   return (
-    <Dashboard  dashboardName="Candidate">
+    <Dashboard dashboardName="Candidate">
       <React.Fragment>
         <Form
           {...formItemLayout}

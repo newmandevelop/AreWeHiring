@@ -8,25 +8,29 @@ const CustomLayout = (props: any) => {
   return (
     <Layout style={{ backgroundColor: '#f1f2f4' }} {...props}>
       <CustomeHeader {...props}></CustomeHeader>
-      <Content
-        style={{
-          // padding: '0px 2rem 3rem 2rem',
-          minHeight: 'calc(100vh - 64px)',
-        }}
-      >
-        {props.children}
-      </Content>
-      {/* <Layout>
-        <CustomSider {...props} />
+      {!props.sideBar && (
         <Content
           style={{
-            padding: '0px 2rem 3rem 2rem',
+            // padding: '0px 2rem 3rem 2rem',
             minHeight: 'calc(100vh - 64px)',
           }}
         >
           {props.children}
         </Content>
-      </Layout> */}
+      )}
+      {props.sideBar && (
+        <Layout>
+          <CustomSider {...props} />
+          <Content
+            style={{
+              padding: '0px 2rem 3rem 2rem',
+              minHeight: 'calc(100vh - 64px)',
+            }}
+          >
+            {props.children}
+          </Content>
+        </Layout>
+      )}
 
       <Footer
         style={{

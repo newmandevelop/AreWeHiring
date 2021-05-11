@@ -1,0 +1,26 @@
+.categoriesWrapper {
+  .category_box {
+    background: #f8f8f8;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    .category_box_items {
+      display: flex;
+      justify-content: space-between;
+      .category_box_content {
+        font-size: 16px !important;
+        font-weight: 500;
+        color: #333;
+        line-height: 2;
+        margin-top: 1.5rem;
+      }
+      .category_number {
+        .categoryNumber {
+          color: #909090;
+          font-size: 48px;
+          opacity: 0.18;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

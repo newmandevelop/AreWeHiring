@@ -67,7 +67,7 @@ const Login = (props: any) => {
     } else if (loginFailure) {
       openNotificationWithIcon('error', loginErrorMessage);
     }
-  }, [loginFailure, loginSuccess]);
+  }, [history, loginErrorMessage, loginFailure, loginSuccess]);
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div className="cardWidth">

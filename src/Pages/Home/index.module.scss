@@ -1,8 +1,12 @@
-.popularCategories {
-  margin-top: 1rem;
-}
-.categoryText {
-  color: #000000 !important;
-  font-size: 2rem !important;
-  font-weight: 300 !important;
+.homeWrapper {
+  background-color: #ffffff;
+  .popularCategories {
+    //   margin-top: 1rem;
+    padding: 2rem 3rem;
+  }
+  .categoryText {
+    color: #000000 !important;
+    font-size: 1.7rem !important;
+    font-weight: 300 !important;
+  }
 }

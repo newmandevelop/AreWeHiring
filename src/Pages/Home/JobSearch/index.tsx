@@ -23,8 +23,6 @@ const JobSearch = () => {
   return (
     <div className={styles.jobSearchWrapper}>
       <div className={styles.jobSearchContainer}>
-        <div className={styles.jobSearchImg}></div>
-
         <div className={styles.containerFields}>
           <Title className={styles.title}>Find Job</Title>
 

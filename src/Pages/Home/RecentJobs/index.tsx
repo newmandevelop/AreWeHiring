@@ -42,7 +42,7 @@ const RecentJobs = () => {
                     <div className={styles.jobDetail}>
                       <div className={styles.detail1}>
                         <Paragraph className={styles.firstDetail}>
-                          <CarryOutOutlined />
+                          <i className="fal fa-briefcase"></i>
                           <span className={styles.span}>
                             {data.recruiterType}
                           </span>
@@ -51,14 +51,14 @@ const RecentJobs = () => {
                       <div className={styles.detail2}>
                         {' '}
                         <Paragraph className={styles.secondDetail}>
-                          <CarryOutOutlined />
+                          <i className="fal fa-map-marked-alt"></i>
                           <span className={styles.span}>{data.location}</span>
                         </Paragraph>
                       </div>
                       <div className={styles.detail3}>
                         {' '}
                         <Paragraph className={styles.secondDetail}>
-                          <DollarCircleOutlined />
+                          <i className="fal fa-money-bill-wave"></i>
                           <span
                             className={styles.span}
                           >{`$${data.salaryLowerLimit}-$${data.salaryUpperLimit}`}</span>
@@ -67,7 +67,7 @@ const RecentJobs = () => {
                       <div className={styles.detail4}>
                         {' '}
                         <Paragraph className={styles.secondDetail}>
-                          <CalendarOutlined />
+                          <i className="fal fa-money-bill-wave"></i>
                           <span
                             className={styles.span}
                           >{`$${data.rateLowerLimit}-$${data.rateUpperLimit}`}</span>

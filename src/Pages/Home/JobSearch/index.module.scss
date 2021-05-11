@@ -1,21 +1,35 @@
 .jobSearchWrapper {
   .jobSearchContainer {
-    // position: relative;
-    .jobSearchImg {
+    &::after {
+      background-color: rgba(42, 46, 50, 0.7);
+      opacity: 0.8;
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: block;
+      top: 0;
+      left: 0;
+    }
+
+    &::before {
+      content: '';
       background-image: url('../../../assets/job.jpeg');
       width: 100%;
       background-position: 100%;
       background-size: cover;
       height: 100%;
       position: absolute;
-      z-index: 0;
-      // filter: blur(2px);
+      // z-index: 0;
+      // filter: grayscale(40%);
       top: 0;
     }
+
     .containerFields {
       padding: 3rem 2rem;
       z-index: 100;
-      // position: relative;
+      position: relative;
+
       .title {
         color: #ffffff !important;
         font-size: 1.8rem !important;

@@ -4,8 +4,11 @@ import { Form, Input, Button, Typography, notification } from 'antd';
 import { Actions } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
+import { useHistory } from 'react-router-dom';
+
 const { Title } = Typography;
 const { Item } = Form;
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -31,6 +34,8 @@ const tailFormItemLayout = {
 
 const RegistrationForm = (props: any) => {
   const [form] = Form.useForm();
+  let history = useHistory();
+
   let dispatch = useDispatch();
   const { signUpSuccess, signUpFailure, signUpErrorMessage } = useSelector(
     (state: IRootState) => state.authState,
@@ -58,6 +63,7 @@ const RegistrationForm = (props: any) => {
     if (signUpSuccess) {
       onReset();
       openNotificationWithIcon('success', 'SignUp Successfully');
+      history.push('/login');
     } else if (signUpFailure) {
       openNotificationWithIcon('error', signUpErrorMessage);
     }

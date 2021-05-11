@@ -14,3 +14,16 @@ export const addJob = async (data: any) => {
     throw error;
   }
 };
+
+export const popularCategories = async () => {
+  try {
+    const response = await axios().get(`jobs/popularCategories`);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error.response;
+  }
+};

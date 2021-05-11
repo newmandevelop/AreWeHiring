@@ -8,6 +8,7 @@ import jobSearchSaga from './Pages/JobOverview/saga';
 import allJobsSaga from './Pages/AllJobs/saga';
 import addCandidateSaga from './Pages/Candidate/saga';
 import addJobSaga from './Pages/PostJob/saga';
+import jobCategoriesSaga from './Pages/Home/Category/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -27,6 +28,7 @@ export default function configureStore() {
       jobSearchSaga(),
       addCandidateSaga(),
       addJobSaga(),
+      jobCategoriesSaga(),
     ]);
   }
 

@@ -113,7 +113,7 @@ const PostJob = () => {
   }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
   return (
-    <Dashboard dashboardName="Employee">
+    <Dashboard dashboardName="Employer">
       <Form
         {...formItemLayout}
         form={form}

@@ -11,6 +11,7 @@ import {
   CalendarOutlined,
   CarryOutOutlined,
 } from '@ant-design/icons';
+import Dashboard from '../../Containers/Dashboard';
 
 const { Title, Paragraph } = Typography;
 
@@ -24,6 +25,7 @@ const AllJobs = () => {
   );
 
   return (
+    <Dashboard  dashboardName="All Jobs">
     <div className={styles.AllJobsFieldWrapper}>
       {console.log(allJobsData)}
       {allJobsSuccess && (
@@ -87,6 +89,7 @@ const AllJobs = () => {
         </Row>
       )}
     </div>
+    </Dashboard>
   );
 };
 

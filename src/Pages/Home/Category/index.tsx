@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './index.module.scss';
 import { Row, Col, Typography } from 'antd';
 import data from './category.json';
+import { useSelector } from 'react-redux';
 import PrimaryButton from '../../../Components/PrimaryButton';
+import { IRootState } from '../../../reducers';
 const { Text } = Typography;
 
 interface IProps {
@@ -12,6 +14,9 @@ interface IProps {
 }
 
 const Category = () => {
+  const { jobCategoriesData } = useSelector(
+    (state: IRootState) => state.jobCategory,
+  );
   const CategoryItem = (props: IProps) => {
     return (
       <div className={styles.category_box}>
@@ -30,13 +35,14 @@ const Category = () => {
   return (
     <div className={styles.categoriesWrapper}>
       <Row gutter={20} justify="space-between">
-        {data.categories.map((d, i) => {
-          return (
-            <Col style={{ marginTop: '1rem' }} key={i} sm={12} xs={24}>
-              <CategoryItem name={d.name} number={d.number} />
-            </Col>
-          );
-        })}
+        {jobCategoriesData &&
+          Object.keys(jobCategoriesData).map((data, index) => {
+            return (
+              <Col style={{ marginTop: '1rem' }} key={index} sm={12} xs={24}>
+                <CategoryItem name={data} number={jobCategoriesData[data]} />
+              </Col>
+            );
+          })}
       </Row>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <PrimaryButton name="Browse All Categories" />

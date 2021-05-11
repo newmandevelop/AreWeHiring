@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import JobSearch from './JobSearch';
 import Category from './Category';
 import RecentJobs from './RecentJobs';
 import styles from './index.module.scss';
 import { Typography, Divider } from 'antd';
-
+import { useDispatch } from 'react-redux';
+import { Actions as jobCategoryAction } from './Category/actions';
 const { Title, Text } = Typography;
-interface IProps {
-  name: string;
-  link: string;
-  number: Number;
-}
 const Home = () => {
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(jobCategoryAction.jobCategoriesProgress());
+  }, []);
+
   return (
     <div className={styles.homeWrapper}>
       <JobSearch />

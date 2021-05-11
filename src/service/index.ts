@@ -1,10 +1,10 @@
 import { login, signUp } from './authentication';
 import { jobSearchById, allJobsSearch } from './jobSearch';
-import {allCompaniesSearch} from './companySearch';
+import { allCompaniesSearch } from './companySearch';
 import { addCandidate } from './candidate';
-import { addJob } from './jobs';
-import {addCompany} from './companies';
-import {allUsersSearch} from './users';
+import { addJob, popularCategories } from './jobs';
+import { addCompany } from './companies';
+import { allUsersSearch } from './users';
 export const Authentication = {
   login,
   signUp,
@@ -19,6 +19,7 @@ export const Candidate = {
 };
 export const Job = {
   addJob,
+  popularCategories,
 };
 
 export const CompanySearch = {

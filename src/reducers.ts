@@ -4,9 +4,12 @@ import JobSearch, { IJobSearch } from './Pages/JobOverview/reducers';
 import AllJobSearch, { IAllJobSearch } from './Pages/AllJobs/reducers';
 import AddCandidate, { IAddCandidate } from './Pages/Candidate/reducers';
 import AddJob, { IAddJob } from './Pages/PostJob/reducers';
-import AllCompaniesSearch, { IAllCompanySearch } from './Pages/AllCompanies/reducers';
+import AllCompaniesSearch, {
+  IAllCompanySearch,
+} from './Pages/AllCompanies/reducers';
 import AddCompany, { IAddCompany } from './Pages/AddCompany/reducers';
-import AllUserSearch, {IAllUserSearch} from './Pages/AllUsers/reducers';
+import AllUserSearch, { IAllUserSearch } from './Pages/AllUsers/reducers';
+import JobCategories, { IJobCategory } from './Pages/Home/Category/reducers';
 export interface IRootState {
   authState: IAuthState;
   jobSearch: IJobSearch;
@@ -16,6 +19,7 @@ export interface IRootState {
   allCompaniesSearch: IAllCompanySearch;
   company: IAddCompany;
   allUserSearch: IAllUserSearch;
+  jobCategory: IJobCategory;
 }
 
 const rootReducer = combineReducers({
@@ -27,6 +31,7 @@ const rootReducer = combineReducers({
   allCompaniesSearch: AllCompaniesSearch,
   company: AddCompany,
   allUserSearch: AllUserSearch,
+  jobCategory: JobCategories,
 });
 
 export default rootReducer;

@@ -53,7 +53,7 @@ const JobSearch = () => {
             <Col span={24}>
               <Input
                 className={styles.jobSearchField}
-                placeholder="Job title, Skill, Industry"
+                placeholder="City, State or Zip"
                 type="text"
               />
             </Col>

@@ -1,25 +1,35 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import PrivateRoute from './PrivateRouting';
+
+import Home from '../Pages/Home';
 import RegistrationForm from '../Pages/SignUp';
 import Login from '../Pages/Login';
-import { isUserLoggedIn } from '../utils/sessionStorage';
+import JobOverview from '../Pages/JobOverview';
+import AllJobs from '../Pages/AllJobs';
+import Candidate from '../Pages/Candidate';
+import PostJob from '../Pages/PostJob';
+import DashboardRoute from './DashboardRoute';
+import SimpleRoute from './SimpleRoute';
 const Routing = () => {
-  if (!isUserLoggedIn())
-    return (
-      <Switch>
-        <Route exact path="/registration" component={RegistrationForm} />
-        <Route exact path="/login" component={Login} />
-        <Redirect to="/login" />
-      </Switch>
-    );
-  else
-    return (
-      <Switch>
-        <PrivateRoute />
-        <Redirect to="/" />
-      </Switch>
-    );
+  return (
+    <Switch>
+      <SimpleRoute exact path="/" component={Home} />
+
+      <Route exact path="/registration" component={RegistrationForm} />
+      <Route exact path="/login" component={Login} />
+      <DashboardRoute exact path="/jobs" component={AllJobs} />
+
+      <DashboardRoute exact path="/jobs/:id" component={JobOverview} />
+      <DashboardRoute exact path="/dashboard/candidate" component={Candidate} />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/post-job"
+        component={PostJob}
+      />
+
+      <Redirect to="/" />
+    </Switch>
+  );
 };
 
 export default Routing;

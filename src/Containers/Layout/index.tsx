@@ -8,7 +8,15 @@ const CustomLayout = (props: any) => {
   return (
     <Layout style={{ backgroundColor: '#f1f2f4' }} {...props}>
       <CustomeHeader {...props}></CustomeHeader>
-      <Layout>
+      <Content
+        style={{
+          // padding: '0px 2rem 3rem 2rem',
+          minHeight: 'calc(100vh - 64px)',
+        }}
+      >
+        {props.children}
+      </Content>
+      {/* <Layout>
         <CustomSider {...props} />
         <Content
           style={{
@@ -18,7 +26,7 @@ const CustomLayout = (props: any) => {
         >
           {props.children}
         </Content>
-      </Layout>
+      </Layout> */}
 
       <Footer
         style={{

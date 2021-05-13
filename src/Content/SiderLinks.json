@@ -42,7 +42,7 @@
     },
     {
       "name": "Add Company",
-      "link": "/dashboard",
+      "link": "/dashboard/company/add-company",
       "type": "simple"
     },
     {

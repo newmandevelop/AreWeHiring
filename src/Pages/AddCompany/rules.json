@@ -1,0 +1,30 @@
+{
+    "name": [
+      {
+        "required": true,
+        " message": "Please input your Name!",
+        "whitespace": true
+      }
+    ],
+    "tagLine": [
+      {
+        "required": true,
+        " message": "Please input Company Tagline!",
+        "whitespace": true
+      }
+    ],
+    "industry": [
+      {
+        "required": true,
+        " message": "Please input industry!",
+        "whitespace": true
+      }
+    ],
+    "dateFounded": [
+      {
+        "required": true,
+        " message": "Please input your Date Founded!",
+        "whitespace": true
+      }
+    ]
+}

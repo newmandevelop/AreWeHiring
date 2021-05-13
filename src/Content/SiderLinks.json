@@ -32,12 +32,12 @@
     },
     {
       "name": "Company",
-      "link": "/dashboard",
+      "link": "/companies",
       "type": "bold"
     },
     {
       "name": "Manage Companies",
-      "link": "/dashboard",
+      "link": "/companies",
       "type": "simple"
     },
     {

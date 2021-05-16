@@ -12,4 +12,12 @@ export function isUserLoggedIn() {
 export function logoutUser() {
   return sessionStorage.removeItem('hiring_user');
 }
+
+export function setToken(token: string, type: string) {
+  return sessionStorage.setItem('token', type+' '+token);
+}
+
+export function getToken() {
+  return sessionStorage.getItem('token');
+}
 /* eslint-enable */

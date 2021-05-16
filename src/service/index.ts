@@ -4,6 +4,7 @@ import {allCompaniesSearch} from './companySearch';
 import { addCandidate } from './candidate';
 import { addJob } from './jobs';
 import {addCompany} from './companies';
+import {allUsersSearch} from './users';
 export const Authentication = {
   login,
   signUp,
@@ -26,4 +27,8 @@ export const CompanySearch = {
 
 export const Company = {
   addCompany,
+};
+
+export const UserSearch = {
+  allUsersSearch,
 };

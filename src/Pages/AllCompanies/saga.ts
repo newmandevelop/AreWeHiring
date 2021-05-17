@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { CompanySearch, JobSearch } from '../../service/index';
+import { CompanySearch } from '../../service/index';
 
 export interface ResponseGenerator {
   config?: any;

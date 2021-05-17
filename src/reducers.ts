@@ -5,6 +5,7 @@ import AllJobSearch, { IAllJobSearch } from './Pages/AllJobs/reducers';
 import AddCandidate, { IAddCandidate } from './Pages/Candidate/reducers';
 import AddJob, { IAddJob } from './Pages/PostJob/reducers';
 import AllCompaniesSearch, { IAllCompanySearch } from './Pages/AllCompanies/reducers';
+import AddCompany, { IAddCompany } from './Pages/AddCompany/reducers';
 export interface IRootState {
   authState: IAuthState;
   jobSearch: IJobSearch;
@@ -12,6 +13,7 @@ export interface IRootState {
   candidate: IAddCandidate;
   job: IAddJob;
   allCompaniesSearch: IAllCompanySearch;
+  company: IAddCompany;
 }
 
 const rootReducer = combineReducers({
@@ -21,6 +23,7 @@ const rootReducer = combineReducers({
   job: AddJob,
   allJobsSearch: AllJobSearch,
   allCompaniesSearch: AllCompaniesSearch,
+  company: AddCompany,
 });
 
 export default rootReducer;

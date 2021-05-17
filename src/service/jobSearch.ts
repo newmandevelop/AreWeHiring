@@ -36,10 +36,8 @@ export const findJob = async (data: findJob) => {
     const response = await axios().post(
       `jobs/find?what=${data.what}&where=${data.where}`,
     );
-    if (response && response.data) {
-      return response.data;
-    } else {
-      return null;
+    if (response) {
+      return response;
     }
   } catch (error) {
     throw error.response;

@@ -14,12 +14,11 @@ interface IProps {
 }
 
 const JobSearch = () => {
-  const [what, setWhat] = useState('');
-  const [where, setWhere] = useState('');
+  const [what, setWhat] = useState('Security Chief');
+  const [where, setWhere] = useState('Seattle');
   let dispatch = useDispatch();
 
   const {
-    jobDataData,
     jobSearchErrorMessage,
     jobSearchFailure,
     jobSearchProgress,
@@ -97,6 +96,7 @@ const JobSearch = () => {
             htmlType="submit"
             onClick={handleSubmit}
             name="Search"
+            loading={jobSearchProgress}
           />
 
           <Text className={styles.titleText}>

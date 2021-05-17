@@ -20,6 +20,7 @@ const PrimaryButton = (props: IProps) => {
       icon={props.icon}
       disabled={props.disabled}
       onClick={props.onClick}
+      loading={props.loading}
       className={styles.searchBtn}
     >
       {props.name}

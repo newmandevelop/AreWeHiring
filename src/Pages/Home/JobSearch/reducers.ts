@@ -6,7 +6,7 @@ export interface IFindJob {
   jobSearchFailure: boolean;
   jobSearchErrorMessage: null | string;
 
-  jobDataData: Object;
+  jobData: Object;
 }
 const initialState: IFindJob = {
   jobSearchProgress: false,
@@ -14,7 +14,7 @@ const initialState: IFindJob = {
   jobSearchFailure: false,
   jobSearchErrorMessage: null,
 
-  jobDataData: {},
+  jobData: {},
 };
 
 export default (state = initialState, action: Action) => {

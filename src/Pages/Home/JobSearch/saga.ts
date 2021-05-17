@@ -18,7 +18,12 @@ function* findJob(action: any) {
         JobSearch.findJob,
         findJob,
       );
-      yield put(Actions.jobSearchSuccess(response.data));
+      console.log(response.data);
+      if (response.data && Object.values(response.data).length > 0)
+        yield put(Actions.jobSearchSuccess(response.data));
+      else {
+        yield put(Actions.jobSearchFailure('Data Not Found'));
+      }
     }
   } catch (error) {
     yield put(Actions.jobSearchFailure(error && error.response.data.message));

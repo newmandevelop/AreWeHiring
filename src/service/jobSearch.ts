@@ -32,9 +32,8 @@ interface findJob {
 }
 
 export const findJob = async (data: findJob) => {
-  console.log(data);
   try {
-    const response = await axios().get(
+    const response = await axios().post(
       `jobs/find?what=${data.what}&where=${data.where}`,
     );
     if (response && response.data) {

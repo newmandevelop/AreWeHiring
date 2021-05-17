@@ -1,5 +1,5 @@
 import { login, signUp } from './authentication';
-import { jobSearchById, allJobsSearch } from './jobSearch';
+import { jobSearchById, allJobsSearch, findJob } from './jobSearch';
 import { allCompaniesSearch } from './companySearch';
 import { addCandidate } from './candidate';
 import { addJob, popularCategories, recentJobsSearch } from './jobs';
@@ -12,6 +12,7 @@ export const Authentication = {
 export const JobSearch = {
   jobSearchById,
   allJobsSearch,
+  findJob,
 };
 
 export const Candidate = {

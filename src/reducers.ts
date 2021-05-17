@@ -10,6 +10,7 @@ import AllCompaniesSearch, {
 import AddCompany, { IAddCompany } from './Pages/AddCompany/reducers';
 import AllUserSearch, { IAllUserSearch } from './Pages/AllUsers/reducers';
 import JobCategories, { IJobCategory } from './Pages/Home/Category/reducers';
+import FindJob, { IFindJob } from './Pages/Home/JobSearch/reducers';
 import RecentJobsCategories, {
   IRecentJobs,
 } from './Pages/Home/RecentJobs/reducers';
@@ -25,6 +26,7 @@ export interface IRootState {
   allUserSearch: IAllUserSearch;
   jobCategory: IJobCategory;
   recentJobs: IRecentJobs;
+  findJob: IFindJob;
 }
 
 const rootReducer = combineReducers({
@@ -38,6 +40,7 @@ const rootReducer = combineReducers({
   allUserSearch: AllUserSearch,
   jobCategory: JobCategories,
   recentJobs: RecentJobsCategories,
+  findJob: FindJob,
 });
 
 export default rootReducer;

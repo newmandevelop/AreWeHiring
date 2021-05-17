@@ -10,6 +10,8 @@ import { IRootState } from '../../reducers';
 import JobSpotlight from './JobSpotlight';
 import { Actions as jobCategoryAction } from './Category/actions';
 import { Actions as recentJobs } from './RecentJobs/actions';
+import Reviews from './Reviews';
+import emoji from '../../assets/in-love.svg';
 const { Title, Text } = Typography;
 const Home = () => {
   let dispatch = useDispatch();
@@ -77,6 +79,22 @@ const Home = () => {
       <div className={styles.homePadding}>
         <Title className={styles.homeCategoryText}>Job Spotlight</Title>
         <JobSpotlight />
+      </div>
+      <div className={styles.users}>
+        <div className={styles.reviewHeading}>
+          <Text className={styles.homeUserReview}>What Our Users Say</Text>
+          <img
+            draggable={false}
+            className={styles.emojiImage}
+            src={emoji}
+            alt="emoji"
+          ></img>
+        </div>
+        <Text className={styles.reviewDetail}>
+          We collect reviews from our users so you can get an honest opinion of
+          what an experience with our website are really like!
+        </Text>
+        <Reviews />
       </div>
     </div>
   );

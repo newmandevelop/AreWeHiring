@@ -13,4 +13,31 @@
     margin-top: 30px;
     padding: auto;
   }
+  .users {
+    justify-content: center;
+    margin-top: 3rem;
+    background-color: #f2f2f2;
+    .reviewHeading {
+      display: flex;
+      justify-content: center;
+      .homeUserReview {
+        text-align: center !important;
+        margin-top: 2rem;
+
+        font-size: 1.5rem;
+      }
+      .emojiImage {
+        margin-top: 2rem;
+        margin-left: 1rem;
+        width: 25px;
+      }
+    }
+    .reviewDetail {
+      display: flex;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+
+      justify-content: center;
+    }
+  }
 }

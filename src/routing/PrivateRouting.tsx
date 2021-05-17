@@ -6,12 +6,14 @@ import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
 import PostJob from '../Pages/PostJob';
 import CustomLayout from '../Containers/Layout';
+import AllCompanies from '../Pages/AllCompanies';
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   return (
     <CustomLayout>
       <Switch>
         <Route exact path="/" component={AllJobs} />
         <Route exact path="/jobs" component={AllJobs} />
+        <Route exact path="/companies" component={AllCompanies} />
 
         <Route exact path="/jobs/:id" component={JobOverview} />
         <Route exact path="/dashboard/candidate" component={Candidate} />

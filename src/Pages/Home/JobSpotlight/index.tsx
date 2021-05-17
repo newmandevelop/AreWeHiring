@@ -37,7 +37,34 @@ const JobSpotlight = () => {
           prevArrow={<LeftArrow type="left" />}
           nextArrow={<RightArrow type="right" />}
           dots={false}
+          infinite={false}
           slidesToShow={4}
+          responsive={[
+            {
+              breakpoint: 1350,
+              settings: {
+                slidesToShow: 4,
+              },
+            },
+            {
+              breakpoint: 1250,
+              settings: {
+                slidesToShow: 3,
+              },
+            },
+            {
+              breakpoint: 1000,
+              settings: {
+                slidesToShow: 2,
+              },
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+              },
+            },
+          ]}
           autoplay
           autoplaySpeed={2000}
         >

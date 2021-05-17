@@ -14,6 +14,7 @@ import allUSersSaga from './Pages/AllUsers/saga';
 import jobCategoriesSaga from './Pages/Home/Category/saga';
 import recentJobs from './Pages/Home/RecentJobs/saga';
 import findJobSaga from './Pages/Home/JobSearch/saga';
+import jobSpotlightSaga from './Pages/Home/JobSpotlight/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -39,6 +40,7 @@ export default function configureStore() {
       jobCategoriesSaga(),
       recentJobs(),
       findJobSaga(),
+      jobSpotlightSaga(),
     ]);
   }
 

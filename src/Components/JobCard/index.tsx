@@ -26,7 +26,7 @@ interface IJob {
 const JobCard = (job: IJob) => {
   return (
     <main className={styles.JobCardWrapper}>
-      <Card style={{ borderRadius: '10px' }} hoverable>
+      <Card style={{ backgroundColor: '#fdfdfd' }} hoverable>
         <Title className={styles.jobTitle} title="JobTitle">
           {job.name}
         </Title>

@@ -21,7 +21,6 @@ const AllJobs = () => {
   return (
     <Dashboard dashboardName="All Jobs">
       <div className={styles.AllJobsFieldWrapper}>
-        {console.log(allJobsData)}
         {allJobsSuccess && (
           <Row justify="space-around">
             {allJobsData.map((job: any) => {

@@ -7,7 +7,7 @@ import { Typography, Divider, Row, Col } from 'antd';
 import JobCard from '../../Components/JobCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
-
+import JobSpotlight from './JobSpotlight';
 import { Actions as jobCategoryAction } from './Category/actions';
 import { Actions as recentJobs } from './RecentJobs/actions';
 const { Title, Text } = Typography;
@@ -25,7 +25,6 @@ const Home = () => {
   return (
     <div className={styles.homeWrapper}>
       <JobSearch />
-      {console.log(jobSearchSuccess)}
       {!jobSearchSuccess && (
         <>
           <div className={styles.homePadding}>
@@ -75,6 +74,10 @@ const Home = () => {
           </div>
         </>
       )}
+      <div className={styles.homePadding}>
+        <Title className={styles.homeCategoryText}>Job Spotlight</Title>
+        <JobSpotlight />
+      </div>
     </div>
   );
 };

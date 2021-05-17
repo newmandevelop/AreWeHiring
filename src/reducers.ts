@@ -11,6 +11,9 @@ import AddCompany, { IAddCompany } from './Pages/AddCompany/reducers';
 import AllUserSearch, { IAllUserSearch } from './Pages/AllUsers/reducers';
 import JobCategories, { IJobCategory } from './Pages/Home/Category/reducers';
 import FindJob, { IFindJob } from './Pages/Home/JobSearch/reducers';
+import JobSpotlight, {
+  IJobSpotlight,
+} from './Pages/Home/JobSpotlight/reducers';
 import RecentJobsCategories, {
   IRecentJobs,
 } from './Pages/Home/RecentJobs/reducers';
@@ -27,6 +30,7 @@ export interface IRootState {
   jobCategory: IJobCategory;
   recentJobs: IRecentJobs;
   findJob: IFindJob;
+  jobSpotlight: IJobSpotlight;
 }
 
 const rootReducer = combineReducers({
@@ -41,6 +45,7 @@ const rootReducer = combineReducers({
   jobCategory: JobCategories,
   recentJobs: RecentJobsCategories,
   findJob: FindJob,
+  jobSpotlight: JobSpotlight,
 });
 
 export default rootReducer;

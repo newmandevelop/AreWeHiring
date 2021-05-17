@@ -10,6 +10,7 @@ import addCandidateSaga from './Pages/Candidate/saga';
 import addJobSaga from './Pages/PostJob/saga';
 import allCompaniesSaga from './Pages/AllCompanies/saga';
 import addCompanySaga from './Pages/AddCompany/saga';
+import allUSersSaga from './Pages/AllUsers/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -31,6 +32,7 @@ export default function configureStore() {
       addJobSaga(),
       allCompaniesSaga(),
       addCompanySaga(),
+      allUSersSaga(),
     ]);
   }
 

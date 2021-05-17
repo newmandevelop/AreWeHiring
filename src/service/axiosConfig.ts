@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { getToken } from "../utils/sessionStorage";
 
 const createAxiosInstance = (): AxiosInstance => {
   const instance = axios.create({
@@ -12,6 +13,8 @@ const createAxiosInstance = (): AxiosInstance => {
   instance.interceptors.request.use(
     (config) => {
       // config.headers.Authorization = ''
+      const token = getToken();
+      config.headers.Authorization =  token;
       return { ...config };
     },
     (error) => {

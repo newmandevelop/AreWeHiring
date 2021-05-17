@@ -4,13 +4,20 @@ import PrivateRoute from './PrivateRouting';
 
 import RegistrationForm from '../Pages/SignUp';
 import Login from '../Pages/Login';
+import { isUserLoggedIn } from '../utils/sessionStorage';
 const Routing = () => {
+  if (!isUserLoggedIn())
+    return (
+      <Switch>
+        <Route exact path="/registration" component={RegistrationForm} />
+        <Route exact path="/login" component={Login} />
+        <Redirect to="/login" />
+      </Switch>
+    )
+  else
   return (
     <Switch>
-      <Route exact path="/registration" component={RegistrationForm} />
-      <Route exact path="/login" component={Login} />
       <PrivateRoute />
-
       <Redirect to="/" />
     </Switch>
   );

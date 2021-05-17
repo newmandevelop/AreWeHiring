@@ -1,0 +1,68 @@
+$small: 500px;
+
+.AllUsersFieldWrapper {
+  margin-top: 2rem;
+  width: 100%;
+  .name {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .typeBtn {
+    opacity: 0.8;
+
+    font-size: 0.6rem;
+    padding: 0px 7px !important;
+    background-color: white;
+    color: #1890ff;
+  }
+  .firstDetail {
+    margin-bottom: 0px !important;
+
+    margin-top: 2rem;
+  }
+  .secondDetail {
+    margin-top: 0px !important;
+    margin-bottom: 0px;
+  }
+  .span {
+    margin-left: 1rem;
+  }
+  .companySize {
+    margin-top: 1rem;
+    text-align: justify;
+  }
+  .applyBtn {
+    width: 100%;
+    height: 30px;
+  }
+  .applyBtn:hover {
+    box-shadow: 6px 3px 5px 0px rgba(171, 162, 171, 1);
+  }
+  .column {
+    margin-top: 30px;
+    padding: auto;
+  }
+  @media screen and (max-width: $small) {
+    .companyName {
+      font-size: 0.8rem;
+    }
+    .typeBtn {
+      font-size: 0.4rem;
+      padding: 1px 7px !important;
+    }
+    .firstDetail {
+      margin-top: 2rem;
+      font-size: 0.7rem;
+    }
+    .secondDetail {
+      font-size: 0.7rem;
+    }
+    .jobDescription {
+      font-size: 0.7rem;
+    }
+    .applyBtn {
+      font-size: 0.7rem;
+      width: 100%;
+    }
+  }
+}

@@ -80,6 +80,17 @@
       "link": "/dashboard",
       "type": "simple"
     },
+
+    {
+      "name": "Manage Users",
+      "link": "/users",
+      "type": "bold"
+    },
+    {
+      "name": "Change Password (Admin)",
+      "link": "/changepasswordadmin",
+      "type": "simple"
+    },
     {
       "name": "Logout",
       "link": "/dashboard",

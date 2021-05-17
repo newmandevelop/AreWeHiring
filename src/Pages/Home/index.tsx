@@ -3,7 +3,8 @@ import JobSearch from './JobSearch';
 import Category from './Category';
 import RecentJobs from './RecentJobs';
 import styles from './index.module.scss';
-import { Typography, Divider } from 'antd';
+import { Typography, Divider, Row, Col } from 'antd';
+import JobCard from '../../Components/JobCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
 
@@ -42,9 +43,35 @@ const Home = () => {
       )}
       {jobSearchSuccess && (
         <>
-          <div className={styles.homePadding}>
+          <div id="searchedJobs" className={styles.homePadding}>
             <Title className={styles.homeCategoryText}>Searched Jobs</Title>
-            {/* <Category /> */}
+            <Row justify="space-around">
+              {Object.values(jobData).map(job => {
+                return (
+                  <Col
+                    key={job.id}
+                    className={styles.column}
+                    md={9}
+                    lg={7}
+                    sm={22}
+                    xs={22}
+                  >
+                    <JobCard
+                      name={job.nameOfJob}
+                      type={job.jobType}
+                      location={job.location}
+                      employer={job.employer}
+                      currencySymbol={job.currencySymbol}
+                      datePosted={job.datePosted}
+                      description={job.description}
+                      id={job.id}
+                      salaryLowerLimit={job.salaryLowerLimit}
+                      salaryUpperLimit={job.salaryUpperLimit}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
           </div>
         </>
       )}

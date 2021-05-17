@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Actions } from './actions';
 
@@ -19,10 +19,10 @@ const JobSearch = () => {
   let dispatch = useDispatch();
 
   const {
-    jobSearchErrorMessage,
-    jobSearchFailure,
     jobSearchProgress,
     jobSearchSuccess,
+    jobSearchErrorMessage,
+    jobSearchFailure,
   } = useSelector((state: IRootState) => state.findJob);
   const Label = (props: IProps) => {
     return (
@@ -34,6 +34,21 @@ const JobSearch = () => {
       </div>
     );
   };
+
+  useEffect(() => {
+    if (jobSearchSuccess) {
+      const element: any = document.getElementById('searchedJobs');
+      element.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, [jobSearchSuccess]);
+
+  useEffect(() => {
+    if (jobSearchFailure) {
+      notification.error({ message: jobSearchErrorMessage });
+    }
+  }, [jobSearchFailure]);
 
   const handleSubmit = () => {
     const token = getToken();

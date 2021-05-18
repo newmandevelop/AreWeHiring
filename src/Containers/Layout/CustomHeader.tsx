@@ -40,10 +40,11 @@ const CustomeHeader = () => {
             </li>
             <li className={styles.navLinkItems}>
               <Dropdown overlay={menu}>
-                <Button 
-                type="link" 
-                href="/dashboard/employee/post-job"
-                className={styles.dropDown}>
+                <Button
+                  type="link"
+                  href="/dashboard/employee/post-job"
+                  className={styles.dropDown}
+                >
                   For Employers
                 </Button>
               </Dropdown>
@@ -58,7 +59,7 @@ const CustomeHeader = () => {
             </Button>
           </ul>
         </div>
-        <div style={{ marginRight: '1rem' }}>
+        {/* <div style={{ marginRight: '1rem' }}>
           <Divider className={styles.divider} type="vertical"></Divider>
           <img
             alt=""
@@ -71,7 +72,7 @@ const CustomeHeader = () => {
               <DownOutlined style={{ marginLeft: '0.3rem' }} />
             </Text>
           </Dropdown>
-        </div>
+        </div> */}
       </div>
     </Header>
   );

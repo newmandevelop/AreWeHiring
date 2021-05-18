@@ -9,16 +9,16 @@ import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
 import PostJob from '../Pages/PostJob';
 import DashboardRoute from './DashboardRoute';
+import ApplyJob from '../Pages/ApplyJob';
 import SimpleRoute from './SimpleRoute';
 const Routing = () => {
   return (
     <Switch>
       <SimpleRoute exact path="/" component={Home} />
-
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
       <DashboardRoute exact path="/jobs" component={AllJobs} />
-
+      <DashboardRoute exact path="/job-apply" component={ApplyJob} />
       <DashboardRoute exact path="/jobs/:id" component={JobOverview} />
       <DashboardRoute exact path="/dashboard/candidate" component={Candidate} />
       <DashboardRoute

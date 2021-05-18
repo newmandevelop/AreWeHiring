@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './index.module.scss';
+import { useHistory } from 'react-router-dom';
 import { StarOutlined, BellOutlined } from '@ant-design/icons';
 import { Button, Typography } from 'antd';
 import moment from 'moment';
 const JobApply = (data: any) => {
+  let history = useHistory();
   const { Title, Text } = Typography;
   const {
     nameOfJob,
@@ -14,6 +16,11 @@ const JobApply = (data: any) => {
     salaryUpperLimit,
     datePosted,
   } = data.data;
+
+  const handleApply = () => {
+    history.push({ pathname: '/job-apply', state: { data: data.data } });
+  };
+
   return (
     <>
       <div className={styles.jobApplyFieldsWrapper}>
@@ -73,6 +80,7 @@ const JobApply = (data: any) => {
         <Button
           block
           size="large"
+          onClick={handleApply}
           className={styles.buttonAlignmant}
           type="primary"
         >

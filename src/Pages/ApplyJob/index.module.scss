@@ -1,0 +1,61 @@
+.applyJobWrapper {
+  margin-top: 3rem;
+
+  .jobDescription {
+    background-color: #ffffff;
+    border-radius: 5px;
+    .TitleContainer {
+      padding: 1rem 2rem;
+      .title {
+        font-weight: 500;
+      }
+    }
+
+    .detailsContainer {
+      padding: 1rem 2rem;
+      .jobName {
+        font-weight: 500;
+      }
+      .tagContainer {
+        margin-bottom: 0.5rem;
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        .date {
+          font-size: 13px;
+        }
+      }
+      .jobNameText {
+        font-size: 0.9rem !important;
+        color: #000000;
+      }
+      .summary {
+        margin-top: 1.5rem;
+        // width: 85%;
+        text-align: left;
+      }
+      .attributes {
+        margin-top: 1rem;
+      }
+      .attrHeading {
+        color: #000000;
+        font-size: 0.8rem;
+        display: block;
+      }
+      .attrText {
+        margin-left: 1.5rem;
+      }
+    }
+  }
+
+  .Divider {
+    margin: 0px !important;
+  }
+  .tag {
+    border-radius: 25px;
+    color: #60707b;
+  }
+  .moreSymbol {
+    color: #008000 !important;
+  }
+}

@@ -48,6 +48,68 @@
     }
   }
 
+  .jobApply {
+    margin-top: 0.2rem;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 0px !important;
+    .TitleContainer {
+      padding: 1rem 2rem;
+      margin-bottom: 0px !important;
+
+      .title {
+        margin-bottom: 0px !important;
+        font-weight: 500;
+      }
+      .whatText {
+        margin-bottom: 0px !important;
+        font-weight: 400;
+        font-size: 0.8rem;
+        margin-top: 0px !important;
+      }
+    }
+
+    .messageContainer {
+      padding: 0.5rem 2rem;
+    }
+    .messageTitle {
+      display: block;
+      font-size: 14px;
+      color: #000000;
+    }
+    .messageText {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+    }
+    .Attachments {
+      display: block;
+      font-size: 14px;
+      color: #000000;
+      margin-top: 2rem;
+    }
+    .dragger {
+      margin-top: 1rem;
+      border: 1px dashed #65a242;
+    }
+    .dragText {
+      font-size: 0.8rem;
+    }
+    .draggerText {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      margin-top: 1rem;
+    }
+    .buttonContainer {
+      padding: 0.5rem 2rem;
+      .submitButton {
+        border-radius: 25px;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
   .Divider {
     margin: 0px !important;
   }

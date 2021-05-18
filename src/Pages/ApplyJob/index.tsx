@@ -1,12 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './index.module.scss';
 import moment from 'moment';
-import { Typography, Row, Divider, Col, Tag } from 'antd';
+import InputField from '../../Components/InputField';
+import {
+  Typography,
+  Row,
+  Divider,
+  Col,
+  Tag,
+  Upload,
+  message,
+  Button,
+} from 'antd';
 const { Text, Title, Paragraph } = Typography;
+const { Dragger } = Upload;
 const ApplyJob = () => {
   const { state }: any = useLocation();
   const { data } = state;
+
+  const props = {
+    name: 'file',
+
+    multiple: true,
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange(info: any) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
   return (
     <div className={styles.applyJobWrapper}>
       <div className={styles.jobDescription}>
@@ -119,6 +149,50 @@ const ApplyJob = () => {
               <Tag className={styles.tag}>HTML</Tag>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className={styles.jobApply}>
+        <div className={styles.TitleContainer}>
+          <Title className={styles.title} level={3}>
+            Introduce Yourself
+          </Title>
+          <Text className={styles.whatText}>
+            What makes you a strong candidate for this job ?
+          </Text>
+        </div>
+        <Divider />
+        <div className={styles.messageContainer}>
+          <Text className={styles.messageTitle}>Message To Client</Text>
+          <Text className={styles.messageText}>
+            Describe some of your experiences that makes you a great candidate
+            for this job, include any questions you may have about this job, or
+            even request a video call
+          </Text>
+          <InputField
+            textarea
+            type="text"
+            name="message"
+            placeholder="Add Cover Letter"
+          />
+          <Text className={styles.Attachments}>Attachments</Text>
+          <Dragger className={styles.dragger} {...props}>
+            <p className={styles.dragText}>
+              drag or <span style={{ color: '#65a242' }}>upload</span> files
+              here
+            </p>
+          </Dragger>
+          <Text className={styles.draggerText}>
+            You may attach upto 10 files under the size of{' '}
+            <strong>25 MB</strong> each, include work samples or other documents
+            to support your application. Do not attach your resume.
+          </Text>
+        </div>
+        <Divider />
+        <div className={styles.buttonContainer}>
+          <Button className={styles.submitButton} type="primary">
+            Submit Proposal
+          </Button>
         </div>
       </div>
     </div>

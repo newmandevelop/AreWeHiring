@@ -51,16 +51,11 @@ const JobSearch = () => {
   }, [jobSearchFailure]);
 
   const handleSubmit = () => {
-    const token = getToken();
-    if (token) {
-      dispatch(
-        Actions.jobSearchProgress({
-          findJob: { what, where },
-        }),
-      );
-    } else {
-      notification.error({ message: 'Login First' });
-    }
+    dispatch(
+      Actions.jobSearchProgress({
+        findJob: { what, where },
+      }),
+    )
   };
 
   return (

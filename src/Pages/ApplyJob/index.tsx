@@ -6,6 +6,7 @@ import InputField from '../../Components/InputField';
 import { IRootState } from '../../reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions } from './actions';
+import { FormItem } from '../../Containers/FormItem';
 import {
   Typography,
   Row,
@@ -41,25 +42,6 @@ const ApplyJob = () => {
   const { state }: any = useLocation();
   const { data } = state;
 
-  const props = {
-    name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info: any) {
-      const { status } = info.file;
-      if (status !== 'uploading') {
-        console.log("File", info.file, "FileInfo", info.fileList);
-      }
-      if (status === 'done') {
-
-        formData.append('applicationFile', "file");
-        console.log("Done");
-        message.success(`Done ${info.file.name} file uploaded successfully.`);
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
 
   const onFinish = (values: any) => {
     let valueForApi = {
@@ -72,7 +54,9 @@ const ApplyJob = () => {
     }
 
     formData.append('application', JSON.stringify(valueForApi));
-    console.log(JSON.stringify(valueForApi))
+    console.log(formData)
+
+
 
     dispatch(
       Actions.applyJobProgress({
@@ -81,6 +65,37 @@ const ApplyJob = () => {
     );
 
   }
+
+  const applicationFileProps = {
+    beforeUpload: (file: Blob) => {
+      formData.append('applicationFile', file);
+      return false;
+    },
+  };
+  const props = {
+    name: 'file',
+    multiple: true,
+    beforeUpload: (file: Blob) => {
+      formData.append('applicationFile', file);
+      return false;
+    },
+    //'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange(info: any) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log("File", info.file, "FileInfo", info.fileList);
+      }
+      if (status === 'done') {
+
+        formData.append('applicationFile', "file");
+        console.log("Done");
+        console.log(formData)
+        message.success(`Done ${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
 
   const openNotificationWithIcon = (
     type: 'success' | 'error',
@@ -268,13 +283,16 @@ const ApplyJob = () => {
               <Text className={styles.DatePickerTitle}>Pick Joining Date</Text>
               <Item name="dateYouCanStart">
                 <DatePicker className={styles.DatePicker} onChange={e => { new Date() }}></DatePicker>
+
               </Item>
               <Text className={styles.Attachments}>Attachments</Text>
+
+
+
               <Item name="">
                 <Dragger className={styles.dragger} {...props}>
                   <p className={styles.dragText}>
-                    drag or <span style={{ color: '#65a242' }}>upload</span> files
-              here
+                    drag or upload files here
             </p>
                 </Dragger>
               </Item>
@@ -289,7 +307,7 @@ const ApplyJob = () => {
           <Divider />
           <div className={styles.buttonContainer}>
             <Button
-              //loading={}
+              loading={applyJobProgress}
               htmlType="submit"
               name="Submit Proposal"
               type
@@ -297,7 +315,7 @@ const ApplyJob = () => {
           </div>
         </Form>
       </div>
-    </div>
+    </div >
   );
 };
 

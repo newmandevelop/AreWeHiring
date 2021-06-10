@@ -20,7 +20,7 @@ export default (state = initialState, action: Action) => {
             return {
                 ...state,
                 applyJobProgress: true,
-                applyJobSuccess: true,
+                applyJobSuccess: false,
                 applyJobFailure: false,
             };
         }

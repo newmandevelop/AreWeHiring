@@ -52,3 +52,4 @@ export const jobSpotlight = async () => {
     throw error.response;
   }
 };
+

@@ -3,7 +3,8 @@ import { ActionTypes, Actions } from './actions';
 import { Candidate } from '../../service/index';
 function* addCandidate(action: any) {
   const { data } = action.payload;
-  console.log('payload', data);
+  console.log('payload--------', data);
+
   try {
     const response = yield call(Candidate.addCandidate, data);
     console.log(response);

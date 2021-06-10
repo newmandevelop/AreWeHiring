@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './index.module.scss';
 import moment from 'moment';
 import InputField from '../../Components/InputField';
+import { IRootState } from '../../reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions } from './actions';
 import {
   Typography,
   Row,
@@ -11,32 +14,96 @@ import {
   Tag,
   Upload,
   message,
-  Button,
+  DatePicker,
+  Form,
+  notification
 } from 'antd';
+
+import Button from '../../Components/Button/index';
 const { Text, Title, Paragraph } = Typography;
 const { Dragger } = Upload;
+const { Item } = Form;
+
+
 const ApplyJob = () => {
+
+
+
+  const [form] = Form.useForm();
+  var formData = new FormData();
+  const {
+    applyJobSuccess,
+    applyJobFailure,
+    applyJobErrorMessage,
+    applyJobProgress, } = useSelector((state: IRootState) => state.applyJob)
+
+  const dispatch = useDispatch()
   const { state }: any = useLocation();
   const { data } = state;
 
   const props = {
     name: 'file',
-
     multiple: true,
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
     onChange(info: any) {
       const { status } = info.file;
       if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
+        console.log("File", info.file, "FileInfo", info.fileList);
       }
       if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
+
+        formData.append('applicationFile', "file");
+        console.log("Done");
+        message.success(`Done ${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
   };
 
+  const onFinish = (values: any) => {
+    let valueForApi = {
+      email: "j.borchardt2021test@gmail.com",
+      jobName: data.nameOfJob,
+      dateApplied: moment(new Date()).format('YYYY-MM-D'),
+      dateYouCanStart: moment(values.dateYouCanStart).format('YYYY-MM-D'),
+      salaryExpected: values.salaryExpected,
+
+    }
+
+    formData.append('application', JSON.stringify(valueForApi));
+    console.log(JSON.stringify(valueForApi))
+
+    dispatch(
+      Actions.applyJobProgress({
+        data: formData,
+      }),
+    );
+
+  }
+
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
+
+  useEffect(() => {
+    if (applyJobSuccess) {
+      //onReset();
+      openNotificationWithIcon('success', 'Job Applied Successfully');
+    } else if (applyJobFailure) {
+      openNotificationWithIcon('error', applyJobErrorMessage);
+    }
+  }, [
+    applyJobSuccess,
+    applyJobFailure,
+    applyJobErrorMessage,
+  ]);
   return (
     <div className={styles.applyJobWrapper}>
       <div className={styles.jobDescription}>
@@ -162,38 +229,73 @@ const ApplyJob = () => {
           </Text>
         </div>
         <Divider />
-        <div className={styles.messageContainer}>
-          <Text className={styles.messageTitle}>Message To Client</Text>
-          <Text className={styles.messageText}>
-            Describe some of your experiences that makes you a great candidate
-            for this job, include any questions you may have about this job, or
-            even request a video call
-          </Text>
-          <InputField
-            textarea
-            type="text"
-            name="message"
-            placeholder="Add Cover Letter"
-          />
-          <Text className={styles.Attachments}>Attachments</Text>
-          <Dragger className={styles.dragger} {...props}>
-            <p className={styles.dragText}>
-              drag or <span style={{ color: '#65a242' }}>upload</span> files
+
+
+        <Form
+          form={form}
+          name="applyJob"
+          onFinish={onFinish}
+          scrollToFirstError>
+          <main>
+            <div className={styles.messageContainer}>
+              <Text className={styles.messageTitle}>Message To Client</Text>
+              <Text className={styles.messageText}>
+                Describe some of your experiences that makes you a great candidate
+                for this job, include any questions you may have about this job, or
+                even request a video call
+          </Text >
+
+              <Item name="message">
+                <InputField
+                  textarea
+                  type="text"
+                  name="message"
+                  placeholder="Add Cover Letter"
+                />
+              </Item>
+
+
+
+              <Text className={styles.SalaryTitle}>Salary Expected</Text>
+              <Item name="salaryExpected">
+                <InputField
+                  name="salaryExpected"
+                  type="text"
+                  placeholder="40,000"
+                />
+              </Item>
+
+              <Text className={styles.DatePickerTitle}>Pick Joining Date</Text>
+              <Item name="dateYouCanStart">
+                <DatePicker className={styles.DatePicker} onChange={e => { new Date() }}></DatePicker>
+              </Item>
+              <Text className={styles.Attachments}>Attachments</Text>
+              <Item name="">
+                <Dragger className={styles.dragger} {...props}>
+                  <p className={styles.dragText}>
+                    drag or <span style={{ color: '#65a242' }}>upload</span> files
               here
             </p>
-          </Dragger>
-          <Text className={styles.draggerText}>
-            You may attach upto 10 files under the size of{' '}
-            <strong>25 MB</strong> each, include work samples or other documents
+                </Dragger>
+              </Item>
+              <Text className={styles.draggerText}>
+                You may attach upto 10 files under the size of{' '}
+                <strong>25 MB</strong> each, include work samples or other documents
             to support your application. Do not attach your resume.
           </Text>
-        </div>
-        <Divider />
-        <div className={styles.buttonContainer}>
-          <Button className={styles.submitButton} type="primary">
-            Submit Proposal
-          </Button>
-        </div>
+            </div>
+          </main>
+
+          <Divider />
+          <div className={styles.buttonContainer}>
+            <Button
+              //loading={}
+              htmlType="submit"
+              name="Submit Proposal"
+              type
+            />
+          </div>
+        </Form>
       </div>
     </div>
   );

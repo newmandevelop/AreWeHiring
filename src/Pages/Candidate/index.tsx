@@ -80,6 +80,8 @@ const Candidate = () => {
         data: formData,
       }),
     );
+    console.log("Form Data", formData);
+
   };
   const logoProps = {
     beforeUpload: (file: Blob) => {

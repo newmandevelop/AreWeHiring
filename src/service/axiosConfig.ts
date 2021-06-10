@@ -4,7 +4,7 @@ import { getToken } from '../utils/sessionStorage';
 const createAxiosInstance = (): AxiosInstance => {
   const instance = axios.create({
     baseURL: 'http://104.236.34.83:8080/api/',
-    timeout: 12000,
+    //timeout: 12000,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

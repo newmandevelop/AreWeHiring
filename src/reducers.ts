@@ -17,6 +17,8 @@ import JobSpotlight, {
 import RecentJobsCategories, {
   IRecentJobs,
 } from './Pages/Home/RecentJobs/reducers';
+import applyJob, {IApplyJob} from './Pages/ApplyJob/reducers'
+
 
 export interface IRootState {
   authState: IAuthState;
@@ -31,6 +33,7 @@ export interface IRootState {
   recentJobs: IRecentJobs;
   findJob: IFindJob;
   jobSpotlight: IJobSpotlight;
+  applyJob:IApplyJob
 }
 
 const rootReducer = combineReducers({
@@ -46,6 +49,7 @@ const rootReducer = combineReducers({
   recentJobs: RecentJobsCategories,
   findJob: FindJob,
   jobSpotlight: JobSpotlight,
+  applyJob:applyJob
 });
 
 export default rootReducer;

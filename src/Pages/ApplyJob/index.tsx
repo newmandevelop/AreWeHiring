@@ -43,13 +43,16 @@ const ApplyJob = () => {
   const { data } = state;
 
 
+
+
   const onFinish = (values: any) => {
     let valueForApi = {
-      email: "j.borchardt2021test@gmail.com",
+      email: sessionStorage.getItem('hiring_user'),
       jobName: data.nameOfJob,
       dateApplied: moment(new Date()).format('YYYY-MM-D'),
       dateYouCanStart: moment(values.dateYouCanStart).format('YYYY-MM-D'),
       salaryExpected: values.salaryExpected,
+      jobId: data.id
 
     }
 
@@ -66,12 +69,7 @@ const ApplyJob = () => {
 
   }
 
-  const applicationFileProps = {
-    beforeUpload: (file: Blob) => {
-      formData.append('applicationFile', file);
-      return false;
-    },
-  };
+
   const props = {
     name: 'file',
     multiple: true,
@@ -79,7 +77,6 @@ const ApplyJob = () => {
       formData.append('applicationFile', file);
       return false;
     },
-    //'https://www.mocky.io/v2/5cc8019d300000980a055e76',
     onChange(info: any) {
       const { status } = info.file;
       if (status !== 'uploading') {
@@ -87,7 +84,7 @@ const ApplyJob = () => {
       }
       if (status === 'done') {
 
-        formData.append('applicationFile', "file");
+        //formData.append('applicationFile', "file");
         console.log("Done");
         console.log(formData)
         message.success(`Done ${info.file.name} file uploaded successfully.`);
@@ -276,7 +273,7 @@ const ApplyJob = () => {
                 <InputField
                   name="salaryExpected"
                   type="text"
-                  placeholder="40,000"
+                  placeholder={`$${data.salaryLowerLimit} - $${data.salaryUpperLimit}`}
                 />
               </Item>
 

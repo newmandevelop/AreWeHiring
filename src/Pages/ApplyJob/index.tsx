@@ -29,7 +29,10 @@ const { Item } = Form;
 const ApplyJob = () => {
 
 
-
+  function disabledDate(current: any) {
+    // Can not select days before today and today
+    return current && current < moment().endOf('day');
+  }
   const [form] = Form.useForm();
   var formData = new FormData();
   const {
@@ -73,6 +76,7 @@ const ApplyJob = () => {
   const props = {
     name: 'file',
     multiple: true,
+    accept: '.doc,.pdf',
     beforeUpload: (file: Blob) => {
       formData.append('applicationFile', file);
       return false;
@@ -279,7 +283,11 @@ const ApplyJob = () => {
 
               <Text className={styles.DatePickerTitle}>Pick Joining Date</Text>
               <Item name="dateYouCanStart">
-                <DatePicker className={styles.DatePicker} onChange={e => { new Date() }}></DatePicker>
+                <DatePicker
+                  className={styles.DatePicker}
+                  format="YYYY-MM-DD"
+                  disabledDate={disabledDate}
+                ></DatePicker>
 
               </Item>
               <Text className={styles.Attachments}>Attachments</Text>

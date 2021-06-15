@@ -10,7 +10,11 @@ import Candidate from '../Pages/Candidate';
 import PostJob from '../Pages/PostJob';
 import DashboardRoute from './DashboardRoute';
 import ApplyJob from '../Pages/ApplyJob';
+import AddCompany from '../Pages/AddCompany';
 import SimpleRoute from './SimpleRoute';
+import AllCompanies from '../Pages/AllCompanies';
+import AllUsers from '../Pages/AllUsers';
+import AddCandidate from '../Pages/Candidate';
 import { getRole } from '../utils/sessionStorage';
 import { RECRUITER, EMPLOYER, CANDIDATE } from '../Content/Roles';
 const Routing = () => {
@@ -34,8 +38,36 @@ const Routing = () => {
           component={PostJob}
         />
       )}
+      {checkEmployee() && (
+        <DashboardRoute
+          exact
+          path="/dashboard/employee/all-users"
+          component={AllUsers}
+        />
+      )}
+      {checkEmployee() && (
+        <DashboardRoute
+          exact
+          path="/dashboard/employee/all-companies"
+          component={AllCompanies}
+        />
+      )}
+      {checkEmployee() && (
+        <DashboardRoute
+          exact
+          path="/dashboard/employee/add-company"
+          component={AddCompany}
+        />
+      )}
       {checkCandidate() && (
         <DashboardRoute exact path="/jobs" component={AllJobs} />
+      )}
+      {checkCandidate() && (
+        <DashboardRoute
+          exact
+          path="/dashboard/candidate/add-data"
+          component={AddCandidate}
+        />
       )}
       {checkCandidate() && (
         <DashboardRoute exact path="/job-apply" component={ApplyJob} />

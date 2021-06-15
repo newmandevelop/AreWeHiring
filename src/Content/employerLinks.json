@@ -2,22 +2,22 @@
   "links": [
     {
       "name": "Main",
-      "link": "/dashboard",
+      "link": "/",
       "type": "bold"
     },
     {
       "name": "Dashboard",
-      "link": "/dashboard",
+      "link": "/",
       "type": "simple"
     },
     {
       "name": "Messages",
-      "link": "/dashboard",
+      "link": "/",
       "type": "simple"
     },
     {
       "name": "Employer",
-      "link": "/jobs",
+      "link": "/dashboard/employee/post-jo",
       "type": "bold"
     },
     {
@@ -37,32 +37,12 @@
     },
     {
       "name": "Manage Companies",
-      "link": "/companies",
+      "link": "/dashboard/employee/all-companies",
       "type": "simple"
     },
     {
       "name": "Add Company",
-      "link": "/dashboard/company/add-company",
-      "type": "simple"
-    },
-    {
-      "name": "Candidate",
-      "link": "/dashboard/candidate",
-      "type": "bold"
-    },
-    {
-      "name": "Manage Resumes",
-      "link": "/dashboard/candidate",
-      "type": "simple"
-    },
-    {
-      "name": "Add Resume",
-      "link": "/dashboard",
-      "type": "simple"
-    },
-    {
-      "name": "My Applications",
-      "link": "/dashboard",
+      "link": "/dashboard/employee/add-company",
       "type": "simple"
     },
     {
@@ -83,7 +63,7 @@
 
     {
       "name": "Manage Users",
-      "link": "/users",
+      "link": "/dashboard/employee/all-users",
       "type": "bold"
     },
     {

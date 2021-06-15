@@ -33,7 +33,7 @@ const formItemLayout = {
   },
 };
 
-const Candidate = () => {
+const AddCandidate = () => {
   let dispatch = useDispatch();
   var formData = new FormData();
   const {
@@ -80,8 +80,7 @@ const Candidate = () => {
         data: formData,
       }),
     );
-    console.log("Form Data", formData);
-
+    console.log('Form Data', formData);
   };
   const logoProps = {
     beforeUpload: (file: Blob) => {
@@ -439,4 +438,4 @@ const Candidate = () => {
   );
 };
 
-export default Candidate;
+export default AddCandidate;

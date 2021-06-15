@@ -1,0 +1,66 @@
+{
+  "links": [
+    {
+      "name": "Main",
+      "link": "/",
+      "type": "bold"
+    },
+    {
+      "name": "Dashboard",
+      "link": "/",
+      "type": "simple"
+    },
+
+    {
+      "name": "Candidate",
+      "link": "/dashboard/candidate",
+      "type": "bold"
+    },
+    {
+      "name": "Add Data",
+      "link": "/dashboard/candidate/add-data",
+      "type": "simple"
+    },
+    {
+      "name": "All Jobs",
+      "link": "/jobs",
+      "type": "simple"
+    },
+    {
+      "name": "Manage Resumes",
+      "link": "/dashboard/candidate",
+      "type": "simple"
+    },
+    {
+      "name": "Add Resume",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+    {
+      "name": "My Applications",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+    {
+      "name": "Account",
+      "link": "/dashboard",
+      "type": "bold"
+    },
+    {
+      "name": "My Profile",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+    {
+      "name": "My Orders",
+      "link": "/dashboard",
+      "type": "simple"
+    },
+
+    {
+      "name": "Logout",
+      "link": "/dashboard",
+      "type": "simple"
+    }
+  ]
+}

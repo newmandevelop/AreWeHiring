@@ -5,15 +5,14 @@ export const login = async (loginData: any) => {
   if (loginData) {
     const { email, password } = loginData;
     try {
-      console.log(loginData);
       const response = await axios().post('/users/login', {
         email,
         password,
       });
       if (response) {
         localStorage.setItem('user', response.data.token);
-        setRole(response.data.userRole);
         setUserSession(response.data.email);
+        setRole(response.data.userRole);
         setToken(response.data.token, response.data.type);
         return response;
       }
@@ -33,7 +32,6 @@ export const signUp = async (signUp: any) => {
         firstName,
         lastName,
         password,
-        userRole: roles,
       });
 
       if (response) {

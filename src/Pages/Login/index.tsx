@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
 import { Form, Input, Button, Typography, notification } from 'antd';
+import { CANDIDATE, RECRUITER, EMPLOYER } from '../../Content/Roles';
+import { getToken, getRole } from '../../utils/sessionStorage';
 const { Title, Text, Link } = Typography;
 const formItemLayout = {
   labelCol: {
@@ -28,6 +30,7 @@ const tailFormItemLayout = {
     },
   },
 };
+
 const Login = (props: any) => {
   const [form] = Form.useForm();
   let dispatch = useDispatch();
@@ -58,16 +61,24 @@ const Login = (props: any) => {
       }),
     );
   };
-
+  const changeRoute = async () => {
+    const role = getRole();
+    if (role === CANDIDATE) {
+      history.push('/dashboard/candidate');
+    }
+    if (role === EMPLOYER || role === RECRUITER) {
+      history.push('/dashboard/employee/add-company');
+    }
+  };
   useEffect(() => {
     if (loginSuccess) {
       onReset();
       openNotificationWithIcon('success', 'Login Successfully');
-      history.push('/');
+      changeRoute();
     } else if (loginFailure) {
       openNotificationWithIcon('error', loginErrorMessage);
     }
-  }, [history, loginErrorMessage, loginFailure, loginSuccess]);
+  }, [loginErrorMessage, loginFailure, loginSuccess]);
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div className="cardWidth">

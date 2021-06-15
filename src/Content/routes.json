@@ -1,0 +1,15 @@
+{
+  "employee": [
+    "/dashboard/employee/post-job",
+    "/dashboard/employee/all-users",
+    "/dashboard/employee/all-companies",
+    "/dashboard/employee/add-company"
+  ],
+  "candidate": [
+    "/jobs",
+    "/dashboard/candidate/add-data",
+    "/job-apply",
+    "/jobs/:id",
+    "/dashboard/candidate"
+  ]
+}

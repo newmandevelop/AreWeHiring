@@ -31,29 +31,6 @@ function* addCandidate(action: any) {
   }
 }
 
-function* getCandidate(action: any) {
-  const { email } = action.payload;
-  try {
-    const response: ResponseGenerator = yield call(
-      Candidate.getCandidate,
-      email,
-    );
-    console.log(response);
-    if (response) {
-      yield put(Actions.getCandidateSuccess(response.data));
-    } else {
-      yield put(Actions.getCandidateFailure('Data Not Found'));
-    }
-  } catch (error) {
-    console.log(error);
-    yield put(Actions.getCandidateFailure(error.message));
-  }
-}
-
-export function* addCandidateSaga() {
+export default function* addCandidateSaga() {
   yield takeLatest(ActionTypes.ADD_CANDIDATE_PROGRESS, addCandidate);
-}
-
-export function* getCandidateSaga() {
-  yield takeLatest(ActionTypes.GET_CANDIDATE_PROGRESS, getCandidate);
 }

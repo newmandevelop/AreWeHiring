@@ -6,6 +6,7 @@ interface IUser {
   email?: string;
   firstName?: string;
   lastName?: string;
+  filledDetails?: boolean;
 }
 
 export interface IAuthState {

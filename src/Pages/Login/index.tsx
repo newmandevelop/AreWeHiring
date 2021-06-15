@@ -63,11 +63,17 @@ const Login = (props: any) => {
   };
   const changeRoute = async () => {
     const role = getRole();
-    if (role === CANDIDATE) {
-      history.push('/dashboard/candidate');
-    }
-    if (role === EMPLOYER || role === RECRUITER) {
-      history.push('/dashboard/employee/add-company');
+    if (userData && userData.filledDetails && userData.filledDetails !== null) {
+      console.log(userData.filledDetails);
+
+      history.push('/');
+    } else {
+      if (role === CANDIDATE) {
+        history.push('/dashboard/candidate');
+      }
+      if (role === EMPLOYER || role === RECRUITER) {
+        history.push('/dashboard/employee/add-company');
+      }
     }
   };
   useEffect(() => {

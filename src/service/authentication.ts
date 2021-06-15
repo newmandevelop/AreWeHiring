@@ -32,6 +32,7 @@ export const signUp = async (signUp: any) => {
         firstName,
         lastName,
         password,
+        userRole: roles,
       });
 
       if (response) {

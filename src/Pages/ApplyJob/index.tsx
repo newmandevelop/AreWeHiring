@@ -17,7 +17,7 @@ import {
   message,
   DatePicker,
   Form,
-  notification
+  notification,
 } from 'antd';
 
 import Button from '../../Components/Button/index';
@@ -25,10 +25,7 @@ const { Text, Title, Paragraph } = Typography;
 const { Dragger } = Upload;
 const { Item } = Form;
 
-
 const ApplyJob = () => {
-
-
   function disabledDate(current: any) {
     // Can not select days before today and today
     return current && current < moment().endOf('day');
@@ -39,39 +36,30 @@ const ApplyJob = () => {
     applyJobSuccess,
     applyJobFailure,
     applyJobErrorMessage,
-    applyJobProgress, } = useSelector((state: IRootState) => state.applyJob)
+    applyJobProgress,
+  } = useSelector((state: IRootState) => state.applyJob);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { state }: any = useLocation();
   const { data } = state;
-
-
-
 
   const onFinish = (values: any) => {
     let valueForApi = {
       email: sessionStorage.getItem('hiring_user'),
       jobName: data.nameOfJob,
+      messageToClient: values.message,
       dateApplied: moment(new Date()).format('YYYY-MM-D'),
       dateYouCanStart: moment(values.dateYouCanStart).format('YYYY-MM-D'),
       salaryExpected: values.salaryExpected,
-      jobId: data.id
-
-    }
-
+      jobId: data.id,
+    };
     formData.append('application', JSON.stringify(valueForApi));
-    console.log(formData)
-
-
-
     dispatch(
       Actions.applyJobProgress({
         data: formData,
       }),
     );
-
-  }
-
+  };
 
   const props = {
     name: 'file',
@@ -84,13 +72,12 @@ const ApplyJob = () => {
     onChange(info: any) {
       const { status } = info.file;
       if (status !== 'uploading') {
-        console.log("File", info.file, "FileInfo", info.fileList);
+        console.log('File', info.file, 'FileInfo', info.fileList);
       }
       if (status === 'done') {
-
         //formData.append('applicationFile', "file");
-        console.log("Done");
-        console.log(formData)
+        console.log('Done');
+        console.log(formData);
         message.success(`Done ${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
@@ -115,11 +102,7 @@ const ApplyJob = () => {
     } else if (applyJobFailure) {
       openNotificationWithIcon('error', applyJobErrorMessage);
     }
-  }, [
-    applyJobSuccess,
-    applyJobFailure,
-    applyJobErrorMessage,
-  ]);
+  }, [applyJobSuccess, applyJobFailure, applyJobErrorMessage]);
   return (
     <div className={styles.applyJobWrapper}>
       <div className={styles.jobDescription}>
@@ -246,20 +229,20 @@ const ApplyJob = () => {
         </div>
         <Divider />
 
-
         <Form
           form={form}
           name="applyJob"
           onFinish={onFinish}
-          scrollToFirstError>
+          scrollToFirstError
+        >
           <main>
             <div className={styles.messageContainer}>
               <Text className={styles.messageTitle}>Message To Client</Text>
               <Text className={styles.messageText}>
-                Describe some of your experiences that makes you a great candidate
-                for this job, include any questions you may have about this job, or
-                even request a video call
-          </Text >
+                Describe some of your experiences that makes you a great
+                candidate for this job, include any questions you may have about
+                this job, or even request a video call
+              </Text>
 
               <Item name="message">
                 <InputField
@@ -269,8 +252,6 @@ const ApplyJob = () => {
                   placeholder="Add Cover Letter"
                 />
               </Item>
-
-
 
               <Text className={styles.SalaryTitle}>Salary Expected</Text>
               <Item name="salaryExpected">
@@ -286,26 +267,21 @@ const ApplyJob = () => {
                 <DatePicker
                   className={styles.DatePicker}
                   format="YYYY-MM-DD"
-                  disabledDate={disabledDate}
                 ></DatePicker>
-
               </Item>
               <Text className={styles.Attachments}>Attachments</Text>
 
-
-
               <Item name="">
                 <Dragger className={styles.dragger} {...props}>
-                  <p className={styles.dragText}>
-                    drag or upload files here
-            </p>
+                  <p className={styles.dragText}>drag or upload files here</p>
                 </Dragger>
               </Item>
               <Text className={styles.draggerText}>
                 You may attach upto 10 files under the size of{' '}
-                <strong>25 MB</strong> each, include work samples or other documents
-            to support your application. Do not attach your resume.
-          </Text>
+                <strong>25 MB</strong> each, include work samples or other
+                documents to support your application. Do not attach your
+                resume.
+              </Text>
             </div>
           </main>
 
@@ -320,7 +296,7 @@ const ApplyJob = () => {
           </div>
         </Form>
       </div>
-    </div >
+    </div>
   );
 };
 

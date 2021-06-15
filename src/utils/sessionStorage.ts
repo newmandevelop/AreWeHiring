@@ -10,7 +10,7 @@ export function isUserLoggedIn() {
 }
 
 export function logoutUser() {
-  return sessionStorage.removeItem('hiring_user');
+  return sessionStorage.removeItem('token');
 }
 
 export function setToken(token: string, type: string) {
@@ -26,5 +26,8 @@ export function setRole(role: string) {
 
 export function getRole() {
   return sessionStorage.getItem('role');
+}
+export function removeRole() {
+  return sessionStorage.removeItem('role');
 }
 /* eslint-enable */

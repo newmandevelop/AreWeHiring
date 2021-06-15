@@ -1,13 +1,11 @@
 import React from 'react';
 import { Layout, Divider, Menu, Dropdown, Button, Typography } from 'antd';
 import styles from './index.module.scss';
-import user from '../../assets/user.png';
-import { DownOutlined } from '@ant-design/icons';
-
+import { getToken } from '../../utils/sessionStorage';
 const { Header } = Layout;
-const { Text } = Typography;
 
 const CustomeHeader = () => {
+  const token = getToken();
   const menu = () => (
     <Menu>
       <Menu.Item>
@@ -54,9 +52,11 @@ const CustomeHeader = () => {
                 Blog
               </Button>
             </Dropdown>{' '}
-            <Button href="/login" type="link" className={styles.dropDown}>
-              Login
-            </Button>
+            {!token && (
+              <Button href="/login" type="link" className={styles.dropDown}>
+                Login
+              </Button>
+            )}
           </ul>
         </div>
         {/* <div style={{ marginRight: '1rem' }}>

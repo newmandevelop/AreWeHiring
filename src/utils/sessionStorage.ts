@@ -14,10 +14,17 @@ export function logoutUser() {
 }
 
 export function setToken(token: string, type: string) {
-  return sessionStorage.setItem('token', type+' '+token);
+  return sessionStorage.setItem('token', type + ' ' + token);
 }
 
 export function getToken() {
   return sessionStorage.getItem('token');
+}
+export function setRole(role: string) {
+  return sessionStorage.setItem('role', role);
+}
+
+export function getRole() {
+  return sessionStorage.getItem('role');
 }
 /* eslint-enable */

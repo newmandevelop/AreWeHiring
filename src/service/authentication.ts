@@ -1,4 +1,4 @@
-import { setToken, setUserSession } from '../utils/sessionStorage';
+import { setToken, setUserSession, setRole } from '../utils/sessionStorage';
 import axios from './axiosConfig';
 
 export const login = async (loginData: any) => {
@@ -12,6 +12,7 @@ export const login = async (loginData: any) => {
       });
       if (response) {
         localStorage.setItem('user', response.data.token);
+        setRole(response.data.userRole);
         setUserSession(response.data.email);
         setToken(response.data.token, response.data.type);
         return response;
@@ -24,7 +25,7 @@ export const login = async (loginData: any) => {
 
 export const signUp = async (signUp: any) => {
   if (signUp) {
-    const { email, firstName, lastName, password } = signUp;
+    const { email, firstName, lastName, password, roles } = signUp;
     console.log(signUp);
     try {
       const response = await axios().post('/users/signup', {
@@ -32,6 +33,7 @@ export const signUp = async (signUp: any) => {
         firstName,
         lastName,
         password,
+        userRole: roles,
       });
 
       if (response) {

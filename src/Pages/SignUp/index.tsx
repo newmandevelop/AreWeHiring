@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
-import { Form, Input, Button, Typography, notification } from 'antd';
+import { Form, Input, Button, Select, Typography, notification } from 'antd';
 import { Actions } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
 import { useHistory } from 'react-router-dom';
-
 const { Title } = Typography;
 const { Item } = Form;
 
@@ -70,7 +69,12 @@ const RegistrationForm = (props: any) => {
   }, [signUpSuccess, signUpFailure, onReset, signUpErrorMessage]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <div style={{ width: '80%' }}>
         <div className="card card-2">
           <div className="card-heading"></div>
@@ -126,7 +130,6 @@ const RegistrationForm = (props: any) => {
               >
                 <Input className="input" />
               </Form.Item>
-
               <Form.Item
                 name="password"
                 label="Password"
@@ -140,7 +143,6 @@ const RegistrationForm = (props: any) => {
               >
                 <Input.Password />
               </Form.Item>
-
               <Form.Item
                 name="confirm"
                 label="Confirm Password"
@@ -167,7 +169,17 @@ const RegistrationForm = (props: any) => {
               >
                 <Input.Password />
               </Form.Item>
-
+              <Form.Item name="roles" label="Roles">
+                <Select
+                  style={{ marginTop: '0.3rem' }}
+                  placeholder="Roles"
+                  allowClear
+                >
+                  <Select.Option value="CANDIDATE">CANDIDATE</Select.Option>
+                  <Select.Option value="EMPLOYER">EMPLOYER</Select.Option>
+                  <Select.Option value="RECRUITER">RECRUITER</Select.Option>
+                </Select>
+              </Form.Item>
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
                   Register

@@ -1,4 +1,12 @@
+import { isUserLoggedIn } from '../../utils/sessionStorage';
 import { Action, ActionTypes } from './actions';
+
+interface IUser {
+  userRole?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+}
 
 export interface IAuthState {
   signUpProgress: boolean;
@@ -13,7 +21,7 @@ export interface IAuthState {
   forgetPasswordSuccess: boolean;
   forgetPasswordFailure: boolean;
   forgetPasswordErrorMessage: undefined | string;
-  userData: Object;
+  userData: IUser;
 }
 const initialState: IAuthState = {
   signUpProgress: false,

@@ -9,19 +9,23 @@ const DashboardRoute = ({ component, path, isAuthenticated, ...rest }: any) => {
   const role = getRole();
 
   const getRoute = () => {
-    if (role === CANDIDATE) {
-      if (routes.candidate.includes(path)) {
-        return <Route {...rest} render={routeComponent} />;
-      } else {
-        return <Redirect to="/" />;
+    if (role) {
+      if (role === CANDIDATE) {
+        if (routes.candidate.includes(path)) {
+          return <Route {...rest} render={routeComponent} />;
+        } else {
+          return <Redirect to="/" />;
+        }
       }
-    }
-    if (role === EMPLOYER || role === RECRUITER) {
-      if (routes.employee.includes(path)) {
-        return <Route {...rest} render={routeComponent} />;
-      } else {
-        return <Redirect to="/" />;
+      if (role === EMPLOYER || role === RECRUITER) {
+        if (routes.employee.includes(path)) {
+          return <Route {...rest} render={routeComponent} />;
+        } else {
+          return <Redirect to="/" />;
+        }
       }
+    } else {
+      return <Redirect to="/" />;
     }
   };
 

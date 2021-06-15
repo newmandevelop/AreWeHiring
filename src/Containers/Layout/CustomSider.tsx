@@ -65,35 +65,34 @@ const CustomSider = () => {
         </Menu>
       )}
 
-      {role === EMPLOYER ||
-        (role === RECRUITER && (
-          <Menu className={styles.menu}>
-            {employerLinks.links.map((link: Links, index) => {
-              return (
-                <Item
-                  key={index}
-                  className={
-                    link.type === 'simple'
-                      ? styles.simpleSideLink
-                      : styles.boldSideLink
-                  }
-                >
-                  {link.name !== 'Logout' && (
-                    <Typography.Link style={{ color: 'gray' }} href={link.link}>
+      {(role === EMPLOYER || role === RECRUITER) && (
+        <Menu className={styles.menu}>
+          {employerLinks.links.map((link: Links, index) => {
+            return (
+              <Item
+                key={index}
+                className={
+                  link.type === 'simple'
+                    ? styles.simpleSideLink
+                    : styles.boldSideLink
+                }
+              >
+                {link.name !== 'Logout' && (
+                  <Typography.Link style={{ color: 'gray' }} href={link.link}>
+                    {link.name}
+                  </Typography.Link>
+                )}
+                {link.name === 'Logout' && (
+                  <button
+                    onClick={() => handleLogout()}
+                    style={{ all: 'unset' }}
+                  >
+                    <Typography.Link style={{ color: 'gray' }}>
                       {link.name}
-                    </Typography.Link>
-                  )}
-                  {link.name === 'Logout' && (
-                    <button
-                      onClick={() => handleLogout()}
-                      style={{ all: 'unset' }}
-                    >
-                      <Typography.Link style={{ color: 'gray' }}>
-                        {link.name}
-                      </Typography.Link>{' '}
-                    </button>
-                  )}
-                  {/* <Badge
+                    </Typography.Link>{' '}
+                  </button>
+                )}
+                {/* <Badge
                 style={{
                   marginLeft: '20px',
                   backgroundColor: '#3489cf',
@@ -101,11 +100,11 @@ const CustomSider = () => {
                 }}
                 count={5}
               /> */}
-                </Item>
-              );
-            })}
-          </Menu>
-        ))}
+              </Item>
+            );
+          })}
+        </Menu>
+      )}
     </Sider>
   );
 };

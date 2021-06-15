@@ -3,7 +3,8 @@
     "/dashboard/employee/post-job",
     "/dashboard/employee/all-users",
     "/dashboard/employee/all-companies",
-    "/dashboard/employee/add-company"
+    "/dashboard/employee/add-company",
+    "/dashboard/employer"
   ],
   "candidate": [
     "/jobs",

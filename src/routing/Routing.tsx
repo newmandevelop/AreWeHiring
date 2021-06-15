@@ -14,6 +14,7 @@ import SimpleRoute from './SimpleRoute';
 import AllCompanies from '../Pages/AllCompanies';
 import AllUsers from '../Pages/AllUsers';
 import AddCandidate from '../Pages/Candidate';
+import Employer from '../Pages/Employer';
 const Routing = () => {
   return (
     <Switch>
@@ -25,38 +26,31 @@ const Routing = () => {
         path="/dashboard/employee/post-job"
         component={PostJob}
       />
-
       <DashboardRoute
         exact
         path="/dashboard/employee/all-users"
         component={AllUsers}
       />
-
       <DashboardRoute
         exact
         path="/dashboard/employee/all-companies"
         component={AllCompanies}
       />
-
       <DashboardRoute
         exact
         path="/dashboard/employee/add-company"
         component={AddCompany}
       />
-
       <DashboardRoute exact path="/jobs" component={AllJobs} />
-
       <DashboardRoute
         exact
         path="/dashboard/candidate/add-data"
         component={AddCandidate}
       />
-
       <DashboardRoute exact path="/job-apply" component={ApplyJob} />
-
       <DashboardRoute exact path="/jobs/:id" component={JobOverview} />
-
       <DashboardRoute exact path="/dashboard/candidate" component={Candidate} />
+      <DashboardRoute exact path="/dashboard/employer" component={Employer} />
 
       <Redirect to="/" />
     </Switch>

@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import Dashboard from '../../Containers/Dashboard';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
 import styles from './index.module.scss';
-import Rules from './rules.json';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
   UploadOutlined,
   MinusCircleOutlined,
   PlusCircleOutlined,
 } from '@ant-design/icons';
+import { getUserSession } from '../../utils/sessionStorage';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormItem } from '../../Containers/FormItem/index';
 import { IRootState } from '../../reducers';
@@ -46,35 +46,41 @@ const PostJob = () => {
       values.rolesAndResponsibilities.map((d: IRoles) => {
         roles.push(d.role);
       });
-    let valueForApi = {
-      nameOfJob: values.jobTitle,
-      company: values.company,
-      description: '',
-      location: values.location,
-      jobType: values.jobType,
-      currencySymbol: '$',
-      salaryLowerLimit: values.minimumSalary,
-      salaryUpperLimit: values.maximumSalary,
-      recruiterType: values.recruiterType,
-      rateLowerLimit: values.minimumRate,
-      rateUpperLimit: values.maximumRate,
-      employer: values.employer,
-      industry: values.industry,
-      rolesAndResponsibilities: roles,
-      datePosted: values.openingDate,
-      expiryDate: values.closingDate,
-      jobCategory: values.jobCategory,
-      jobTags: ['Java'],
-      jobUrl: values.application,
-      hoursPerWeek: values.hours,
-      externalLink: values.external,
-    };
-    formData.append('job', JSON.stringify(valueForApi));
-    dispatch(
-      Actions.addJobProgress({
-        data: formData,
-      }),
-    );
+    const userData = getUserSession();
+    if (userData) {
+      let valueForApi = {
+        nameOfJob: values.jobTitle,
+        company: values.company,
+        description: '',
+        location: values.location,
+        jobType: values.jobType,
+        currencySymbol: '$',
+        salaryLowerLimit: values.minimumSalary,
+        salaryUpperLimit: values.maximumSalary,
+        recruiterType: values.recruiterType,
+        rateLowerLimit: values.minimumRate,
+        rateUpperLimit: values.maximumRate,
+        employer: values.employer,
+        industry: values.industry,
+        rolesAndResponsibilities: roles,
+        datePosted: values.openingDate,
+        expiryDate: values.closingDate,
+        jobCategory: values.jobCategory,
+        jobTags: ['Java'],
+        jobUrl: values.application,
+        hoursPerWeek: values.hours,
+        externalLink: values.external,
+        userId: userData,
+      };
+      formData.append('job', JSON.stringify(valueForApi));
+      dispatch(
+        Actions.addJobProgress({
+          data: formData,
+        }),
+      );
+    } else {
+      alert('User Id not Present');
+    }
   };
 
   const logoProps = {

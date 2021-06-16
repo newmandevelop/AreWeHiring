@@ -11,7 +11,7 @@ export const login = async (loginData: any) => {
       });
       if (response) {
         localStorage.setItem('user', response.data.token);
-        setUserSession(response.data.email);
+        setUserSession(response.data.id);
         setRole(response.data.userRole);
         setToken(response.data.token, response.data.type);
         return response;

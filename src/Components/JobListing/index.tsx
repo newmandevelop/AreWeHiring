@@ -1,17 +1,26 @@
 import React from 'react';
 import moment from 'moment';
-import { Typography, List, Tag } from 'antd';
+import { Typography, List, Modal } from 'antd';
 import styles from './index.module.scss';
 import { BiArchiveOut } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
+import { getUserSession } from '../../utils/sessionStorage';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions as ApproveJobAction } from '../../Pages/Employer/ManageJobs/ApproveJob/actions';
+import { Actions as ArchiveJobAction } from '../../Pages/Employer/ManageJobs/ArchiveJob/actions';
+import { Actions as DeleteJobAction } from '../../Pages/Employer/ManageJobs/DeleteJob/actions';
+
 const { Text, Link } = Typography;
+const { confirm } = Modal;
 interface IData {
-  title?: string;
-  postedBy?: string;
-  date?: string;
-  expiry?: string;
+  nameOfJob?: string;
+  employer?: string;
+  datePosted?: string;
+  expiryDate?: string;
   message?: string;
+  id?: string;
 }
 
 interface IProps {
@@ -24,9 +33,70 @@ interface IProps {
 }
 
 const JobListing = (props: IProps) => {
+  let dispatch = useDispatch();
+  const doAction = (type: string, id?: string) => {
+    let user = getUserSession();
+    if (user)
+      switch (type) {
+        case 'Approve':
+          return confirm({
+            title: 'Do you Want to Approve this Job',
+            icon: <ExclamationCircleOutlined />,
+            content: 'This job will be approved and show in Approve Jobs List',
+            onOk() {
+              dispatch(
+                ApproveJobAction.approveJobProgress({
+                  userId: user,
+                  jobId: id,
+                }),
+              );
+            },
+            onCancel() {
+              console.log('');
+            },
+          });
+        case 'Archive':
+          return confirm({
+            title: 'Do you Want to Archive this Job',
+            icon: <ExclamationCircleOutlined />,
+            content: 'This job will be archived and show in Archive Jobs List',
+            onOk() {
+              dispatch(
+                ArchiveJobAction.archiveJobProgress({
+                  userId: user,
+                  jobId: id,
+                }),
+              );
+            },
+            onCancel() {
+              console.log('');
+            },
+          });
+        case 'Delete':
+          return confirm({
+            title: 'Do you Want to Delete this Job',
+            icon: <ExclamationCircleOutlined />,
+            content: 'This job will be deleted and show in Delete Jobs List',
+            onOk() {
+              dispatch(
+                DeleteJobAction.deleteJobProgress({
+                  userId: user,
+                  jobId: id,
+                }),
+              );
+            },
+            onCancel() {
+              console.log('');
+            },
+          });
+      }
+    else {
+      alert('No user Present');
+    }
+  };
+
   return (
     <div className={styles.jobListing}>
-      {console.log(props.data)}
       <List
         header={
           <div className={styles.heading}>
@@ -48,42 +118,45 @@ const JobListing = (props: IProps) => {
                     <div className={styles.date}>
                       <Text className={styles.posting}>
                         {item.message}{' '}
-                        {moment(item.date).format('MMM DD, YYYY')}
+                        {moment(item.datePosted).format('MMM DD, YYYY')}
                       </Text>
                       <Text className={styles.expiry}>
-                        Expiry {moment(item.expiry).format('MMM DD, YYYY')}
+                        Expiry {moment(item.expiryDate).format('MMM DD, YYYY')}
                       </Text>
                     </div>
                     <div className={styles.title}>
-                      <Link className={styles.link}>{item.title}</Link>
+                      <Link className={styles.link}>{item.nameOfJob}</Link>
                       <Text className={styles.message}>
-                        Posted By: {item.postedBy}
+                        Posted By: {item.employer}
                       </Text>
                     </div>
                   </div>
                   <div className={styles.actions}>
-                    {props.archive && (
+                    {props.archive && item && (
                       <BiArchiveOut
                         size="30px"
                         title="Archive"
                         cursor="pointer"
                         className={styles.archive}
+                        onClick={() => doAction('Archive', item.id)}
                       />
                     )}
-                    {props.approve && (
+                    {props.approve && item && (
                       <TiTick
                         className={styles.approve}
                         size="30px"
                         title="Approve"
                         cursor="pointer"
+                        onClick={() => doAction('Approve', item.id)}
                       />
                     )}
-                    {props.delete && (
+                    {props.delete && item && (
                       <MdDelete
                         className={styles.delete}
                         size="30px"
                         title="Delete"
                         cursor="pointer"
+                        onClick={() => doAction('Delete', item.id)}
                       />
                     )}
                   </div>

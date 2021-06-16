@@ -1,9 +1,11 @@
 /* eslint-disable */
 
-export function setUserSession(email: string) {
-  return sessionStorage.setItem('hiring_user', email);
+export function setUserSession(id: string) {
+  return sessionStorage.setItem('hiring_user', id);
 }
-
+export function getUserSession() {
+  return sessionStorage.getItem('hiring_user');
+}
 export function isUserLoggedIn() {
   const user = sessionStorage.getItem('hiring_user');
   return user !== null;

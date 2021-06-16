@@ -1,7 +1,18 @@
 import { login, signUp } from './authentication';
-import { jobSearchById, allJobsSearch, findJob } from './jobSearch';
+import {
+  jobSearchById,
+  allJobsSearch,
+  findJob,
+  jobsInDraft,
+  jobsInApprove,
+  approveJob,
+  archiveJob,
+  jobsInArchive,
+  deleteJob,
+  jobsInDelete,
+} from './jobSearch';
 import { allCompaniesSearch } from './companySearch';
-import { addCandidate,applyJob } from './candidate';
+import { addCandidate, applyJob } from './candidate';
 import {
   addJob,
   popularCategories,
@@ -18,11 +29,18 @@ export const JobSearch = {
   jobSearchById,
   allJobsSearch,
   findJob,
+  jobsInDraft,
+  jobsInApprove,
+  approveJob,
+  archiveJob,
+  jobsInArchive,
+  deleteJob,
+  jobsInDelete,
 };
 
 export const Candidate = {
   addCandidate,
-  applyJob
+  applyJob,
 };
 export const Job = {
   addJob,

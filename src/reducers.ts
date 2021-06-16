@@ -17,9 +17,20 @@ import JobSpotlight, {
 import RecentJobsCategories, {
   IRecentJobs,
 } from './Pages/Home/RecentJobs/reducers';
-import applyJob, {IApplyJob} from './Pages/ApplyJob/reducers'
+import applyJob, { IApplyJob } from './Pages/ApplyJob/reducers';
+import draftJob, {
+  IDraftJob,
+} from './Pages/Employer/ManageJobs/DraftJobs/reducers';
+import approveJob, {
+  IApproveJob,
+} from './Pages/Employer/ManageJobs/ApproveJob/reducers';
 
-
+import archiveJob, {
+  IArchiveJob,
+} from './Pages/Employer/ManageJobs/ArchiveJob/reducers';
+import deleteJob, {
+  IDeleteJob,
+} from './Pages/Employer/ManageJobs/DeleteJob/reducers';
 export interface IRootState {
   authState: IAuthState;
   jobSearch: IJobSearch;
@@ -33,7 +44,11 @@ export interface IRootState {
   recentJobs: IRecentJobs;
   findJob: IFindJob;
   jobSpotlight: IJobSpotlight;
-  applyJob:IApplyJob
+  applyJob: IApplyJob;
+  draftJob: IDraftJob;
+  approveJob: IApproveJob;
+  archiveJob: IArchiveJob;
+  deleteJob: IDeleteJob;
 }
 
 const rootReducer = combineReducers({
@@ -49,7 +64,11 @@ const rootReducer = combineReducers({
   recentJobs: RecentJobsCategories,
   findJob: FindJob,
   jobSpotlight: JobSpotlight,
-  applyJob:applyJob
+  applyJob: applyJob,
+  draftJob: draftJob,
+  approveJob: approveJob,
+  archiveJob: archiveJob,
+  deleteJob: deleteJob,
 });
 
 export default rootReducer;

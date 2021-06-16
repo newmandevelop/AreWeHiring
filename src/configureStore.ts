@@ -16,7 +16,10 @@ import recentJobs from './Pages/Home/RecentJobs/saga';
 import findJobSaga from './Pages/Home/JobSearch/saga';
 import jobSpotlightSaga from './Pages/Home/JobSpotlight/saga';
 import applyJobSaga from './Pages/ApplyJob/saga';
-
+import draftJobSaga from './Pages/Employer/ManageJobs/DraftJobs/saga';
+import approveJobSaga from './Pages/Employer/ManageJobs/ApproveJob/saga';
+import archiveJobSaga from './Pages/Employer/ManageJobs/ArchiveJob/saga';
+import deleteJobSaga from './Pages/Employer/ManageJobs/DeleteJob/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -43,7 +46,11 @@ export default function configureStore() {
       recentJobs(),
       findJobSaga(),
       jobSpotlightSaga(),
-      applyJobSaga()
+      applyJobSaga(),
+      draftJobSaga(),
+      approveJobSaga(),
+      archiveJobSaga(),
+      deleteJobSaga(),
     ]);
   }
 

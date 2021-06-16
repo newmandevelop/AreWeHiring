@@ -22,7 +22,7 @@
     },
     {
       "name": "Manage Jobs",
-      "link": "/jobs",
+      "link": "/dashboard/employee/manage-jobs",
       "type": "simple"
     },
     {

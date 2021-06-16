@@ -1,0 +1,70 @@
+.jobListing {
+  margin-top: 3rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 5px;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0px 20px;
+  }
+
+  .listItem {
+    display: flex;
+    justify-content: space-between;
+
+    .content {
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+      .date {
+        display: flex;
+        flex-direction: column;
+        .posting {
+          font-weight: bold;
+          font-size: 12px;
+        }
+        .expiry {
+          font-size: 12px;
+        }
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+        .link {
+          color: #3489cf;
+          font-size: 1rem;
+        }
+        .message {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .actions {
+      .archive {
+        margin: 0 10px;
+        &:hover {
+          color: brown;
+        }
+      }
+      .approve {
+        margin: 0 10px;
+        &:hover {
+          color: green;
+        }
+      }
+      .delete {
+        margin: 0 10px;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+}

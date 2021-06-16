@@ -14,7 +14,8 @@ import SimpleRoute from './SimpleRoute';
 import AllCompanies from '../Pages/AllCompanies';
 import AllUsers from '../Pages/AllUsers';
 import AddCandidate from '../Pages/Candidate';
-import Employer from '../Pages/Employer';
+import Employer from '../Pages/Employer/Dashboard';
+import ManageJobs from '../Pages/Employer/ManageJobs';
 const Routing = () => {
   return (
     <Switch>
@@ -35,6 +36,11 @@ const Routing = () => {
         exact
         path="/dashboard/employee/all-companies"
         component={AllCompanies}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/manage-jobs"
+        component={ManageJobs}
       />
       <DashboardRoute
         exact

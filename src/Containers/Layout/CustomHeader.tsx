@@ -57,6 +57,12 @@ const CustomeHeader = () => {
                 Login
               </Button>
             )}
+
+            {token && (
+              <Button type="link" className={styles.dropDown}>
+                Signout
+              </Button>
+            )}
           </ul>
         </div>
         {/* <div style={{ marginRight: '1rem' }}>

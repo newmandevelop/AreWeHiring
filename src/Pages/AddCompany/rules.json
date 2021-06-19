@@ -6,6 +6,21 @@
         "whitespace": true
       }
     ],
+    "companyEmail": [
+      {
+        "required": true,
+        " message": "Please input Company Email!",
+        "whitespace": true
+      }
+    ],
+
+    "phoneNumber": [
+      {
+        "required": true,
+        " message": "Please input Company Phone!",
+        "whitespace": true
+      }
+    ],
     "tagLine": [
       {
         "required": true,

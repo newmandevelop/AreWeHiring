@@ -66,7 +66,12 @@ const Login = (props: any) => {
     if (userData && userData.filledDetails && userData.filledDetails !== null) {
       console.log(userData.filledDetails);
 
-      history.push('/');
+      if (role === EMPLOYER || role === RECRUITER) {
+        history.push('/dashboard/employer');
+      } else {
+        history.push('/');
+      }
+     
     } else {
       if (role === CANDIDATE) {
         history.push('/dashboard/candidate');

@@ -43,8 +43,15 @@ const AllCompanies = () => {
                   <Title className={styles.companyName} title="Company Name">
                     {company.name}
                   </Title>
-
-                  <Paragraph className={styles.firstDetail}>
+                  <Paragraph className={styles.secondDetail}>
+                    <CarryOutOutlined />
+                    <span className={styles.span}>{company.companyEmail}</span>
+                  </Paragraph>
+                  <Paragraph className={styles.secondDetail}>
+                    <CarryOutOutlined />
+                    <span className={styles.span}>{company.phoneNumber}</span>
+                  </Paragraph>
+                  <Paragraph className={styles.secondDetail}>
                     <CarryOutOutlined />
                     <span className={styles.span}>{`${
                       company.location ? company.location : 'No Location'

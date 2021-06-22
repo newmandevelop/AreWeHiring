@@ -18,7 +18,7 @@ export interface IDraftJob {
   jobsInDraftFailure: boolean;
   jobsInDraftErrorMessage: null | string;
 
-  draftJobsData: IJob;
+  draftJobsData: [IJob] | [];
 }
 const initialState: IDraftJob = {
   jobsInDraftProgress: false,
@@ -26,7 +26,7 @@ const initialState: IDraftJob = {
   jobsInDraftFailure: false,
   jobsInDraftErrorMessage: null,
 
-  draftJobsData: {},
+  draftJobsData: [],
 };
 
 export default (state = initialState, action: Action) => {

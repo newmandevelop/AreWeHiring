@@ -94,7 +94,7 @@ const JobListing = (props: IProps) => {
       alert('No user Present');
     }
   };
-
+  console.log(`props.data`, props.data);
   return (
     <div className={styles.jobListing}>
       <List

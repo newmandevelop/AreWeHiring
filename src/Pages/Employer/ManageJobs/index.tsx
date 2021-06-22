@@ -39,47 +39,39 @@ const ManageJobs = () => {
   return (
     <div className={styles.manageJobsWrapper}>
       <div className={styles.draftJobs}>
-        {Object.keys(draftJobsData).length > 0 && (
-          <JobListing
-            data={draftJobsData}
-            number={Object.keys(draftJobsData).length}
-            heading="Draft Jobs"
-            approve
-            delete
-            archive
-          />
-        )}
+        <JobListing
+          data={draftJobsData}
+          number={Object.keys(draftJobsData).length}
+          heading="Draft Jobs"
+          approve
+          delete
+          archive
+        />
       </div>
       <div className={styles.approveJobs}>
-        {Object.keys(approvedJobsData).length > 0 && (
-          <JobListing
-            data={approvedJobsData}
-            number={Object.keys(approvedJobsData).length}
-            heading="Approved Jobs"
-            delete
-            archive
-          />
-        )}
+        <JobListing
+          data={approvedJobsData}
+          number={Object.keys(approvedJobsData).length}
+          heading="Approved Jobs"
+          delete
+          archive
+        />
       </div>
       <div className={styles.archiveJobs}>
-        {Object.keys(archivedJobsData).length > 0 && (
-          <JobListing
-            data={archivedJobsData}
-            number={Object.keys(archivedJobsData).length}
-            heading="Archived Jobs"
-            approve
-            delete
-          />
-        )}
+        <JobListing
+          data={archivedJobsData}
+          number={Object.keys(archivedJobsData).length}
+          heading="Archived Jobs"
+          approve
+          delete
+        />
       </div>
       <div className={styles.deleteJobs}>
-        {Object.keys(deleteJobData).length > 0 && (
-          <JobListing
-            data={deleteJobData}
-            number={Object.keys(deleteJobData).length}
-            heading="Deleted Jobs"
-          />
-        )}
+        <JobListing
+          data={deleteJobData}
+          number={Object.keys(deleteJobData).length}
+          heading="Deleted Jobs"
+        />
       </div>
     </div>
   );

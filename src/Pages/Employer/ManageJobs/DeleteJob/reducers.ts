@@ -20,7 +20,7 @@ export interface IDeleteJob {
   jobDeletedSuccess: boolean;
   jobDeletedFailure: boolean;
   jobDeletedErrorMessage: string;
-  deleteJobData: IJob;
+  deleteJobData: [IJob] | [];
 }
 const initialState: IDeleteJob = {
   jobsInDeleteProgress: false,
@@ -30,7 +30,7 @@ const initialState: IDeleteJob = {
   jobDeletedSuccess: false,
   jobDeletedFailure: false,
   jobDeletedErrorMessage: '',
-  deleteJobData: {},
+  deleteJobData: [],
 };
 
 export default (state = initialState, action: Action) => {

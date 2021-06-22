@@ -144,18 +144,6 @@ const Employer = () => {
         categoryData[index] = { ...updated };
         setCategoryData([...categoryData]);
       });
-
-    // const activeListing = user && activeListings(user);
-    // activeListing &&
-    //   activeListing.then(data => {
-    //     console.log(`data`, data);
-    //     const changeData = [...categoryData];
-    //     const activeData = changeData.filter(({ id }) => id === 'activeJob');
-    //     const updated = { ...activeData[0], number: data };
-    //     const index = categoryData.findIndex(el => el.id === 'activeJob');
-    //     categoryData[index] = { ...updated };
-    //     setCategoryData([...categoryData]);
-    //   });
   }, []);
 
   const CategoryItem = (props: IProps) => {

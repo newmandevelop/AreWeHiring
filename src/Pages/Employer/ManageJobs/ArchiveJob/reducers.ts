@@ -20,7 +20,7 @@ export interface IArchiveJob {
   jobArchivedSuccess: boolean;
   jobArchivedFailure: boolean;
   jobArchivedErrorMessage: string;
-  archivedJobsData: IJob;
+  archivedJobsData: [IJob] | [];
 }
 const initialState: IArchiveJob = {
   jobsInArchiveProgress: false,
@@ -30,7 +30,7 @@ const initialState: IArchiveJob = {
   jobArchivedSuccess: false,
   jobArchivedFailure: false,
   jobArchivedErrorMessage: '',
-  archivedJobsData: {},
+  archivedJobsData: [],
 };
 
 export default (state = initialState, action: Action) => {

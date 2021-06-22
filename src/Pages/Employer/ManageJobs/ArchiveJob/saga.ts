@@ -18,6 +18,7 @@ function* jobsInArchive(action: any) {
         JobSearch.jobsInArchive,
         userId,
       );
+      console.log(`response.data`, response.data);
       yield put(Actions.jobsInArchiveSuccess(response.data));
     }
   } catch (error) {

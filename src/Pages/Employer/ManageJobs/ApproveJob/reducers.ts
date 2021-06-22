@@ -20,7 +20,7 @@ export interface IApproveJob {
   jobApprovedSuccess: boolean;
   jobApprovedFailure: boolean;
   jobApprovedErrorMessage: string;
-  approvedJobsData: IJob;
+  approvedJobsData: [IJob] | [];
 }
 const initialState: IApproveJob = {
   jobsInApproveProgress: false,
@@ -30,7 +30,7 @@ const initialState: IApproveJob = {
   jobApprovedSuccess: false,
   jobApprovedFailure: false,
   jobApprovedErrorMessage: '',
-  approvedJobsData: {},
+  approvedJobsData: [],
 };
 
 export default (state = initialState, action: Action) => {

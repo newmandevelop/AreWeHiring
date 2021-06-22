@@ -43,6 +43,8 @@ const AddCompany = () => {
   const onFinish = (values: any) => {
     let valueForApi = {
       name: values.name,
+      companyEmail: values.companyEmail,
+      phoneNumber: values.phoneNumber,
       tagLine: values.tagLine,
       website: values.website,
       industry: values.industry,
@@ -111,6 +113,25 @@ const AddCompany = () => {
             placeholder: 'Enter Name',
             fieldType: 'input',
           })}
+
+          {/* Company Email */}
+          {FormItem({
+            name: 'companyEmail',
+            label: 'Email',
+            type: 'text',
+            placeholder: 'Enter Email',
+            fieldType: 'input',
+          })}
+
+          {/* Company Phone Number*/}
+          {FormItem({
+            name: 'phoneNumber',
+            label: 'Phone',
+            type: 'text',
+            placeholder: 'Enter Phone Number',
+            fieldType: 'input',
+          })}
+
 
             {/* TagLine Field */}
           {FormItem({

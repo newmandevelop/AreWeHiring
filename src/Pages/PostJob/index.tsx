@@ -138,7 +138,7 @@ const PostJob = () => {
             label: 'Company',
             placeholder: 'Select Company',
             fieldType: 'dropDown',
-            options: ['Amazon Inc'],
+            options: ['Amazon Inc', 'Apple Inc', 'Jackson Company', 'Telepro Group'],
           })}
           {FormItem({
             name: 'jobTitle',
@@ -197,7 +197,7 @@ const PostJob = () => {
             optional: true,
             placeholder: 'Enter Employer',
             fieldType: 'dropDown',
-            options: ['Amazon Inc'],
+            options: ['Amazon Inc', 'Apple Inc', 'Jackson Company', 'Telepro Group'],
           })}
           {/*Industry Input Field */}
           {FormItem({

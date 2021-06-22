@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import { Row, Col, Typography, List, Avatar, Tag, Pagination } from 'antd';
+import {
+  activeListings,
+  timeBookmarked,
+  totalApplication,
+  totalJobViews,
+} from '../../../service/dashboard';
+import { getUserSession } from '../../../utils/sessionStorage';
 const { Text, Title, Link } = Typography;
 interface IProps {
   name?: string;
   number?: Number;
   link?: string;
   color?: string;
+  id: string;
 }
 
 const recentActivities = [
@@ -43,23 +51,27 @@ const recentActivities = [
 ];
 const data = [
   {
-    number: 26,
+    number: 0,
     name: 'Active Job Listing',
+    id: 'activeJob',
     color: '#26ae60',
   },
   {
-    number: 156,
+    number: 0,
     name: 'Total Jobs Views',
+    id: 'totalJob',
     color: '#363841',
   },
   {
     number: 0,
     name: 'Total Applications',
+    id: 'totalApplication',
     color: '#117bbf',
   },
   {
     number: 0,
     name: 'Times Bookmarked',
+    id: 'timesBookmarked',
     color: '#ffae00',
   },
 ];
@@ -78,6 +90,74 @@ const packages = [
   },
 ];
 const Employer = () => {
+  const [categoryData, setCategoryData] = useState(data);
+
+  useEffect(() => {
+    let user = getUserSession();
+
+    const activeListing = user && activeListings(user);
+    activeListing &&
+      activeListing.then(data => {
+        const changeData = [...categoryData];
+        const activeData = changeData.filter(({ id }) => id === 'activeJob');
+        const updated = { ...activeData[0], number: data };
+        const index = categoryData.findIndex(el => el.id === 'activeJob');
+        categoryData[index] = { ...updated };
+        setCategoryData([...categoryData]);
+      });
+
+    const totalApplicationAmount = user && totalApplication(user);
+    totalApplicationAmount &&
+      totalApplicationAmount.then(data => {
+        const changeData = [...categoryData];
+        const activeData = changeData.filter(
+          ({ id }) => id === 'totalApplication',
+        );
+        const updated = { ...activeData[0], number: data };
+        const index = categoryData.findIndex(
+          el => el.id === 'totalApplication',
+        );
+        categoryData[index] = { ...updated };
+        setCategoryData([...categoryData]);
+      });
+
+    const timeBookmarkedAmount = user && timeBookmarked(user);
+    timeBookmarkedAmount &&
+      timeBookmarkedAmount.then(data => {
+        const changeData = [...categoryData];
+        const activeData = changeData.filter(
+          ({ id }) => id === 'timesBookmarked',
+        );
+        const updated = { ...activeData[0], number: data };
+        const index = categoryData.findIndex(el => el.id === 'timesBookmarked');
+        categoryData[index] = { ...updated };
+        setCategoryData([...categoryData]);
+      });
+
+    const totalJobAmount = user && totalJobViews(user);
+    totalJobAmount &&
+      totalJobAmount.then(data => {
+        const changeData = [...categoryData];
+        const activeData = changeData.filter(({ id }) => id === 'totalJob');
+        const updated = { ...activeData[0], number: data };
+        const index = categoryData.findIndex(el => el.id === 'totalJob');
+        categoryData[index] = { ...updated };
+        setCategoryData([...categoryData]);
+      });
+
+    // const activeListing = user && activeListings(user);
+    // activeListing &&
+    //   activeListing.then(data => {
+    //     console.log(`data`, data);
+    //     const changeData = [...categoryData];
+    //     const activeData = changeData.filter(({ id }) => id === 'activeJob');
+    //     const updated = { ...activeData[0], number: data };
+    //     const index = categoryData.findIndex(el => el.id === 'activeJob');
+    //     categoryData[index] = { ...updated };
+    //     setCategoryData([...categoryData]);
+    //   });
+  }, []);
+
   const CategoryItem = (props: IProps) => {
     return (
       <div
@@ -89,7 +169,6 @@ const Employer = () => {
             <Title level={2} className={styles.categoryNumber}>
               {props.number}
             </Title>
-
             <Text className={styles.categoryText}>{props.name}</Text>
           </div>
         </div>
@@ -101,10 +180,11 @@ const Employer = () => {
     <div className={styles.employerWrapper}>
       <div className={styles.categoriesWrapper}>
         <Row gutter={20} justify="space-between">
-          {data.map((data, index) => {
+          {categoryData.map((data, index) => {
             return (
               <Col style={{ marginTop: '1rem' }} key={index} sm={12} xs={24}>
                 <CategoryItem
+                  id={data.id}
                   color={data.color}
                   name={data.name}
                   number={data.number}

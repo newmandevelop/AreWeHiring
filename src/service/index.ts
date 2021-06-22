@@ -21,6 +21,13 @@ import {
 } from './jobs';
 import { addCompany } from './companies';
 import { allUsersSearch } from './users';
+import {
+  activeListings,
+  totalJobViews,
+  totalApplication,
+  timeBookmarked,
+} from './dashboard';
+
 export const Authentication = {
   login,
   signUp,
@@ -59,4 +66,10 @@ export const Company = {
 
 export const UserSearch = {
   allUsersSearch,
+};
+export const Dashboard = {
+  activeListings,
+  totalJobViews,
+  totalApplication,
+  timeBookmarked,
 };

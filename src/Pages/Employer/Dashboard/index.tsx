@@ -6,6 +6,7 @@ import {
   timeBookmarked,
   totalApplication,
   totalJobViews,
+  recentActivities,
 } from '../../../service/dashboard';
 import { getUserSession } from '../../../utils/sessionStorage';
 const { Text, Title, Link } = Typography;
@@ -17,38 +18,6 @@ interface IProps {
   id: string;
 }
 
-const recentActivities = [
-  {
-    listing: 'Listing',
-    link: 'Physician Assistant – Neurosurgical Critical Care',
-    message: 'was updated',
-    time: '1 week ago',
-  },
-  {
-    listing: 'Listing',
-    link: 'Hematology Oncology PA / Nurse Practitioner (APRN)',
-    message: 'was removed',
-    time: '4 week ago',
-  },
-  {
-    listing: 'Listing',
-    link: 'Hematology Oncology PA / Nurse Practitioner (APRN)',
-    message: 'was removed',
-    time: '4 week ago',
-  },
-  {
-    listing: 'Listing',
-    link: 'Physician Assistant – Neurosurgical Critical Care',
-    message: 'was updated',
-    time: '1 week ago',
-  },
-  {
-    listing: 'Listing',
-    link: 'Physician Assistant – Neurosurgical Critical Care',
-    message: 'was approved',
-    time: '4 week ago',
-  },
-];
 const data = [
   {
     number: 0,
@@ -90,8 +59,17 @@ const packages = [
   },
 ];
 const Employer = () => {
+  const [activities, setRecentActivities] = useState([
+    {
+      jobName: '',
+      activityName: '',
+      timeDetails: '',
+    },
+  ]);
   const [categoryData, setCategoryData] = useState(data);
-
+  useEffect(() => {
+    console.log(activities);
+  }, [activities]);
   useEffect(() => {
     let user = getUserSession();
 
@@ -104,6 +82,12 @@ const Employer = () => {
         const index = categoryData.findIndex(el => el.id === 'activeJob');
         categoryData[index] = { ...updated };
         setCategoryData([...categoryData]);
+      });
+
+    const recentActivity = user && recentActivities(user);
+    recentActivity &&
+      recentActivity.then(data => {
+        setRecentActivities(data);
       });
 
     const totalApplicationAmount = user && totalApplication(user);
@@ -192,17 +176,17 @@ const Employer = () => {
             </div>
           }
           bordered
-          dataSource={recentActivities}
+          dataSource={activities}
           renderItem={item => (
             <List.Item>
               <List.Item.Meta
                 avatar={<Avatar>A</Avatar>}
                 description={
                   <React.Fragment>
-                    <Text className={styles.listing}>{item.listing}</Text>
-                    <Link className={styles.link}>{item.link}</Link>
-                    <Text className={styles.message}>{item.message}</Text>
-                    <Tag className={styles.time}>{item.time}</Tag>
+                    <Text className={styles.listing}>Listing</Text>
+                    <Text className={styles.message}>{item.jobName}</Text>
+                    <Link className={styles.link}>{item.activityName}</Link>
+                    <Tag className={styles.time}>{item.timeDetails}</Tag>
                   </React.Fragment>
                 }
               />

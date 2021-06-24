@@ -56,3 +56,16 @@ export const timeBookmarked = async (userId: string) => {
     throw error.response;
   }
 };
+
+export const recentActivities = async (userId: string) => {
+  try {
+    const response = await axios().get(`/jobs/recentactivities?userId=${userId}`);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error.response;
+  }
+};

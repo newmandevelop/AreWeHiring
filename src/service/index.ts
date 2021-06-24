@@ -26,6 +26,7 @@ import {
   totalJobViews,
   totalApplication,
   timeBookmarked,
+  recentActivities
 } from './dashboard';
 
 export const Authentication = {
@@ -72,4 +73,5 @@ export const Dashboard = {
   totalJobViews,
   totalApplication,
   timeBookmarked,
+  recentActivities
 };

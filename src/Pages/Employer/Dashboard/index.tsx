@@ -67,9 +67,7 @@ const Employer = () => {
     },
   ]);
   const [categoryData, setCategoryData] = useState(data);
-  useEffect(() => {
-    console.log(activities);
-  }, [activities]);
+ 
   useEffect(() => {
     let user = getUserSession();
 

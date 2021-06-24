@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from '../../service/axiosConfig';
 import Dashboard from '../../Containers/Dashboard';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
 import styles from './index.module.scss';
@@ -32,7 +33,6 @@ const PostJob = () => {
   let dispatch = useDispatch();
   const [form] = Form.useForm();
   let formData = new FormData();
-
   const {
     addJobErrorMessage,
     addJobFailure,
@@ -109,6 +109,16 @@ const PostJob = () => {
     form.resetFields();
   };
 
+  const getAllCompanies = async () => {
+    const response = await axios().get(
+      '/companies/all',
+    );
+    if (response) {
+      console.log(response.data);
+    } else {
+      console.log('Error occurred');
+    }
+  };
   useEffect(() => {
     if (addJobSuccess) {
       onReset();
@@ -118,6 +128,9 @@ const PostJob = () => {
     }
   }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
+  useEffect(() => {
+    getAllCompanies();
+  }, []);
   return (
     <Dashboard dashboardName="Employer">
       <Form
@@ -138,7 +151,12 @@ const PostJob = () => {
             label: 'Company',
             placeholder: 'Select Company',
             fieldType: 'dropDown',
-            options: ['Amazon Inc', 'Apple Inc', 'Jackson Company', 'Telepro Group'],
+            options: [
+              'Amazon Inc',
+              'Apple Inc',
+              'Jackson Company',
+              'Telepro Group',
+            ],
           })}
           {FormItem({
             name: 'jobTitle',
@@ -197,7 +215,12 @@ const PostJob = () => {
             optional: true,
             placeholder: 'Enter Employer',
             fieldType: 'dropDown',
-            options: ['Amazon Inc', 'Apple Inc', 'Jackson Company', 'Telepro Group'],
+            options: [
+              'Amazon Inc',
+              'Apple Inc',
+              'Jackson Company',
+              'Telepro Group',
+            ],
           })}
           {/*Industry Input Field */}
           {FormItem({

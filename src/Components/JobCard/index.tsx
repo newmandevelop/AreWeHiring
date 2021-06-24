@@ -1,7 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Card, Typography, Button } from 'antd';
 import moment from 'moment';
+import axios from '../../service/axiosConfig';
 import styles from './index.module.scss';
+import { getUserSession } from '../../utils/sessionStorage';
 import { dateFormat } from '../../utils/general';
 import {
   DollarCircleOutlined,
@@ -24,6 +27,25 @@ interface IJob {
 }
 
 const JobCard = (job: IJob) => {
+  let history = useHistory();
+  let user = getUserSession();
+
+  const handleClick = async () => {
+    try {
+      const response = await axios().get(
+        `/jobs/view?jobId=${job.id}&userId=${user}`,
+      );
+      if (response) {
+        console.log('Success');
+        history.push(`/jobs/${job.id}`);
+      } else {
+        console.log('Error occurred');
+      }
+    } catch (error) {
+      throw error.response;
+    }
+  };
+  
   return (
     <main className={styles.JobCardWrapper}>
       <Card style={{ backgroundColor: '#fdfdfd' }} hoverable>
@@ -61,7 +83,7 @@ const JobCard = (job: IJob) => {
           {job.description}
         </Paragraph>
         <Button
-          href={`/jobs/${job.id}`}
+          onClick={() => {handleClick()}}
           className={styles.applyBtn}
           type="primary"
           size="small"

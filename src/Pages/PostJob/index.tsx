@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../service/axiosConfig';
 import Dashboard from '../../Containers/Dashboard';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
+import { getAllCompanies } from '../../service/companies';
 import styles from './index.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
@@ -29,9 +29,13 @@ const formItemLayout = {
 interface IRoles {
   role: string;
 }
+interface ICompanies {
+  name: string;
+}
 const PostJob = () => {
   let dispatch = useDispatch();
   const [form] = Form.useForm();
+  const[companies, setCompanies] = useState<[]>([])
   let formData = new FormData();
   const {
     addJobErrorMessage,
@@ -109,27 +113,25 @@ const PostJob = () => {
     form.resetFields();
   };
 
-  const getAllCompanies = async () => {
-    const response = await axios().get(
-      '/companies/all',
-    );
-    if (response) {
-      console.log(response.data);
-    } else {
-      console.log('Error occurred');
-    }
-  };
   useEffect(() => {
     if (addJobSuccess) {
       onReset();
       openNotificationWithIcon('success', 'Job Added Successfully');
     } else if (addJobFailure) {
+      console.log(addJobErrorMessage)
       openNotificationWithIcon('error', addJobErrorMessage);
     }
   }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
   useEffect(() => {
-    getAllCompanies();
+    const response = getAllCompanies();
+    response.then((data)=> {
+      const companies:any = []
+      data?.data.map((company: ICompanies)=> {
+        companies.push(company.name)
+      })
+      setCompanies(companies)
+    })
   }, []);
   return (
     <Dashboard dashboardName="Employer">
@@ -151,12 +153,7 @@ const PostJob = () => {
             label: 'Company',
             placeholder: 'Select Company',
             fieldType: 'dropDown',
-            options: [
-              'Amazon Inc',
-              'Apple Inc',
-              'Jackson Company',
-              'Telepro Group',
-            ],
+            options: companies
           })}
           {FormItem({
             name: 'jobTitle',

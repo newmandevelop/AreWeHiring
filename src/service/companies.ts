@@ -14,3 +14,16 @@ export const addCompany = async (data: any) => {
     throw error;
   }
 };
+
+export const getAllCompanies = async () => {
+  try {
+    const response = await axios().get('companies/all');
+    if (response) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};

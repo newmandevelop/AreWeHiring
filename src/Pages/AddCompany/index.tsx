@@ -215,9 +215,6 @@ const AddCompany = () => {
             fieldType: 'upload',
             btnName: 'Browse',
           })}
-
-         
-
           <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
           <Divider />
         </main>

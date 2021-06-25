@@ -4,10 +4,13 @@ import { Actions } from '../SignUp/actions';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../reducers';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Form, Input, Button, Typography, notification } from 'antd';
 import { CANDIDATE, RECRUITER, EMPLOYER } from '../../Content/Roles';
 import { getToken, getRole } from '../../utils/sessionStorage';
 const { Title, Text, Link } = Typography;
+const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -30,8 +33,9 @@ const tailFormItemLayout = {
     },
   },
 };
-
+let loginFailCount = 0;
 const Login = (props: any) => {
+  const [recaptchaApproved, setRecaptchaApproved] = useState(false);
   const [form] = Form.useForm();
   let dispatch = useDispatch();
   let history = useHistory();
@@ -55,11 +59,21 @@ const Login = (props: any) => {
     });
   };
   const onFinish = (values: any) => {
-    dispatch(
-      Actions.loginProgress({
-        login: values,
-      }),
-    );
+    if (loginFailCount <= 2) {
+      dispatch(
+        Actions.loginProgress({
+          login: values,
+        }),
+      );
+    } else if (loginFailCount >= 3) {
+      recaptchaApproved
+        ? dispatch(
+            Actions.loginProgress({
+              login: values,
+            }),
+          )
+        : openNotificationWithIcon('error', 'Approve ReCAPTCHA first');
+    }
   };
   const changeRoute = async () => {
     const role = getRole();
@@ -71,7 +85,6 @@ const Login = (props: any) => {
       } else {
         history.push('/');
       }
-     
     } else {
       if (role === CANDIDATE) {
         history.push('/dashboard/candidate');
@@ -87,6 +100,7 @@ const Login = (props: any) => {
       openNotificationWithIcon('success', 'Login Successfully');
       changeRoute();
     } else if (loginFailure) {
+      loginFailCount++;
       openNotificationWithIcon('error', loginErrorMessage);
     }
   }, [loginErrorMessage, loginFailure, loginSuccess]);
@@ -136,6 +150,22 @@ const Login = (props: any) => {
                 <Input.Password />
               </Form.Item>
 
+              <Form.Item
+                style={{ display: 'flex', justifyContent: 'flex-end' }}
+              >
+                {loginFailCount >= 2 ? (
+                  <ReCAPTCHA
+                    theme="light"
+                    sitekey={TEST_SITE_KEY}
+                    onChange={value => {
+                      console.log(value);
+                      setRecaptchaApproved(true);
+                    }}
+                  />
+                ) : (
+                  ''
+                )}
+              </Form.Item>
               <Form.Item {...tailFormItemLayout}>
                 <Button
                   loading={loginProgress}

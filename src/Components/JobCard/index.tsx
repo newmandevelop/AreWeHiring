@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Card, Typography, Button } from 'antd';
 import moment from 'moment';
 import axios from '../../service/axiosConfig';
+import {countJobView} from '../../service/jobs'
 import styles from './index.module.scss';
 import { getUserSession } from '../../utils/sessionStorage';
 import { dateFormat } from '../../utils/general';
@@ -31,19 +32,9 @@ const JobCard = (job: IJob) => {
   let user = getUserSession();
 
   const handleClick = async () => {
-    try {
-      const response = await axios().get(
-        `/jobs/view?jobId=${job.id}&userId=${user}`,
-      );
-      if (response) {
-        console.log('Success');
-        history.push(`/jobs/${job.id}`);
-      } else {
-        console.log('Error occurred');
-      }
-    } catch (error) {
-      throw error.response;
-    }
+    const response = countJobView(job.id, user)
+    if(response)
+    history.push(`/jobs/${job.id}`);
   };
   
   return (

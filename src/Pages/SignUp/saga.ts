@@ -27,6 +27,7 @@ function* signUp(action: any) {
 
 function* login(action: any) {
   const { login } = action.payload;
+  login.email = login.email.replace(/ /g, "")
   try {
     if (login) {
       const response: ResponseGenerator = yield call(
@@ -37,7 +38,7 @@ function* login(action: any) {
     }
   } catch (error) {
     console.log('err', error);
-    yield put(Actions.loginFailure(error && error.message));
+    yield put(Actions.loginFailure(error && error.response.data.message));
   }
 }
 

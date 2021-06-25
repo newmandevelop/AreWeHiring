@@ -1,10 +1,18 @@
 import React from 'react';
 import { Layout, Divider, Menu, Dropdown, Button, Typography } from 'antd';
 import styles from './index.module.scss';
+import { logoutUser, removeRole } from '../../utils/sessionStorage'
+import { useHistory } from 'react-router-dom';
 import { getToken } from '../../utils/sessionStorage';
 const { Header } = Layout;
 
 const CustomeHeader = () => {
+  const history = useHistory();
+  const handleLogout = () => {
+    logoutUser();
+    removeRole();
+    history.push('/');
+  };
   const token = getToken();
   const menu = () => (
     <Menu>
@@ -59,7 +67,7 @@ const CustomeHeader = () => {
             )}
 
             {token && (
-              <Button type="link" className={styles.dropDown}>
+              <Button onClick={()=>handleLogout()} type="link" className={styles.dropDown}>
                 Signout
               </Button>
             )}

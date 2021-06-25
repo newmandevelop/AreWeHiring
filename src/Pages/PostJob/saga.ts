@@ -21,8 +21,8 @@ function* addJob(action: any) {
       yield put(Actions.addJobFailure('Data Not Found'));
     }
   } catch (error) {
-    console.log(error);
-    yield put(Actions.addJobFailure(error.message));
+    console.log(error.response.data);
+    yield put(Actions.addJobFailure(error.response.data.message));
   }
 }
 

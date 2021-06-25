@@ -1,15 +1,22 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { Typography, Breadcrumb } from 'antd';
+import { useHistory } from 'react-router-dom';
+import {logoutUser, removeRole} from '../../utils/sessionStorage';
 const { Title, Paragraph, Link } = Typography;
 const { Item } = Breadcrumb;
-
 interface IProps {
   children?: any;
   dashboardName?: string;
 }
 
 const Dashboard = (props: IProps) => {
+  const history = useHistory();
+  const handleLogout = () => {
+    logoutUser();
+    removeRole();
+    history.push('/');
+  };
   return (
     <div className={styles.dashboard}>
       <div>
@@ -31,7 +38,7 @@ const Dashboard = (props: IProps) => {
             </Paragraph>
           </div>
           <div>
-            <Link className={styles.signout}>Signout</Link>
+            <Link onClick={() => handleLogout()} className={styles.signout}>Signout</Link>
           </div>
         </div>
       </div>

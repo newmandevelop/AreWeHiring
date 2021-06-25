@@ -35,7 +35,7 @@ interface ICompanies {
 const PostJob = () => {
   let dispatch = useDispatch();
   const [form] = Form.useForm();
-  const[companies, setCompanies] = useState<[]>([])
+  const [companies, setCompanies] = useState<[]>([]);
   let formData = new FormData();
   const {
     addJobErrorMessage,
@@ -118,20 +118,19 @@ const PostJob = () => {
       onReset();
       openNotificationWithIcon('success', 'Job Added Successfully');
     } else if (addJobFailure) {
-      console.log(addJobErrorMessage)
       openNotificationWithIcon('error', addJobErrorMessage);
     }
   }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
   useEffect(() => {
     const response = getAllCompanies();
-    response.then((data)=> {
-      const companies:any = []
-      data?.data.map((company: ICompanies)=> {
-        companies.push(company.name)
-      })
-      setCompanies(companies)
-    })
+    response.then(data => {
+      const companies: any = [];
+      data?.data.map((company: ICompanies) => {
+        companies.push(company.name);
+      });
+      setCompanies(companies);
+    });
   }, []);
   return (
     <Dashboard dashboardName="Employer">
@@ -153,7 +152,7 @@ const PostJob = () => {
             label: 'Company',
             placeholder: 'Select Company',
             fieldType: 'dropDown',
-            options: companies
+            options: companies,
           })}
           {FormItem({
             name: 'jobTitle',
@@ -305,18 +304,17 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Upload Logo Image Button */}
-          {FormItem({
-            name: 'jobLogo',
-            fileProps: { ...logoProps },
-            label: 'Logo',
-            icon: <UploadOutlined />,
-            optional: true,
-            fileType: 'picture',
-            placeholder: 'Maximum file size: 50 MB.',
-            fieldType: 'upload',
-            btnName: 'Browse',
-          })}
-
+            {FormItem({
+              name: 'jobLogo',
+              fileProps: { ...logoProps },
+              label: 'Logo',
+              icon: <UploadOutlined />,
+              optional: true,
+              fileType: 'picture',
+              placeholder: 'Maximum file size: 50 MB.',
+              fieldType: 'upload',
+              btnName: 'Browse',
+            })}
           {/* Maximum rate Field */}
           {FormItem({
             name: 'maximumRate',

@@ -13,9 +13,9 @@ export const jobSearchById = async (id: any) => {
   }
 };
 
-export const allJobsSearch = async () => {
+export const allJobsSearch = async (limit: number) => {
   try {
-    const response = await axios().get(`jobs/all`);
+    const response = await axios().get(`jobs/allpaginated/10/${limit}`);
     if (response && response.data) {
       return response.data;
     } else {

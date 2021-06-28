@@ -22,7 +22,7 @@ function* addCompany(action: any) {
     }
   } catch (error) {
     console.log(error);
-    yield put(Actions.addCompanyFailure(error.message));
+    yield put(Actions.addCompanyFailure(error.response.data.message));
   }
 }
 

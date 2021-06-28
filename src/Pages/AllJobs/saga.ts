@@ -9,12 +9,14 @@ export interface ResponseGenerator {
   request?: any;
   status?: number;
   statusText?: string;
+  content?: any
 }
-function* allJobs() {
+function* allJobs(action: any) {
+  const {limit} = action.payload
   try {
-    const response: ResponseGenerator = yield call(JobSearch.allJobsSearch);
+    const response: ResponseGenerator = yield call(JobSearch.allJobsSearch, limit);
     if (response) {
-      yield put(Actions.allJobsSuccess(response));
+      yield put(Actions.allJobsSuccess(response.content));
     } else {
       yield put(Actions.allJobsFailure('Data Not Found'));
     }

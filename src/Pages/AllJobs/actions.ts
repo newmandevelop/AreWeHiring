@@ -6,6 +6,7 @@ export enum ActionTypes {
 
 export interface AllJobsProgress {
   type: ActionTypes.ALL_JOBS_PROGRESS;
+  payload: any
 }
 
 export interface AllJobsSuccess {
@@ -18,9 +19,10 @@ export interface AllJobsFailure {
   payload: any;
 }
 
-function allJobsProgress(): AllJobsProgress {
+function allJobsProgress(payload: any): AllJobsProgress {
   return {
     type: ActionTypes.ALL_JOBS_PROGRESS,
+    payload
   };
 }
 function allJobsSuccess(payload: any): AllJobsSuccess {

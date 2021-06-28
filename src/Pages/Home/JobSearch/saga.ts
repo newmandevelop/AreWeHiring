@@ -18,7 +18,6 @@ function* findJob(action: any) {
         JobSearch.findJob,
         findJob,
       );
-      console.log(response.data);
       if (response.data && Object.values(response.data).length > 0)
         yield put(Actions.jobSearchSuccess(response.data));
       else {

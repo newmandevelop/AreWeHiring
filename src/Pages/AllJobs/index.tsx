@@ -15,7 +15,7 @@ const AllJobs = () => {
   useEffect(() => {
     dispatch(Actions.allJobsProgress({ limit: limit }));
   }, [dispatch]);
-  const { allJobsSuccess, allJobsData } = useSelector(
+  const { allJobsSuccess, allJobsData, allJobsCount } = useSelector(
     (state: IRootState) => state.allJobsSearch,
   );
   useEffect(() => {
@@ -26,7 +26,7 @@ const AllJobs = () => {
       <div className={styles.AllJobsFieldWrapper}>
         <Pagination
           defaultCurrent={1}
-          total={25}
+          total={allJobsCount}
           onChange={e => {
             setLimit(e * 10 - 10);
           }}

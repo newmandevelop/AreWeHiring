@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import JobSearch from './JobSearch';
 import Category from './Category';
 import RecentJobs from './RecentJobs';
@@ -12,12 +12,15 @@ import { Actions as jobCategoryAction } from './Category/actions';
 import { Actions as recentJobs } from './RecentJobs/actions';
 import Reviews from './Reviews';
 import emoji from '../../assets/in-love.svg';
+import { Pagination } from 'antd';
+
 const { Title, Text } = Typography;
 const Home = () => {
   let dispatch = useDispatch();
-  const { jobData, jobSearchSuccess } = useSelector(
+  const { jobData, jobSearchSuccess, jobCount } = useSelector(
     (state: IRootState) => state.findJob,
   );
+  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     dispatch(jobCategoryAction.jobCategoriesProgress());
@@ -26,7 +29,7 @@ const Home = () => {
 
   return (
     <div className={styles.homeWrapper}>
-      <JobSearch />
+      <JobSearch limit={limit} />
       {!jobSearchSuccess && (
         <>
           <div className={styles.homePadding}>
@@ -47,6 +50,14 @@ const Home = () => {
           <div id="searchedJobs" className={styles.homePadding}>
             <Title className={styles.homeCategoryText}>Searched Jobs</Title>
             <Row justify="space-around">
+              <Pagination
+                defaultCurrent={1}
+                total={jobCount}
+                pageSize={5}
+                onChange={e => {
+                  setLimit(5 * e - 5);
+                }}
+              />
               {Object.values(jobData).map(job => {
                 return (
                   <Col

@@ -5,7 +5,7 @@ export interface IFindJob {
   jobSearchSuccess: boolean;
   jobSearchFailure: boolean;
   jobSearchErrorMessage: null | string;
-
+  jobCount: number;
   jobData: Object;
 }
 const initialState: IFindJob = {
@@ -13,7 +13,7 @@ const initialState: IFindJob = {
   jobSearchSuccess: false,
   jobSearchFailure: false,
   jobSearchErrorMessage: null,
-
+  jobCount: 0,
   jobData: {},
 };
 
@@ -33,7 +33,8 @@ export default (state = initialState, action: Action) => {
         jobSearchProgress: false,
         jobSearchSuccess: true,
         jobSearchFailure: false,
-        jobData: action.payload,
+        jobData: action.payload.content,
+        jobCount: action.payload.totalElements
       };
     }
     case ActionTypes.JOB_SEARCH_FAILURE: {

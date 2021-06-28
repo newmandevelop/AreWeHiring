@@ -29,12 +29,13 @@ export const allJobsSearch = async (limit: number) => {
 interface findJob {
   what?: string;
   where?: string;
+  limit?: any
 }
 
 export const findJob = async (data: findJob) => {
   try {
     const response = await axios().post(
-      `jobs/find?what=${data.what}&where=${data.where}`,
+      `jobs/findpaginated/5/${data.limit}?what=${data.what}&where=${data.where}`,
     );
     if (response) {
       return response;

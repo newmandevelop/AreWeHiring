@@ -16,7 +16,7 @@ function* allJobs(action: any) {
   try {
     const response: ResponseGenerator = yield call(JobSearch.allJobsSearch, limit);
     if (response) {
-      yield put(Actions.allJobsSuccess(response.content));
+      yield put(Actions.allJobsSuccess(response));
     } else {
       yield put(Actions.allJobsFailure('Data Not Found'));
     }

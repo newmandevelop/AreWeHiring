@@ -13,7 +13,7 @@ interface IProps {
   name?: any;
 }
 
-const JobSearch = () => {
+const JobSearch = ( {limit}: any ) => {
   const [what, setWhat] = useState('Security Chief');
   const [where, setWhere] = useState('Seattle');
   let dispatch = useDispatch();
@@ -53,11 +53,18 @@ const JobSearch = () => {
   const handleSubmit = () => {
     dispatch(
       Actions.jobSearchProgress({
-        findJob: { what, where },
+        findJob: { what, where, limit }
       }),
-    )
+    );
   };
 
+  useEffect(() => {
+    dispatch(
+      Actions.jobSearchProgress({
+        findJob: { what, where, limit}
+      }),
+    );
+  }, [limit])
   return (
     <div className={styles.jobSearchWrapper}>
       <div className={styles.jobSearchContainer}>

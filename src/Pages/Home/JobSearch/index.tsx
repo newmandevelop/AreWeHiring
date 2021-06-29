@@ -13,7 +13,7 @@ interface IProps {
   name?: any;
 }
 
-const JobSearch = ( {limit}: any ) => {
+const JobSearch = ({ limit }: any) => {
   const [what, setWhat] = useState('Security Chief');
   const [where, setWhere] = useState('Seattle');
   let dispatch = useDispatch();
@@ -36,11 +36,13 @@ const JobSearch = ( {limit}: any ) => {
   };
 
   useEffect(() => {
-    if (jobSearchSuccess) {
-      const element: any = document.getElementById('searchedJobs');
-      element.scrollIntoView({
-        behavior: 'smooth',
-      });
+    if (limit === 0) {
+      if (jobSearchSuccess) {
+        const element: any = document.getElementById('searchedJobs');
+        element.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
     }
   }, [jobSearchSuccess]);
 
@@ -53,18 +55,20 @@ const JobSearch = ( {limit}: any ) => {
   const handleSubmit = () => {
     dispatch(
       Actions.jobSearchProgress({
-        findJob: { what, where, limit }
+        findJob: { what, where, limit },
       }),
     );
   };
 
   useEffect(() => {
-    dispatch(
-      Actions.jobSearchProgress({
-        findJob: { what, where, limit}
-      }),
-    );
-  }, [limit])
+    if (limit != 0) {
+      dispatch(
+        Actions.jobSearchProgress({
+          findJob: { what, where, limit },
+        }),
+      );
+    }
+  }, [limit]);
   return (
     <div className={styles.jobSearchWrapper}>
       <div className={styles.jobSearchContainer}>

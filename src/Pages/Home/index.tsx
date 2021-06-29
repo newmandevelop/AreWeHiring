@@ -26,7 +26,6 @@ const Home = () => {
     dispatch(jobCategoryAction.jobCategoriesProgress());
     dispatch(recentJobs.recentJobsProgress());
   }, []);
-
   return (
     <div className={styles.homeWrapper}>
       <JobSearch limit={limit} />
@@ -61,7 +60,7 @@ const Home = () => {
               {Object.values(jobData).map(job => {
                 return (
                   <Col
-                    key={job.id}
+                    key={job.content.id}
                     className={styles.column}
                     md={9}
                     lg={7}
@@ -69,16 +68,16 @@ const Home = () => {
                     xs={22}
                   >
                     <JobCard
-                      name={job.nameOfJob}
-                      type={job.jobType}
-                      location={job.location}
-                      employer={job.employer}
-                      currencySymbol={job.currencySymbol}
-                      datePosted={job.datePosted}
-                      description={job.description}
+                      name={job.content.nameOfJob}
+                      type={job.content.jobType}
+                      location={job.content.location}
+                      employer={job.content.employer}
+                      currencySymbol={job.content.currencySymbol}
+                      datePosted={job.content.datePosted}
+                      description={job.content.description}
                       id={job.id}
-                      salaryLowerLimit={job.salaryLowerLimit}
-                      salaryUpperLimit={job.salaryUpperLimit}
+                      salaryLowerLimit={job.content.salaryLowerLimit}
+                      salaryUpperLimit={job.content.salaryUpperLimit}
                     />
                   </Col>
                 );

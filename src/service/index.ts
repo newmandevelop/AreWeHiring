@@ -1,4 +1,4 @@
-import { login, signUp } from './authentication';
+import { login, signUp, forgetPassword } from './authentication';
 import {
   jobSearchById,
   allJobsSearch,
@@ -32,6 +32,7 @@ import {
 export const Authentication = {
   login,
   signUp,
+  forgetPassword
 };
 export const JobSearch = {
   jobSearchById,

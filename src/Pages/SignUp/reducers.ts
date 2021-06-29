@@ -22,7 +22,7 @@ export interface IAuthState {
   forgetPasswordProgress: boolean;
   forgetPasswordSuccess: boolean;
   forgetPasswordFailure: boolean;
-  forgetPasswordErrorMessage: undefined | string;
+  forgetPasswordErrorMessage: null | string;
   userData: IUser;
 }
 const initialState: IAuthState = {
@@ -37,7 +37,7 @@ const initialState: IAuthState = {
   forgetPasswordProgress: false,
   forgetPasswordSuccess: false,
   forgetPasswordFailure: false,
-  forgetPasswordErrorMessage: undefined,
+  forgetPasswordErrorMessage: null,
   userData: {},
 };
 
@@ -101,7 +101,6 @@ export default (state = initialState, action: Action) => {
         forgetPasswordProgress: true,
         forgetPasswordSuccess: false,
         forgetPasswordFailure: false,
-        forgetPasswordErrorMessage: undefined,
       };
     }
     case ActionTypes.FORGET_PASSWORD_SUCCESS: {
@@ -110,7 +109,6 @@ export default (state = initialState, action: Action) => {
         forgetPasswordProgress: false,
         forgetPasswordSuccess: true,
         forgetPasswordFailure: false,
-        forgetPasswordErrorMessage: undefined,
       };
     }
     case ActionTypes.FORGET_PASSWORD_FAILURE: {

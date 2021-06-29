@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Pages/Home';
 import RegistrationForm from '../Pages/SignUp';
 import Login from '../Pages/Login';
+import ForgotPassword from '../Pages/ForgotPassword';
 import JobOverview from '../Pages/JobOverview';
 import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
@@ -22,6 +23,7 @@ const Routing = () => {
       <SimpleRoute exact path="/" component={Home} />
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/forgotPassword" component={ForgotPassword} />
       <DashboardRoute
         exact
         path="/dashboard/employee/post-job"

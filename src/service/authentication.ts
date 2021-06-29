@@ -45,3 +45,17 @@ export const signUp = async (signUp: any) => {
     }
   }
 };
+
+export const forgetPassword = async (email: any) => {
+  if (email) {
+    try {
+      const response = await axios().get(`/users/resetuserpassword?email=${email}`);
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error)
+      throw error;
+    }
+  }
+};

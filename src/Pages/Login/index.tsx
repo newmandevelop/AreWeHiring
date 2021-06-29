@@ -148,6 +148,10 @@ const Login = (props: any) => {
                 hasFeedback
               >
                 <Input.Password />
+                <br />
+                <Text>
+                  <Link href="/forgotPassword">Forgot Password</Link>
+                </Text>
               </Form.Item>
 
               <Form.Item

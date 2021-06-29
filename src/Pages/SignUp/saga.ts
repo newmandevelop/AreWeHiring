@@ -42,20 +42,25 @@ function* login(action: any) {
   }
 }
 
-// function* forgetPassword(action: any) {
-//   const { email, firebase } = action.payload
-//   try {
-//     yield firebase.resetPassword(email)
-
-//     yield put(Actions.forgetPasswordSuccess())
-//   } catch (error) {
-//     console.log('err', error)
-//     yield put(Actions.forgetPasswordFailure(error && error.message))
-//   }
-// }
+function* forgetPassword(action: any) {
+  const { email } = action.payload.email;
+  try {
+    if (email) {
+      const response: ResponseGenerator = yield call(
+        Authentication.forgetPassword,
+        email,
+      );
+      if (response) yield put(Actions.forgetPasswordSuccess());
+    }
+  } catch (error) {
+    console.log('err', error);
+    yield put(Actions.forgetPasswordFailure(error && error.response.data.message));
+  }
+}
 
 export default function* authSaga() {
   yield takeLatest(ActionTypes.SIGNUP_PROGRESS, signUp);
   yield takeLatest(ActionTypes.LOGIN_PROGRESS, login);
+  yield takeLatest(ActionTypes.FORGET_PASSWORD_PROGRESS, forgetPassword);
   //   yield takeLatest(ActionTypes.FORGET_PASSWORD_PROGRESS, forgetPassword)
 }

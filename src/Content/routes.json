@@ -5,13 +5,15 @@
     "/dashboard/employee/all-companies",
     "/dashboard/employee/add-company",
     "/dashboard/employer",
-    "/dashboard/employee/manage-jobs"
+    "/dashboard/employee/manage-jobs",
+    "/dashboard/reset-password"
   ],
   "candidate": [
     "/jobs",
     "/dashboard/candidate/add-data",
     "/job-apply",
     "/jobs/:id",
-    "/dashboard/candidate"
+    "/dashboard/candidate",
+    "/dashboard/reset-password"
   ]
 }

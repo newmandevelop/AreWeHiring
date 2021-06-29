@@ -4,6 +4,7 @@ import Home from '../Pages/Home';
 import RegistrationForm from '../Pages/SignUp';
 import Login from '../Pages/Login';
 import ForgotPassword from '../Pages/ForgotPassword';
+import ResetPassword from '../Pages/ResetPassword';
 import JobOverview from '../Pages/JobOverview';
 import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
@@ -24,6 +25,11 @@ const Routing = () => {
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/forgotPassword" component={ForgotPassword} />
+      <DashboardRoute
+        // exact
+        path="/dashboard/reset-password"
+        component={ResetPassword}
+      />
       <DashboardRoute
         exact
         path="/dashboard/employee/post-job"

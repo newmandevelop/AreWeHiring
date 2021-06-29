@@ -32,6 +32,7 @@ const ForgotPassword = (props: any) => {
   };
 
   const onFinish = (values: any) => {
+    console.log(values)
     dispatch(
       Actions.forgetPasswordProgress({
         email: values,

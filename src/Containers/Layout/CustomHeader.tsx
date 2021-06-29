@@ -1,11 +1,11 @@
 import React from 'react';
-import { Layout, Divider, Menu, Dropdown, Button, Typography } from 'antd';
+import { Layout, Divider, Menu, Dropdown, Button, Typography, Avatar } from 'antd';
 import styles from './index.module.scss';
-import { logoutUser, removeRole } from '../../utils/sessionStorage'
+import { logoutUser, removeRole } from '../../utils/sessionStorage';
 import { useHistory } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 import { getToken } from '../../utils/sessionStorage';
 const { Header } = Layout;
-
 const CustomeHeader = () => {
   const history = useHistory();
   const handleLogout = () => {
@@ -24,9 +24,20 @@ const CustomeHeader = () => {
     </Menu>
   );
 
+  const accountSettingMenu = () => (
+    <Menu>
+      <Menu.Item>
+        <a href="/dashboard/resetPassword" rel="noopener noreferrer">
+          Reset Password
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <Header className={styles.header}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* <Avatar size={64} icon={<UserOutlined />} /> */}
         <div style={{ display: 'flex', justifyContent: 'start' }}>
           <h1 className={styles.logo}>AreWeHiring</h1>
           <ul className={styles.navLink}>
@@ -65,12 +76,42 @@ const CustomeHeader = () => {
                 Login
               </Button>
             )}
-
             {token && (
-              <Button onClick={()=>handleLogout()} type="link" className={styles.dropDown}>
+              <Button
+                href="/dashboard/reset-password"
+                type="link"
+                className={styles.dropDown}
+              >
+                Reset Password
+              </Button>
+            )}
+            {token && (
+              <Button
+                onClick={() => handleLogout()}
+                type="link"
+                className={styles.dropDown}
+              >
                 Signout
               </Button>
             )}
+            {/* {token && (
+              <Dropdown overlay={accountSettingMenu}>
+                <a
+                  // className={styles.dropDown}
+                  // className="ant-dropdown-link"
+                  onClick={e => e.preventDefault()}
+                >
+                  Account Settings
+                </a>
+              </Dropdown>
+              <Button
+                onClick={() => handleLogout()}
+                type="link"
+                className={styles.dropDown}
+              >
+                Account Setting
+              </Button>
+            )} */}
           </ul>
         </div>
         {/* <div style={{ marginRight: '1rem' }}>

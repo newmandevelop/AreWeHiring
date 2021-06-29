@@ -148,12 +148,13 @@ const Login = (props: any) => {
                 hasFeedback
               >
                 <Input.Password />
-                <br />
+              </Form.Item>
+              {/* <br /> */}
+              <div className="text-right">
                 <Text>
                   <Link href="/forgotPassword">Forgot Password</Link>
                 </Text>
-              </Form.Item>
-
+              </div>
               <Form.Item
                 style={{ display: 'flex', justifyContent: 'flex-end' }}
               >

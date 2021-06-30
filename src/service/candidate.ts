@@ -26,3 +26,21 @@ export const applyJob = async (data: any) => {
     throw error;
   }
 };
+
+export const searchCandidate = async (data: any) => {
+  const {email} = data
+  console.log(email)
+  try {
+    const response = await axios().get(`candidates/findbyemail?email=${email}`);
+    console.log(response)
+    if (response) {
+      console.log(response)
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+};

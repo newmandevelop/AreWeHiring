@@ -9,6 +9,7 @@ import JobOverview from '../Pages/JobOverview';
 import AllJobs from '../Pages/AllJobs';
 import Candidate from '../Pages/Candidate';
 import PostJob from '../Pages/PostJob';
+import SearchCandidate from '../Pages/SearchCandidate';
 import DashboardRoute from './DashboardRoute';
 import ApplyJob from '../Pages/ApplyJob';
 import AddCompany from '../Pages/AddCompany';
@@ -50,6 +51,12 @@ const Routing = () => {
         path="/dashboard/employee/manage-jobs"
         component={ManageJobs}
       />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/search-candidate"
+        component={SearchCandidate}
+      />
+      
       <DashboardRoute
         exact
         path="/dashboard/employee/add-company"

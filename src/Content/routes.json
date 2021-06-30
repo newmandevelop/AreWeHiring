@@ -4,6 +4,7 @@
     "/dashboard/employee/all-users",
     "/dashboard/employee/all-companies",
     "/dashboard/employee/add-company",
+    "/dashboard/employee/search-candidate",
     "/dashboard/employer",
     "/dashboard/employee/manage-jobs",
     "/dashboard/reset-password"

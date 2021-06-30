@@ -31,6 +31,11 @@
       "type": "simple"
     },
     {
+      "name": "Search Candidate",
+      "link": "/dashboard/employee/search-candidate",
+      "type": "simple"
+    },
+    {
       "name": "Company",
       "link": "/companies",
       "type": "bold"

@@ -19,6 +19,7 @@ import AllUsers from '../Pages/AllUsers';
 import AddCandidate from '../Pages/Candidate';
 import Employer from '../Pages/Employer/Dashboard';
 import ManageJobs from '../Pages/Employer/ManageJobs';
+import ManageApplications from '../Pages/Employer/ManageApplications';
 const Routing = () => {
   return (
     <Switch>
@@ -50,6 +51,11 @@ const Routing = () => {
         exact
         path="/dashboard/employee/manage-jobs"
         component={ManageJobs}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/manage-applications"
+        component={ManageApplications}
       />
       <DashboardRoute
         exact

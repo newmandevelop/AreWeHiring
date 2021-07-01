@@ -28,12 +28,20 @@ import {
   timeBookmarked,
   recentActivities
 } from './dashboard';
-
+import {
+  applicationsInDraft,
+  approvedApplications,
+  archivedApplications,
+  deletedApplications,
+  rejectedApplications
+}
+  from './applications'
 export const Authentication = {
   login,
   signUp,
   forgetPassword
 };
+
 export const JobSearch = {
   jobSearchById,
   allJobsSearch,
@@ -46,6 +54,14 @@ export const JobSearch = {
   deleteJob,
   jobsInDelete,
 };
+
+export const ApplicationSearch = {
+  applicationsInDraft,
+  approvedApplications,
+  archivedApplications,
+  deletedApplications,
+  rejectedApplications
+}
 
 export const Candidate = {
   addCandidate,

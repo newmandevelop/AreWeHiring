@@ -32,6 +32,12 @@ import archiveJob, {
 import deleteJob, {
   IDeleteJob,
 } from './Pages/Employer/ManageJobs/DeleteJob/reducers';
+import approvedApplications, {IApprovedApplications} from './Pages/Employer/ManageApplications/ApproveApplications/reducers'
+import archivedApplications, {IArchivedApplications} from './Pages/Employer/ManageApplications/ArchiveApplications/reducers'
+import deletedApplications, {IDeletedApplications} from './Pages/Employer/ManageApplications/DeleteApplications/reducers'
+import draftApplications, { IDraftApplications } from './Pages/Employer/ManageApplications/DraftApplications/reducers';
+import rejectedApplications, { IRejectedApplications } from './Pages/Employer/ManageApplications/RejectApplications/reducers';
+
 export interface IRootState {
   authState: IAuthState;
   jobSearch: IJobSearch;
@@ -51,6 +57,11 @@ export interface IRootState {
   approveJob: IApproveJob;
   archiveJob: IArchiveJob;
   deleteJob: IDeleteJob;
+  approvedApplications: IApprovedApplications;
+  archivedApplications: IArchivedApplications;
+  deletedApplications: IDeletedApplications;
+  draftApplications: IDraftApplications;
+  rejectedApplications: IRejectedApplications;
 }
 
 const rootReducer = combineReducers({
@@ -72,6 +83,11 @@ const rootReducer = combineReducers({
   approveJob: approveJob,
   archiveJob: archiveJob,
   deleteJob: deleteJob,
+  approvedApplications: approvedApplications,
+  archivedApplications: archivedApplications,
+  deletedApplications: deletedApplications,
+  draftApplications: draftApplications,
+  rejectedApplications: rejectedApplications
 });
 
 export default rootReducer;

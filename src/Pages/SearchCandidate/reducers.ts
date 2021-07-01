@@ -1,28 +1,20 @@
-import { isUserLoggedIn } from '../../utils/sessionStorage';
 import { Action, ActionTypes } from './actions';
 
-interface ICandidate {
-  userRole?: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  filledDetails?: boolean;
-  id?: string;
-}
-
-export interface ICandidateState {
+export interface ISearchCandidate {
   candidateSearchProgress: boolean;
   candidateSearchSuccess: boolean;
   candidateSearchFailure: boolean;
   candidateSearchErrorMessage: null | string;
-  candidateData: ICandidate;
+  candidateCount: number;
+  candidateData: null | Object | any;
 }
-const initialState: ICandidateState = {
+const initialState: ISearchCandidate = {
   candidateSearchProgress: false,
   candidateSearchSuccess: false,
   candidateSearchFailure: false,
   candidateSearchErrorMessage: null,
-  candidateData: {},
+  candidateCount: 0,
+  candidateData: [],
 };
 
 export default (state = initialState, action: Action) => {
@@ -41,7 +33,8 @@ export default (state = initialState, action: Action) => {
         candidateSearchProgress: false,
         candidateSearchSuccess: true,
         candidateSearchFailure: false,
-        candidateSearchErrorMessage: action.payload,
+        candidateData: action.payload.content,
+        candidateCount: action.payload.numberOfElements
       };
     }
     case ActionTypes.CANDIDATE_SEARCH_FAILURE: {

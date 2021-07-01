@@ -27,20 +27,17 @@ export const applyJob = async (data: any) => {
   }
 };
 
-export const searchCandidate = async (data: any) => {
-  const {email} = data
-  console.log(email)
+export const searchCandidate = async (data: any, limit: number) => {
+  const{email, where} = data;
+  const postData:any = {email:email}
   try {
-    const response = await axios().get(`candidates/findbyemail?email=${email}`);
-    console.log(response)
+    const response = await axios().post(`candidates/find/5/${limit}?what=${where}`, postData);
     if (response) {
-      console.log(response)
       return response;
     } else {
       return null;
     }
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };

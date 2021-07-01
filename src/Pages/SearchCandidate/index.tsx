@@ -1,179 +1,154 @@
 import React, { useEffect, useState } from 'react';
-import Dashboard from '../../Containers/Dashboard';
 import {
-  Divider,
   Form,
-  Upload,
   notification,
   Typography,
-  Space,
   Descriptions,
+  Avatar,
+  Input,
+  Pagination,
 } from 'antd';
-import { getAllCompanies } from '../../service/companies';
-import styles from './index.module.scss';
-import ReCAPTCHA from 'react-google-recaptcha';
-import {
-  UploadOutlined,
-  MinusCircleOutlined,
-  PlusCircleOutlined,
-} from '@ant-design/icons';
-import { getUserSession } from '../../utils/sessionStorage';
 import { useSelector, useDispatch } from 'react-redux';
-import { FormItem } from '../../Containers/FormItem/index';
 import { IRootState } from '../../reducers';
-import { searchCandidate } from '../../service/candidate';
-
-// import { Actions } from './actions';
+import { Actions } from './actions';
 import Button from '../../Components/Button';
-import { Candidate } from '../../service';
-const { Item, List } = Form;
-const { Title } = Typography;
-const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-  },
-};
-interface IRoles {
-  role: string;
-}
-interface ICompanies {
-  name: string;
-}
-const SearchCandidate = () => {
-  // let dispatch = useDispatch();
-  const [form] = Form.useForm();
-  // const [companies, setCompanies] = useState<[]>([]);
-  // let formData = new FormData();
-  // const {
-  //   addJobErrorMessage,
-  //   addJobFailure,
-  //   addJobSuccess,
-  //   addJobProgress,
-  // } = useSelector((state: IRootState) => state.job);
+import { UserOutlined } from '@ant-design/icons';
+import styles from './index.module.scss';
 
-  const onFinish = (values: any) => {
-    console.log(values);
-    searchCandidate(values);
+const { Title } = Typography;
+
+const SearchCandidate = () => {
+  let dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const [limit, setLimit] = useState(0);
+
+  const {
+    candidateSearchErrorMessage,
+    candidateSearchFailure,
+    candidateSearchSuccess,
+    candidateSearchProgress,
+    candidateData,
+    candidateCount,
+  } = useSelector((state: IRootState) => state.searchCandidate);
+
+  const onFinish = (values: object) => {
+    dispatch(
+      Actions.candidateSearchProgress({
+        data: values,
+        limit: limit,
+      }),
+    );
   };
 
-  // const logoProps = {
-  //   beforeUpload: (file: Blob) => {
-  //     formData.append('jobLogo', file);
-  //     return false;
-  //   },
-  // };
-  // const headerProps = {
-  //   beforeUpload: (file: any) => {
-  //     formData.append('headerImage', file);
-  //     return false;
-  //   },
-  // };
-  // const openNotificationWithIcon = (
-  //   type: 'success' | 'error',
-  //   description: String | null,
-  // ) => {
-  //   notification[type]({
-  //     message: 'Notification Title',
-  //     description: description,
-  //   });
-  // };
+  const openNotificationWithIcon = (
+    type: 'success' | 'error',
+    description: String | null,
+  ) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: description,
+    });
+  };
 
-  // const onReset = () => {
-  //   form.resetFields();
-  // };
+  useEffect(() => {
+    if (candidateSearchSuccess) {
+      openNotificationWithIcon('success', 'Candidates Fetched Successfully');
+    } else if (candidateSearchFailure) {
+      openNotificationWithIcon('error', candidateSearchErrorMessage);
+    }
+  }, [
+    candidateSearchSuccess,
+    candidateSearchFailure,
+    candidateSearchErrorMessage,
+  ]);
 
-  // useEffect(() => {
-  //   if (addJobSuccess) {
-  //     onReset();
-  //     openNotificationWithIcon('success', 'Job Added Successfully');
-  //   } else if (addJobFailure) {
-  //     openNotificationWithIcon('error', addJobErrorMessage);
-  //   }
-  // }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
-
-  // useEffect(() => {
-  //   const response = getAllCompanies();
-  //   response.then(data => {
-  //     const companies: any = [];
-  //     data?.data.map((company: ICompanies) => {
-  //       companies.push(company.name);
-  //     });
-  //     setCompanies(companies);
-  //   });
-  // }, []);
-  const candidates = [
-    {
-      name: 'Zhou Maomao',
-      earned: "$7K+ earned",
-      netWorth: '$11.11/hr',
-      country: 'China',
-      description:
-        'I am freelance writer from UK, now based in China.I have written hundreds of articles on a number of freelance writing websites and I currently write blogs on Chinese culture, history and travel.',
-    },
-    {
-      name: 'John W. H',
-      earned: "$60K+ earned",
-      netWorth: '$35.00/hr',
-      country: 'United States',
-      description:
-        'As a printer/photographer with 45 years of experience(26 years working on Mac with Photoshop, Indesign and Illustration doing digital for web and print), I have worked with hundreds of clients on thousands of different projects',
-    },
-  ];
   return (
     <div>
       <Form
-        {...formItemLayout}
+        style={{ paddingTop: '1rem' }}
         form={form}
         name="SearchCandidate"
+        layout="vertical"
         onFinish={onFinish}
       >
         <Title ellipsis={false} level={4}>
           Candidate Search
         </Title>
-        <main className={styles.jobPostFieldWrapper}>
-          {FormItem({
-            name: 'email',
-            label: 'Candidate Email',
-            placeholder: 'Enter Candidate Email',
-            fieldType: 'input',
-          })}
-        </main>
+        <Form.Item
+          label="Candidate Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'This field is required!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Where"
+          name="where"
+          rules={[
+            {
+              required: true,
+              message: 'This field is required!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
         <div>
           <Button
-            // loading={addJobProgress}
+            loading={candidateSearchProgress}
             htmlType="submit"
             name="Search"
             type
           />
-          <Button
-            htmlType="button"
-            // onClick={onReset}
-            // name="Reset"
-          />
+          <Button htmlType="button" />
         </div>
       </Form>
-      {candidates.map(candidate => {
-        return <div style={{ backgroundColor: 'white' }}>
-          <div style={{ margin: '2rem' }}>
-            <Descriptions title={candidate.name}>
-              <Descriptions.Item>
-                {candidate.earned}
-              </Descriptions.Item>
-              <Descriptions.Item>{candidate.netWorth}</Descriptions.Item>
-              <Descriptions.Item label="Live">
-                {candidate.country}
-              </Descriptions.Item>
-              <Descriptions.Item>
-                {candidate.description}
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
-        </div>;
-      })}
+
+      <Pagination
+        defaultCurrent={1}
+        total={candidateCount}
+        onChange={e => {
+          setLimit(e * 5 - 5);
+        }}
+      />
+      {candidateData &&
+        candidateData.map((candidate: any) => {
+          return (
+            <div className = {styles.description}>
+              <div style={{padding:'1rem'}}>
+                <Avatar
+                  className={`ant-dropdown-link`}
+                  size={50}
+                  icon={<UserOutlined />}
+                />
+                <Descriptions
+                  title={
+                    candidate.content.firstName +
+                    ' ' +
+                    candidate.content.lastName
+                  }
+                >
+                  <Descriptions.Item>
+                    {candidate.content.minimumRate}$/hr
+                  </Descriptions.Item>
+                  <Descriptions.Item>
+                    {candidate.content.professionalTitle}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Live">
+                    {candidate.content.location}
+                  </Descriptions.Item>
+                  {/* <Descriptions.Item>{candidate.description}</Descriptions.Item> */}
+                </Descriptions>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 };

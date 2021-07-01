@@ -11,20 +11,22 @@ export interface ResponseGenerator {
   statusText?: string;
 }
 function* candidateSearch(action: any) {
-  const { email } = action.payload;
   try {
-    if (email) {
+    if (action.payload.data) {
       const response: ResponseGenerator = yield call(
         searchCandidate,
-        email,
+        action.payload.data,
+        action.payload.limit
       );
-      yield put(Actions.searchCandidateSuccess(response.data));
+      response.status === 200 ?
+      yield put(Actions.candidateSearchSuccess(response.data)) 
+      : console.log("Responce error",response)
     }
   } catch (error) {
-    yield put(Actions.searchCandidateFailure(error && error.response.data.message));
+    yield put(Actions.candidateSearchFailure(error && error.response.data.message));
   }
 }
 
-export default function* authSaga() {
-  yield takeLatest(ActionTypes.SIGNUP_PROGRESS, candidateSearch);
+export default function* searchCandidateSaga() {
+  yield takeLatest(ActionTypes.CANDIDATE_SEARCH_PROGRESS, candidateSearch);
 }

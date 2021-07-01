@@ -7,6 +7,7 @@ import authSaga from './Pages/SignUp/saga';
 import jobSearchSaga from './Pages/JobOverview/saga';
 import allJobsSaga from './Pages/AllJobs/saga';
 import addCandidateSaga from './Pages/Candidate/saga';
+import searchCandidateSaga from './Pages/SearchCandidate/saga';
 import addJobSaga from './Pages/PostJob/saga';
 import allCompaniesSaga from './Pages/AllCompanies/saga';
 import addCompanySaga from './Pages/AddCompany/saga';
@@ -20,6 +21,7 @@ import draftJobSaga from './Pages/Employer/ManageJobs/DraftJobs/saga';
 import approveJobSaga from './Pages/Employer/ManageJobs/ApproveJob/saga';
 import archiveJobSaga from './Pages/Employer/ManageJobs/ArchiveJob/saga';
 import deleteJobSaga from './Pages/Employer/ManageJobs/DeleteJob/saga';
+// import { searchCandidate } from './service/candidate';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -38,6 +40,7 @@ export default function configureStore() {
       allJobsSaga(),
       jobSearchSaga(),
       addCandidateSaga(),
+      searchCandidateSaga(),
       addJobSaga(),
       allCompaniesSaga(),
       addCompanySaga(),

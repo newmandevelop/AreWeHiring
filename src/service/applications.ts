@@ -10,6 +10,7 @@ export const applicationsInDraft = async (userId: string) => {
     throw error.response;
   }
 };
+
 export const approvedApplications = async (userId: string) => {
   try {
     const response = await axios().get(`/applications/applicationsapproved?userId=${userId}`);
@@ -23,18 +24,19 @@ export const approvedApplications = async (userId: string) => {
   }
 };
 
-// export const approveJob = async (userId: string, jobId: string) => {
-//   try {
-//     const response = await axios().get(
-//       `/jobs/approve?jobId=${jobId}&userId=${userId}`,
-//     );
-//     if (response) {
-//       return response;
-//     }
-//   } catch (error) {
-//     throw error.response;
-//   }
-// };
+export const doApplicationApprove = async (applicationId: string) => {
+  try {
+    const response = await axios().get(`applications/approve?applicationId=${applicationId}`);
+    console.log(response)
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error)
+    throw error.response;
+  }
+};
+
 export const archivedApplications = async (userId: string) => {
   try {
     const response = await axios().get(`/applications/applicationsarchived?userId=${userId}`);
@@ -45,18 +47,20 @@ export const archivedApplications = async (userId: string) => {
     throw error.response;
   }
 };
-// export const archiveJob = async (userId: string, jobId: string) => {
-//   try {
-//     const response = await axios().get(
-//       `/jobs/archive?jobId=${jobId}&userId=${userId}`,
-//     );
-//     if (response) {
-//       return response;
-//     }
-//   } catch (error) {
-//     throw error.response;
-//   }
-// };
+
+export const sendApplicationToArchive = async (applicationId: string) => {
+  try {
+    const response = await axios().get(`applications/archive?applicationId=${applicationId}`);
+    console.log(response)
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error)
+    throw error.response;
+  }
+};
+
 export const deletedApplications = async (userId: string) => {
   try {
     const response = await axios().get(`/applications/applicationsdeleted?userId=${userId}`);
@@ -64,6 +68,19 @@ export const deletedApplications = async (userId: string) => {
       return response;
     }
   } catch (error) {
+    throw error.response;
+  }
+};
+
+export const doApplicationDelete = async (applicationId: string) => {
+  try {
+    const response = await axios().get(`applications/delete?applicationId=${applicationId}`);
+    console.log(response)
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error)
     throw error.response;
   }
 };
@@ -78,15 +95,16 @@ export const rejectedApplications = async (userId: string) => {
       throw error.response;
     }
   };
-// export const deleteJob = async (userId: string, jobId: string) => {
-//   try {
-//     const response = await axios().get(
-//       `/jobs/delete?jobId=${jobId}&userId=${userId}`,
-//     );
-//     if (response) {
-//       return response;
-//     }
-//   } catch (error) {
-//     throw error.response;
-//   }
-// };
+
+  export const doApplicationReject = async (applicationId: string) => {
+    try {
+      const response = await axios().get(`applications/reject?applicationId=${applicationId}`);
+      console.log(response)
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error)
+      throw error.response;
+    }
+  };

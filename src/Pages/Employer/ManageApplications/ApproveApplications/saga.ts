@@ -26,6 +26,26 @@ function* approvedApplications(action: any) {
     );
   }
 }
+
+function* applicationApprove(action: any) {
+  const { applicationId } = action.payload;
+  console.log("payload",action.payload)
+  try {
+    if (applicationId) {
+      const response: ResponseGenerator = yield call(
+        ApplicationSearch.doApplicationApprove,
+        applicationId,
+      );
+      yield put(Actions.applicationApproveSuccess(response.data));
+    }
+  } catch (error) {
+    yield put(
+      Actions.applicationApproveFailure(error && error.response.data.message),
+    );
+  }
+}
+
 export default function* approvedApplicationsSaga() {
   yield takeLatest(ActionTypes.APPROVED_APPLICATIONS_PROGRESS, approvedApplications);
+  yield takeLatest(ActionTypes.APPLICATION_APPROVE_PROGRESS, applicationApprove);
 }

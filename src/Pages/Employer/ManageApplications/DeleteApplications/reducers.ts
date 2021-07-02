@@ -1,23 +1,15 @@
 import { Action, ActionTypes } from './actions';
 
-// interface IJob {
-//   id?: string;
-//   nameOfJob?: string;
-//   status?: string;
-//   datePosted?: string;
-//   employer?: boolean;
-//   expiryDate?: string;
-//   dateDeleted?: string;
-//   dateArchived?: string;
-//   dateApproved?: string;
-// }
-
 export interface IDeletedApplications {
   deletedApplicationsProgress: boolean;
   deletedApplicationsSuccess: boolean;
   deletedApplicationsFailure: boolean;
   deletedApplicationsErrorMessage: null | string;
   deletedApplicationsData: null | object | any;
+  applicationDeleteProgress: boolean;
+  applicationDeleteSuccess: boolean;
+  applicationDeleteFailure: boolean;
+  applicationDeleteErrorMessage: null | object | any;
 }
 const initialState: IDeletedApplications = {
   deletedApplicationsProgress: false,
@@ -25,6 +17,10 @@ const initialState: IDeletedApplications = {
   deletedApplicationsFailure: false,
   deletedApplicationsErrorMessage: null,
   deletedApplicationsData: [],
+  applicationDeleteProgress: false,
+  applicationDeleteSuccess: false,
+  applicationDeleteFailure: false,
+  applicationDeleteErrorMessage: null
 };
 
 export default (state = initialState, action: Action) => {
@@ -55,7 +51,31 @@ export default (state = initialState, action: Action) => {
         deletedApplicationsErrorMessage: action.payload,
       };
     }
-
+case ActionTypes.APPLICATION_DELETE_PROGRESS: {
+      return {
+        ...state,
+        applicationDeleteProgress: true,
+        applicationDeleteSuccess: false,
+        applicationDeleteFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_DELETE_SUCCESS: {
+      return {
+        ...state,
+        applicationDeleteProgress: false,
+        applicationDeleteSuccess: true,
+        applicationDeleteFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_DELETE_FAILURE: {
+      return {
+        ...state,
+        applicationDeleteProgress: false,
+        applicationDeleteSuccess: false,
+        applicationDeleteFailure: true,
+        applicationDeleteErrorMessage: action.payload
+      }
+    }
     default:
       return state;
   }

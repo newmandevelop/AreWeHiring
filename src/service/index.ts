@@ -31,9 +31,13 @@ import {
 import {
   applicationsInDraft,
   approvedApplications,
+  doApplicationApprove,
   archivedApplications,
+  sendApplicationToArchive,
   deletedApplications,
-  rejectedApplications
+  doApplicationDelete,
+  rejectedApplications,
+  doApplicationReject
 }
   from './applications'
 export const Authentication = {
@@ -58,9 +62,13 @@ export const JobSearch = {
 export const ApplicationSearch = {
   applicationsInDraft,
   approvedApplications,
+  doApplicationApprove,
   archivedApplications,
+  sendApplicationToArchive,
   deletedApplications,
-  rejectedApplications
+  doApplicationDelete,
+  rejectedApplications,
+  doApplicationReject
 }
 
 export const Candidate = {

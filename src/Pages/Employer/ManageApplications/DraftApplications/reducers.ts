@@ -1,17 +1,5 @@
 import { Action, ActionTypes } from './actions';
 
-// interface IJob {
-//   id?: string;
-//   nameOfJob?: string;
-//   status?: string;
-//   datePosted?: string;
-//   employer?: boolean;
-//   expiryDate?: string;
-//   dateDeleted?: string;
-//   dateArchived?: string;
-//   dateApproved?: string;
-// }
-
 export interface IDraftApplications {
   draftApplicationsProgress: boolean;
   draftApplicationsSuccess: boolean;

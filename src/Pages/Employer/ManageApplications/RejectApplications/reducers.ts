@@ -1,23 +1,16 @@
 import { Action, ActionTypes } from './actions';
 
-// interface IJob {
-//   id?: string;
-//   nameOfJob?: string;
-//   status?: string;
-//   datePosted?: string;
-//   employer?: boolean;
-//   expiryDate?: string;
-//   dateDeleted?: string;
-//   dateArchived?: string;
-//   dateApproved?: string;
-// }
-
 export interface IRejectedApplications {
   rejectedApplicationsProgress: boolean;
   rejectedApplicationsSuccess: boolean;
   rejectedApplicationsFailure: boolean;
   rejectedApplicationsErrorMessage: null | string;
   rejectedApplicationsData: null | object | any;
+  applicationRejectProgress: boolean;
+  applicationRejectSuccess: boolean;
+  applicationRejectFailure: boolean;
+  applicationRejectErrorMessage: null | object | any;
+
 }
 const initialState: IRejectedApplications = {
   rejectedApplicationsProgress: false,
@@ -25,6 +18,10 @@ const initialState: IRejectedApplications = {
   rejectedApplicationsFailure: false,
   rejectedApplicationsErrorMessage: null,
   rejectedApplicationsData: [],
+  applicationRejectProgress: false,
+  applicationRejectSuccess: false,
+  applicationRejectFailure: false,
+  applicationRejectErrorMessage: null
 };
 
 export default (state = initialState, action: Action) => {
@@ -54,6 +51,31 @@ export default (state = initialState, action: Action) => {
         rejectedApplicationsFailure: true,
         rejectedApplicationsErrorMessage: action.payload,
       };
+    }
+    case ActionTypes.APPLICATION_REJECT_PROGRESS: {
+      return {
+        ...state,
+        applicationRejectProgress: true,
+        applicationRejectSuccess: false,
+        applicationRejectFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_REJECT_SUCCESS: {
+      return {
+        ...state,
+        applicationRejectProgress: false,
+        applicationRejectSuccess: true,
+        applicationRejectFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_REJECT_FAILURE: {
+      return {
+        ...state,
+        applicationRejectProgress: false,
+        applicationRejectSuccess: false,
+        applicationRejectFailure: true,
+        applicationRejectErrorMessage: action.payload
+      }
     }
 
     default:

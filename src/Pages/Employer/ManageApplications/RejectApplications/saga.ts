@@ -26,6 +26,25 @@ function* rejectedApplications(action: any) {
     );
   }
 }
+
+function* doApplicationReject(action: any) {
+  const { applicationId } = action.payload;
+  console.log("payload",action.payload)
+  try {
+    if (applicationId) {
+      const response: ResponseGenerator = yield call(
+        ApplicationSearch.doApplicationReject,
+        applicationId,
+      );
+      yield put(Actions.applicationRejectSuccess(response.data));
+    }
+  } catch (error) {
+    yield put(
+      Actions.applicationRejectFailure(error && error.response.data.message),
+    );
+  }
+}
 export default function* rejectedApplicationsSaga() {
   yield takeLatest(ActionTypes.REJECTED_APPLICATIONS_PROGRESS, rejectedApplications);
+  yield takeLatest(ActionTypes.APPLICATION_REJECT_PROGRESS, doApplicationReject);
 }

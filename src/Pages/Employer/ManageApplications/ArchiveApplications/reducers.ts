@@ -1,23 +1,15 @@
 import { Action, ActionTypes } from './actions';
 
-// interface IJob {
-//   id?: string;
-//   nameOfJob?: string;
-//   status?: string;
-//   datePosted?: string;
-//   employer?: boolean;
-//   expiryDate?: string;
-//   dateDeleted?: string;
-//   dateArchived?: string;
-//   dateApproved?: string;
-// }
-
 export interface IArchivedApplications {
   archivedApplicationsProgress: boolean;
   archivedApplicationsSuccess: boolean;
   archivedApplicationsFailure: boolean;
   archivedApplicationsErrorMessage: null | string;
   archivedApplicationsData: null | object | any;
+  sendApplicationToArchiveProgress: boolean;
+  sendApplicationToArchiveSuccess: boolean;
+  sendApplicationToArchiveFailure: boolean;
+  sendApplicationToArchiveErrorMessage: null | object | any;
 }
 const initialState: IArchivedApplications = {
   archivedApplicationsProgress: false,
@@ -25,6 +17,10 @@ const initialState: IArchivedApplications = {
   archivedApplicationsFailure: false,
   archivedApplicationsErrorMessage: null,
   archivedApplicationsData: [],
+  sendApplicationToArchiveProgress: false,
+  sendApplicationToArchiveSuccess: false,
+  sendApplicationToArchiveFailure: false,
+  sendApplicationToArchiveErrorMessage: null
 };
 
 export default (state = initialState, action: Action) => {
@@ -54,6 +50,31 @@ export default (state = initialState, action: Action) => {
         archivedApplicationsFailure: true,
         archivedApplicationsErrorMessage: action.payload,
       };
+    }
+    case ActionTypes.SEND_APPLICATION_TO_ARCHIVE_PROGRESS: {
+      return {
+        ...state,
+        sendApplicationToArchiveProgress: true,
+        sendApplicationToArchiveSuccess: false,
+        sendApplicationToArchiveFailure: false
+      }
+    }
+    case ActionTypes.SEND_APPLICATION_TO_ARCHIVE_SUCCESS: {
+      return {
+        ...state,
+        sendApplicationToArchiveProgress: false,
+        sendApplicationToArchiveSuccess: true,
+        sendApplicationToArchiveFailure: false
+      }
+    }
+    case ActionTypes.SEND_APPLICATION_TO_ARCHIVE_FAILURE: {
+      return {
+        ...state,
+        sendApplicationToArchiveProgress: false,
+        sendApplicationToArchiveSuccess: false,
+        sendApplicationToArchiveFailure: true,
+        sendApplicationToArchiveErrorMessage: action.payload
+      }
     }
 
     default:

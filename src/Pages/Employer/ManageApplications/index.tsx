@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import JobListing from '../../../Components/JobListing';
+import ApplicationListing from '../../../Components/ApplicationListing';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../../reducers';
 import { Actions as approvedApplicationsActions } from './ApproveApplications/actions';
@@ -12,15 +12,15 @@ import { getUserSession } from '../../../utils/sessionStorage';
 
 const ManageApplications = () => {
   let dispatch = useDispatch();
-  const { approvedApplicationsSuccess, approvedApplicationsData } = useSelector(
+  const { approvedApplicationsSuccess, approvedApplicationsData, applicationApproveSuccess } = useSelector(
     (state: IRootState) => state.approvedApplications,
   );
 
-  const { archivedApplicationsSuccess, archivedApplicationsData } = useSelector(
+  const { archivedApplicationsSuccess, archivedApplicationsData, sendApplicationToArchiveSuccess } = useSelector(
     (state: IRootState) => state.archivedApplications,
   );
 
-  const { deletedApplicationsSuccess, deletedApplicationsData } = useSelector(
+  const { deletedApplicationsSuccess, deletedApplicationsData, applicationDeleteSuccess } = useSelector(
     (state: IRootState) => state.deletedApplications,
   );
 
@@ -32,42 +32,6 @@ const ManageApplications = () => {
     (state: IRootState) => state.rejectedApplications,
   );
 
-  // interface IJob {
-  //   id?: string;
-  //   nameOfJob?: string;
-  //   status?: string;
-  //   datePosted?: string;
-  //   employer?: boolean;
-  //   expiryDate?: string;
-  //   dateDeleted?: string;
-  //   dateArchived?: string;
-  //   dateApproved?: string;
-  // }
-
-  const data = [
-    {
-      id: '12321',
-      nameOfJob: 'Software Developer',
-      status: 'Draft',
-      datePosted: '23 Jun 2021',
-      employer: 'Apple',
-      expiryDate: '23 July 2021',
-      dateDeleted: '25 July 2021',
-      dateArchived: '25 July 2021',
-      dateApproved: '20 July 2021',
-    },
-    {
-      id: '4567865',
-      nameOfJob: 'Web Developer',
-      status: 'Draft',
-      datePosted: '23 Jun 2021',
-      employer: 'Samsung',
-      expiryDate: '23 July 2021',
-      dateDeleted: '25 July 2021',
-      dateArchived: '25 July 2021',
-      dateApproved: '20 July 2021',
-    },
-  ];
   useEffect(() => {
     let user = getUserSession();
     if (user) {
@@ -97,68 +61,52 @@ const ManageApplications = () => {
         }),
       );
     }
-  }, []);
-
-  useEffect(() => {
-    approvedApplicationsData &&
-      console.log('approved jobs', approvedApplicationsData);
-  }, [approvedApplicationsSuccess]);
-
-  useEffect(() => {
-    archivedApplicationsData &&
-      console.log('archived jobs', archivedApplicationsData);
-  }, [archivedApplicationsSuccess]);
-
-  useEffect(() => {
-    deletedApplicationsData &&
-      console.log('deleted jobs', deletedApplicationsData);
-  }, [deletedApplicationsSuccess]);
-
-  useEffect(() => {
-    draftApplicationsData && console.log('draft jobs', draftApplicationsData);
-  }, [draftApplicationsSuccess]);
+  }, [applicationApproveSuccess, sendApplicationToArchiveSuccess, applicationDeleteSuccess]);
 
   return (
     <div className={styles.manageJobsWrapper}>
       <div className={styles.draftJobs}>
-        <JobListing
-          data={data}
-          number={Object.keys(data).length}
+        <ApplicationListing
+          data={draftApplicationsData}
+          number={Object.keys(draftApplicationsData).length}
           heading="Draft Applications"
           approve
           delete
           archive
+          reject
         />
       </div>
       <div className={styles.approveJobs}>
-        <JobListing
-          data={data}
-          number={Object.keys(data).length}
+        <ApplicationListing
+          data={approvedApplicationsData}
+          number={Object.keys(approvedApplicationsData).length}
           heading="Approved Applications"
           delete
           archive
+          reject
         />
       </div>
       <div className={styles.archiveJobs}>
-        <JobListing
-          data={data}
-          number={Object.keys(data).length}
+        <ApplicationListing
+          data={archivedApplicationsData}
+          number={Object.keys(archivedApplicationsData).length}
           heading="Archived Applications"
           approve
           delete
+          reject
         />
       </div>
       <div className={styles.deleteJobs}>
-        <JobListing
-          data={data}
-          number={Object.keys(data).length}
+        <ApplicationListing
+          data={deletedApplicationsData}
+          number={Object.keys(deletedApplicationsData).length}
           heading="Deleted Applications"
         />
       </div>
       <div className={styles.deleteJobs}>
-        <JobListing
-          data={data}
-          number={Object.keys(data).length}
+        <ApplicationListing
+          data={rejectedApplicationsData}
+          number={Object.keys(rejectedApplicationsData).length}
           heading="Rejected Applications"
         />
       </div>

@@ -1,23 +1,15 @@
 import { Action, ActionTypes } from './actions';
 
-// interface IJob {
-//   id?: string;
-//   nameOfJob?: string;
-//   status?: string;
-//   datePosted?: string;
-//   employer?: boolean;
-//   expiryDate?: string;
-//   dateDeleted?: string;
-//   dateArchived?: string;
-//   dateApproved?: string;
-// }
-
 export interface IApprovedApplications {
   approvedApplicationsProgress: boolean;
   approvedApplicationsSuccess: boolean;
   approvedApplicationsFailure: boolean;
   approvedApplicationsErrorMessage: null | string;
   approvedApplicationsData: null | object | any;
+  applicationApproveProgress: boolean;
+  applicationApproveSuccess: boolean;
+  applicationApproveFailure: boolean;
+  applicationApproveErrorMessage: null | object | any;
 }
 const initialState: IApprovedApplications = {
   approvedApplicationsProgress: false,
@@ -25,6 +17,10 @@ const initialState: IApprovedApplications = {
   approvedApplicationsFailure: false,
   approvedApplicationsErrorMessage: null,
   approvedApplicationsData: [],
+  applicationApproveProgress: false,
+  applicationApproveSuccess: false,
+  applicationApproveFailure: false,
+  applicationApproveErrorMessage: null
 };
 
 export default (state = initialState, action: Action) => {
@@ -54,6 +50,31 @@ export default (state = initialState, action: Action) => {
         approvedApplicationsFailure: true,
         approvedApplicationsErrorMessage: action.payload,
       };
+    }
+    case ActionTypes.APPLICATION_APPROVE_PROGRESS: {
+      return {
+        ...state,
+        applicationApproveProgress: true,
+        applicationApproveSuccess: false,
+        applicationApproveFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_APPROVE_SUCCESS: {
+      return {
+        ...state,
+        applicationApproveProgress: false,
+        applicationApproveSuccess: true,
+        applicationApproveFailure: false
+      }
+    }
+    case ActionTypes.APPLICATION_APPROVE_FAILURE: {
+      return {
+        ...state,
+        applicationApproveProgress: false,
+        applicationApproveSuccess: false,
+        applicationApproveFailure: true,
+        applicationApproveErrorMessage: action.payload
+      }
     }
 
     default:

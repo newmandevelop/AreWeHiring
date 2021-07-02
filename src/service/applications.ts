@@ -108,3 +108,14 @@ export const rejectedApplications = async (userId: string) => {
       throw error.response;
     }
   };
+
+  export const applicationsPostedByUser = async (userId: string) => {
+    try {
+      const response = await axios().get(`/applications/userjobapplications?userId=${userId}`);
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      throw error.response;
+    }
+  };

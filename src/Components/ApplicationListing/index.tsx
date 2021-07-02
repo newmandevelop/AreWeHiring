@@ -134,6 +134,7 @@ const ApplicationListing = (props: IProps) => {
                     <div className={styles.date}>
                       <Text className={styles.posting}>
                         {item.messageToClient}{' '}
+                        <br/>
                         {moment(item.dateApplied).format('MMM DD, YYYY')}
                       </Text>
                       <Text className={styles.expiry}>

@@ -26,6 +26,7 @@ import archivedApplicationsSaga from './Pages/Employer/ManageApplications/Archiv
 import deletedApplicationsSaga from './Pages/Employer/ManageApplications/DeleteApplications/saga'
 import draftApplicationsSaga from './Pages/Employer/ManageApplications/DraftApplications/saga';
 import rejectedApplicationsSaga from './Pages/Employer/ManageApplications/RejectApplications/saga';
+import fetchApplicationsSaga from './Pages/JobApplications/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -62,7 +63,8 @@ export default function configureStore() {
       archivedApplicationsSaga(),
       deletedApplicationsSaga(),
       draftApplicationsSaga(),
-      rejectedApplicationsSaga()
+      rejectedApplicationsSaga(),
+      fetchApplicationsSaga()
     ]);
   }
 

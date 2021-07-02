@@ -37,6 +37,7 @@ import archivedApplications, {IArchivedApplications} from './Pages/Employer/Mana
 import deletedApplications, {IDeletedApplications} from './Pages/Employer/ManageApplications/DeleteApplications/reducers'
 import draftApplications, { IDraftApplications } from './Pages/Employer/ManageApplications/DraftApplications/reducers';
 import rejectedApplications, { IRejectedApplications } from './Pages/Employer/ManageApplications/RejectApplications/reducers';
+import fetchApplications, { IFetchApplications } from './Pages/JobApplications/reducers';
 
 export interface IRootState {
   authState: IAuthState;
@@ -62,6 +63,7 @@ export interface IRootState {
   deletedApplications: IDeletedApplications;
   draftApplications: IDraftApplications;
   rejectedApplications: IRejectedApplications;
+  fetchApplications: IFetchApplications;
 }
 
 const rootReducer = combineReducers({
@@ -87,7 +89,8 @@ const rootReducer = combineReducers({
   archivedApplications: archivedApplications,
   deletedApplications: deletedApplications,
   draftApplications: draftApplications,
-  rejectedApplications: rejectedApplications
+  rejectedApplications: rejectedApplications,
+  fetchApplications: fetchApplications
 });
 
 export default rootReducer;

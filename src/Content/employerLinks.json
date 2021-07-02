@@ -26,6 +26,11 @@
       "type": "simple"
     },
     {
+      "name": "Job Applications",
+      "link": "/dashboard/employee/job-applications",
+      "type": "simple"
+    },
+    {
       "name": "Manage Applications",
       "link": "/dashboard/employee/manage-applications",
       "type": "simple"

@@ -37,7 +37,8 @@ import {
   deletedApplications,
   doApplicationDelete,
   rejectedApplications,
-  doApplicationReject
+  doApplicationReject,
+  applicationsPostedByUser
 }
   from './applications'
 export const Authentication = {
@@ -68,7 +69,8 @@ export const ApplicationSearch = {
   deletedApplications,
   doApplicationDelete,
   rejectedApplications,
-  doApplicationReject
+  doApplicationReject,
+  applicationsPostedByUser
 }
 
 export const Candidate = {

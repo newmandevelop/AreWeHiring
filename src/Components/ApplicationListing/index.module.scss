@@ -12,8 +12,8 @@
   }
 
   .listItem {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
 
     .content {
       width: 70%;
@@ -24,10 +24,10 @@
         flex-direction: column;
         .posting {
           font-weight: bold;
-          font-size: 12px;
+          font-size: 15px;
         }
         .expiry {
-          font-size: 12px;
+          font-size: 15px;
         }
       }
 
@@ -39,7 +39,7 @@
           font-size: 1rem;
         }
         .message {
-          font-size: 12px;
+          font-size: 15px;
           font-weight: 500;
         }
       }

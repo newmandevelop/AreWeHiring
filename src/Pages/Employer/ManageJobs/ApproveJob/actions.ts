@@ -5,6 +5,9 @@ export enum ActionTypes {
   APPROVE_JOB_PROGRESS = 'APPROVE_JOB_PROGRESS',
   APPROVE_JOB_SUCCESS = 'APPROVE_JOB_SUCCESS',
   APPROVE_JOB_FAILURE = 'APPROVE_JOB_FAILURE',
+  GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS = 'GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS',
+  GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS = 'GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS',
+  GET_APPLICATIONS_FOR_THIS_JOB_FAILURE = 'GET_APPLICATIONS_FOR_THIS_JOB_FAILURE',
 }
 export interface JobsInApproveProgress {
   type: ActionTypes.JOBS_IN_APPROVE_PROGRESS;
@@ -78,13 +81,49 @@ function approveJobFailure(payload: any): ApproveJobFailure {
   };
 }
 
+export interface GetApplicationsForThisJobProgress {
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS,
+  payload: any
+}
+
+export interface GetApplicationsForThisJobSuccess {
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS,
+  payload: any
+}
+export interface GetApplicationsForThisJobFailure {
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE,
+  payload: any
+}
+
+function getApplicationsForThisJobProgress(payload: any):  GetApplicationsForThisJobProgress {
+  return {
+    type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS,
+    payload
+  }
+}
+
+function getApplicationsForThisJobSuccess(payload: any):  GetApplicationsForThisJobSuccess {
+  return {
+    type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS,
+    payload
+  }
+}
+function getApplicationsForThisJobFailure(payload: any):  GetApplicationsForThisJobFailure {
+  return {
+    type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE,
+    payload
+  }
+}
 export type Action =
   | JobsInApproveProgress
   | JobsInApproveFailure
   | JobsInApproveSuccess
   | ApproveJobProgress
   | ApproveJobFailure
-  | ApproveJobSuccess;
+  | ApproveJobSuccess
+  | GetApplicationsForThisJobProgress
+  | GetApplicationsForThisJobSuccess
+  | GetApplicationsForThisJobFailure
 
 export const Actions = {
   jobsInApproveProgress,
@@ -93,4 +132,7 @@ export const Actions = {
   approveJobProgress,
   approveJobSuccess,
   approveJobFailure,
+  getApplicationsForThisJobProgress,
+  getApplicationsForThisJobSuccess,
+  getApplicationsForThisJobFailure
 };

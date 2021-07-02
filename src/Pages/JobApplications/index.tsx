@@ -24,7 +24,7 @@ useEffect(() => {
         <ApplicationListing
           data={fetchApplicationsData}
           number={Object.keys(fetchApplicationsData).length}
-          heading="Job Applications"
+          heading="Job Applications By User"
         />
       </div>
     </div>

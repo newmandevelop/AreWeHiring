@@ -119,3 +119,14 @@ export const rejectedApplications = async (userId: string) => {
       throw error.response;
     }
   };
+
+  export const applicationsSearchByJobId = async (jobId: string) => {
+    try {
+      const response = await axios().get(`applications/byjobid?jobId=${jobId}`);
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      throw error.response;
+    }
+  };

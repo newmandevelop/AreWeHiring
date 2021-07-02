@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { JobSearch } from '../../../../service/index';
+import { JobSearch, ApplicationSearch } from '../../../../service/index';
 import { notification } from 'antd';
 export interface ResponseGenerator {
   config?: any;
@@ -55,7 +55,24 @@ function* ApproveJob(action: any) {
   }
 }
 
+function* getApplicationsForThisJob (action: any) {
+  const {jobId} = action.payload
+  try {
+    if (jobId) {
+      const response: ResponseGenerator = yield call(
+        ApplicationSearch.applicationsSearchByJobId,
+        jobId,
+      );
+      yield put(Actions.getApplicationsForThisJobSuccess(response.data));
+    }
+  } catch (error) {
+    yield put(
+      Actions.getApplicationsForThisJobFailure(error && error.response.data.message),
+    );
+  }
+}
 export default function* approveJobSaga() {
   yield takeLatest(ActionTypes.JOBS_IN_APPROVE_PROGRESS, jobsInApprove);
   yield takeLatest(ActionTypes.APPROVE_JOB_PROGRESS, ApproveJob);
+  yield takeLatest(ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS, getApplicationsForThisJob);
 }

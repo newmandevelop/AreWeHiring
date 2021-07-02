@@ -23,6 +23,7 @@ interface IData {
   salaryExpected?: string;
   messageToClient?: string;
   id?: string;
+  applicationDownloadUri?: string
 }
 
 interface IProps {
@@ -133,9 +134,9 @@ const ApplicationListing = (props: IProps) => {
                   <div className={styles.content}>
                     <div className={styles.date}>
                       <Text className={styles.posting}>
-                        {item.messageToClient}{' '}
+                        Subject: {item.messageToClient}{' '}
                         <br/>
-                        {moment(item.dateApplied).format('MMM DD, YYYY')}
+                        Applied Date: {moment(item.dateApplied).format('MMM DD, YYYY')}
                       </Text>
                       <Text className={styles.expiry}>
                         Expected Salary {item.salaryExpected}
@@ -145,6 +146,9 @@ const ApplicationListing = (props: IProps) => {
                       <Link className={styles.link}>{item.jobName}</Link>
                       <Text className={styles.message}>
                         Applied By: {item.email}
+                      </Text>
+                      <Text className={styles.message}>
+                        Download Link: <a target="_blank" href={`${item.applicationDownloadUri}`}>{item.applicationDownloadUri}</a>
                       </Text>
                     </div>
                   </div>

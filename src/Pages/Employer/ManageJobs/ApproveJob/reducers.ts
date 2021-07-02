@@ -21,6 +21,11 @@ export interface IApproveJob {
   jobApprovedFailure: boolean;
   jobApprovedErrorMessage: string;
   approvedJobsData: [IJob] | [];
+  applicationsForThisJobProgress: boolean,
+  applicationsForThisJobSuccess: boolean,
+  applicationsForThisJobFailure: boolean,
+  applicationFetchErrorMessage: null
+  applicationsDataForThisJob: null | object | any
 }
 const initialState: IApproveJob = {
   jobsInApproveProgress: false,
@@ -31,6 +36,11 @@ const initialState: IApproveJob = {
   jobApprovedFailure: false,
   jobApprovedErrorMessage: '',
   approvedJobsData: [],
+  applicationsForThisJobProgress: false,
+  applicationsForThisJobSuccess: false,
+  applicationsForThisJobFailure: false,
+  applicationFetchErrorMessage: null,
+  applicationsDataForThisJob: []
 };
 
 export default (state = initialState, action: Action) => {
@@ -75,6 +85,32 @@ export default (state = initialState, action: Action) => {
         jobApprovedFailure: true,
         jobApprovedErrorMessage: action.payload,
       };
+    }
+    case ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS: {
+      return {
+        ...state,
+        applicationsForThisJobProgress: true,
+        applicationsForThisJobSuccess: false,
+        applicationsForThisJobFailure: false
+      }
+    }
+    case ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS: {
+      return {
+        ...state,
+        applicationsForThisJobProgress: false,
+        applicationsForThisJobSuccess: true,
+        applicationsForThisJobFailure: false,
+        applicationsDataForThisJob: action.payload,
+      }
+    }
+    case ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE: {
+      return {
+        ...state,
+        applicationsForThisJobProgress: false,
+        applicationsForThisJobSuccess: false,
+        applicationsForThisJobFailure: true,
+        applicationsDataForThisJob: action.payload,
+      }
     }
 
     default:

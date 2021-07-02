@@ -9,7 +9,8 @@
     "/dashboard/employee/manage-jobs",
     "/dashboard/employee/job-applications",
     "/dashboard/employee/manage-applications",
-    "/dashboard/reset-password"
+    "/dashboard/reset-password",
+    "/dashboard/employee/manage-jobs/applications"
   ],
   "candidate": [
     "/jobs",

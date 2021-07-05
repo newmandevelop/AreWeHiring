@@ -1,3 +1,7 @@
+.icon {
+  cursor: pointer;
+  font-size: 20px;
+}
 .jobListing {
   margin-top: 3rem;
   background-color: #ffffff;
@@ -62,6 +66,11 @@
         margin: 0 10px;
         &:hover {
           color: red;
+        }
+      }
+      .view {
+        &:hover {
+          color: #0645ad;
         }
       }
     }

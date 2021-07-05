@@ -21,6 +21,7 @@ import Employer from '../Pages/Employer/Dashboard';
 import ManageJobs from '../Pages/Employer/ManageJobs';
 import ManageApplications from '../Pages/Employer/ManageApplications';
 import JobApplications from '../Pages/JobApplications'
+import MyApplications from '../Pages/Candidate/MyApplications'
 import ApplicationsForJob from '../Pages/Employer/ManageJobs/ApplicationsForJob'
 const Routing = () => {
   return (
@@ -71,10 +72,15 @@ const Routing = () => {
       />
       <DashboardRoute
         exact
+        path="/dashboard/candidate/my-applications"
+        component={MyApplications}
+      />
+      <DashboardRoute
+        exact
         path="/dashboard/employee/search-candidate"
         component={SearchCandidate}
       />
-      
+
       <DashboardRoute
         exact
         path="/dashboard/employee/add-company"

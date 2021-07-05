@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Typography, List, Modal } from 'antd';
 import styles from './index.module.scss';
-import { BiArchiveOut } from 'react-icons/bi';
-import { MdDelete } from 'react-icons/md';
-import { TiTick } from 'react-icons/ti';
-import { AiFillRightCircle } from 'react-icons/ai';
+import { CheckOutlined } from '@ant-design/icons'
 import { getUserSession } from '../../utils/sessionStorage';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, DeleteOutlined, RightOutlined, ToTopOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions as ApproveJobAction } from '../../Pages/Employer/ManageJobs/ApproveJob/actions';
 import { Actions as ArchiveJobAction } from '../../Pages/Employer/ManageJobs/ArchiveJob/actions';
 import { Actions as DeleteJobAction } from '../../Pages/Employer/ManageJobs/DeleteJob/actions';
 import { useHistory } from 'react-router-dom';
+import { renewJob } from '../../service/jobs';
+
 
 const { Text, Link } = Typography;
 const { confirm } = Modal;
@@ -20,7 +19,7 @@ interface IData {
   nameOfJob?: string;
   employer?: string;
   datePosted?: string;
-  expiryDate?: string;
+  expiryDate?: Date;
   message?: string;
   id?: string;
 }
@@ -37,6 +36,18 @@ interface IProps {
 const JobListing = (props: IProps) => {
   let history = useHistory();
   let dispatch = useDispatch();
+  const todaysDate = Date.now();
+  const formatedTodayDate = moment(todaysDate).format('MMM DD, YYYY')
+  const userId = getUserSession()
+
+  const isJobExpired = (job: any) => {
+    return new Date(moment(job.expiryDate).format('MMM DD, YYYY')) < new Date(formatedTodayDate) ?
+      true : false
+  }
+
+  const renewJob = (jobId: any) => {
+    dispatch(ApproveJobAction.renewJobProgress({ jobId: jobId, userId: userId }),)
+  }
   const doAction = (type: string, id?: string) => {
     let user = getUserSession();
     if (user)
@@ -125,6 +136,13 @@ const JobListing = (props: IProps) => {
                       </Text>
                       <Text className={styles.expiry}>
                         Expiry {moment(item.expiryDate).format('MMM DD, YYYY')}
+                        {
+                          item && isJobExpired(item) &&
+                          (<p className={styles.link}
+                            onClick={() => { renewJob(item.id) }}
+                          >
+                            <span style={{ color: 'red' }}>Expired!</span> Click to renew</p>)
+                        }
                       </Text>
                     </div>
                     <div className={styles.title}>
@@ -136,45 +154,40 @@ const JobListing = (props: IProps) => {
                   </div>
                   <div className={styles.actions}>
                     {props.archive && item && (
-                      <BiArchiveOut
-                        size="30px"
+                      <ToTopOutlined
+                        className={`${styles.archive} ${styles.icon}`}
                         title="Archive"
-                        cursor="pointer"
-                        className={styles.archive}
                         onClick={() => doAction('Archive', item.id)}
                       />
                     )}
                     {props.approve && item && (
-                      <TiTick
-                        className={styles.approve}
-                        size="30px"
+                      <CheckOutlined
+                        className={`${styles.approve} ${styles.icon}`}
                         title="Approve"
-                        cursor="pointer"
+                        // cursor="pointer"
                         onClick={() => doAction('Approve', item.id)}
                       />
                     )}
                     {props.delete && item && (
-                      <MdDelete
-                        className={styles.delete}
-                        size="30px"
+                      <DeleteOutlined
+                        className={`${styles.delete} ${styles.icon}`}
                         title="Delete"
-                        cursor="pointer"
                         onClick={() => doAction('Delete', item.id)}
                       />
                     )}
                     {item && (
-                      <AiFillRightCircle
-                        size="30px"
+                      <RightOutlined
+                        className={`${styles.view} ${styles.icon}`}
                         title="View Applications"
-                        cursor="pointer"
                         onClick={() => {
                           history.push({
                             pathname: '/dashboard/employee/manage-jobs/applications',
-                            state: {jobId: item.id}
+                            state: { jobId: item.id }
                           });
                         }}
                       />
                     )}
+
                   </div>
                 </div>
               }

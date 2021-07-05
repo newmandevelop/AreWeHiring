@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { JobSearch, ApplicationSearch } from '../../../../service/index';
+import { JobSearch, ApplicationSearch, Job } from '../../../../service/index';
 import { notification } from 'antd';
 export interface ResponseGenerator {
   config?: any;
@@ -55,8 +55,8 @@ function* ApproveJob(action: any) {
   }
 }
 
-function* getApplicationsForThisJob (action: any) {
-  const {jobId} = action.payload
+function* getApplicationsForThisJob(action: any) {
+  const { jobId } = action.payload;
   try {
     if (jobId) {
       const response: ResponseGenerator = yield call(
@@ -67,12 +67,48 @@ function* getApplicationsForThisJob (action: any) {
     }
   } catch (error) {
     yield put(
-      Actions.getApplicationsForThisJobFailure(error && error.response.data.message),
+      Actions.getApplicationsForThisJobFailure(
+        error && error.response.data.message,
+      ),
     );
   }
 }
+
+function* renewJob(action: any) {
+  console.log('payload', action.payload);
+  const { userId, jobId } = action.payload;
+  try {
+    if (userId && jobId) {
+      const response: ResponseGenerator = yield call(
+        Job.renewJob,
+        jobId,
+        userId,
+      );
+      notification.success({
+        type: 'success',
+        message: 'Job Renewed Successfully',
+        closeIcon: true,
+        placement: 'topRight',
+      });
+      yield put(Actions.renewJobSuccess());
+    }
+  } catch (error) {
+    notification.error({
+      type: 'error',
+      message: error.response.data.message,
+      closeIcon: true,
+      placement: 'topRight',
+    });
+    yield put(Actions.RenewJobFailure(error && error.response.data.message));
+  }
+}
+
 export default function* approveJobSaga() {
   yield takeLatest(ActionTypes.JOBS_IN_APPROVE_PROGRESS, jobsInApprove);
   yield takeLatest(ActionTypes.APPROVE_JOB_PROGRESS, ApproveJob);
-  yield takeLatest(ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS, getApplicationsForThisJob);
+  yield takeLatest(
+    ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS,
+    getApplicationsForThisJob,
+  );
+  yield takeLatest(ActionTypes.RENEW_JOB_PROGRESS, renewJob);
 }

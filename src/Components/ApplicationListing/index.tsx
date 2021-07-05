@@ -6,6 +6,7 @@ import { BiArchiveOut } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { CheckOutlined } from '@ant-design/icons'
 import { getUserSession } from '../../utils/sessionStorage';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -163,11 +164,11 @@ const ApplicationListing = (props: IProps) => {
                       />
                     )}
                     {props.approve && item && (
-                      <TiTick
+                      <CheckOutlined
                         className={styles.approve}
-                        size="30px"
+                        style={{fontSize:"30px", cursor:"pointer"}}
                         title="Approve"
-                        cursor="pointer"
+                        // cursor="pointer"
                         onClick={() => doAction('Approve', item.id)}
                       />
                     )}

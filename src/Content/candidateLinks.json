@@ -38,7 +38,7 @@
     },
     {
       "name": "My Applications",
-      "link": "/dashboard",
+      "link": "/dashboard/candidate/my-applications",
       "type": "simple"
     },
     {

@@ -6,7 +6,7 @@ import rootReducer from './reducers';
 import authSaga from './Pages/SignUp/saga';
 import jobSearchSaga from './Pages/JobOverview/saga';
 import allJobsSaga from './Pages/AllJobs/saga';
-import addCandidateSaga from './Pages/Candidate/saga';
+import CandidateSaga from './Pages/Candidate/saga';
 import searchCandidateSaga from './Pages/SearchCandidate/saga';
 import addJobSaga from './Pages/PostJob/saga';
 import allCompaniesSaga from './Pages/AllCompanies/saga';
@@ -22,8 +22,8 @@ import approveJobSaga from './Pages/Employer/ManageJobs/ApproveJob/saga';
 import archiveJobSaga from './Pages/Employer/ManageJobs/ArchiveJob/saga';
 import deleteJobSaga from './Pages/Employer/ManageJobs/DeleteJob/saga';
 import approvedApplicationsSaga from './Pages/Employer/ManageApplications/ApproveApplications/saga';
-import archivedApplicationsSaga from './Pages/Employer/ManageApplications/ArchiveApplications/saga'
-import deletedApplicationsSaga from './Pages/Employer/ManageApplications/DeleteApplications/saga'
+import archivedApplicationsSaga from './Pages/Employer/ManageApplications/ArchiveApplications/saga';
+import deletedApplicationsSaga from './Pages/Employer/ManageApplications/DeleteApplications/saga';
 import draftApplicationsSaga from './Pages/Employer/ManageApplications/DraftApplications/saga';
 import rejectedApplicationsSaga from './Pages/Employer/ManageApplications/RejectApplications/saga';
 import fetchApplicationsSaga from './Pages/JobApplications/saga';
@@ -44,7 +44,7 @@ export default function configureStore() {
       authSaga(),
       allJobsSaga(),
       jobSearchSaga(),
-      addCandidateSaga(),
+      CandidateSaga(),
       searchCandidateSaga(),
       addJobSaga(),
       allCompaniesSaga(),
@@ -64,7 +64,7 @@ export default function configureStore() {
       deletedApplicationsSaga(),
       draftApplicationsSaga(),
       rejectedApplicationsSaga(),
-      fetchApplicationsSaga()
+      fetchApplicationsSaga(),
     ]);
   }
 

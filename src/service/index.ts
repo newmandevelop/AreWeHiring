@@ -18,6 +18,7 @@ import {
   popularCategories,
   recentJobsSearch,
   jobSpotlight,
+  renewJob,
 } from './jobs';
 import { addCompany } from './companies';
 import { allUsersSearch } from './users';
@@ -26,7 +27,7 @@ import {
   totalJobViews,
   totalApplication,
   timeBookmarked,
-  recentActivities
+  recentActivities,
 } from './dashboard';
 import {
   applicationsInDraft,
@@ -39,13 +40,13 @@ import {
   rejectedApplications,
   doApplicationReject,
   applicationsPostedByUser,
-  applicationsSearchByJobId
-}
-  from './applications'
+  applicationsSearchByJobId,
+  applicationsSearchByEmail,
+} from './applications';
 export const Authentication = {
   login,
   signUp,
-  forgetPassword
+  forgetPassword,
 };
 
 export const JobSearch = {
@@ -72,8 +73,9 @@ export const ApplicationSearch = {
   rejectedApplications,
   doApplicationReject,
   applicationsPostedByUser,
-  applicationsSearchByJobId
-}
+  applicationsSearchByJobId,
+  applicationsSearchByEmail,
+};
 
 export const Candidate = {
   addCandidate,
@@ -84,6 +86,7 @@ export const Job = {
   popularCategories,
   recentJobsSearch,
   jobSpotlight,
+  renewJob,
 };
 
 export const CompanySearch = {
@@ -102,5 +105,5 @@ export const Dashboard = {
   totalJobViews,
   totalApplication,
   timeBookmarked,
-  recentActivities
+  recentActivities,
 };

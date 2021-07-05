@@ -3,7 +3,9 @@ import Auth, { IAuthState } from './Pages/SignUp/reducers';
 import JobSearch, { IJobSearch } from './Pages/JobOverview/reducers';
 import AllJobSearch, { IAllJobSearch } from './Pages/AllJobs/reducers';
 import AddCandidate, { IAddCandidate } from './Pages/Candidate/reducers';
-import SearchCandidate, { ISearchCandidate } from './Pages/SearchCandidate/reducers';
+import SearchCandidate, {
+  ISearchCandidate,
+} from './Pages/SearchCandidate/reducers';
 import AddJob, { IAddJob } from './Pages/PostJob/reducers';
 import AllCompaniesSearch, {
   IAllCompanySearch,
@@ -32,12 +34,24 @@ import archiveJob, {
 import deleteJob, {
   IDeleteJob,
 } from './Pages/Employer/ManageJobs/DeleteJob/reducers';
-import approvedApplications, {IApprovedApplications} from './Pages/Employer/ManageApplications/ApproveApplications/reducers'
-import archivedApplications, {IArchivedApplications} from './Pages/Employer/ManageApplications/ArchiveApplications/reducers'
-import deletedApplications, {IDeletedApplications} from './Pages/Employer/ManageApplications/DeleteApplications/reducers'
-import draftApplications, { IDraftApplications } from './Pages/Employer/ManageApplications/DraftApplications/reducers';
-import rejectedApplications, { IRejectedApplications } from './Pages/Employer/ManageApplications/RejectApplications/reducers';
-import fetchApplications, { IFetchApplications } from './Pages/JobApplications/reducers';
+import approvedApplications, {
+  IApprovedApplications,
+} from './Pages/Employer/ManageApplications/ApproveApplications/reducers';
+import archivedApplications, {
+  IArchivedApplications,
+} from './Pages/Employer/ManageApplications/ArchiveApplications/reducers';
+import deletedApplications, {
+  IDeletedApplications,
+} from './Pages/Employer/ManageApplications/DeleteApplications/reducers';
+import draftApplications, {
+  IDraftApplications,
+} from './Pages/Employer/ManageApplications/DraftApplications/reducers';
+import rejectedApplications, {
+  IRejectedApplications,
+} from './Pages/Employer/ManageApplications/RejectApplications/reducers';
+import fetchApplications, {
+  IFetchApplications,
+} from './Pages/JobApplications/reducers';
 
 export interface IRootState {
   authState: IAuthState;
@@ -90,7 +104,7 @@ const rootReducer = combineReducers({
   deletedApplications: deletedApplications,
   draftApplications: draftApplications,
   rejectedApplications: rejectedApplications,
-  fetchApplications: fetchApplications
+  fetchApplications: fetchApplications,
 });
 
 export default rootReducer;

@@ -21,11 +21,15 @@ export interface IApproveJob {
   jobApprovedFailure: boolean;
   jobApprovedErrorMessage: string;
   approvedJobsData: [IJob] | [];
-  applicationsForThisJobProgress: boolean,
-  applicationsForThisJobSuccess: boolean,
-  applicationsForThisJobFailure: boolean,
-  applicationFetchErrorMessage: null
-  applicationsDataForThisJob: null | object | any
+  applicationsForThisJobProgress: boolean;
+  applicationsForThisJobSuccess: boolean;
+  applicationsForThisJobFailure: boolean;
+  applicationFetchErrorMessage: null;
+  applicationsDataForThisJob: null | object | any;
+  renewJobProgress: boolean;
+  renewJobSuccess: boolean;
+  renewJobFailure: boolean;
+  renewJobErrorMessage: null | string;
 }
 const initialState: IApproveJob = {
   jobsInApproveProgress: false,
@@ -40,7 +44,11 @@ const initialState: IApproveJob = {
   applicationsForThisJobSuccess: false,
   applicationsForThisJobFailure: false,
   applicationFetchErrorMessage: null,
-  applicationsDataForThisJob: []
+  applicationsDataForThisJob: [],
+  renewJobProgress: false,
+  renewJobSuccess: false,
+  renewJobFailure: false,
+  renewJobErrorMessage: null,
 };
 
 export default (state = initialState, action: Action) => {
@@ -91,8 +99,8 @@ export default (state = initialState, action: Action) => {
         ...state,
         applicationsForThisJobProgress: true,
         applicationsForThisJobSuccess: false,
-        applicationsForThisJobFailure: false
-      }
+        applicationsForThisJobFailure: false,
+      };
     }
     case ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS: {
       return {
@@ -101,7 +109,7 @@ export default (state = initialState, action: Action) => {
         applicationsForThisJobSuccess: true,
         applicationsForThisJobFailure: false,
         applicationsDataForThisJob: action.payload,
-      }
+      };
     }
     case ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE: {
       return {
@@ -110,7 +118,33 @@ export default (state = initialState, action: Action) => {
         applicationsForThisJobSuccess: false,
         applicationsForThisJobFailure: true,
         applicationsDataForThisJob: action.payload,
-      }
+      };
+    }
+    case ActionTypes.RENEW_JOB_PROGRESS: {
+      return {
+        ...state,
+        renewJobProgress: true,
+        renewJobSuccess: false,
+        renewJobFailure: false,
+      };
+    }
+    case ActionTypes.RENEW_JOB_SUCCESS: {
+      return {
+        ...state,
+        renewJobProgress: false,
+        renewJobSuccess: true,
+        renewJobFailure: false,
+      };
+    }
+
+    case ActionTypes.RENEW_JOB_FAILURE: {
+      return {
+        ...state,
+        renewJobProgrss: false,
+        renewJobSuccess: false,
+        renewJobFailure: true,
+        renewJobErorMessage: action.payload,
+      };
     }
 
     default:

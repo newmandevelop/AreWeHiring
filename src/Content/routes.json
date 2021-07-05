@@ -18,6 +18,7 @@
     "/job-apply",
     "/jobs/:id",
     "/dashboard/candidate",
-    "/dashboard/reset-password"
+    "/dashboard/reset-password",
+    "/dashboard/candidate/my-applications"
   ]
 }

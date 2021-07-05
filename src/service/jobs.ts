@@ -9,7 +9,7 @@ export const addJob = async (data: any) => {
       return null;
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw error;
   }
 };
@@ -53,18 +53,34 @@ export const jobSpotlight = async () => {
   }
 };
 
-export const countJobView = async(jobId: any, userId: any) => {
+export const countJobView = async (jobId: any, userId: any) => {
   try {
     const response = await axios().get(
       `/jobs/view?jobId=${jobId}&userId=${userId}`,
     );
     if (response) {
-      console.log("view counted successfully")
-      return response
+      console.log('view counted successfully');
+      return response;
     } else {
       console.log('Error occurred');
     }
   } catch (error) {
     throw error;
   }
-}
+};
+
+export const renewJob = async (jobId: any, userId: any) => {
+  try {
+    const response = await axios().get(
+      `jobs/renewjob?jobId=${jobId}&userId=${userId}`,
+    );
+    if (response) {
+      return response;
+    } else {
+      console.log('Error occurred');
+    }
+  } catch (error) {
+    console.error();
+    throw error;
+  }
+};

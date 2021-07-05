@@ -8,6 +8,9 @@ export enum ActionTypes {
   GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS = 'GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS',
   GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS = 'GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS',
   GET_APPLICATIONS_FOR_THIS_JOB_FAILURE = 'GET_APPLICATIONS_FOR_THIS_JOB_FAILURE',
+  RENEW_JOB_PROGRESS = 'RENEW_JOB_PROGRESS',
+  RENEW_JOB_SUCCESS = 'RENEW_JOB_SUCCES',
+  RENEW_JOB_FAILURE = 'RENEW_JOB_FAILURE',
 }
 export interface JobsInApproveProgress {
   type: ActionTypes.JOBS_IN_APPROVE_PROGRESS;
@@ -82,38 +85,78 @@ function approveJobFailure(payload: any): ApproveJobFailure {
 }
 
 export interface GetApplicationsForThisJobProgress {
-  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS,
-  payload: any
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS;
+  payload: any;
 }
 
 export interface GetApplicationsForThisJobSuccess {
-  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS,
-  payload: any
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS;
+  payload: any;
 }
 export interface GetApplicationsForThisJobFailure {
-  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE,
-  payload: any
+  type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE;
+  payload: any;
 }
 
-function getApplicationsForThisJobProgress(payload: any):  GetApplicationsForThisJobProgress {
+function getApplicationsForThisJobProgress(
+  payload: any,
+): GetApplicationsForThisJobProgress {
   return {
     type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_PROGRESS,
-    payload
-  }
+    payload,
+  };
 }
 
-function getApplicationsForThisJobSuccess(payload: any):  GetApplicationsForThisJobSuccess {
+function getApplicationsForThisJobSuccess(
+  payload: any,
+): GetApplicationsForThisJobSuccess {
   return {
     type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
-function getApplicationsForThisJobFailure(payload: any):  GetApplicationsForThisJobFailure {
+function getApplicationsForThisJobFailure(
+  payload: any,
+): GetApplicationsForThisJobFailure {
   return {
     type: ActionTypes.GET_APPLICATIONS_FOR_THIS_JOB_FAILURE,
-    payload
-  }
+    payload,
+  };
 }
+
+export interface RenewJobProgress {
+  type: ActionTypes.RENEW_JOB_PROGRESS;
+  payload: any;
+}
+
+export interface RenewJobSuccess {
+  type: ActionTypes.RENEW_JOB_SUCCESS;
+}
+
+export interface RenewJobFailure {
+  type: ActionTypes.RENEW_JOB_FAILURE;
+  payload: any;
+}
+
+function renewJobProgress(payload: any): RenewJobProgress {
+  return {
+    type: ActionTypes.RENEW_JOB_PROGRESS,
+    payload,
+  };
+}
+
+function renewJobSuccess(): RenewJobSuccess {
+  return {
+    type: ActionTypes.RENEW_JOB_SUCCESS,
+  };
+}
+function RenewJobFailure(payload: any): RenewJobFailure {
+  return {
+    type: ActionTypes.RENEW_JOB_FAILURE,
+    payload,
+  };
+}
+
 export type Action =
   | JobsInApproveProgress
   | JobsInApproveFailure
@@ -124,6 +167,9 @@ export type Action =
   | GetApplicationsForThisJobProgress
   | GetApplicationsForThisJobSuccess
   | GetApplicationsForThisJobFailure
+  | RenewJobProgress
+  | RenewJobSuccess
+  | RenewJobFailure;
 
 export const Actions = {
   jobsInApproveProgress,
@@ -134,5 +180,8 @@ export const Actions = {
   approveJobFailure,
   getApplicationsForThisJobProgress,
   getApplicationsForThisJobSuccess,
-  getApplicationsForThisJobFailure
+  getApplicationsForThisJobFailure,
+  renewJobProgress,
+  renewJobSuccess,
+  RenewJobFailure,
 };

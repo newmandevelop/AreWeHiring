@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
 import { Candidate } from '../../service/index';
+import { ApplicationSearch } from '../../service/index';
 export interface ResponseGenerator {
   config?: any;
   data?: any;
@@ -31,6 +32,28 @@ function* addCandidate(action: any) {
   }
 }
 
-export default function* addCandidateSaga() {
+function* getApplications(action: any) {
+  const { email } = action.payload;
+
+  try {
+    const response: ResponseGenerator = yield call(
+      ApplicationSearch.applicationsSearchByEmail,
+      email,
+    );
+    if (response) {
+      yield put(Actions.getCandidateApplicationsSuccess(response.data));
+    } else {
+      yield put(Actions.addCandidateFailure('Data Not Found'));
+    }
+  } catch (error) {
+    yield put(Actions.addCandidateFailure(error.response.data.message));
+  }
+}
+
+export default function* CandidateSaga() {
   yield takeLatest(ActionTypes.ADD_CANDIDATE_PROGRESS, addCandidate);
+  yield takeLatest(
+    ActionTypes.GET_CANDIDATE_APPLICATIONS_PROGRESS,
+    getApplications,
+  );
 }

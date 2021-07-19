@@ -10,6 +10,11 @@ export interface IAddCandidate {
   getApplicationsFailure: boolean;
   ApplicationsErrorMessage: null | string;
   candidateApplicationsData: null | object | any;
+  getCandidateNotificationsProgress: boolean;
+  getCandidateNotificationsSuccess: boolean;
+  getCandidateNotificationsFailure: boolean;
+  notificationErrorMessage: null | string;
+  notificationsData: null | object | any;
 }
 const initialState: IAddCandidate = {
   addCandidateProgress: false,
@@ -21,6 +26,11 @@ const initialState: IAddCandidate = {
   getApplicationsFailure: false,
   ApplicationsErrorMessage: null,
   candidateApplicationsData: [],
+  getCandidateNotificationsProgress: false,
+  getCandidateNotificationsSuccess: false,
+  getCandidateNotificationsFailure: false,
+  notificationErrorMessage: null,
+  notificationsData: [],
 };
 
 export default (state = { initialState }, action: Action) => {
@@ -74,6 +84,31 @@ export default (state = { initialState }, action: Action) => {
         getApplicationsSuccess: false,
         getApplicationsFailure: true,
         ErrorMessage: action.payload,
+      };
+    }
+    case ActionTypes.GET_NOTIFICATIONS_PROGRESS: {
+      return {
+        ...state,
+        getCandidateNotificationsProgress: true,
+        getCandidateNotificationsSuccess: false,
+        getCandidateNotificationsFailure: false,
+      };
+    }
+    case ActionTypes.GET_NOTIFICATIONS_SUCCESS: {
+      return {
+        ...state,
+        getCandidateNotificationsProgress: false,
+        getCandidateNotificationsSuccess: true,
+        getCandidateNotificationsFailure: false,
+      };
+    }
+    case ActionTypes.GET_NOTIFICATIONS_FAILURE: {
+      return {
+        ...state,
+        getCandidateNotificationsProgress: false,
+        getCandidateNotificationsSuccess: false,
+        getCandidateNotificationsFailure: true,
+        notificationErrorMessage: action.payload,
       };
     }
     default:

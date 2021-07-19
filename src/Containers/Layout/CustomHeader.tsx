@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   Layout,
   Divider,
@@ -11,11 +11,13 @@ import {
 import styles from './index.module.scss';
 import { logoutUser, removeRole } from '../../utils/sessionStorage';
 import { useHistory } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { getToken, getRole } from '../../utils/sessionStorage';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { Actions } from '../../Pages/Candidate/actions';
 const { Header } = Layout;
 const CustomeHeader = () => {
+  let dispatch = useDispatch();
 
   const history = useHistory();
   const handleLogout = () => {
@@ -25,6 +27,11 @@ const CustomeHeader = () => {
   };
   const token = getToken();
   const role = getRole();
+  useEffect(() => {
+    dispatch(
+      Actions.getNotificationsProgress(),
+    );
+  }, [])
   const menu = () => (
     <Menu>
       <Menu.Item>
@@ -47,10 +54,10 @@ const CustomeHeader = () => {
 
   return (
     <Header className={styles.header}>
-      <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-        <div style={{ display: 'flex', justifyContent: 'start' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
           <h1 className={styles.logo}>AreWeHiring</h1>
-          <ul className={styles.navLink}>
+          <ul className={styles.navLink} style={{ width: '100%' }}>
             <li className={styles.navLinkItems}>
               <Button href="/dashboard" type="link" className={styles.dropDown}>
                 Home
@@ -96,19 +103,34 @@ const CustomeHeader = () => {
                 Signout
               </Button>
             )}
-            {token && (
+
+          </ul>
+        </div>
+        {token && (
+          <div className={`${styles.avatarDiv}`}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '80px' }}>
               <Dropdown overlay={accountSettingMenu}>
                 <Avatar
-                  className={`ant-dropdown-link ${styles.avatar}`}
+                  className={`ant-dropdown-link`}
+                  style={{ backgroundColor: '#1e90ff' }}
                   size={34}
                   icon={<UserOutlined />}
                 />
               </Dropdown>
-            )}
-          </ul>
-        </div>
+              <Dropdown overlay={accountSettingMenu}>
+                <Avatar
+                  className={`ant-dropdown-link`}
+                  style={{ backgroundColor: '#1e90ff' }}
+                  size={34}
+                  icon={<BellOutlined />}
+                />
+              </Dropdown>
+            </div>
+          </div>
+
+        )}
       </div>
-    </Header>
+    </Header >
   );
 };
 

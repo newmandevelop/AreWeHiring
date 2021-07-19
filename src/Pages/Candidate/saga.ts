@@ -50,10 +50,25 @@ function* getApplications(action: any) {
   }
 }
 
+function* getNotifications() {
+  try {
+    const response: ResponseGenerator = yield call(Candidate.getNotifications);
+    console.log('noti res', response);
+    if (response) {
+      yield put(Actions.getCandidateApplicationsSuccess(response));
+    } else {
+      yield put(Actions.getCandidateApplicationsFailure('Data Not Found'));
+    }
+  } catch (error) {
+    console.log(error);
+    yield put(Actions.getCandidateApplicationsFailure(error.message));
+  }
+}
 export default function* CandidateSaga() {
   yield takeLatest(ActionTypes.ADD_CANDIDATE_PROGRESS, addCandidate);
   yield takeLatest(
     ActionTypes.GET_CANDIDATE_APPLICATIONS_PROGRESS,
     getApplications,
   );
+  yield takeLatest(ActionTypes.GET_NOTIFICATIONS_PROGRESS, getNotifications);
 }

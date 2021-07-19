@@ -5,6 +5,9 @@ export enum ActionTypes {
   GET_CANDIDATE_APPLICATIONS_PROGRESS = 'auth/GET_CANDIDATE_APPLICATIONS_PROGRESS',
   GET_CANDIDATE_APPLICATIONS_SUCCESS = 'auth/GET_CANDIDATE_APPLICATIONS_SUCCESS',
   GET_CANDIDATE_APPLICATIONS_FAILURE = 'auth/GET_CANDIDATE_APPLICATIONS_FAILURE',
+  GET_NOTIFICATIONS_PROGRESS = 'auth/GET_NOTIFICATIONS_PROGRESS',
+  GET_NOTIFICATIONS_SUCCESS = 'auth/GET_NOTIFICATIONS_SUCCESS',
+  GET_NOTIFICATIONS_FAILURE = 'auth/GET_NOTIFICATIONS_FAILURE',
 }
 
 export interface AddCandidateProgress {
@@ -18,6 +21,33 @@ export interface AddCandidateSuccess {
 
 export interface AddCandidateFailure {
   type: ActionTypes.ADD_CANDIDATE_FAILURE;
+  payload: any;
+}
+export interface GetCandidateApplicationsProgress {
+  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_PROGRESS;
+  payload: any;
+}
+
+export interface GetCandidateApplicationsSuccess {
+  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_SUCCESS;
+  payload: any;
+}
+
+export interface GetCandidateApplicationsFailure {
+  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_FAILURE;
+  payload: any;
+}
+export interface GetNotificationsProgress {
+  type: ActionTypes.GET_NOTIFICATIONS_PROGRESS;
+}
+
+export interface GetNotificationsSuccess {
+  type: ActionTypes.GET_NOTIFICATIONS_SUCCESS;
+  payload: any;
+}
+
+export interface GetNotificationsFailure {
+  type: ActionTypes.GET_NOTIFICATIONS_FAILURE;
   payload: any;
 }
 
@@ -39,20 +69,23 @@ function addCandidateFailure(payload: any): AddCandidateFailure {
     payload,
   };
 }
-
-export interface GetCandidateApplicationsProgress {
-  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_PROGRESS;
-  payload: any;
+function getNotificationsProgress(): GetNotificationsProgress {
+  return {
+    type: ActionTypes.GET_NOTIFICATIONS_PROGRESS,
+  };
+}
+function getNotificationsSuccess(payload: any): GetNotificationsSuccess {
+  return {
+    type: ActionTypes.GET_NOTIFICATIONS_SUCCESS,
+    payload,
+  };
 }
 
-export interface GetCandidateApplicationsSuccess {
-  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_SUCCESS;
-  payload: any;
-}
-
-export interface GetCandidateApplicationsFailure {
-  type: ActionTypes.GET_CANDIDATE_APPLICATIONS_FAILURE;
-  payload: any;
+function getNotificationsFailure(payload: any): GetNotificationsFailure {
+  return {
+    type: ActionTypes.GET_NOTIFICATIONS_FAILURE,
+    payload,
+  };
 }
 
 function getCandidateApplicationsProgress(
@@ -87,7 +120,10 @@ export type Action =
   | AddCandidateSuccess
   | GetCandidateApplicationsProgress
   | GetCandidateApplicationsSuccess
-  | GetCandidateApplicationsFailure;
+  | GetCandidateApplicationsFailure
+  | GetNotificationsProgress
+  | GetNotificationsSuccess
+  | GetNotificationsFailure;
 
 export const Actions = {
   addCandidateProgress,
@@ -96,4 +132,7 @@ export const Actions = {
   getCandidateApplicationsProgress,
   getCandidateApplicationsSuccess,
   getCandidateApplicationsFailure,
+  getNotificationsProgress,
+  getNotificationsSuccess,
+  getNotificationsFailure,
 };

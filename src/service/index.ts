@@ -12,7 +12,7 @@ import {
   jobsInDelete,
 } from './jobSearch';
 import { allCompaniesSearch } from './companySearch';
-import { addCandidate, applyJob } from './candidate';
+import { addCandidate, applyJob, getNotifications } from './candidate';
 import {
   addJob,
   popularCategories,
@@ -80,6 +80,7 @@ export const ApplicationSearch = {
 export const Candidate = {
   addCandidate,
   applyJob,
+  getNotifications,
 };
 export const Job = {
   addJob,

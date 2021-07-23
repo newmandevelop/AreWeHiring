@@ -53,15 +53,14 @@ function* getApplications(action: any) {
 function* getNotifications() {
   try {
     const response: ResponseGenerator = yield call(Candidate.getNotifications);
-    console.log('noti res', response);
     if (response) {
-      yield put(Actions.getCandidateApplicationsSuccess(response));
+      yield put(Actions.getNotificationsSuccess(response.data));
     } else {
-      yield put(Actions.getCandidateApplicationsFailure('Data Not Found'));
+      yield put(Actions.getNotificationsFailure('Data Not Found'));
     }
   } catch (error) {
     console.log(error);
-    yield put(Actions.getCandidateApplicationsFailure(error.message));
+    yield put(Actions.getNotificationsFailure(error.message));
   }
 }
 export default function* CandidateSaga() {

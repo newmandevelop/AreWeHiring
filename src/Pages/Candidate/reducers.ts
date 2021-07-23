@@ -100,6 +100,7 @@ export default (state = { initialState }, action: Action) => {
         getCandidateNotificationsProgress: false,
         getCandidateNotificationsSuccess: true,
         getCandidateNotificationsFailure: false,
+        notificationsData: action.payload,
       };
     }
     case ActionTypes.GET_NOTIFICATIONS_FAILURE: {

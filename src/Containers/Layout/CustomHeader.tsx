@@ -15,10 +15,14 @@ import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { getToken, getRole } from '../../utils/sessionStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions } from '../../Pages/Candidate/actions';
+import { IRootState } from '../../reducers';
 const { Header } = Layout;
 const CustomeHeader = () => {
   let dispatch = useDispatch();
-
+  const {
+    notificationsData,
+    getCandidateNotificationsSuccess
+  } = useSelector((state: IRootState) => state.candidate);
   const history = useHistory();
   const handleLogout = () => {
     logoutUser();
@@ -32,6 +36,7 @@ const CustomeHeader = () => {
       Actions.getNotificationsProgress(),
     );
   }, [])
+
   const menu = () => (
     <Menu>
       <Menu.Item>
@@ -39,6 +44,16 @@ const CustomeHeader = () => {
           Item
         </a>
       </Menu.Item>
+    </Menu>
+  );
+
+  const notifications = () => (
+    <Menu>
+      {
+        notificationsData && notificationsData.length > 0 ? notificationsData.map((notification: any) => {
+          return <Menu.Item key={notification.id}>{notification.message}</Menu.Item>
+        }) : <Menu.Item><p>No Notifications</p></Menu.Item>
+      }
     </Menu>
   );
 
@@ -117,7 +132,8 @@ const CustomeHeader = () => {
                   icon={<UserOutlined />}
                 />
               </Dropdown>
-              <Dropdown overlay={accountSettingMenu}>
+
+              <Dropdown overlay={notifications} trigger={['click']}>
                 <Avatar
                   className={`ant-dropdown-link`}
                   style={{ backgroundColor: '#1e90ff' }}

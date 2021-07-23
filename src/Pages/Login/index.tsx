@@ -68,10 +68,10 @@ const Login = (props: any) => {
     } else if (loginFailCount >= 3) {
       recaptchaApproved
         ? dispatch(
-            Actions.loginProgress({
-              login: values,
-            }),
-          )
+          Actions.loginProgress({
+            login: values,
+          }),
+        )
         : openNotificationWithIcon('error', 'Approve ReCAPTCHA first');
     }
   };
@@ -87,10 +87,10 @@ const Login = (props: any) => {
       }
     } else {
       if (role === CANDIDATE) {
-        history.push('/dashboard/candidate');
+        history.push('/candidate/fill-details');
       }
       if (role === EMPLOYER || role === RECRUITER) {
-        history.push('/dashboard/employee/add-company');
+        history.push('/employee/add-company');
       }
     }
   };

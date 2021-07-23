@@ -10,7 +10,7 @@ import AddJob, { IAddJob } from './Pages/PostJob/reducers';
 import AllCompaniesSearch, {
   IAllCompanySearch,
 } from './Pages/AllCompanies/reducers';
-import AddCompany, { IAddCompany } from './Pages/AddCompany/reducers';
+import AddCompany, { IAddCompany } from './Pages/Employer/AddCompany/reducers';
 import AllUserSearch, { IAllUserSearch } from './Pages/AllUsers/reducers';
 import JobCategories, { IJobCategory } from './Pages/Home/Category/reducers';
 import FindJob, { IFindJob } from './Pages/Home/JobSearch/reducers';

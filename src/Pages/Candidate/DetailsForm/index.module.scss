@@ -1,0 +1,43 @@
+.candidateFieldWrapper {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  padding: 0.5rem 2rem;
+  padding-bottom: 2rem;
+
+  .divider {
+    margin-top: 1.5rem;
+  }
+  .experience {
+    background-color: #ebebeb;
+    padding: 0.5rem 2rem;
+    padding-bottom: 2rem;
+  }
+  .space {
+    display: flex;
+    :first-child {
+      width: 100%;
+    }
+  }
+
+  .formItem {
+    width: '100%';
+  }
+
+  .logo {
+    color: black;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    font-weight: 300;
+    margin-left: 1rem;
+    width: 234px;
+  }
+}
+.logo {
+  color: black;
+  font-size: 1.5rem;
+  padding-top: 1rem;
+  font-weight: 300;
+  margin-left: 1rem;
+  width: 234px;
+}

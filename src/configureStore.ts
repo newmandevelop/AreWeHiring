@@ -10,7 +10,7 @@ import CandidateSaga from './Pages/Candidate/saga';
 import searchCandidateSaga from './Pages/SearchCandidate/saga';
 import addJobSaga from './Pages/PostJob/saga';
 import allCompaniesSaga from './Pages/AllCompanies/saga';
-import addCompanySaga from './Pages/AddCompany/saga';
+import addCompanySaga from './Pages/Employer/AddCompany/saga';
 import allUSersSaga from './Pages/AllUsers/saga';
 import jobCategoriesSaga from './Pages/Home/Category/saga';
 import recentJobs from './Pages/Home/RecentJobs/saga';

@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { Company } from '../../service/index';
+import { Company } from '../../../service/index';
 
 export interface ResponseGenerator {
   config?: any;

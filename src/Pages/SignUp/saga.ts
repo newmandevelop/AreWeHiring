@@ -27,13 +27,14 @@ function* signUp(action: any) {
 
 function* login(action: any) {
   const { login } = action.payload;
-  login.email = login.email.replace(/ /g, "")
+  login.email = login.email.replace(/ /g, '');
   try {
     if (login) {
       const response: ResponseGenerator = yield call(
         Authentication.login,
         login,
       );
+      console.log('login responce', response);
       if (response) yield put(Actions.loginSuccess(response.data));
     }
   } catch (error) {
@@ -54,7 +55,9 @@ function* forgetPassword(action: any) {
     }
   } catch (error) {
     console.log('err', error);
-    yield put(Actions.forgetPasswordFailure(error && error.response.data.message));
+    yield put(
+      Actions.forgetPasswordFailure(error && error.response.data.message),
+    );
   }
 }
 

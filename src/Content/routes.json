@@ -10,11 +10,13 @@
     "/dashboard/employee/job-applications",
     "/dashboard/employee/manage-applications",
     "/dashboard/reset-password",
-    "/dashboard/employee/manage-jobs/applications"
+    "/dashboard/employee/manage-jobs/applications",
+    "/employee/add-company"
   ],
   "candidate": [
     "/jobs",
     "/dashboard/candidate/add-data",
+    "/dashboard/candidate/fill-details",
     "/job-apply",
     "/jobs/:id",
     "/dashboard/candidate",

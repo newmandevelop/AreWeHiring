@@ -12,7 +12,7 @@ import PostJob from '../Pages/PostJob';
 import SearchCandidate from '../Pages/SearchCandidate';
 import DashboardRoute from './DashboardRoute';
 import ApplyJob from '../Pages/ApplyJob';
-import AddCompany from '../Pages/AddCompany';
+import AddCompany from '../Pages/Employer/AddCompany';
 import SimpleRoute from './SimpleRoute';
 import AllCompanies from '../Pages/AllCompanies';
 import AllUsers from '../Pages/AllUsers';
@@ -23,6 +23,8 @@ import ManageApplications from '../Pages/Employer/ManageApplications';
 import JobApplications from '../Pages/JobApplications'
 import MyApplications from '../Pages/Candidate/MyApplications'
 import ApplicationsForJob from '../Pages/Employer/ManageJobs/ApplicationsForJob'
+// import employeeDetailsForm from '../Pages/Employer/AddCompany'
+import candidateDetailsForm from '../Pages/Candidate/DetailsForm'
 const Routing = () => {
   return (
     <Switch>
@@ -30,6 +32,9 @@ const Routing = () => {
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/forgotPassword" component={ForgotPassword} />
+      <Route exact path="/employee/add-company" component={AddCompany} />
+      <Route exact path="/candidate/fill-details" component={candidateDetailsForm} />
+      {/* <Route exact path="/details" component={UserDetails} /> */}
       <DashboardRoute
         // exact
         path="/dashboard/reset-password"
@@ -81,10 +86,20 @@ const Routing = () => {
         component={SearchCandidate}
       />
 
-      <DashboardRoute
+      {/* <DashboardRoute
         exact
         path="/dashboard/employee/add-company"
         component={AddCompany}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/fill-details"
+        component={AddCompany}
+      /> */}
+      <DashboardRoute
+        exact
+        path="/dashboard/candidate/fill-details"
+        component={candidateDetailsForm}
       />
       <DashboardRoute exact path="/jobs" component={AllJobs} />
       <DashboardRoute

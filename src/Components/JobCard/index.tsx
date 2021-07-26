@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Card, Typography, Button } from 'antd';
 import moment from 'moment';
 import axios from '../../service/axiosConfig';
-import {countJobView} from '../../service/jobs'
+import { countJobView } from '../../service/jobs'
 import styles from './index.module.scss';
 import { getUserSession } from '../../utils/sessionStorage';
 import { dateFormat } from '../../utils/general';
@@ -32,11 +32,11 @@ const JobCard = (job: IJob) => {
   let user = getUserSession();
 
   const handleClick = async () => {
-    const response = countJobView(job.id, user)
-    if(response)
-    history.push(`/jobs/${job.id}`);
+    const response = await countJobView(job.id, user)
+    if (response)
+      history.push(`/jobs/${job.id}`);
   };
-  
+
   return (
     <main className={styles.JobCardWrapper}>
       <Card style={{ backgroundColor: '#fdfdfd' }} hoverable>
@@ -48,9 +48,8 @@ const JobCard = (job: IJob) => {
         </Button>
         <Paragraph className={styles.firstDetail}>
           <CarryOutOutlined />
-          <span className={styles.span}>{`${
-            job.employer ? job.employer : 'Recruiter'
-          }`}</span>
+          <span className={styles.span}>{`${job.employer ? job.employer : 'Recruiter'
+            }`}</span>
         </Paragraph>
         <Paragraph className={styles.secondDetail}>
           <CarryOutOutlined />
@@ -74,7 +73,7 @@ const JobCard = (job: IJob) => {
           {job.description}
         </Paragraph>
         <Button
-          onClick={() => {handleClick()}}
+          onClick={() => { handleClick() }}
           className={styles.applyBtn}
           type="primary"
           size="small"

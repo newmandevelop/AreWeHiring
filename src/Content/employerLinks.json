@@ -67,7 +67,7 @@
     },
     {
       "name": "My Profile",
-      "link": "/dashboard",
+      "link": "/dashboard/profile",
       "type": "simple"
     },
     {

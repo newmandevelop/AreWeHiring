@@ -23,8 +23,8 @@ import ManageApplications from '../Pages/Employer/ManageApplications';
 import JobApplications from '../Pages/JobApplications'
 import MyApplications from '../Pages/Candidate/MyApplications'
 import ApplicationsForJob from '../Pages/Employer/ManageJobs/ApplicationsForJob'
-// import employeeDetailsForm from '../Pages/Employer/AddCompany'
-import candidateDetailsForm from '../Pages/Candidate/DetailsForm'
+import CandidateDetailsForm from '../Pages/Candidate/DetailsForm'
+import UserProfile from '../Pages/UserProfile'
 const Routing = () => {
   return (
     <Switch>
@@ -33,12 +33,16 @@ const Routing = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/forgotPassword" component={ForgotPassword} />
       <Route exact path="/employee/add-company" component={AddCompany} />
-      <Route exact path="/candidate/fill-details" component={candidateDetailsForm} />
-      {/* <Route exact path="/details" component={UserDetails} /> */}
+      <Route exact path="/candidate/fill-details" component={CandidateDetailsForm} />
       <DashboardRoute
         // exact
         path="/dashboard/reset-password"
         component={ResetPassword}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/profile"
+        component={UserProfile}
       />
       <DashboardRoute
         exact
@@ -99,7 +103,7 @@ const Routing = () => {
       <DashboardRoute
         exact
         path="/dashboard/candidate/fill-details"
-        component={candidateDetailsForm}
+        component={CandidateDetailsForm}
       />
       <DashboardRoute exact path="/jobs" component={AllJobs} />
       <DashboardRoute

@@ -50,7 +50,7 @@ export default function () {
         ],
     };
     return (
-        <Row style={{ marginTop: '2rem' }} gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Row style={{ marginTop: '1rem', padding: '2rem', backgroundColor: 'white' }} gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={4}>
                 <div>
                     <img src={data.image} style={{ width: '100%' }} />

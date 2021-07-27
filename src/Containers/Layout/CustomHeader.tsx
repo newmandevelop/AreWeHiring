@@ -72,7 +72,8 @@ const CustomeHeader = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
           <h1 className={styles.logo}>AreWeHiring</h1>
-          <ul className={styles.navLink} style={{ width: '100%' }}>
+
+          <ul className={styles.navLink} style={{ width: '50vw' }}>
             <li className={styles.navLinkItems}>
               <Button href="/dashboard" type="link" className={styles.dropDown}>
                 Home
@@ -99,24 +100,25 @@ const CustomeHeader = () => {
                 </Button>
               </Dropdown>
             </li>}
-            <Dropdown overlay={menu}>
-              <Button type="link" className={styles.dropDown}>
-                Blog
-              </Button>
-            </Dropdown>{' '}
+            <li className={styles.navLinkItems}>
+              <Dropdown overlay={menu}>
+                <Button type="link" className={styles.dropDown}>
+                  Blog
+                </Button>
+              </Dropdown></li>{' '}
             {!token && (
-              <Button href="/login" type="link" className={styles.dropDown}>
+              <li className={styles.navLinkItems}><Button href="/login" type="link" className={styles.dropDown}>
                 Login
-              </Button>
+              </Button></li>
             )}
             {token && (
-              <Button
+              <li className={styles.navLinkItems}><Button
                 onClick={() => handleLogout()}
                 type="link"
                 className={styles.dropDown}
               >
                 Signout
-              </Button>
+              </Button></li>
             )}
 
           </ul>

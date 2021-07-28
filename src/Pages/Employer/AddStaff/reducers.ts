@@ -7,7 +7,7 @@ export interface IAddStaff {
   errorMessage: null | String;
 }
 
-const initialState: IAddStaff = {
+export const initialState: IAddStaff = {
   addStaffProgress: false,
   addStaffSuccess: false,
   addStaffFailure: false,
@@ -43,5 +43,8 @@ export default (state = initialState, action: Action) => {
         errorMessage: action.payload,
       };
     }
+
+    default:
+      return state;
   }
 };

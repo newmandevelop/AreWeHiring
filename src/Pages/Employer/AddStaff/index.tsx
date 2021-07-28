@@ -10,8 +10,11 @@ import {
     Select
 } from 'antd';
 import Button from '../../../Components/Button';
+import { Actions } from './actions';
 import { FormItem } from '../../../Containers/FormItem/index';
 import { getAllCompanies } from '../../../service/companies';
+import { useSelector, useDispatch } from 'react-redux';
+import { IRootState } from '../../../reducers';
 
 
 const { Title } = Typography;
@@ -31,12 +34,25 @@ interface IFormValues {
 }
 export default function AddStaff() {
     const [form] = Form.useForm();
+    let dispatch = useDispatch();
     const [companies, setCompanies] = useState<[]>([]);
     const [companyIds, setCompanyIds] = useState<[]>([]);
 
+    const {
+        errorMessage,
+        addStaffProgress,
+        addStaffSuccess,
+        addStaffFailure,
+    } = useSelector((state: IRootState) => state.addStaff);
     const onFinish = (values: IFormValues) => {
         const index = companies.findIndex((company) => company === values.company)
         values.company = companyIds[index]
+
+        dispatch(
+            Actions.addStaffProgress({
+                data: values,
+            }),
+        );
     };
 
     const openNotificationWithIcon = (
@@ -48,7 +64,9 @@ export default function AddStaff() {
             description: description,
         });
     };
-
+    const onReset = () => {
+        form.resetFields();
+    };
     useEffect(() => {
         const response = getAllCompanies();
         response.then(data => {
@@ -63,6 +81,15 @@ export default function AddStaff() {
             setCompanyIds(ids);
         });
     }, []);
+
+    useEffect(() => {
+        if (addStaffSuccess) {
+            onReset();
+            openNotificationWithIcon('success', 'Member Added Successfully');
+        } else if (addStaffFailure) {
+            openNotificationWithIcon('error', errorMessage);
+        }
+    }, [addStaffSuccess, addStaffFailure, errorMessage]);
     return (
         <div>
             <Form

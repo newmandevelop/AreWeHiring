@@ -6,6 +6,7 @@ export enum ActionTypes {
 
 export interface AddStaffProgress {
   type: ActionTypes.ADD_STAFF_PROGRESS;
+  payload: any;
 }
 
 export interface AddStaffSuccess {
@@ -17,9 +18,10 @@ export interface AddStaffFailure {
   payload: any;
 }
 
-function addStaffProgress(): AddStaffProgress {
+function addStaffProgress(payload: any): AddStaffProgress {
   return {
     type: ActionTypes.ADD_STAFF_PROGRESS,
+    payload,
   };
 }
 

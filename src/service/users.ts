@@ -14,8 +14,17 @@ export const allUsersSearch = async () => {
 };
 
 export const addStaff = async (data: any) => {
+  const postData = {
+    email: data.email,
+    password: data.password,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    userRole: data.userRole,
+    companyId: data.company,
+  };
+  console.log(postData);
   try {
-    const response = await axios().post('users/addstaff', data);
+    const response = await axios().post('users/addstaff', postData);
     if (response) {
       return response;
     } else {

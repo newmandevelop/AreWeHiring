@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes, Actions } from './actions';
-import { UserSearch } from '../../service/index';
+import { Users } from '../../service/index';
 
 export interface ResponseGenerator {
   config?: any;
@@ -12,7 +12,7 @@ export interface ResponseGenerator {
 }
 function* allUsers() {
   try {
-    const response: ResponseGenerator = yield call(UserSearch.allUsersSearch);
+    const response: ResponseGenerator = yield call(Users.allUsersSearch);
     if (response) {
       yield put(Actions.allUsersSuccess(response));
     } else {

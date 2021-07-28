@@ -23,18 +23,18 @@ interface IProps {
   fileType?: 'picture' | 'text';
   options?: string[];
   btnType?: boolean;
-  rules?: [];
+  rules?: [] | any;
   loading?: boolean;
   disabled?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
   btnName?: string;
   fieldType?:
-    | 'button'
-    | 'input'
-    | 'editor'
-    | 'tagField'
-    | 'dropDown'
-    | 'upload';
+  | 'button'
+  | 'input'
+  | 'editor'
+  | 'tagField'
+  | 'dropDown'
+  | 'upload';
   fieldKey?: any;
 }
 export const FormItem = (props: IProps) => {
@@ -92,7 +92,7 @@ export const FormItem = (props: IProps) => {
       return (
         <div style={{ marginTop: '2rem' }}>
           <Label optional={props.optional} label={props.label} />
-          <Item name={props.name}>
+          <Item name={props.name} rules={props.rules}>
             <Select
               style={{ marginTop: '0.3rem' }}
               placeholder={props.placeholder}

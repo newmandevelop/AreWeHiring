@@ -49,6 +49,7 @@ import draftApplications, {
 import rejectedApplications, {
   IRejectedApplications,
 } from './Pages/Employer/ManageApplications/RejectApplications/reducers';
+import AddStaff, { IAddStaff } from './Pages/Employer/AddStaff/reducers';
 import fetchApplications, {
   IFetchApplications,
 } from './Pages/JobApplications/reducers';
@@ -63,6 +64,7 @@ export interface IRootState {
   allCompaniesSearch: IAllCompanySearch;
   company: IAddCompany;
   allUserSearch: IAllUserSearch;
+  addStaff: IAddStaff;
   jobCategory: IJobCategory;
   recentJobs: IRecentJobs;
   findJob: IFindJob;
@@ -90,6 +92,7 @@ const rootReducer = combineReducers({
   allCompaniesSearch: AllCompaniesSearch,
   company: AddCompany,
   allUserSearch: AllUserSearch,
+  addStaff: AddStaff,
   jobCategory: JobCategories,
   recentJobs: RecentJobsCategories,
   findJob: FindJob,

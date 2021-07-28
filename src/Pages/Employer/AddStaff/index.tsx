@@ -39,6 +39,16 @@ export default function AddStaff() {
         values.company = companyIds[index]
     };
 
+    const openNotificationWithIcon = (
+        type: 'success' | 'error',
+        description: String | null,
+    ) => {
+        notification[type]({
+            message: 'Notification Title',
+            description: description,
+        });
+    };
+
     useEffect(() => {
         const response = getAllCompanies();
         response.then(data => {
@@ -77,6 +87,7 @@ export default function AddStaff() {
                 >
                     <Input />
                 </Form.Item>
+
                 <Form.Item
                     label="Password"
                     name="password"
@@ -89,6 +100,7 @@ export default function AddStaff() {
                 >
                     <Input.Password />
                 </Form.Item>
+
                 <Form.Item
                     label="Confirm Password"
                     name="confirm-password"
@@ -114,6 +126,7 @@ export default function AddStaff() {
                 >
                     <Input.Password />
                 </Form.Item>
+
                 <Form.Item
                     label="First Name"
                     name="firstName"
@@ -126,6 +139,7 @@ export default function AddStaff() {
                 >
                     <Input />
                 </Form.Item>
+
                 <Form.Item
                     label="Last Name"
                     name="lastName"
@@ -152,25 +166,20 @@ export default function AddStaff() {
                         <Select.Option value="EMPLOYERSTAFF">EMPLOYER STAFF</Select.Option>
                     </Select>
                 </Form.Item>
+
                 {FormItem({
                     name: 'company',
+                    rules: [
+                        {
+                            required: true,
+                            message: 'This field is required!',
+                        },
+                    ],
                     label: 'Company',
                     placeholder: 'Select Company',
                     fieldType: 'dropDown',
                     options: companies,
                 })}
-                {/* <Form.Item
-                    label="Company"
-                    name="company"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'This field is required!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item> */}
 
                 <div>
                     <Button

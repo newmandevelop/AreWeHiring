@@ -21,7 +21,7 @@ import {
   renewJob,
 } from './jobs';
 import { addCompany } from './companies';
-import { allUsersSearch } from './users';
+import { allUsersSearch, addStaff } from './users';
 import {
   activeListings,
   totalJobViews,
@@ -98,8 +98,9 @@ export const Company = {
   addCompany,
 };
 
-export const UserSearch = {
+export const Users = {
   allUsersSearch,
+  addStaff,
 };
 export const Dashboard = {
   activeListings,

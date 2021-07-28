@@ -140,13 +140,11 @@ export default function ManageStaff() {
                             <div style={{ padding: '1rem' }}>
                                 <Descriptions
                                     title={
-                                        user.firstName +
-                                        ' ' +
-                                        user.lastName
+                                        `Full Name: ${user.firstName} ${user.lastName}`
                                     }
                                 >
                                     <Descriptions.Item label="Email">
-                                        {user.email}$/hr
+                                        {user.email}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Role">
                                         {user.userRole}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Form,
     notification,
@@ -10,11 +10,49 @@ import {
     Select
 } from 'antd';
 import Button from '../../../Components/Button';
+import { FormItem } from '../../../Containers/FormItem/index';
+import { getAllCompanies } from '../../../service/companies';
+
 
 const { Title } = Typography;
+interface ICompanies {
+    id: string;
+    name: string;
+}
 
+
+interface IFormValues {
+    email: string;
+    password: string,
+    firstName: string,
+    lastName: string,
+    userRole: string,
+    company: string
+}
 export default function AddStaff() {
     const [form] = Form.useForm();
+    const [companies, setCompanies] = useState<[]>([]);
+    const [companyIds, setCompanyIds] = useState<[]>([]);
+
+    const onFinish = (values: IFormValues) => {
+        const index = companies.findIndex((company) => company === values.company)
+        values.company = companyIds[index]
+    };
+
+    useEffect(() => {
+        const response = getAllCompanies();
+        response.then(data => {
+            console.log("companies", data)
+            const companies: any = [];
+            const ids: any = [];
+            data?.data.map((company: ICompanies) => {
+                companies.push(company.name);
+                ids.push(company.id)
+            });
+            setCompanies(companies);
+            setCompanyIds(ids);
+        });
+    }, []);
     return (
         <div>
             <Form
@@ -22,6 +60,7 @@ export default function AddStaff() {
                 form={form}
                 name="SearchCandidate"
                 layout="vertical"
+                onFinish={onFinish}
             >
                 <Title ellipsis={false} level={4}>
                     Add Staff Members
@@ -77,7 +116,7 @@ export default function AddStaff() {
                 </Form.Item>
                 <Form.Item
                     label="First Name"
-                    name="first-name"
+                    name="firstName"
                     rules={[
                         {
                             required: true,
@@ -89,7 +128,7 @@ export default function AddStaff() {
                 </Form.Item>
                 <Form.Item
                     label="Last Name"
-                    name="last-name"
+                    name="lastName"
                     rules={[
                         {
                             required: true,
@@ -99,21 +138,10 @@ export default function AddStaff() {
                 >
                     <Input />
                 </Form.Item>
-                {/* <Form.Item
-                    label="User Role"
-                    name="user-role"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'This field is required!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item> */}
+
                 <Form.Item
                     label="User Role"
-                    name="user-role"
+                    name="userRole"
                     rules={[
                         {
                             required: true,
@@ -124,7 +152,14 @@ export default function AddStaff() {
                         <Select.Option value="EMPLOYERSTAFF">EMPLOYER STAFF</Select.Option>
                     </Select>
                 </Form.Item>
-                <Form.Item
+                {FormItem({
+                    name: 'company',
+                    label: 'Company',
+                    placeholder: 'Select Company',
+                    fieldType: 'dropDown',
+                    options: companies,
+                })}
+                {/* <Form.Item
                     label="Company"
                     name="company"
                     rules={[
@@ -135,7 +170,7 @@ export default function AddStaff() {
                     ]}
                 >
                     <Input />
-                </Form.Item>
+                </Form.Item> */}
 
                 <div>
                     <Button

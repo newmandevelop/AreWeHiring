@@ -70,7 +70,6 @@ export default function AddStaff() {
     useEffect(() => {
         const response = getAllCompanies();
         response.then(data => {
-            console.log("companies", data)
             const companies: any = [];
             const ids: any = [];
             data?.data.map((company: ICompanies) => {
@@ -110,6 +109,10 @@ export default function AddStaff() {
                             required: true,
                             message: 'This field is required!',
                         },
+                        {
+                            type: 'email',
+                            message: 'Invalid Email'
+                        }
                     ]}
                 >
                     <Input />

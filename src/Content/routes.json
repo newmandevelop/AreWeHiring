@@ -12,6 +12,7 @@
     "/dashboard/reset-password",
     "/dashboard/employee/manage-jobs/applications",
     "/dashboard/employee/add-staff",
+    "/dashboard/employee/manage-staff",
     "/employee/add-organization",
     "/dashboard/profile"
   ],

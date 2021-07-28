@@ -24,6 +24,7 @@ import JobApplications from '../Pages/JobApplications'
 import MyApplications from '../Pages/Candidate/MyApplications'
 import ApplicationsForJob from '../Pages/Employer/ManageJobs/ApplicationsForJob'
 import AddStaff from '../Pages/Employer/AddStaff';
+import ManageStaff from '../Pages/Employer/ManageStaff';
 import CandidateDetailsForm from '../Pages/Candidate/DetailsForm'
 import UserProfile from '../Pages/UserProfile'
 const Routing = () => {
@@ -84,6 +85,11 @@ const Routing = () => {
         exact
         path="/dashboard/employee/add-staff"
         component={AddStaff}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/manage-staff"
+        component={ManageStaff}
       />
       <DashboardRoute
         exact

@@ -35,3 +35,20 @@ export const addStaff = async (data: any) => {
     throw error;
   }
 };
+
+export const searchUserByCompany = async (data: any) => {
+  const companyId = data.company;
+  try {
+    const response = await axios().get(
+      `users/findusersbycompany?companyId=${companyId}`,
+    );
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error();
+    throw error.response;
+  }
+};

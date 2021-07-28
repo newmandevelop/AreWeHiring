@@ -51,6 +51,11 @@
       "type": "simple"
     },
     {
+      "name": "Manage Staff",
+      "link": "/dashboard/employee/manage-staff",
+      "type": "simple"
+    },
+    {
       "name": "Company",
       "link": "/companies",
       "type": "bold"

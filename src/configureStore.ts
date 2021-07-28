@@ -28,6 +28,7 @@ import draftApplicationsSaga from './Pages/Employer/ManageApplications/DraftAppl
 import rejectedApplicationsSaga from './Pages/Employer/ManageApplications/RejectApplications/saga';
 import fetchApplicationsSaga from './Pages/JobApplications/saga';
 import staffSaga from './Pages/Employer/AddStaff/saga';
+import searchStaffSaga from './Pages/Employer/ManageStaff/saga';
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
 
@@ -52,6 +53,7 @@ export default function configureStore() {
       addCompanySaga(),
       allUSersSaga(),
       staffSaga(),
+      searchStaffSaga(),
       jobCategoriesSaga(),
       recentJobs(),
       findJobSaga(),

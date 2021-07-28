@@ -15,7 +15,7 @@ import { FormItem } from '../../../Containers/FormItem/index';
 import { getAllCompanies } from '../../../service/companies';
 import { useSelector, useDispatch } from 'react-redux';
 import { IRootState } from '../../../reducers';
-
+import styles from './index.module.scss'
 
 const { Title } = Typography;
 interface ICompanies {
@@ -40,10 +40,11 @@ export default function ManageStaff() {
 
     const {
         errorMessage,
-        addStaffProgress,
-        addStaffSuccess,
-        addStaffFailure,
-    } = useSelector((state: IRootState) => state.addStaff);
+        searchUserProgress,
+        searchUserSuccess,
+        searchUserFailure,
+        searchedUsers
+    } = useSelector((state: IRootState) => state.searchStaff);
     const onFinish = (values: IFormValues) => {
         const index = companies.findIndex((company) => company === values.company)
         values.company = companyIds[index]
@@ -81,14 +82,18 @@ export default function ManageStaff() {
         });
     }, []);
 
-    // useEffect(() => {
-    //     if (addStaffSuccess) {
-    //         onReset();
-    //         openNotificationWithIcon('success', 'Member Added Successfully');
-    //     } else if (addStaffFailure) {
-    //         openNotificationWithIcon('error', errorMessage);
-    //     }
-    // }, [addStaffSuccess, addStaffFailure, errorMessage]);
+    useEffect(() => {
+        if (searchUserSuccess) {
+            if (searchedUsers.length === 0)
+                openNotificationWithIcon('success', 'No Member Exists For This Company');
+            else
+                openNotificationWithIcon('success', 'Members Retrieved Successfully');
+        } else if (searchUserFailure) {
+            openNotificationWithIcon('error', errorMessage);
+        }
+    }, [searchUserSuccess, searchUserFailure, errorMessage]);
+
+
     return (
         <div>
             <Form
@@ -127,6 +132,34 @@ export default function ManageStaff() {
                     <Button htmlType="button" />
                 </div>
             </Form>
+
+            {searchedUsers &&
+                searchedUsers.map((user: any) => {
+                    return (
+                        <div className={styles.description}>
+                            <div style={{ padding: '1rem' }}>
+                                <Descriptions
+                                    title={
+                                        user.firstName +
+                                        ' ' +
+                                        user.lastName
+                                    }
+                                >
+                                    <Descriptions.Item label="Email">
+                                        {user.email}$/hr
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Role">
+                                        {user.userRole}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Date Created">
+                                        {user.dateCreated}
+                                    </Descriptions.Item>
+                                    {/* <Descriptions.Item>{candidate.description}</Descriptions.Item> */}
+                                </Descriptions>
+                            </div>
+                        </div>
+                    );
+                })}
         </div>
     )
 }

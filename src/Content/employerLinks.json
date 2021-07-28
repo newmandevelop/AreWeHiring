@@ -46,18 +46,23 @@
       "type": "simple"
     },
     {
+      "name": "Add Staff",
+      "link": "/dashboard/employee/add-staff",
+      "type": "simple"
+    },
+    {
       "name": "Company",
       "link": "/companies",
       "type": "bold"
     },
     {
-      "name": "Manage Companies",
-      "link": "/dashboard/employee/all-companies",
+      "name": "Manage Organizations",
+      "link": "/dashboard/employee/manage-organizations",
       "type": "simple"
     },
     {
-      "name": "Add Company",
-      "link": "/dashboard/employee/add-company",
+      "name": "Add Organization",
+      "link": "/dashboard/employee/add-organization",
       "type": "simple"
     },
     {

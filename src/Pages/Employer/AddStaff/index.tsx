@@ -99,7 +99,7 @@ export default function AddStaff() {
                 onFinish={onFinish}
             >
                 <Title ellipsis={false} level={4}>
-                    Add Staff Members
+                    Manage/Add Recruiters
                 </Title>
                 <Form.Item
                     label="Email"

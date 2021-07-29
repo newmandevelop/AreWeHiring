@@ -1,6 +1,7 @@
 import { Action, ActionTypes } from './actions';
 
 interface IEditJobData {
+  id?: string;
   company?: string;
   datePosted?: string;
   employer?: string;

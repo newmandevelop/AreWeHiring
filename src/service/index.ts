@@ -20,6 +20,7 @@ import {
   jobSpotlight,
   renewJob,
   editJob,
+  updateJob,
 } from './jobs';
 import { addCompany } from './companies';
 import { allUsersSearch, addStaff, searchUserByCompany } from './users';
@@ -90,6 +91,7 @@ export const Job = {
   jobSpotlight,
   renewJob,
   editJob,
+  updateJob,
 };
 
 export const CompanySearch = {

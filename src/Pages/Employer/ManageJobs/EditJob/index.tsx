@@ -16,6 +16,7 @@ import { IRootState } from '../../../../reducers';
 // import { Actions } from './actions';
 import Button from '../../../../Components/Button';
 import { searchUserByCompany } from '../../../../service/users';
+import { updateJob } from '../../../../service/jobs';
 const { Item, List } = Form;
 const { Title } = Typography;
 const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
@@ -99,7 +100,7 @@ const PostJob = () => {
                 rateUpperLimit: values.maximumRate,
                 employer: values.employer,
                 industry: values.industry,
-                rolesAndResponsibilities: roles,
+                // rolesAndResponsibilities: roles,
                 datePosted: values.openingDate,
                 expiryDate: values.closingDate,
                 jobCategory: values.jobCategory,
@@ -110,6 +111,10 @@ const PostJob = () => {
                 userId: userData,
             };
             formData.append('job', JSON.stringify(valueForApi));
+            console.log(values)
+            const response = updateJob(editJobData.id, values)
+            response.then(res => console.log(res))
+                .catch(error => console.log(error))
             //   dispatch(
             //     Actions.addJobProgress({
             //       data: formData,

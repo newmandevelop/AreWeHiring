@@ -97,6 +97,7 @@ export const FormItem = (props: IProps) => {
               style={{ marginTop: '0.3rem' }}
               placeholder={props.placeholder}
               allowClear
+              onChange={props.onChange}
             >
               {props.options?.map((d, i) => {
                 return (

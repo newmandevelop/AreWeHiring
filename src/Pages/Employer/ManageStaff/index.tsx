@@ -4,10 +4,6 @@ import {
     notification,
     Typography,
     Descriptions,
-    Avatar,
-    Input,
-    Pagination,
-    Select
 } from 'antd';
 import Button from '../../../Components/Button';
 import { Actions } from './actions';
@@ -48,7 +44,6 @@ export default function ManageStaff() {
     const onFinish = (values: IFormValues) => {
         const index = companies.findIndex((company) => company === values.company)
         values.company = companyIds[index]
-        // console.log(values)
         dispatch(
             Actions.searchUserProgress({
                 data: values,

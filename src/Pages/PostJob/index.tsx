@@ -15,6 +15,7 @@ import { FormItem } from '../../Containers/FormItem/index';
 import { IRootState } from '../../reducers';
 import { Actions } from './actions';
 import Button from '../../Components/Button';
+import { searchUserByCompany } from '../../service/users';
 const { Item, List } = Form;
 const { Title } = Typography;
 const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
@@ -30,12 +31,16 @@ interface IRoles {
   role: string;
 }
 interface ICompanies {
+  id: string;
   name: string;
 }
 const PostJob = () => {
   let dispatch = useDispatch();
   const [form] = Form.useForm();
   const [companies, setCompanies] = useState<[]>([]);
+  const [companyIds, setCompanyIds] = useState<[]>([]);
+  const [recruiters, setRecruiters] = useState<[]>([]);
+  const [recruiterIds, setRecruiterIds] = useState<[]>([]);
   let formData = new FormData();
   const {
     addJobErrorMessage,
@@ -45,6 +50,8 @@ const PostJob = () => {
   } = useSelector((state: IRootState) => state.job);
 
   const onFinish = (values: any) => {
+    const index = recruiters.findIndex(recruiter => recruiter === values.employer)
+    values.employer = recruiterIds[index]
     let roles: string[] = [];
     if (values.rolesAndResponsibilities)
       values.rolesAndResponsibilities.map((d: IRoles) => {
@@ -126,12 +133,32 @@ const PostJob = () => {
     const response = getAllCompanies();
     response.then(data => {
       const companies: any = [];
+      const ids: any = [];
       data?.data.map((company: ICompanies) => {
         companies.push(company.name);
+        ids.push(company.id)
       });
       setCompanies(companies);
+      setCompanyIds(ids);
     });
   }, []);
+
+  const getAllRecruiters = async (value: string) => {
+    const index = companies.findIndex((company) => company === value)
+    const companyId = companyIds[index]
+    const data = { company: companyId }
+    const response = searchUserByCompany(data);
+    response.then(data => {
+      const recruiters: any = [];
+      const ids: any = [];
+      data && data.map((recruiter: any) => {
+        recruiters.push(recruiter.firstName + " " + recruiter.lastName);
+        ids.push(recruiter.id)
+      });
+      setRecruiters(recruiters);
+      setRecruiterIds(ids);
+    });
+  }
   return (
     <Dashboard dashboardName="Employer">
       <Form
@@ -153,6 +180,7 @@ const PostJob = () => {
             placeholder: 'Select Company',
             fieldType: 'dropDown',
             options: companies,
+            onChange: (value: string) => { getAllRecruiters(value) }
           })}
           {FormItem({
             name: 'jobTitle',
@@ -187,10 +215,10 @@ const PostJob = () => {
             placeholder: 'Choose a Category',
             fieldType: 'dropDown',
             options: ['Accounting / Finance', 'Software', 'Automotive Jobs', 'Contruction',
-          'Construction / Facilities', 'Education Training', 'Healthcare', 'Human Resource (HR)', 'Industrial Manufacturing & Engineering',
-          'Insurance', 'Market and Customer Research', 'Program Management / Project Management',
-          'Recruiting / Talent Acquisition', 'Restaurant / Food Service', 'Sales & Marketing',
-          'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
+              'Construction / Facilities', 'Education Training', 'Healthcare', 'Human Resource (HR)', 'Industrial Manufacturing & Engineering',
+              'Insurance', 'Market and Customer Research', 'Program Management / Project Management',
+              'Recruiting / Talent Acquisition', 'Restaurant / Food Service', 'Sales & Marketing',
+              'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
           })}
           {/* Job Tags Input Field */}
           {FormItem({
@@ -216,7 +244,7 @@ const PostJob = () => {
             optional: true,
             placeholder: 'Enter Employer',
             fieldType: 'dropDown',
-            options: companies,
+            options: recruiters,
           })}
           {/*Industry Input Field */}
           {FormItem({
@@ -291,7 +319,7 @@ const PostJob = () => {
             fieldType: 'input',
           })}
 
-                    {/*Application URL */}
+          {/*Application URL */}
           {FormItem({
             name: 'applicationUrl',
             label: 'Application URL',
@@ -327,17 +355,17 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Upload Logo Image Button */}
-            {FormItem({
-              name: 'jobLogo',
-              fileProps: { ...logoProps },
-              label: 'Logo',
-              icon: <UploadOutlined />,
-              optional: true,
-              fileType: 'picture',
-              placeholder: 'Maximum file size: 50 MB.',
-              fieldType: 'upload',
-              btnName: 'Browse',
-            })}
+          {FormItem({
+            name: 'jobLogo',
+            fileProps: { ...logoProps },
+            label: 'Logo',
+            icon: <UploadOutlined />,
+            optional: true,
+            fileType: 'picture',
+            placeholder: 'Maximum file size: 50 MB.',
+            fieldType: 'upload',
+            btnName: 'Browse',
+          })}
           {/* Maximum rate Field */}
           {FormItem({
             name: 'maximumRate',

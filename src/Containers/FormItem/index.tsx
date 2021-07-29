@@ -36,13 +36,13 @@ interface IProps {
   | 'dropDown'
   | 'upload';
   fieldKey?: any;
-  initialValue?: string;
+  initialValue?: string | [] | number;
 }
 export const FormItem = (props: IProps) => {
   switch (props.fieldType) {
     case 'input':
       return (
-        <Item fieldKey={props.fieldKey} name={props.name} rules={props.rules}>
+        <Item fieldKey={props.fieldKey} name={props.name} rules={props.rules} initialValue={props.initialValue}>
           <InputField
             label={props.label}
             name={props.name}
@@ -80,7 +80,7 @@ export const FormItem = (props: IProps) => {
       );
     case 'tagField':
       return (
-        <Item name={props.name}>
+        <Item name={props.name} initialValue={props.initialValue}>
           <TagsField
             label={props.label}
             name={props.name}

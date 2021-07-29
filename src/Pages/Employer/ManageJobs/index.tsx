@@ -56,6 +56,7 @@ const ManageJobs = () => {
           heading="Approved Jobs"
           delete
           archive
+          edit
         />
       </div>
       <div className={styles.archiveJobs}>
@@ -65,6 +66,7 @@ const ManageJobs = () => {
           heading="Archived Jobs"
           approve
           delete
+          edit
         />
       </div>
       <div className={styles.deleteJobs}>

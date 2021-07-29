@@ -89,6 +89,7 @@ export const editJob = async (jobId: any) => {
   try {
     const response = await axios().get(`jobs/byid?id=${jobId}`);
     if (response) {
+      console.log('api res', response);
       return response;
     } else {
       console.log('Error occurred');

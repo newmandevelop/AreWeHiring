@@ -34,6 +34,31 @@ interface ICompanies {
     id: string;
     name: string;
 }
+
+interface IEditJobData {
+    company: string,
+    datePosted: string,
+    employer: string,
+    externalLink: string,
+    expiryDate: string,
+    headerDownloadUri: string,
+    headerImage: any,
+    hoursPerWork: number,
+    industry: string,
+    jobCategory: string,
+    jobLogo: any,
+    jobTags: [],
+    jobType: string,
+    jobUrl: string,
+    location: string,
+    nameOfJob: string,
+    rateLowerLimit: number,
+    rateUpperLimit: number,
+    recruiterType: string,
+    rolesAndResponsibilities: [],
+    salaryLowerLimit: number,
+    salaryUpperLimit: number
+}
 const PostJob = () => {
     let dispatch = useDispatch();
     const [form] = Form.useForm();
@@ -41,14 +66,15 @@ const PostJob = () => {
     const [companyIds, setCompanyIds] = useState<[]>([]);
     const [recruiters, setRecruiters] = useState<[]>([]);
     const [recruiterIds, setRecruiterIds] = useState<[]>([]);
+    let [jobTags, setJobTags] = useState("")
     let formData = new FormData();
     const {
-        addJobErrorMessage,
-        addJobFailure,
-        addJobSuccess,
-        addJobProgress,
-    } = useSelector((state: IRootState) => state.job);
-
+        editJobErrorMessage,
+        editJobFailure,
+        editJobSuccess,
+        editJobProgress,
+        editJobData
+    } = useSelector((state: IRootState) => state.editJob);
     const onFinish = (values: any) => {
         const index = recruiters.findIndex(recruiter => recruiter === values.employer)
         values.employer = recruiterIds[index]
@@ -120,14 +146,14 @@ const PostJob = () => {
         form.resetFields();
     };
 
-    useEffect(() => {
-        if (addJobSuccess) {
-            onReset();
-            openNotificationWithIcon('success', 'Job Added Successfully');
-        } else if (addJobFailure) {
-            openNotificationWithIcon('error', addJobErrorMessage);
-        }
-    }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
+    // useEffect(() => {
+    //     if (addJobSuccess) {
+    //         onReset();
+    //         openNotificationWithIcon('success', 'Job Added Successfully');
+    //     } else if (addJobFailure) {
+    //         openNotificationWithIcon('error', addJobErrorMessage);
+    //     }
+    // }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
 
     useEffect(() => {
         const response = getAllCompanies();
@@ -159,6 +185,13 @@ const PostJob = () => {
             setRecruiterIds(ids);
         });
     }
+    useEffect(() => {
+        let tags = ""
+        editJobData.jobTags?.map(job => { tags += job + ", "; })
+        setJobTags(tags)
+        form.resetFields()
+    }, [editJobData]);
+
     return (
         <Dashboard dashboardName="Employer">
             <Form
@@ -170,7 +203,7 @@ const PostJob = () => {
                 scrollToFirstError
             >
                 <Title ellipsis={false} level={4}>
-                    Job Details
+                    Edit Job Details
                 </Title>
                 <main className={styles.jobPostFieldWrapper}>
                     {/*Company Name Field */}
@@ -182,7 +215,7 @@ const PostJob = () => {
                         options: companies,
                         onChange: (value: string) => { getAllRecruiters(value) },
                         rules: [{ required: true, message: "This field is required" }],
-                        initialValue: "Jackson Company"
+                        initialValue: editJobData.company
                     })}
                     {FormItem({
                         name: 'jobTitle',
@@ -190,7 +223,8 @@ const PostJob = () => {
                         type: 'text',
                         placeholder: 'Enter Job Title',
                         fieldType: 'input',
-                        rules: [{ required: true, message: "This field is required" }]
+                        rules: [{ required: true, message: "This field is required" }],
+                        initialValue: editJobData.nameOfJob
                     })}
                     {/* Location Field */}
                     {FormItem({
@@ -200,6 +234,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g London',
                         fieldType: 'input',
+                        initialValue: editJobData.location
                     })}
                     {/*Job Type Field */}
                     {FormItem({
@@ -209,7 +244,8 @@ const PostJob = () => {
                         placeholder: 'FULL TIME',
                         fieldType: 'dropDown',
                         options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
-                        rules: [{ required: true, message: "This field is required" }]
+                        rules: [{ required: true, message: "This field is required" }],
+                        initialValue: editJobData.jobType
                     })}
                     {/* Job Category Field */}
                     {FormItem({
@@ -222,15 +258,18 @@ const PostJob = () => {
                             'Construction / Facilities', 'Education Training', 'Healthcare', 'Human Resource (HR)', 'Industrial Manufacturing & Engineering',
                             'Insurance', 'Market and Customer Research', 'Program Management / Project Management',
                             'Recruiting / Talent Acquisition', 'Restaurant / Food Service', 'Sales & Marketing',
-                            'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
+                            'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics'],
+                        initialValue: editJobData.jobCategory
                     })}
                     {/* Job Tags Input Field */}
+
                     {FormItem({
                         name: 'jobTags',
                         label: 'Job Tags',
                         optional: true,
                         placeholder: 'e.g PHP, Social Media Management',
                         fieldType: 'tagField',
+                        initialValue: jobTags
                     })}
                     {/* Recruiter Type Input Field */}
                     {FormItem({
@@ -240,6 +279,7 @@ const PostJob = () => {
                         placeholder: 'Enter Recruiter Type',
                         fieldType: 'dropDown',
                         options: ['EMPLOYER', 'AGENCY'],
+                        initialValue: editJobData.recruiterType
                     })}
                     {/* Recruiter Type Input Field */}
                     {FormItem({
@@ -249,6 +289,7 @@ const PostJob = () => {
                         placeholder: 'Enter Employer',
                         fieldType: 'dropDown',
                         options: recruiters,
+                        initialValue: editJobData.employer
                     })}
                     {/*Industry Input Field */}
                     {FormItem({
@@ -277,6 +318,7 @@ const PostJob = () => {
                             'Service',
                             'Transportation',
                         ],
+                        initialValue: editJobData.industry
                     })}
                     {/* Description Fields */}
                     {FormItem({
@@ -284,9 +326,10 @@ const PostJob = () => {
                         label: 'Description',
 
                         fieldType: 'editor',
+                        initialValue: editJobData.description
                     })}
                     {/* Roles and Responsibilities */}
-                    <Form.List name="rolesAndResponsibilities">
+                    {/* <Form.List name="rolesAndResponsibilities">
                         {(fields, { add, remove }) => (
                             <>
                                 {FormItem({
@@ -313,24 +356,26 @@ const PostJob = () => {
                                 ))}
                             </>
                         )}
-                    </Form.List>
+                    </Form.List> */}
                     {/*Application Field */}
-                    {FormItem({
+                    {/* {FormItem({
                         name: 'application',
                         label: 'Application Email',
                         type: 'text',
                         placeholder: 'j.borchardt2021@gmail.com',
                         fieldType: 'input',
-                    })}
+                        initialValue: editJobData.
+                    })} */}
 
                     {/*Application URL */}
-                    {FormItem({
+                    {/* {FormItem({
                         name: 'applicationUrl',
                         label: 'Application URL',
                         type: 'text',
                         placeholder: 'https://arewehiring.com',
                         fieldType: 'input',
-                    })}
+                        initialValue: editJobData.externalLink
+                    })} */}
                     {/* Minimum rate Field */}
                     {FormItem({
                         name: 'closingDate',
@@ -339,6 +384,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 20',
                         fieldType: 'input',
+                        initialValue: editJobData.expiryDate
                     })}
                     {/* Minimum rate Field */}
                     {FormItem({
@@ -348,6 +394,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 20',
                         fieldType: 'input',
+                        initialValue: editJobData.datePosted
                     })}
                     {/* Minimum rate Field */}
                     {FormItem({
@@ -357,9 +404,10 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 20',
                         fieldType: 'input',
+                        initialValue: editJobData.rateLowerLimit
                     })}
                     {/* Upload Logo Image Button */}
-                    {FormItem({
+                    {/* {FormItem({
                         name: 'jobLogo',
                         fileProps: { ...logoProps },
                         label: 'Logo',
@@ -369,7 +417,7 @@ const PostJob = () => {
                         placeholder: 'Maximum file size: 50 MB.',
                         fieldType: 'upload',
                         btnName: 'Browse',
-                    })}
+                    })} */}
                     {/* Maximum rate Field */}
                     {FormItem({
                         name: 'maximumRate',
@@ -378,6 +426,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 50',
                         fieldType: 'input',
+                        initialValue: editJobData.rateUpperLimit
                     })}
                     {/* Minimum Salary Field */}
                     {FormItem({
@@ -387,6 +436,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 20000',
                         fieldType: 'input',
+                        initialValue: editJobData.salaryLowerLimit
                     })}
                     {/* Maximum Salary Field */}
                     {FormItem({
@@ -396,6 +446,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 50000',
                         fieldType: 'input',
+                        initialValue: editJobData.salaryUpperLimit
                     })}
                     {/* Hours Per Week Field */}
                     {FormItem({
@@ -405,6 +456,7 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'e.g 40',
                         fieldType: 'input',
+                        initialValue: editJobData.hoursPerWeek
                     })}
                     {/* External "Apply For Job" LinkField */}
                     {FormItem({
@@ -414,9 +466,10 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'http://',
                         fieldType: 'input',
+                        initialValue: editJobData.externalLink
                     })}
                     {/* Upload Header Image Button */}
-                    {FormItem({
+                    {/* {FormItem({
                         name: 'headerImage',
                         fileProps: { ...headerProps },
                         label: 'Header Image',
@@ -426,14 +479,14 @@ const PostJob = () => {
                         fieldType: 'upload',
                         btnName: 'Browse',
                         fileType: 'picture',
-                    })}
+                    })} */}
 
                     <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
                     <Divider />
                 </main>
                 <div style={{ display: 'flex' }}>
                     <Button
-                        loading={addJobProgress}
+                        // loading={addJobProgress}
                         htmlType="submit"
                         name="Save Changes"
                         type

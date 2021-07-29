@@ -11,12 +11,12 @@ export interface ResponseGenerator {
   statusText?: string;
 }
 function* editJob(action: any) {
-  const { data } = action.payload;
+  const { jobId } = action.payload;
   try {
-    const response: ResponseGenerator = yield call(Job.editJob, data);
+    const response: ResponseGenerator = yield call(Job.editJob, jobId);
     console.log(response);
     if (response) {
-      yield put(Actions.editJobSuccess(data));
+      yield put(Actions.editJobSuccess(response.data));
     } else {
       yield put(Actions.editJobFailure('Data Not Found'));
     }
@@ -26,6 +26,6 @@ function* editJob(action: any) {
   }
 }
 
-export default function* addJobSaga() {
+export default function* editJobSaga() {
   yield takeLatest(ActionTypes.EDIT_JOB_PROGRESS, editJob);
 }

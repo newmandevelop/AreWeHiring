@@ -65,7 +65,7 @@ const JobListing = (props: IProps) => {
                   jobId: id,
                 }),
               );
-              history.push('/dashboard/employer/edit-job')
+              history.push('/dashboard/employee/edit-job')
             },
             onCancel() {
               console.log('');

@@ -180,7 +180,8 @@ const PostJob = () => {
             placeholder: 'Select Company',
             fieldType: 'dropDown',
             options: companies,
-            onChange: (value: string) => { getAllRecruiters(value) }
+            onChange: (value: string) => { getAllRecruiters(value) },
+            rules: [{ required: true, message: "This field is required" }]
           })}
           {FormItem({
             name: 'jobTitle',
@@ -188,6 +189,7 @@ const PostJob = () => {
             type: 'text',
             placeholder: 'Enter Job Title',
             fieldType: 'input',
+            rules: [{ required: true, message: "This field is required" }]
           })}
           {/* Location Field */}
           {FormItem({
@@ -206,6 +208,7 @@ const PostJob = () => {
             placeholder: 'FULL TIME',
             fieldType: 'dropDown',
             options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
+            rules: [{ required: true, message: "This field is required" }]
           })}
           {/* Job Category Field */}
           {FormItem({

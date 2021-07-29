@@ -41,7 +41,7 @@ export const FormItem = (props: IProps) => {
   switch (props.fieldType) {
     case 'input':
       return (
-        <Item fieldKey={props.fieldKey} name={props.name}>
+        <Item fieldKey={props.fieldKey} name={props.name} rules={props.rules}>
           <InputField
             label={props.label}
             name={props.name}

@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Typography, List, Modal } from 'antd';
 import styles from './index.module.scss';
-import { CheckOutlined } from '@ant-design/icons'
+import { CheckOutlined, EditOutlined } from '@ant-design/icons'
 import { getUserSession } from '../../utils/sessionStorage';
 import { ExclamationCircleOutlined, DeleteOutlined, RightOutlined, ToTopOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions as ApproveJobAction } from '../../Pages/Employer/ManageJobs/ApproveJob/actions';
 import { Actions as ArchiveJobAction } from '../../Pages/Employer/ManageJobs/ArchiveJob/actions';
 import { Actions as DeleteJobAction } from '../../Pages/Employer/ManageJobs/DeleteJob/actions';
+import { Actions as EditJobAction } from '../../Pages/Employer/ManageJobs/EditJob/actions';
 import { useHistory } from 'react-router-dom';
-import { renewJob } from '../../service/jobs';
+import { editJob } from '../../service/jobs';
 
 
 const { Text, Link } = Typography;
@@ -31,6 +32,7 @@ interface IProps {
   delete?: boolean;
   approve?: boolean;
   archive?: boolean;
+  edit?: boolean
 }
 
 const JobListing = (props: IProps) => {
@@ -52,6 +54,23 @@ const JobListing = (props: IProps) => {
     let user = getUserSession();
     if (user)
       switch (type) {
+        case 'Edit':
+          return confirm({
+            title: 'Do you Want to Edit this Job',
+            icon: <ExclamationCircleOutlined />,
+            // content: 'This job will be approved and show in Approve Jobs List',
+            onOk() {
+              dispatch(
+                EditJobAction.editJobProgress({
+                  jobId: id,
+                }),
+              );
+              history.push('/dashboard/employer/edit-job')
+            },
+            onCancel() {
+              console.log('');
+            },
+          });
         case 'Approve':
           return confirm({
             title: 'Do you Want to Approve this Job',
@@ -154,6 +173,13 @@ const JobListing = (props: IProps) => {
                     </div>
                   </div>
                   <div className={styles.actions}>
+                    {props.edit && item && (
+                      <EditOutlined
+                        className={`${styles.archive} ${styles.icon}`}
+                        title="Edit"
+                        onClick={() => doAction('Edit', item.id)}
+                      />
+                    )}
                     {props.archive && item && (
                       <ToTopOutlined
                         className={`${styles.archive} ${styles.icon}`}

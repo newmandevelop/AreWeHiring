@@ -84,3 +84,17 @@ export const renewJob = async (jobId: any, userId: any) => {
     throw error;
   }
 };
+
+export const editJob = async (jobId: any) => {
+  try {
+    const response = await axios().get(`jobs/byid?id=${jobId}`);
+    if (response) {
+      return response;
+    } else {
+      console.log('Error occurred');
+    }
+  } catch (error) {
+    console.error();
+    throw error;
+  }
+};

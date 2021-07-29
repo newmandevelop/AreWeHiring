@@ -19,6 +19,7 @@ import AllUsers from '../Pages/AllUsers';
 import AddCandidate from '../Pages/Candidate';
 import Employer from '../Pages/Employer/Dashboard';
 import ManageJobs from '../Pages/Employer/ManageJobs';
+import EditJob from '../Pages/Employer/ManageJobs/EditJob'
 import ManageApplications from '../Pages/Employer/ManageApplications';
 import JobApplications from '../Pages/JobApplications'
 import MyApplications from '../Pages/Candidate/MyApplications'
@@ -50,6 +51,11 @@ const Routing = () => {
         exact
         path="/dashboard/employee/post-job"
         component={PostJob}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/edit-job"
+        component={EditJob}
       />
       <DashboardRoute
         exact

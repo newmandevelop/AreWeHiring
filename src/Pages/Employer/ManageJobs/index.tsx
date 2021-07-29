@@ -46,6 +46,7 @@ const ManageJobs = () => {
           approve
           delete
           archive
+          edit
         />
       </div>
       <div className={styles.approveJobs}>

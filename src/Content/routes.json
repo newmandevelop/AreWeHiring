@@ -7,6 +7,7 @@
     "/dashboard/employee/search-candidate",
     "/dashboard/employer",
     "/dashboard/employee/manage-jobs",
+    "/dashboard/employee/edit-job",
     "/dashboard/employee/job-applications",
     "/dashboard/employee/manage-applications",
     "/dashboard/reset-password",

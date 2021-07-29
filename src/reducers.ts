@@ -34,6 +34,9 @@ import archiveJob, {
 import deleteJob, {
   IDeleteJob,
 } from './Pages/Employer/ManageJobs/DeleteJob/reducers';
+import editJob, {
+  IEditJob,
+} from './Pages/Employer/ManageJobs/EditJob/reducers';
 import approvedApplications, {
   IApprovedApplications,
 } from './Pages/Employer/ManageApplications/ApproveApplications/reducers';
@@ -78,6 +81,7 @@ export interface IRootState {
   approveJob: IApproveJob;
   archiveJob: IArchiveJob;
   deleteJob: IDeleteJob;
+  editJob: IEditJob;
   approvedApplications: IApprovedApplications;
   archivedApplications: IArchivedApplications;
   deletedApplications: IDeletedApplications;
@@ -107,6 +111,7 @@ const rootReducer = combineReducers({
   approveJob: approveJob,
   archiveJob: archiveJob,
   deleteJob: deleteJob,
+  editJob: editJob,
   approvedApplications: approvedApplications,
   archivedApplications: archivedApplications,
   deletedApplications: deletedApplications,

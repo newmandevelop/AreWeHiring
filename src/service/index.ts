@@ -19,6 +19,7 @@ import {
   recentJobsSearch,
   jobSpotlight,
   renewJob,
+  editJob,
 } from './jobs';
 import { addCompany } from './companies';
 import { allUsersSearch, addStaff, searchUserByCompany } from './users';
@@ -88,6 +89,7 @@ export const Job = {
   recentJobsSearch,
   jobSpotlight,
   renewJob,
+  editJob,
 };
 
 export const CompanySearch = {

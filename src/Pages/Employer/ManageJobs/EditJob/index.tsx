@@ -1,0 +1,447 @@
+import React, { useEffect, useState } from 'react';
+import Dashboard from '../../../../Containers/Dashboard';
+import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
+import { getAllCompanies } from '../../../../service/companies';
+import styles from './index.module.scss';
+import ReCAPTCHA from 'react-google-recaptcha';
+import {
+    UploadOutlined,
+    MinusCircleOutlined,
+    PlusCircleOutlined,
+} from '@ant-design/icons';
+import { getUserSession } from '../../../../utils/sessionStorage';
+import { useSelector, useDispatch } from 'react-redux';
+import { FormItem } from '../../../../Containers/FormItem/index';
+import { IRootState } from '../../../../reducers';
+// import { Actions } from './actions';
+import Button from '../../../../Components/Button';
+import { searchUserByCompany } from '../../../../service/users';
+const { Item, List } = Form;
+const { Title } = Typography;
+const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+    },
+};
+interface IRoles {
+    role: string;
+}
+interface ICompanies {
+    id: string;
+    name: string;
+}
+const PostJob = () => {
+    let dispatch = useDispatch();
+    const [form] = Form.useForm();
+    const [companies, setCompanies] = useState<[]>([]);
+    const [companyIds, setCompanyIds] = useState<[]>([]);
+    const [recruiters, setRecruiters] = useState<[]>([]);
+    const [recruiterIds, setRecruiterIds] = useState<[]>([]);
+    let formData = new FormData();
+    const {
+        addJobErrorMessage,
+        addJobFailure,
+        addJobSuccess,
+        addJobProgress,
+    } = useSelector((state: IRootState) => state.job);
+
+    const onFinish = (values: any) => {
+        const index = recruiters.findIndex(recruiter => recruiter === values.employer)
+        values.employer = recruiterIds[index]
+        let roles: string[] = [];
+        if (values.rolesAndResponsibilities)
+            values.rolesAndResponsibilities.map((d: IRoles) => {
+                roles.push(d.role);
+            });
+        const userData = getUserSession();
+        if (userData) {
+            let valueForApi = {
+                nameOfJob: values.jobTitle,
+                company: values.company,
+                description: '',
+                location: values.location,
+                jobType: values.jobType,
+                currencySymbol: '$',
+                salaryLowerLimit: values.minimumSalary,
+                salaryUpperLimit: values.maximumSalary,
+                recruiterType: values.recruiterType,
+                rateLowerLimit: values.minimumRate,
+                rateUpperLimit: values.maximumRate,
+                employer: values.employer,
+                industry: values.industry,
+                rolesAndResponsibilities: roles,
+                datePosted: values.openingDate,
+                expiryDate: values.closingDate,
+                jobCategory: values.jobCategory,
+                jobTags: ['Java'],
+                jobUrl: values.application,
+                hoursPerWeek: values.hours,
+                externalLink: values.external,
+                userId: userData,
+            };
+            formData.append('job', JSON.stringify(valueForApi));
+            //   dispatch(
+            //     Actions.addJobProgress({
+            //       data: formData,
+            //     }),
+            //   );
+        } else {
+            alert('User Id not Present');
+        }
+    };
+
+    const logoProps = {
+        beforeUpload: (file: Blob) => {
+            formData.append('jobLogo', file);
+            return false;
+        },
+    };
+    const headerProps = {
+        beforeUpload: (file: any) => {
+            formData.append('headerImage', file);
+            return false;
+        },
+    };
+    const openNotificationWithIcon = (
+        type: 'success' | 'error',
+        description: String | null,
+    ) => {
+        notification[type]({
+            message: 'Notification Title',
+            description: description,
+        });
+    };
+
+    const onReset = () => {
+        form.resetFields();
+    };
+
+    useEffect(() => {
+        if (addJobSuccess) {
+            onReset();
+            openNotificationWithIcon('success', 'Job Added Successfully');
+        } else if (addJobFailure) {
+            openNotificationWithIcon('error', addJobErrorMessage);
+        }
+    }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
+
+    useEffect(() => {
+        const response = getAllCompanies();
+        response.then((data: any) => {
+            const companies: any = [];
+            const ids: any = [];
+            data?.data.map((company: ICompanies) => {
+                companies.push(company.name);
+                ids.push(company.id)
+            });
+            setCompanies(companies);
+            setCompanyIds(ids);
+        });
+    }, []);
+
+    const getAllRecruiters = async (value: string) => {
+        const index = companies.findIndex((company) => company === value)
+        const companyId = companyIds[index]
+        const data = { company: companyId }
+        const response = searchUserByCompany(data);
+        response.then((data: any) => {
+            const recruiters: any = [];
+            const ids: any = [];
+            data && data.map((recruiter: any) => {
+                recruiters.push(recruiter.firstName + " " + recruiter.lastName);
+                ids.push(recruiter.id)
+            });
+            setRecruiters(recruiters);
+            setRecruiterIds(ids);
+        });
+    }
+    return (
+        <Dashboard dashboardName="Employer">
+            <Form
+                {...formItemLayout}
+                form={form}
+                onKeyDown={e => (e.keyCode == 13 ? e.preventDefault() : '')}
+                name="addCandidate"
+                onFinish={onFinish}
+                scrollToFirstError
+            >
+                <Title ellipsis={false} level={4}>
+                    Job Details
+                </Title>
+                <main className={styles.jobPostFieldWrapper}>
+                    {/*Company Name Field */}
+                    {FormItem({
+                        name: 'company',
+                        label: 'Company',
+                        placeholder: 'Select Company',
+                        fieldType: 'dropDown',
+                        options: companies,
+                        onChange: (value: string) => { getAllRecruiters(value) },
+                        rules: [{ required: true, message: "This field is required" }],
+                        initialValue: "Jackson Company"
+                    })}
+                    {FormItem({
+                        name: 'jobTitle',
+                        label: 'Job Title',
+                        type: 'text',
+                        placeholder: 'Enter Job Title',
+                        fieldType: 'input',
+                        rules: [{ required: true, message: "This field is required" }]
+                    })}
+                    {/* Location Field */}
+                    {FormItem({
+                        name: 'location',
+                        label: 'Location',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g London',
+                        fieldType: 'input',
+                    })}
+                    {/*Job Type Field */}
+                    {FormItem({
+                        name: 'jobType',
+                        label: 'Job Type',
+                        type: 'text',
+                        placeholder: 'FULL TIME',
+                        fieldType: 'dropDown',
+                        options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
+                        rules: [{ required: true, message: "This field is required" }]
+                    })}
+                    {/* Job Category Field */}
+                    {FormItem({
+                        name: 'jobCategory',
+                        label: 'Job Category',
+                        type: 'text',
+                        placeholder: 'Choose a Category',
+                        fieldType: 'dropDown',
+                        options: ['Accounting / Finance', 'Software', 'Automotive Jobs', 'Contruction',
+                            'Construction / Facilities', 'Education Training', 'Healthcare', 'Human Resource (HR)', 'Industrial Manufacturing & Engineering',
+                            'Insurance', 'Market and Customer Research', 'Program Management / Project Management',
+                            'Recruiting / Talent Acquisition', 'Restaurant / Food Service', 'Sales & Marketing',
+                            'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
+                    })}
+                    {/* Job Tags Input Field */}
+                    {FormItem({
+                        name: 'jobTags',
+                        label: 'Job Tags',
+                        optional: true,
+                        placeholder: 'e.g PHP, Social Media Management',
+                        fieldType: 'tagField',
+                    })}
+                    {/* Recruiter Type Input Field */}
+                    {FormItem({
+                        name: 'recruiterType',
+                        label: 'Recruiter Type',
+                        optional: true,
+                        placeholder: 'Enter Recruiter Type',
+                        fieldType: 'dropDown',
+                        options: ['EMPLOYER', 'AGENCY'],
+                    })}
+                    {/* Recruiter Type Input Field */}
+                    {FormItem({
+                        name: 'employer',
+                        label: 'Employer',
+                        optional: true,
+                        placeholder: 'Enter Employer',
+                        fieldType: 'dropDown',
+                        options: recruiters,
+                    })}
+                    {/*Industry Input Field */}
+                    {FormItem({
+                        name: 'industry',
+                        label: 'Industry',
+                        optional: true,
+                        placeholder: 'Enter Industry',
+                        fieldType: 'dropDown',
+                        options: [
+                            'High Tech',
+                            'Agriculture',
+                            'Government',
+                            'Arts',
+                            'Construction',
+                            'Consumer Goods',
+                            'Corporate',
+                            'Educational',
+                            'Finance',
+                            'Legal',
+                            'Manufacturing',
+                            'Media',
+                            'Medical',
+                            'Veterinary',
+                            'Non-profit',
+                            'Recreational',
+                            'Service',
+                            'Transportation',
+                        ],
+                    })}
+                    {/* Description Fields */}
+                    {FormItem({
+                        name: 'description',
+                        label: 'Description',
+
+                        fieldType: 'editor',
+                    })}
+                    {/* Roles and Responsibilities */}
+                    <Form.List name="rolesAndResponsibilities">
+                        {(fields, { add, remove }) => (
+                            <>
+                                {FormItem({
+                                    icon: <PlusCircleOutlined />,
+                                    label: 'Add Roles and Responsibility',
+                                    optional: true,
+                                    onClick: () => add(),
+                                    name: 'Add Role and Responsibility',
+                                    fieldType: 'button',
+                                })}
+
+                                {fields.map(({ key, name, fieldKey, ...restField }) => (
+                                    <Space key={key} className={styles.space}>
+                                        {FormItem({
+                                            name: [name, 'role'],
+                                            type: 'text',
+                                            placeholder: 'Enter Role',
+                                            fieldType: 'input',
+                                            fieldKey: [fieldKey, 'role'],
+                                        })}
+
+                                        <MinusCircleOutlined onClick={() => remove(name)} />
+                                    </Space>
+                                ))}
+                            </>
+                        )}
+                    </Form.List>
+                    {/*Application Field */}
+                    {FormItem({
+                        name: 'application',
+                        label: 'Application Email',
+                        type: 'text',
+                        placeholder: 'j.borchardt2021@gmail.com',
+                        fieldType: 'input',
+                    })}
+
+                    {/*Application URL */}
+                    {FormItem({
+                        name: 'applicationUrl',
+                        label: 'Application URL',
+                        type: 'text',
+                        placeholder: 'https://arewehiring.com',
+                        fieldType: 'input',
+                    })}
+                    {/* Minimum rate Field */}
+                    {FormItem({
+                        name: 'closingDate',
+                        label: 'Posting Expiration Date',
+                        type: 'date',
+                        optional: true,
+                        placeholder: 'e.g 20',
+                        fieldType: 'input',
+                    })}
+                    {/* Minimum rate Field */}
+                    {FormItem({
+                        name: 'openingDate',
+                        label: 'Opening Date',
+                        type: 'date',
+                        optional: true,
+                        placeholder: 'e.g 20',
+                        fieldType: 'input',
+                    })}
+                    {/* Minimum rate Field */}
+                    {FormItem({
+                        name: 'minimumRate',
+                        label: 'Minimum rate/h ($)',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g 20',
+                        fieldType: 'input',
+                    })}
+                    {/* Upload Logo Image Button */}
+                    {FormItem({
+                        name: 'jobLogo',
+                        fileProps: { ...logoProps },
+                        label: 'Logo',
+                        icon: <UploadOutlined />,
+                        optional: true,
+                        fileType: 'picture',
+                        placeholder: 'Maximum file size: 50 MB.',
+                        fieldType: 'upload',
+                        btnName: 'Browse',
+                    })}
+                    {/* Maximum rate Field */}
+                    {FormItem({
+                        name: 'maximumRate',
+                        label: 'Maximum rate/h ($)',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g 50',
+                        fieldType: 'input',
+                    })}
+                    {/* Minimum Salary Field */}
+                    {FormItem({
+                        name: 'minimumSalary',
+                        label: 'Minimum Salary/h ($)',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g 20000',
+                        fieldType: 'input',
+                    })}
+                    {/* Maximum Salary Field */}
+                    {FormItem({
+                        name: 'maximumSalary',
+                        label: 'Maximum Salary/h ($)',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g 50000',
+                        fieldType: 'input',
+                    })}
+                    {/* Hours Per Week Field */}
+                    {FormItem({
+                        name: 'hours',
+                        label: 'Hours Per Week',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'e.g 40',
+                        fieldType: 'input',
+                    })}
+                    {/* External "Apply For Job" LinkField */}
+                    {FormItem({
+                        name: 'external',
+                        label: 'External "Apply For Job" Link',
+                        type: 'text',
+                        optional: true,
+                        placeholder: 'http://',
+                        fieldType: 'input',
+                    })}
+                    {/* Upload Header Image Button */}
+                    {FormItem({
+                        name: 'headerImage',
+                        fileProps: { ...headerProps },
+                        label: 'Header Image',
+                        optional: true,
+                        icon: <UploadOutlined />,
+                        placeholder: 'The header image size should be atleast 1750x425',
+                        fieldType: 'upload',
+                        btnName: 'Browse',
+                        fileType: 'picture',
+                    })}
+
+                    <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
+                    <Divider />
+                </main>
+                <div style={{ display: 'flex' }}>
+                    <Button
+                        loading={addJobProgress}
+                        htmlType="submit"
+                        name="Save Changes"
+                        type
+                    />
+                    <Button htmlType="button" onClick={onReset} name="Reset" />
+                </div>
+            </Form>{' '}
+        </Dashboard>
+    );
+};
+export default PostJob;

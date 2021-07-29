@@ -36,6 +36,7 @@ interface IProps {
   | 'dropDown'
   | 'upload';
   fieldKey?: any;
+  initialValue?: string;
 }
 export const FormItem = (props: IProps) => {
   switch (props.fieldType) {
@@ -92,7 +93,7 @@ export const FormItem = (props: IProps) => {
       return (
         <div style={{ marginTop: '2rem' }}>
           <Label optional={props.optional} label={props.label} />
-          <Item name={props.name} rules={props.rules}>
+          <Item name={props.name} rules={props.rules} initialValue={props.initialValue}>
             <Select
               style={{ marginTop: '0.3rem' }}
               placeholder={props.placeholder}

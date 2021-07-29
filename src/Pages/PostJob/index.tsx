@@ -177,7 +177,7 @@ const PostJob = () => {
             type: 'text',
             placeholder: 'FULL TIME',
             fieldType: 'dropDown',
-            options: ['FULLTIME'],
+            options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
           })}
           {/* Job Category Field */}
           {FormItem({
@@ -185,7 +185,12 @@ const PostJob = () => {
             label: 'Job Category',
             type: 'text',
             placeholder: 'Choose a Category',
-            fieldType: 'input',
+            fieldType: 'dropDown',
+            options: ['Accounting / Finance', 'Software', 'Automotive Jobs', 'Contruction',
+          'Construction / Facilities', 'Education Training', 'Healthcare', 'Human Resource (HR)', 'Industrial Manufacturing & Engineering',
+          'Insurance', 'Market and Customer Research', 'Program Management / Project Management',
+          'Recruiting / Talent Acquisition', 'Restaurant / Food Service', 'Sales & Marketing',
+          'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
           })}
           {/* Job Tags Input Field */}
           {FormItem({
@@ -211,12 +216,7 @@ const PostJob = () => {
             optional: true,
             placeholder: 'Enter Employer',
             fieldType: 'dropDown',
-            options: [
-              'Amazon Inc',
-              'Apple Inc',
-              'Jackson Company',
-              'Telepro Group',
-            ],
+            options: companies,
           })}
           {/*Industry Input Field */}
           {FormItem({
@@ -226,10 +226,24 @@ const PostJob = () => {
             placeholder: 'Enter Industry',
             fieldType: 'dropDown',
             options: [
-              'Computer Software',
-              'Accounting',
-              'Banking',
-              'Biotechnology',
+              'High Tech',
+              'Agriculture',
+              'Government',
+              'Arts',
+              'Construction',
+              'Consumer Goods',
+              'Corporate',
+              'Educational',
+              'Finance',
+              'Legal',
+              'Manufacturing',
+              'Media',
+              'Medical',
+              'Veterinary',
+              'Non-profit',
+              'Recreational',
+              'Service',
+              'Transportation',
             ],
           })}
           {/* Description Fields */}
@@ -271,15 +285,24 @@ const PostJob = () => {
           {/*Application Field */}
           {FormItem({
             name: 'application',
-            label: 'Application Email/URL',
+            label: 'Application Email',
             type: 'text',
             placeholder: 'j.borchardt2021@gmail.com',
+            fieldType: 'input',
+          })}
+
+                    {/*Application URL */}
+          {FormItem({
+            name: 'applicationUrl',
+            label: 'Application URL',
+            type: 'text',
+            placeholder: 'https://arewehiring.com',
             fieldType: 'input',
           })}
           {/* Minimum rate Field */}
           {FormItem({
             name: 'closingDate',
-            label: 'Expiry Date',
+            label: 'Posting Expiration Date',
             type: 'date',
             optional: true,
             placeholder: 'e.g 20',

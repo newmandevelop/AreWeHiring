@@ -23,6 +23,8 @@ import ManageApplications from '../Pages/Employer/ManageApplications';
 import JobApplications from '../Pages/JobApplications'
 import MyApplications from '../Pages/Candidate/MyApplications'
 import ApplicationsForJob from '../Pages/Employer/ManageJobs/ApplicationsForJob'
+import AddStaff from '../Pages/Employer/AddStaff';
+import ManageStaff from '../Pages/Employer/ManageStaff';
 import CandidateDetailsForm from '../Pages/Candidate/DetailsForm'
 import UserProfile from '../Pages/UserProfile'
 const Routing = () => {
@@ -32,7 +34,7 @@ const Routing = () => {
       <Route exact path="/registration" component={RegistrationForm} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/forgotPassword" component={ForgotPassword} />
-      <Route exact path="/employee/add-company" component={AddCompany} />
+      <Route exact path="/employee/add-organization" component={AddCompany} />
       <Route exact path="/candidate/fill-details" component={CandidateDetailsForm} />
       <DashboardRoute
         // exact
@@ -56,7 +58,7 @@ const Routing = () => {
       />
       <DashboardRoute
         exact
-        path="/dashboard/employee/all-companies"
+        path="/dashboard/employee/manage-organizations"
         component={AllCompanies}
       />
       <DashboardRoute
@@ -81,6 +83,16 @@ const Routing = () => {
       />
       <DashboardRoute
         exact
+        path="/dashboard/employee/add-staff"
+        component={AddStaff}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/employee/manage-staff"
+        component={ManageStaff}
+      />
+      <DashboardRoute
+        exact
         path="/dashboard/candidate/my-applications"
         component={MyApplications}
       />
@@ -90,12 +102,12 @@ const Routing = () => {
         component={SearchCandidate}
       />
 
-      {/* <DashboardRoute
+      <DashboardRoute
         exact
-        path="/dashboard/employee/add-company"
+        path="/dashboard/employee/add-organization"
         component={AddCompany}
       />
-      <DashboardRoute
+      {/* <DashboardRoute
         exact
         path="/dashboard/employee/fill-details"
         component={AddCompany}

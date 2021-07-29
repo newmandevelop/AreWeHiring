@@ -2,8 +2,8 @@
   "employee": [
     "/dashboard/employee/post-job",
     "/dashboard/employee/all-users",
-    "/dashboard/employee/all-companies",
-    "/dashboard/employee/add-company",
+    "/dashboard/employee/manage-organizations",
+    "/dashboard/employee/add-organization",
     "/dashboard/employee/search-candidate",
     "/dashboard/employer",
     "/dashboard/employee/manage-jobs",
@@ -11,7 +11,9 @@
     "/dashboard/employee/manage-applications",
     "/dashboard/reset-password",
     "/dashboard/employee/manage-jobs/applications",
-    "/employee/add-company",
+    "/dashboard/employee/add-staff",
+    "/dashboard/employee/manage-staff",
+    "/employee/add-organization",
     "/dashboard/profile"
   ],
   "candidate": [

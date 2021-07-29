@@ -136,13 +136,14 @@ const JobListing = (props: IProps) => {
                       </Text>
                       <Text className={styles.expiry}>
                         Expiry {moment(item.expiryDate).format('MMM DD, YYYY')}
-                        {
+                        {/* {
                           item && isJobExpired(item) &&
                           (<p className={styles.link}
+                            style={{ cursor: 'pointer' }}
                             onClick={() => { renewJob(item.id) }}
                           >
                             <span style={{ color: 'red' }}>Expired!</span> Click to renew</p>)
-                        }
+                        } */}
                       </Text>
                     </div>
                     <div className={styles.title}>
@@ -187,6 +188,15 @@ const JobListing = (props: IProps) => {
                         }}
                       />
                     )}
+
+                    {
+                      item && isJobExpired(item) &&
+                      (<p className={styles.link}
+                        style={{ cursor: 'pointer', marginTop: '1rem' }}
+                        onClick={() => { renewJob(item.id) }}
+                      >
+                        <span style={{ color: 'red' }}>Expired!</span> Click to renew</p>)
+                    }
 
                   </div>
                 </div>

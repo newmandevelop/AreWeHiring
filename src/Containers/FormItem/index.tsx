@@ -5,7 +5,7 @@ import Button from '../../Components/Button';
 import TextEditor from '../../Components/TextEditor';
 import TagsField from '../../Components/InputFieldsWithTags';
 import Label from '../../Components/Label';
-import { Form, Select, Upload } from 'antd';
+import { Form, Select, Upload, Radio } from 'antd';
 const { Item } = Form;
 const { Option } = Select;
 interface IProps {
@@ -34,7 +34,8 @@ interface IProps {
   | 'editor'
   | 'tagField'
   | 'dropDown'
-  | 'upload';
+  | 'upload'
+  | 'radioButton';
   fieldKey?: any;
   initialValue?: string | [] | number;
 }
@@ -128,6 +129,21 @@ export const FormItem = (props: IProps) => {
               name={props.btnName}
             />{' '}
           </Upload>
+        </Item>
+      );
+
+    case 'radioButton':
+      return (
+        <Item name={props.name}>
+          <Radio.Group>
+            {props.options?.map((d, i) => {
+              return (
+                <Radio key={i} value={d}>
+                  {d}
+                </Radio>
+              );
+            })}
+          </Radio.Group>
         </Item>
       );
     default:

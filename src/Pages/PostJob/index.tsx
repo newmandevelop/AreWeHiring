@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Dashboard from '../../Containers/Dashboard';
-import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
+import { Radio, Divider, Form, Upload, notification, Typography, Space, Input } from 'antd';
 import { getAllCompanies } from '../../service/companies';
 import styles from './index.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -41,6 +41,8 @@ const PostJob = () => {
   const [companyIds, setCompanyIds] = useState<[]>([]);
   const [recruiters, setRecruiters] = useState<[]>([]);
   const [recruiterIds, setRecruiterIds] = useState<[]>([]);
+  const [expiryDate, setExpiryDate] = useState('')
+  const [value, setValue] = useState()
   let formData = new FormData();
   const {
     addJobErrorMessage,
@@ -84,11 +86,12 @@ const PostJob = () => {
         userId: userData,
       };
       formData.append('job', JSON.stringify(valueForApi));
-      dispatch(
-        Actions.addJobProgress({
-          data: formData,
-        }),
-      );
+      console.log(valueForApi)
+      // dispatch(
+      //   Actions.addJobProgress({
+      //     data: formData,
+      //   }),
+      // );
     } else {
       alert('User Id not Present');
     }
@@ -331,14 +334,28 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Minimum rate Field */}
-          {FormItem({
-            name: 'closingDate',
-            label: 'Posting Expiration Date',
-            type: 'date',
-            optional: true,
-            placeholder: 'e.g 20',
-            fieldType: 'input',
-          })}
+          <h6>Posting Expiration Date</h6>
+          <Form.Item name="closingDate" rules={[
+            {
+              required: true,
+              message: 'This field is required!',
+            },
+          ]}>
+            <Radio.Group value={value} onChange={(e) => setValue(e.target.value)}>
+              <Radio value={'No Expiry'}>No Expiry Date</Radio>
+              <Radio value={expiryDate}>
+                <Input type='date' value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)}></Input>
+                {/* {FormItem({
+                  name: 'closingDate',
+                  label: 'Posting Expiration Date',
+                  type: 'date',
+                  optional: true,
+                  fieldType: 'input',
+                })} */}
+              </Radio>
+            </Radio.Group>
+          </Form.Item>
+
           {/* Minimum rate Field */}
           {FormItem({
             name: 'openingDate',

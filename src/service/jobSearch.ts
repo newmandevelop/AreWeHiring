@@ -29,7 +29,7 @@ export const allJobsSearch = async (limit: number) => {
 interface findJob {
   what?: string;
   where?: string;
-  limit?: any
+  limit?: any;
 }
 
 export const findJob = async (data: findJob) => {
@@ -48,6 +48,7 @@ export const findJob = async (data: findJob) => {
 export const jobsInDraft = async (userId: string) => {
   try {
     const response = await axios().get(`/jobs/jobsindraft?userId=${userId}`);
+    console.log('draft', response.data);
     if (response) {
       return response;
     }
@@ -58,6 +59,7 @@ export const jobsInDraft = async (userId: string) => {
 export const jobsInApprove = async (userId: string) => {
   try {
     const response = await axios().get(`/jobs/jobsapproved?userId=${userId}`);
+    console.log('approve', response.data);
     if (response) {
       return response;
     }
@@ -81,6 +83,7 @@ export const approveJob = async (userId: string, jobId: string) => {
 export const jobsInArchive = async (userId: string) => {
   try {
     const response = await axios().get(`/jobs/jobsarchived?userId=${userId}`);
+    console.log('archive', response.data);
     if (response) {
       return response;
     }
@@ -103,6 +106,7 @@ export const archiveJob = async (userId: string, jobId: string) => {
 export const jobsInDelete = async (userId: string) => {
   try {
     const response = await axios().get(`/jobs/jobsdeleted?userId=${userId}`);
+    console.log('delete', response.data);
     if (response) {
       return response;
     }

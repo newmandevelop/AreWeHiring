@@ -25,11 +25,11 @@ const CustomSider = () => {
   return (
     <Sider width={250} className={styles.Sider}>
       {role === CANDIDATE && (
-        <Menu className={styles.menu}>
+        <Menu className={styles.menu} defaultSelectedKeys={['/']} selectedKeys={[window.location.pathname]}>
           {candidateLinks.links.map((link: Links, index) => {
             return (
               <Item
-                key={index}
+                key={link.link}
                 className={
                   link.type === 'simple'
                     ? styles.simpleSideLink
@@ -66,11 +66,12 @@ const CustomSider = () => {
       )}
 
       {(role === EMPLOYER || role === RECRUITER) && (
-        <Menu className={styles.menu}>
+        <Menu className={styles.menu} defaultSelectedKeys={['/']} selectedKeys={[window.location.pathname]}>
           {employerLinks.links.map((link: Links, index) => {
+            console.log('links', link)
             return (
               <Item
-                key={index}
+                key={link.link}
                 className={
                   link.type === 'simple'
                     ? styles.simpleSideLink

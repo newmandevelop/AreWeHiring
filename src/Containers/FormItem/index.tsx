@@ -86,6 +86,7 @@ export const FormItem = (props: IProps) => {
             name={props.name}
             optional={props.optional}
             placeholder={props.placeholder}
+            initialValue={props.initialValue}
           />
         </Item>
       );

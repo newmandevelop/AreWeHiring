@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import Dashboard from '../../../../Containers/Dashboard';
 import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
 import { getAllCompanies } from '../../../../service/companies';
@@ -74,7 +75,6 @@ const PostJob = () => {
         updateJobErrorMessage,
         updateJobFailure,
         updateJobSuccess,
-        updateJobProgress,
         editJobData
     } = useSelector((state: IRootState) => state.editJob);
     const onFinish = (values: any) => {
@@ -176,12 +176,17 @@ const PostJob = () => {
             setRecruiterIds(ids);
         });
     }
+    const getJobTags = async () => {
+
+    }
     useEffect(() => {
         let tags = ""
-        editJobData.jobTags?.map(job => { tags += job + ", "; })
-        setJobTags(tags)
+        editJobData.jobTags?.map(job => { tags += job + ", "; setJobTags(tags) })
         form.resetFields()
-    }, [editJobData]);
+    }, [editJobData.jobTags]);
+    useEffect(() => {
+        form.resetFields()
+    }, [jobTags])
 
     return (
         <Dashboard dashboardName="Employer">

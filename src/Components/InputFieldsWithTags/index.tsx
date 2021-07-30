@@ -8,6 +8,7 @@ interface IProps {
   placeholder?: any;
   label?: String;
   optional?: boolean;
+  initialValue?: string | [] | number
 }
 const TagsField = (props: IProps) => {
   const [tags, setTags] = useState<Array<string>>([]);
@@ -47,11 +48,12 @@ const TagsField = (props: IProps) => {
           <li>
             <Input
               className={styles.input}
-              value={inputText}
+              value={inputText !== '' ? inputText : props.initialValue}
               onChange={e => setInputText(e.target.value)}
               onKeyDown={inputKeyDown}
               type="text"
               placeholder={props.placeholder}
+              defaultValue="asdas"
             />
           </li>
         </ul>

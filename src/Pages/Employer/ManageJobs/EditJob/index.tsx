@@ -13,10 +13,10 @@ import { getUserSession } from '../../../../utils/sessionStorage';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormItem } from '../../../../Containers/FormItem/index';
 import { IRootState } from '../../../../reducers';
-// import { Actions } from './actions';
+import { Actions } from './actions';
 import Button from '../../../../Components/Button';
 import { searchUserByCompany } from '../../../../service/users';
-import { updateJob } from '../../../../service/jobs';
+import { useHistory } from 'react-router';
 const { Item, List } = Form;
 const { Title } = Typography;
 const TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
@@ -62,6 +62,7 @@ interface IEditJobData {
 }
 const PostJob = () => {
     let dispatch = useDispatch();
+    let history = useHistory();
     const [form] = Form.useForm();
     const [companies, setCompanies] = useState<[]>([]);
     const [companyIds, setCompanyIds] = useState<[]>([]);
@@ -70,56 +71,40 @@ const PostJob = () => {
     let [jobTags, setJobTags] = useState("")
     let formData = new FormData();
     const {
-        editJobErrorMessage,
-        editJobFailure,
-        editJobSuccess,
-        editJobProgress,
+        updateJobErrorMessage,
+        updateJobFailure,
+        updateJobSuccess,
+        updateJobProgress,
         editJobData
     } = useSelector((state: IRootState) => state.editJob);
     const onFinish = (values: any) => {
-        const index = recruiters.findIndex(recruiter => recruiter === values.employer)
-        values.employer = recruiterIds[index]
-        let roles: string[] = [];
-        if (values.rolesAndResponsibilities)
-            values.rolesAndResponsibilities.map((d: IRoles) => {
-                roles.push(d.role);
-            });
+        // const index = recruiters.findIndex(recruiter => recruiter === values.employer)
+        // values.employer = recruiterIds[index]
+        // let roles: string[] = [];
+        // if (values.rolesAndResponsibilities)
+        //     values.rolesAndResponsibilities.map((d: IRoles) => {
+        //         roles.push(d.role);
+        //     });
         const userData = getUserSession();
         if (userData) {
             let valueForApi = {
-                nameOfJob: values.jobTitle,
+                nameOfJob: values.nameOfJob,
                 company: values.company,
-                description: '',
+                description: values.description,
                 location: values.location,
                 jobType: values.jobType,
                 currencySymbol: '$',
-                salaryLowerLimit: values.minimumSalary,
-                salaryUpperLimit: values.maximumSalary,
+                salaryLowerLimit: values.salaryLowerLimit,
+                salaryUpperLimit: values.salaryUpperLimit,
                 recruiterType: values.recruiterType,
-                rateLowerLimit: values.minimumRate,
-                rateUpperLimit: values.maximumRate,
-                employer: values.employer,
-                industry: values.industry,
-                // rolesAndResponsibilities: roles,
-                datePosted: values.openingDate,
-                expiryDate: values.closingDate,
-                jobCategory: values.jobCategory,
-                jobTags: ['Java'],
-                jobUrl: values.application,
-                hoursPerWeek: values.hours,
-                externalLink: values.external,
-                userId: userData,
+                employer: values.employer
             };
-            formData.append('job', JSON.stringify(valueForApi));
-            console.log(values)
-            const response = updateJob(editJobData.id, values)
-            response.then(res => console.log(res))
-                .catch(error => console.log(error))
-            //   dispatch(
-            //     Actions.addJobProgress({
-            //       data: formData,
-            //     }),
-            //   );
+            dispatch(
+                Actions.updateJobProgress({
+                    jobId: editJobData.id,
+                    data: valueForApi,
+                }),
+            );
         } else {
             alert('User Id not Present');
         }
@@ -151,14 +136,15 @@ const PostJob = () => {
         form.resetFields();
     };
 
-    // useEffect(() => {
-    //     if (addJobSuccess) {
-    //         onReset();
-    //         openNotificationWithIcon('success', 'Job Added Successfully');
-    //     } else if (addJobFailure) {
-    //         openNotificationWithIcon('error', addJobErrorMessage);
-    //     }
-    // }, [addJobSuccess, addJobFailure, addJobErrorMessage]);
+    useEffect(() => {
+        if (updateJobSuccess) {
+            onReset();
+            openNotificationWithIcon('success', 'Job Added Successfully');
+            history.push('/dashboard/employee/manage-jobs')
+        } else if (updateJobFailure) {
+            openNotificationWithIcon('error', updateJobErrorMessage);
+        }
+    }, [updateJobSuccess, updateJobFailure, updateJobErrorMessage]);
 
     useEffect(() => {
         const response = getAllCompanies();
@@ -223,7 +209,7 @@ const PostJob = () => {
                         initialValue: editJobData.company
                     })}
                     {FormItem({
-                        name: 'jobTitle',
+                        name: 'nameOfJob',
                         label: 'Job Title',
                         type: 'text',
                         placeholder: 'Enter Job Title',
@@ -334,7 +320,7 @@ const PostJob = () => {
                         initialValue: editJobData.description
                     })}
                     {/* Roles and Responsibilities */}
-                    {/* <Form.List name="rolesAndResponsibilities">
+                    <Form.List name="rolesAndResponsibilities">
                         {(fields, { add, remove }) => (
                             <>
                                 {FormItem({
@@ -361,7 +347,7 @@ const PostJob = () => {
                                 ))}
                             </>
                         )}
-                    </Form.List> */}
+                    </Form.List>
                     {/*Application Field */}
                     {/* {FormItem({
                         name: 'application',
@@ -412,7 +398,7 @@ const PostJob = () => {
                         initialValue: editJobData.rateLowerLimit
                     })}
                     {/* Upload Logo Image Button */}
-                    {/* {FormItem({
+                    {FormItem({
                         name: 'jobLogo',
                         fileProps: { ...logoProps },
                         label: 'Logo',
@@ -422,7 +408,7 @@ const PostJob = () => {
                         placeholder: 'Maximum file size: 50 MB.',
                         fieldType: 'upload',
                         btnName: 'Browse',
-                    })} */}
+                    })}
                     {/* Maximum rate Field */}
                     {FormItem({
                         name: 'maximumRate',
@@ -435,7 +421,7 @@ const PostJob = () => {
                     })}
                     {/* Minimum Salary Field */}
                     {FormItem({
-                        name: 'minimumSalary',
+                        name: 'salaryLowerLimit',
                         label: 'Minimum Salary/h ($)',
                         type: 'text',
                         optional: true,
@@ -445,7 +431,7 @@ const PostJob = () => {
                     })}
                     {/* Maximum Salary Field */}
                     {FormItem({
-                        name: 'maximumSalary',
+                        name: 'salaryUpperLimit',
                         label: 'Maximum Salary/h ($)',
                         type: 'text',
                         optional: true,
@@ -474,7 +460,7 @@ const PostJob = () => {
                         initialValue: editJobData.externalLink
                     })}
                     {/* Upload Header Image Button */}
-                    {/* {FormItem({
+                    {FormItem({
                         name: 'headerImage',
                         fileProps: { ...headerProps },
                         label: 'Header Image',
@@ -484,7 +470,7 @@ const PostJob = () => {
                         fieldType: 'upload',
                         btnName: 'Browse',
                         fileType: 'picture',
-                    })} */}
+                    })}
 
                     <ReCAPTCHA theme="light" sitekey={TEST_SITE_KEY} />
                     <Divider />

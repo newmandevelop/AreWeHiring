@@ -31,7 +31,11 @@ export interface IEditJob {
   editJobProgress: boolean;
   editJobSuccess: boolean;
   editJobFailure: boolean;
+  updateJobProgress: boolean;
+  updateJobSuccess: boolean;
+  updateJobFailure: boolean;
   editJobErrorMessage: null | String;
+  updateJobErrorMessage: null | String;
   editJobData: IEditJobData;
 }
 const initialState: IEditJob = {
@@ -39,6 +43,10 @@ const initialState: IEditJob = {
   editJobSuccess: false,
   editJobFailure: false,
   editJobErrorMessage: null,
+  updateJobProgress: false,
+  updateJobSuccess: false,
+  updateJobFailure: false,
+  updateJobErrorMessage: null,
   editJobData: {},
 };
 
@@ -53,7 +61,6 @@ export default (state = initialState, action: Action) => {
       };
     }
     case ActionTypes.EDIT_JOB_SUCCESS: {
-      console.log('success payload', action.payload);
       return {
         ...state,
         editJobProgress: false,
@@ -69,6 +76,32 @@ export default (state = initialState, action: Action) => {
         editJobSuccess: false,
         editJobFailure: true,
         editJobErrorMessage: action.payload,
+      };
+    }
+
+    case ActionTypes.UPDATE_JOB_PROGRESS: {
+      return {
+        ...state,
+        updateJobProgress: true,
+        updateJobSuccess: false,
+        updateJobFailure: false,
+      };
+    }
+    case ActionTypes.UPDATE_JOB_SUCCESS: {
+      return {
+        ...state,
+        updateJobProgress: false,
+        updateJobSuccess: true,
+        updateJobFailure: false,
+      };
+    }
+    case ActionTypes.UPDATE_JOB_FAILURE: {
+      return {
+        ...state,
+        updateJobProgress: false,
+        updateJobSuccess: false,
+        updateJobFailure: true,
+        updateJobErrorMessage: action.payload,
       };
     }
 

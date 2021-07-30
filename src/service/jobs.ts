@@ -101,11 +101,9 @@ export const editJob = async (jobId: any) => {
 };
 
 export const updateJob = async (jobId: any, data: any) => {
-  console.log(data);
   try {
     const response = await axios().post(`jobs/update?id=${jobId}`, data);
     if (response) {
-      console.log('api res', response);
       return response;
     } else {
       console.log('Error occurred');

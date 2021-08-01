@@ -27,6 +27,11 @@
       "type": "simple"
     },
     {
+      "name": "Search Jobs",
+      "link": "/dashboard/candidate/search-jobs",
+      "type": "simple"
+    },
+    {
       "name": "Manage Resumes",
       "link": "/dashboard/candidate",
       "type": "simple"

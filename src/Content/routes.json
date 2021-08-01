@@ -21,6 +21,7 @@
     "/jobs",
     "/dashboard/candidate/add-data",
     "/dashboard/candidate/fill-details",
+    "/dashboard/candidate/search-jobs",
     "/job-apply",
     "/jobs/:id",
     "/dashboard/candidate",

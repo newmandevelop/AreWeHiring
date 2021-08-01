@@ -37,30 +37,6 @@ interface ICompanies {
     name: string;
 }
 
-interface IEditJobData {
-    company: string,
-    datePosted: string,
-    employer: string,
-    externalLink: string,
-    expiryDate: string,
-    headerDownloadUri: string,
-    headerImage: any,
-    hoursPerWork: number,
-    industry: string,
-    jobCategory: string,
-    jobLogo: any,
-    jobTags: [],
-    jobType: string,
-    jobUrl: string,
-    location: string,
-    nameOfJob: string,
-    rateLowerLimit: number,
-    rateUpperLimit: number,
-    recruiterType: string,
-    rolesAndResponsibilities: [],
-    salaryLowerLimit: number,
-    salaryUpperLimit: number
-}
 const PostJob = () => {
     let dispatch = useDispatch();
     let history = useHistory();
@@ -80,11 +56,11 @@ const PostJob = () => {
     const onFinish = (values: any) => {
         // const index = recruiters.findIndex(recruiter => recruiter === values.employer)
         // values.employer = recruiterIds[index]
-        // let roles: string[] = [];
-        // if (values.rolesAndResponsibilities)
-        //     values.rolesAndResponsibilities.map((d: IRoles) => {
-        //         roles.push(d.role);
-        //     });
+        let roles: string[] = [];
+        if (values.rolesAndResponsibilities)
+            values.rolesAndResponsibilities.map((d: IRoles) => {
+                roles.push(d.role);
+            });
         const userData = getUserSession();
         if (userData) {
             let valueForApi = {
@@ -97,8 +73,19 @@ const PostJob = () => {
                 salaryLowerLimit: values.salaryLowerLimit,
                 salaryUpperLimit: values.salaryUpperLimit,
                 recruiterType: values.recruiterType,
-                employer: values.employer
+                rateLowerLimit: values.minimumRate,
+                rateUpperLimit: values.maximumRate,
+                employer: values.employer,
+                datePosted: values.openingDate,
+                expiryDate: values.closingDate,
+                jobTags: ["Java", "PHP"],
+                rolesAndResponsibilities: roles,
+                jobUrl: values.application,
+                hoursPerWeek: values.hours,
+                externalLink: values.external,
+                userId: userData,
             };
+            console.log(valueForApi)
             dispatch(
                 Actions.updateJobProgress({
                     jobId: editJobData.id,
@@ -139,7 +126,7 @@ const PostJob = () => {
     useEffect(() => {
         if (updateJobSuccess) {
             onReset();
-            openNotificationWithIcon('success', 'Job Added Successfully');
+            openNotificationWithIcon('success', 'Job Updated Successfully');
             history.push('/dashboard/employee/manage-jobs')
         } else if (updateJobFailure) {
             openNotificationWithIcon('error', updateJobErrorMessage);
@@ -176,17 +163,14 @@ const PostJob = () => {
             setRecruiterIds(ids);
         });
     }
-    const getJobTags = async () => {
 
-    }
     useEffect(() => {
+        console.log('roles', editJobData.rolesAndResponsibilities)
         let tags = ""
-        editJobData.jobTags?.map(job => { tags += job + ", "; setJobTags(tags) })
+        editJobData.jobTags?.map(job => { tags += job + ", "; })
+        setJobTags(tags)
         form.resetFields()
     }, [editJobData.jobTags]);
-    useEffect(() => {
-        form.resetFields()
-    }, [jobTags])
 
     return (
         <Dashboard dashboardName="Employer">
@@ -325,7 +309,7 @@ const PostJob = () => {
                         initialValue: editJobData.description
                     })}
                     {/* Roles and Responsibilities */}
-                    <Form.List name="rolesAndResponsibilities">
+                    <Form.List name="rolesAndResponsibilities" initialValue={editJobData.rolesAndResponsibilities}>
                         {(fields, { add, remove }) => (
                             <>
                                 {FormItem({
@@ -354,14 +338,14 @@ const PostJob = () => {
                         )}
                     </Form.List>
                     {/*Application Field */}
-                    {/* {FormItem({
+                    {FormItem({
                         name: 'application',
                         label: 'Application Email',
                         type: 'text',
                         placeholder: 'j.borchardt2021@gmail.com',
                         fieldType: 'input',
-                        initialValue: editJobData.
-                    })} */}
+                        // initialValue: editJobData.
+                    })}
 
                     {/*Application URL */}
                     {/* {FormItem({

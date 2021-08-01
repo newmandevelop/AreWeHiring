@@ -132,20 +132,6 @@ export const FormItem = (props: IProps) => {
         </Item>
       );
 
-    case 'radioButton':
-      return (
-        <Item name={props.name}>
-          <Radio.Group>
-            {props.options?.map((d, i) => {
-              return (
-                <Radio key={i} value={d}>
-                  {d}
-                </Radio>
-              );
-            })}
-          </Radio.Group>
-        </Item>
-      );
     default:
       return <></>;
   }

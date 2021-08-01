@@ -3,17 +3,18 @@ import { Tag, Input } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import Label from './../Label/index';
+import { useEffect } from 'react';
 interface IProps {
   name?: any;
   placeholder?: any;
   label?: String;
   optional?: boolean;
-  initialValue?: string | [] | number
+  initialValue?: string | [] | number;
 }
 const TagsField = (props: IProps) => {
   const [tags, setTags] = useState<Array<string>>([]);
 
-  const [inputText, setInputText] = useState<string>('');
+  const [inputText, setInputText] = useState<string>(`${props.initialValue}`);
 
   const inputKeyDown = (e: any) => {
     if (e.key === 'Enter') {
@@ -27,7 +28,9 @@ const TagsField = (props: IProps) => {
       }
     }
   };
-
+  useEffect(() => {
+    console.log("tags", tags)
+  }, [inputText])
   return (
     <div className={styles.tagsInput}>
       <Label optional={props.optional} label={props.label} />
@@ -48,12 +51,11 @@ const TagsField = (props: IProps) => {
           <li>
             <Input
               className={styles.input}
-              value={inputText !== '' ? inputText : props.initialValue}
+              value={inputText}
               onChange={e => setInputText(e.target.value)}
               onKeyDown={inputKeyDown}
               type="text"
               placeholder={props.placeholder}
-              defaultValue="asdas"
             />
           </li>
         </ul>

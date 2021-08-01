@@ -86,12 +86,11 @@ const PostJob = () => {
         userId: userData,
       };
       formData.append('job', JSON.stringify(valueForApi));
-      console.log(valueForApi)
-      // dispatch(
-      //   Actions.addJobProgress({
-      //     data: formData,
-      //   }),
-      // );
+      dispatch(
+        Actions.addJobProgress({
+          data: formData,
+        }),
+      );
     } else {
       alert('User Id not Present');
     }

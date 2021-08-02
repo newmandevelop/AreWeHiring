@@ -10,6 +10,7 @@ import {
   jobsInArchive,
   deleteJob,
   jobsInDelete,
+  advanceSearch,
 } from './jobSearch';
 import { allCompaniesSearch } from './companySearch';
 import { addCandidate, applyJob, getNotifications } from './candidate';
@@ -62,6 +63,7 @@ export const JobSearch = {
   jobsInArchive,
   deleteJob,
   jobsInDelete,
+  advanceSearch,
 };
 
 export const ApplicationSearch = {

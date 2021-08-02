@@ -4,7 +4,7 @@ import Button from '../../../Components/Button';
 import { FormItem } from '../../../Containers/FormItem/index';
 import JobCard from '../../../Components/JobCard';
 import { getAllCompanies } from '../../../service/companies';
-
+import { JobSearch } from '../../../service'
 
 interface ICompanies {
     id: string;
@@ -14,57 +14,82 @@ interface ICompanies {
 export default function SearchJob() {
     const [state, setState] = useState({})
     const [companies, setCompanies] = useState<[]>([]);
+    const [searchedJobs, setSearchedJobs] = useState([])
 
-    const allJobsData: any = [
-        {
-            nameOfJob: "Senior Python Developer",
-            jobType: "FREELANCE",
-            location: "Seattle, Washington",
-            employer: "Jackson Company",
-            currencySymbol: "$",
-            datePosted: "Aug 2nd 2021",
-            description: "",
-            id: "1",
-            salaryLowerLimit: "20000",
-            salaryUpperLimit: "50000"
-        },
-        {
-            nameOfJob: "Senior Designer",
-            jobType: "FULL TIME",
-            location: "Seattle, Washington",
-            employer: "Jackson Company",
-            currencySymbol: "$",
-            datePosted: "Aug 2nd 2021",
-            description: "",
-            id: "1",
-            salaryLowerLimit: "20000",
-            salaryUpperLimit: "50000"
-        },
-        {
-            nameOfJob: "Senior Developer",
-            jobType: "FREELANCE",
-            location: "Seattle, Washington",
-            employer: "Jackson Company",
-            currencySymbol: "$",
-            datePosted: "Aug 2nd 2021",
-            description: "",
-            id: "1",
-            salaryLowerLimit: "20000",
-            salaryUpperLimit: "50000"
-        },
-        {
-            nameOfJob: "Senior Developer",
-            jobType: "FREELANCE",
-            location: "Seattle, Washington",
-            employer: "Jackson Company",
-            currencySymbol: "$",
-            datePosted: "Aug 2nd 2021",
-            description: "",
-            id: "1",
-            salaryLowerLimit: "20000",
-            salaryUpperLimit: "50000"
+    const jobSearch = async () => {
+        try {
+            const response = await JobSearch.advanceSearch(state)
+            if (response) {
+                setSearchedJobs(response.data)
+            }
         }
-    ]
+        catch (error) {
+            console.error();
+        }
+    }
+
+    const setJobType = (value: string) => {
+        if (value === "FREELANCE") {
+            setState({
+                ...state,
+                jobType: {
+                    freelance: true,
+                    fullTime: false,
+                    internship: false,
+                    partTime: false,
+                    temporary: false
+                }
+            })
+        }
+        else if (value === "FULLTIME") {
+            setState({
+                ...state,
+                jobType: {
+                    freelance: false,
+                    fullTime: true,
+                    internship: false,
+                    partTime: false,
+                    temporary: false
+                }
+            })
+        }
+        else if (value === "INTERNSHIP") {
+            setState({
+                ...state,
+                jobType: {
+                    freelance: false,
+                    fullTime: false,
+                    internship: true,
+                    partTime: false,
+                    temporary: false
+                }
+            })
+        }
+        else if (value === "PARTTIME") {
+            setState({
+                ...state,
+                jobType: {
+                    freelance: false,
+                    fullTime: false,
+                    internship: false,
+                    partTime: true,
+                    temporary: false
+                }
+            })
+        }
+        else if (value === "TEMPORARY") {
+            setState({
+                ...state,
+                jobType: {
+                    freelance: false,
+                    fullTime: false,
+                    internship: false,
+                    partTime: false,
+                    temporary: true
+                }
+            })
+        }
+    }
 
     useEffect(() => {
         const response = getAllCompanies();
@@ -126,46 +151,7 @@ export default function SearchJob() {
                             fieldType: 'dropDown',
                             options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
                             rules: [{ required: true, message: "This field is required" }],
-                            onChange: (value: string) => {
-                                value = value.toLowerCase();
-                                if (value === "freelance") {
-                                    setState({
-                                        ...state,
-                                        jobType: {
-                                            freelance: true,
-                                            fullTime: false,
-                                            internship: false,
-                                            partTime: false,
-                                            temporary: false
-                                        }
-                                    })
-                                }
-                                else if (value === "fullTime") {
-                                    setState({
-                                        ...state,
-                                        jobType: {
-                                            freelance: false,
-                                            fullTime: true,
-                                            internship: false,
-                                            partTime: false,
-                                            temporary: false
-                                        }
-                                    })
-                                }
-                                else if (value === "internship") {
-                                    setState({
-                                        ...state,
-                                        jobType: {
-                                            freelance: false,
-                                            fullTime: false,
-                                            internship: true,
-                                            partTime: false,
-                                            temporary: false
-                                        }
-                                    })
-                                }
-                                setState({ ...state, jobType: { value: true } })
-                            },
+                            onChange: (value: string) => { setJobType(value) },
                         })}
                     </Col>
                 </Row>
@@ -242,14 +228,14 @@ export default function SearchJob() {
                             htmlType="submit"
                             name="Search"
                             type
-                            onClick={() => console.log('state', state)}
+                            onClick={jobSearch()}
                         />
                         <Button htmlType="button" />
 
                     </Col>
                 </Row>
                 <Row justify="space-around">
-                    {allJobsData.map((job: any) => {
+                    {searchedJobs.length > 1 && searchedJobs.map((job: any) => {
                         return (
                             <Col
                                 key={job.id}

@@ -38,7 +38,7 @@
     },
     {
       "name": "Add Resume",
-      "link": "/dashboard",
+      "link": "/dashboard/candidate/add-resume",
       "type": "simple"
     },
     {

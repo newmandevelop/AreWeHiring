@@ -29,6 +29,7 @@ import ManageStaff from '../Pages/Employer/ManageStaff';
 import CandidateDetailsForm from '../Pages/Candidate/DetailsForm'
 import UserProfile from '../Pages/UserProfile'
 import SearchJob from '../Pages/Candidate/SearchJob';
+import AddResume from '../Pages/Candidate/AddResume';
 const Routing = () => {
   return (
     <Switch>
@@ -87,6 +88,11 @@ const Routing = () => {
         exact
         path="/dashboard/employee/manage-applications"
         component={ManageApplications}
+      />
+      <DashboardRoute
+        exact
+        path="/dashboard/candidate/add-resume"
+        component={AddResume}
       />
       <DashboardRoute
         exact

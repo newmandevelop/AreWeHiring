@@ -27,6 +27,7 @@
     "/dashboard/candidate",
     "/dashboard/reset-password",
     "/dashboard/candidate/my-applications",
-    "/dashboard/profile"
+    "/dashboard/profile",
+    "/dashboard/candidate/add-resume"
   ]
 }

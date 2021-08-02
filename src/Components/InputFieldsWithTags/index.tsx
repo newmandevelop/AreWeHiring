@@ -14,7 +14,7 @@ interface IProps {
 const TagsField = (props: IProps) => {
   const [tags, setTags] = useState<Array<string>>([]);
 
-  const [inputText, setInputText] = useState<string>(`${props.initialValue}`);
+  const [inputText, setInputText] = useState<string>(props.initialValue ? `${props.initialValue}` : '');
 
   const inputKeyDown = (e: any) => {
     if (e.key === 'Enter') {

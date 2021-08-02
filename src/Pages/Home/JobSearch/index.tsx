@@ -4,7 +4,7 @@ import { Actions } from './actions';
 
 import { Typography, Row, Col, Input, notification } from 'antd';
 import PrimaryButton from '../../../Components/PrimaryButton';
-import { getToken } from '../../../utils/sessionStorage';
+import { getRole, getToken } from '../../../utils/sessionStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../../reducers';
 const { Text, Title, Link } = Typography;
@@ -17,6 +17,8 @@ const JobSearch = ({ limit }: any) => {
   const [what, setWhat] = useState('Security Chief');
   const [where, setWhere] = useState('Seattle');
   let dispatch = useDispatch();
+  const token = getToken();
+  const role = getRole();
 
   const {
     jobSearchProgress,
@@ -120,12 +122,12 @@ const JobSearch = ({ limit }: any) => {
             loading={jobSearchProgress}
           />
 
-          <Text className={styles.titleText}>
+          {token && role === "CANDIDATE" && <Text className={styles.titleText}>
             Need more search options?
-            <Link style={{ color: '#3489cf', marginLeft: '0.5rem' }}>
+            <Link href="/dashboard/candidate/search-jobs" style={{ color: '#3489cf', marginLeft: '0.5rem' }}>
               Advanced Search
             </Link>
-          </Text>
+          </Text>}
         </div>
       </div>
     </div>

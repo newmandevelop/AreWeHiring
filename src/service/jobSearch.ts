@@ -126,3 +126,14 @@ export const deleteJob = async (userId: string, jobId: string) => {
     throw error.response;
   }
 };
+
+export const advanceSearch = async (data: any) => {
+  try {
+    const response = await axios().post(`/jobs/advancedsearch`, data);
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw error.response;
+  }
+};

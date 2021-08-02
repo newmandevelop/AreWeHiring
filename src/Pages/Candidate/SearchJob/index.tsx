@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Form, Input } from 'antd';
 import Button from '../../../Components/Button';
 import { FormItem } from '../../../Containers/FormItem/index';
 import JobCard from '../../../Components/JobCard';
+import { getAllCompanies } from '../../../service/companies';
+
+
+interface ICompanies {
+    id: string;
+    name: string;
+}
 
 export default function SearchJob() {
+    const [state, setState] = useState({})
+    const [companies, setCompanies] = useState<[]>([]);
+
     const allJobsData: any = [
         {
             nameOfJob: "Senior Python Developer",
@@ -55,6 +65,19 @@ export default function SearchJob() {
             salaryUpperLimit: "50000"
         }
     ]
+
+    useEffect(() => {
+        const response = getAllCompanies();
+        response.then(data => {
+            const companies: any = [];
+            const ids: any = [];
+            data?.data.map((company: ICompanies) => {
+                companies.push(company.name);
+                ids.push(company.id)
+            });
+            setCompanies(companies);
+        });
+    }, []);
     return (
         <Row style={{ margin: '1rem' }}>
             <Col span={6} style={{ backgroundColor: '' }}>
@@ -65,18 +88,15 @@ export default function SearchJob() {
                 </Row>
                 <Row>
                     <Col span={20}>
-                        <Form.Item
-                            label="Job Name"
-                            name="where"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'This field is required!',
-                                },
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>
+                        {FormItem({
+                            name: 'company',
+                            label: 'Company',
+                            placeholder: 'Select Company',
+                            fieldType: 'dropDown',
+                            options: companies,
+                            onChange: (value: string) => { setState({ ...state, company: value }) },
+                            rules: [{ required: true, message: "This field is required" }]
+                        })}
                     </Col>
                 </Row>
                 <Row>
@@ -91,24 +111,62 @@ export default function SearchJob() {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input onChange={(e) => setState({ ...state, location: { location: e.target.value } })} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span={20}>
-                        <Form.Item
-                            label="Job Type"
-                            name="jobType"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'This field is required!',
-                                },
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>
+                        <p>Job Type:</p>
+                        {FormItem({
+                            name: 'jobType',
+                            // label: 'Job Type',
+                            type: 'text',
+                            placeholder: 'FULL TIME',
+                            fieldType: 'dropDown',
+                            options: ['FULLTIME', 'FREELANCE', 'INTERNSHIP', 'PARTTIME', 'TEMPORARY'],
+                            rules: [{ required: true, message: "This field is required" }],
+                            onChange: (value: string) => {
+                                value = value.toLowerCase();
+                                if (value === "freelance") {
+                                    setState({
+                                        ...state,
+                                        jobType: {
+                                            freelance: true,
+                                            fullTime: false,
+                                            internship: false,
+                                            partTime: false,
+                                            temporary: false
+                                        }
+                                    })
+                                }
+                                else if (value === "fullTime") {
+                                    setState({
+                                        ...state,
+                                        jobType: {
+                                            freelance: false,
+                                            fullTime: true,
+                                            internship: false,
+                                            partTime: false,
+                                            temporary: false
+                                        }
+                                    })
+                                }
+                                else if (value === "internship") {
+                                    setState({
+                                        ...state,
+                                        jobType: {
+                                            freelance: false,
+                                            fullTime: false,
+                                            internship: true,
+                                            partTime: false,
+                                            temporary: false
+                                        }
+                                    })
+                                }
+                                setState({ ...state, jobType: { value: true } })
+                            },
+                        })}
                     </Col>
                 </Row>
                 <Row>
@@ -184,6 +242,7 @@ export default function SearchJob() {
                             htmlType="submit"
                             name="Search"
                             type
+                            onClick={() => console.log('state', state)}
                         />
                         <Button htmlType="button" />
 

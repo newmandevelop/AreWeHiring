@@ -14,13 +14,15 @@ interface ICompanies {
 export default function SearchJob() {
     const [state, setState] = useState({})
     const [companies, setCompanies] = useState<[]>([]);
-    const [searchedJobs, setSearchedJobs] = useState([])
+    const [searchedJobs, setSearchedJobs] = useState([]);
+    const [message, setMessage] = useState("")
 
     const jobSearch = async () => {
         try {
             const response = await JobSearch.advanceSearch(state)
             if (response) {
                 setSearchedJobs(response.data)
+                if (response.data.length === 0) { setMessage("No Data Availabe") }
             }
         }
         catch (error) {
@@ -228,7 +230,7 @@ export default function SearchJob() {
                             htmlType="submit"
                             name="Search"
                             type
-                            onClick={jobSearch()}
+                            onClick={() => jobSearch()}
                         />
                         <Button htmlType="button" />
 
@@ -260,6 +262,9 @@ export default function SearchJob() {
                             </Col>
                         );
                     })}
+                    {
+                        message && <div>{message}</div>
+                    }
                 </Row>
             </Col>
         </Row>

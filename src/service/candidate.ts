@@ -28,13 +28,29 @@ export const applyJob = async (data: any) => {
   }
 };
 
+// export const searchCandidate = async (data: any, limit: number) => {
+//   const { email, where } = data;
+//   const postData: any = { email: email };
+//   try {
+//     const response = await axios().post(
+//       `candidates/find/5/${limit}?what=${where}`,
+//       postData,
+//     );
+//     if (response) {
+//       return response;
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
 export const searchCandidate = async (data: any, limit: number) => {
-  const { email, where } = data;
-  const postData: any = { email: email };
   try {
     const response = await axios().post(
-      `candidates/find/5/${limit}?what=${where}`,
-      postData,
+      `candidates/advancedsearch/5/${limit}`,
+      data,
     );
     if (response) {
       return response;

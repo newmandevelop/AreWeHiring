@@ -16,14 +16,16 @@ function* candidateSearch(action: any) {
       const response: ResponseGenerator = yield call(
         searchCandidate,
         action.payload.data,
-        action.payload.limit
+        action.payload.limit,
       );
-      response.status === 200 ?
-      yield put(Actions.candidateSearchSuccess(response.data)) 
-      : console.log("Responce error",response)
+      response.status === 200
+        ? yield put(Actions.candidateSearchSuccess(response.data))
+        : console.log('Responce error', response);
     }
   } catch (error) {
-    yield put(Actions.candidateSearchFailure(error && error.response.data.message));
+    yield put(
+      Actions.candidateSearchFailure(error && error.response.data.message),
+    );
   }
 }
 

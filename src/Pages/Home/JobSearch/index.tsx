@@ -128,6 +128,12 @@ const JobSearch = ({ limit }: any) => {
               Advanced Search
             </Link>
           </Text>}
+          {!token && <Text className={styles.titleText}>
+            Need more search options?
+            <Link href="/login" style={{ color: '#3489cf', marginLeft: '0.5rem' }}>
+              Advanced Search
+            </Link>
+          </Text>}
         </div>
       </div>
     </div>

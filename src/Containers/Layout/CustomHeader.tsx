@@ -7,12 +7,11 @@ import {
   Button,
   Typography,
   Avatar,
-  Input
 } from 'antd';
 import styles from './index.module.scss';
 import { logoutUser, removeRole } from '../../utils/sessionStorage';
 import { useHistory } from 'react-router-dom';
-import { UserOutlined, BellOutlined, SearchOutlined } from '@ant-design/icons';
+import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { getToken, getRole } from '../../utils/sessionStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import { Actions } from '../../Pages/Candidate/actions';
@@ -74,7 +73,7 @@ const CustomeHeader = () => {
         <div style={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
           <h1 className={styles.logo}>AreWeHiring</h1>
 
-          <ul className={styles.navLink} style={{ width: '70vw' }}>
+          <ul className={styles.navLink} style={{ width: '50vw' }}>
             <li className={styles.navLinkItems}>
               <Button href="/dashboard" type="link" className={styles.dropDown}>
                 Home
@@ -121,11 +120,8 @@ const CustomeHeader = () => {
                 Signout
               </Button></li>
             )}
-            <li className={styles.navLinkItems}>
-              <Input className={styles.searchBar} placeholder="Search" prefix={<SearchOutlined />} />
-            </li>
-          </ul>
 
+          </ul>
         </div>
         {token && (
           <div className={`${styles.avatarDiv}`}>

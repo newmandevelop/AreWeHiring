@@ -39,27 +39,6 @@ $small: 700px;
       display: none;
     }
   }
-  // .searchBar {
-  @media (max-width: '1200px') {
-    .searchBar {
-      width: 70%;
-    }
-
-    .logo {
-      margin-left: 0;
-      width: 200px;
-    }
-  }
-  @media (max-width: '1000px') {
-    .searchBar {
-      width: 50%;
-    }
-
-    .logo {
-      width: 170px;
-    }
-  }
-  // }
 }
 .Sider {
   margin-right: 0px !important;

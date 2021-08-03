@@ -32,7 +32,6 @@ const ForgotPassword = (props: any) => {
   };
 
   const onFinish = (values: any) => {
-    console.log(values)
     dispatch(
       Actions.forgetPasswordProgress({
         email: values,
@@ -45,7 +44,7 @@ const ForgotPassword = (props: any) => {
       onReset();
       openNotificationWithIcon('success', 'Reset Email Sent Successfully');
       history.push('/');
-    } 
+    }
     else if (forgetPasswordFailure) {
       openNotificationWithIcon('error', forgetPasswordErrorMessage);
     }
@@ -65,7 +64,7 @@ const ForgotPassword = (props: any) => {
             <Form
               form={form}
               name="register"
-                onFinish={onFinish}
+              onFinish={onFinish}
               scrollToFirstError
             >
               <Form.Item

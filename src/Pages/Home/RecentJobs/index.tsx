@@ -18,7 +18,6 @@ const RecentJobs = () => {
   return (
     <>
       <div className={styles.recent_jobs_Wrapper}>
-        {console.log(recentJobsData)}
         <div className={styles.recentJobCard}>
           {recentJobsData &&
             Object.values(recentJobsData).map((data: any, index) => {

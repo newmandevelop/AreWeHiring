@@ -28,7 +28,6 @@ const JobApply = (data: any) => {
           <Title level={4} className={styles.jobContetHeading}>
             Job Title
           </Title>
-          {console.log(nameOfJob)}
           <Text className={styles.jobContetPara}>{nameOfJob}</Text>
           <Title level={4} className={styles.jobContetHeading}>
             Location

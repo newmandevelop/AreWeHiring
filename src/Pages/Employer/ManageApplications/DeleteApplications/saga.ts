@@ -29,7 +29,6 @@ function* deletedApplications(action: any) {
 
 function* applicationDelete(action: any) {
   const { applicationId } = action.payload;
-  console.log("payload",action.payload)
   try {
     if (applicationId) {
       const response: ResponseGenerator = yield call(
@@ -45,6 +44,9 @@ function* applicationDelete(action: any) {
   }
 }
 export default function* deletedApplicationsSaga() {
-  yield takeLatest(ActionTypes.DELETED_APPLICATIONS_PROGRESS, deletedApplications);
+  yield takeLatest(
+    ActionTypes.DELETED_APPLICATIONS_PROGRESS,
+    deletedApplications,
+  );
   yield takeLatest(ActionTypes.APPLICATION_DELETE_PROGRESS, applicationDelete);
 }

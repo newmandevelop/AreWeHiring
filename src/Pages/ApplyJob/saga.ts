@@ -7,7 +7,6 @@ function* applyJob(action: any) {
 
   try {
     const response = yield call(Candidate.applyJob, data);
-    console.log(response);
     if (response) {
       yield put(Actions.applyJobSuccess());
     } else {

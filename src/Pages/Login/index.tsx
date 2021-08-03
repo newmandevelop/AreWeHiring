@@ -78,7 +78,6 @@ const Login = (props: any) => {
   const changeRoute = async () => {
     const role = getRole();
     if (userData && userData.filledDetails && userData.filledDetails !== null) {
-      console.log(userData.filledDetails);
 
       if (role === EMPLOYER || role === RECRUITER) {
         history.push('/dashboard/employer');
@@ -163,7 +162,6 @@ const Login = (props: any) => {
                     theme="light"
                     sitekey={TEST_SITE_KEY}
                     onChange={value => {
-                      console.log(value);
                       setRecaptchaApproved(true);
                     }}
                   />

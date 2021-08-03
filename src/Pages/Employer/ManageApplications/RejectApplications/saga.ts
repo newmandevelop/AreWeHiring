@@ -29,7 +29,6 @@ function* rejectedApplications(action: any) {
 
 function* doApplicationReject(action: any) {
   const { applicationId } = action.payload;
-  console.log("payload",action.payload)
   try {
     if (applicationId) {
       const response: ResponseGenerator = yield call(
@@ -45,6 +44,12 @@ function* doApplicationReject(action: any) {
   }
 }
 export default function* rejectedApplicationsSaga() {
-  yield takeLatest(ActionTypes.REJECTED_APPLICATIONS_PROGRESS, rejectedApplications);
-  yield takeLatest(ActionTypes.APPLICATION_REJECT_PROGRESS, doApplicationReject);
+  yield takeLatest(
+    ActionTypes.REJECTED_APPLICATIONS_PROGRESS,
+    rejectedApplications,
+  );
+  yield takeLatest(
+    ActionTypes.APPLICATION_REJECT_PROGRESS,
+    doApplicationReject,
+  );
 }

@@ -85,7 +85,6 @@ const PostJob = () => {
                 externalLink: values.external,
                 userId: userData,
             };
-            console.log(valueForApi)
             dispatch(
                 Actions.updateJobProgress({
                     jobId: editJobData.id,
@@ -165,7 +164,6 @@ const PostJob = () => {
     }
 
     useEffect(() => {
-        console.log('roles', editJobData.rolesAndResponsibilities)
         let tags = ""
         editJobData.jobTags?.map(job => { tags += job + ", "; })
         setJobTags(tags)

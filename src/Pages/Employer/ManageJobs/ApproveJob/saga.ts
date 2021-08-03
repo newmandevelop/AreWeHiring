@@ -75,7 +75,6 @@ function* getApplicationsForThisJob(action: any) {
 }
 
 function* renewJob(action: any) {
-  console.log('payload', action.payload);
   const { userId, jobId } = action.payload;
   try {
     if (userId && jobId) {

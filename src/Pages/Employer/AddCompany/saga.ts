@@ -14,7 +14,6 @@ function* addCompany(action: any) {
   const { data } = action.payload;
   try {
     const response: ResponseGenerator = yield call(Company.addCompany, data);
-    console.log(response);
     if (response) {
       yield put(Actions.addCompanySuccess());
     } else {

@@ -24,11 +24,6 @@ const MyApplications = () => {
     }
   }, []);
 
-  useEffect(() => {
-console.log("gotcha", candidateApplicationsData)
-if(getApplicationsSuccess) console.log("length", candidateApplicationsData.length)
-  },[candidateApplicationsData, getApplicationsSuccess])
-
   return (
     <div>
       <div>

@@ -68,7 +68,6 @@ const CustomSider = () => {
       {(role === EMPLOYER || role === RECRUITER) && (
         <Menu className={styles.menu} defaultSelectedKeys={['/']} selectedKeys={[window.location.pathname]}>
           {employerLinks.links.map((link: Links, index) => {
-            console.log('links', link)
             return (
               <Item
                 key={link.link}

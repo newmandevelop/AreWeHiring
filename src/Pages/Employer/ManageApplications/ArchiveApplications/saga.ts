@@ -29,7 +29,6 @@ function* archivedApplications(action: any) {
 
 function* sendApplicationToArchive(action: any) {
   const { applicationId } = action.payload;
-  console.log("payload",action.payload)
   try {
     if (applicationId) {
       const response: ResponseGenerator = yield call(
@@ -40,12 +39,20 @@ function* sendApplicationToArchive(action: any) {
     }
   } catch (error) {
     yield put(
-      Actions.sendApplicationToArchiveFailure(error && error.response.data.message),
+      Actions.sendApplicationToArchiveFailure(
+        error && error.response.data.message,
+      ),
     );
   }
 }
 
 export default function* archivedApplicationsSaga() {
-  yield takeLatest(ActionTypes.ARCHIVED_APPLICATIONS_PROGRESS, archivedApplications);
-  yield takeLatest(ActionTypes.SEND_APPLICATION_TO_ARCHIVE_PROGRESS, sendApplicationToArchive);
+  yield takeLatest(
+    ActionTypes.ARCHIVED_APPLICATIONS_PROGRESS,
+    archivedApplications,
+  );
+  yield takeLatest(
+    ActionTypes.SEND_APPLICATION_TO_ARCHIVE_PROGRESS,
+    sendApplicationToArchive,
+  );
 }

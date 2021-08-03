@@ -29,7 +29,6 @@ function* approvedApplications(action: any) {
 
 function* applicationApprove(action: any) {
   const { applicationId } = action.payload;
-  console.log("payload",action.payload)
   try {
     if (applicationId) {
       const response: ResponseGenerator = yield call(
@@ -46,6 +45,12 @@ function* applicationApprove(action: any) {
 }
 
 export default function* approvedApplicationsSaga() {
-  yield takeLatest(ActionTypes.APPROVED_APPLICATIONS_PROGRESS, approvedApplications);
-  yield takeLatest(ActionTypes.APPLICATION_APPROVE_PROGRESS, applicationApprove);
+  yield takeLatest(
+    ActionTypes.APPROVED_APPLICATIONS_PROGRESS,
+    approvedApplications,
+  );
+  yield takeLatest(
+    ActionTypes.APPLICATION_APPROVE_PROGRESS,
+    applicationApprove,
+  );
 }

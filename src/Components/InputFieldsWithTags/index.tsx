@@ -28,9 +28,6 @@ const TagsField = (props: IProps) => {
       }
     }
   };
-  useEffect(() => {
-    console.log("tags", tags)
-  }, [inputText])
   return (
     <div className={styles.tagsInput}>
       <Label optional={props.optional} label={props.label} />

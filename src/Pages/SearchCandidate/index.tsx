@@ -51,7 +51,7 @@ export default function SearchCandidate() {
   }
   useEffect(() => {
     if (candidateSearchSuccess) {
-      if (!candidateData.content) openNotificationWithIcon('success', 'No Data Available');
+      if (candidateData.length === 0) openNotificationWithIcon('success', 'No Data Available');
       else openNotificationWithIcon('success', 'Candidates Fetched Successfully');
     } else if (candidateSearchFailure) {
       openNotificationWithIcon('error', candidateSearchErrorMessage);
@@ -61,38 +61,38 @@ export default function SearchCandidate() {
     candidateSearchFailure,
     candidateSearchErrorMessage,
   ]);
-  // const candidateData = [
-  //   {
-  //     content: {
-  //       firstName: "Jackson",
-  //       lastName: "Smith",
-  //       minimumRate: "100",
-  //       professionalTitle: 'Developer',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   },
-  //   {
-  //     content: {
-  //       firstName: "Harris",
-  //       lastName: "Edwards",
-  //       minimumRate: "80",
-  //       professionalTitle: 'Bussiness Manager',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   },
-  //   {
-  //     content: {
-  //       firstName: "Liam",
-  //       lastName: "Cole",
-  //       minimumRate: "85",
-  //       professionalTitle: 'Senior Executive',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   }
-  // ]
+  const candidateDataDummy = [
+    {
+      content: {
+        firstName: "Jackson",
+        lastName: "Smith",
+        minimumRate: "100",
+        professionalTitle: 'Developer',
+        location: 'United States',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
+      }
+    },
+    {
+      content: {
+        firstName: "Harris",
+        lastName: "Edwards",
+        minimumRate: "80",
+        professionalTitle: 'Bussiness Manager',
+        location: 'United States',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
+      }
+    },
+    {
+      content: {
+        firstName: "Liam",
+        lastName: "Cole",
+        minimumRate: "85",
+        professionalTitle: 'Senior Executive',
+        location: 'United States',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
+      }
+    }
+  ]
   return (
     <Row style={{ margin: '1rem' }}>
       <Col span={6} style={{ backgroundColor: '' }}>
@@ -214,22 +214,24 @@ export default function SearchCandidate() {
             }}
           />}
           {candidateData &&
-            candidateData.map((candidate: any) => {
+            candidateDataDummy.map((candidate: any) => {
               return (
                 <div className={styles.description}>
                   <div style={{ padding: '1rem' }}>
-                    <Avatar
-                      className={`ant-dropdown-link`}
-                      size={50}
-                      icon={<UserOutlined />}
-                    />
-                    <Descriptions
-                      title={
-                        candidate.content.firstName +
-                        ' ' +
-                        candidate.content.lastName
-                      }
-                    >
+                    <Descriptions.Item>
+                      <Avatar
+                        className={`ant-dropdown-link`}
+                        size={50}
+                        icon={<UserOutlined />}
+                      />
+                      <div style={{ marginLeft: '5px', display: 'inline' }}>
+                        <strong>{candidate.content.firstName +
+                          ' ' +
+                          candidate.content.lastName}</strong>
+                      </div>
+                    </Descriptions.Item>
+
+                    <Descriptions style={{ marginTop: '1rem' }}>
                       <Descriptions.Item>
                         {candidate.content.minimumRate}$/hr
                       </Descriptions.Item>

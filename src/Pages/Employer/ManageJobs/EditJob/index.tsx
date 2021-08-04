@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import Dashboard from '../../../../Containers/Dashboard';
-import { Divider, Form, Upload, notification, Typography, Space } from 'antd';
+import { Divider, Form, Upload, notification, Typography, Space, DatePicker } from 'antd';
 import { getAllCompanies } from '../../../../service/companies';
 import styles from './index.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -45,6 +45,8 @@ const PostJob = () => {
     const [companyIds, setCompanyIds] = useState<[]>([]);
     const [recruiters, setRecruiters] = useState<[]>([]);
     const [recruiterIds, setRecruiterIds] = useState<[]>([]);
+    const [datePosted, setDatePosted] = useState("")
+    const [expiryDate, setExpiryDate] = useState("")
     let [jobTags, setJobTags] = useState("")
     let formData = new FormData();
     const {
@@ -166,9 +168,13 @@ const PostJob = () => {
     useEffect(() => {
         let tags = ""
         editJobData.jobTags?.map(job => { tags += job + ", "; })
+        const datePosted = editJobData.datePosted ? new Date(editJobData.datePosted) : ""
+        if (datePosted !== "") setDatePosted(datePosted.toDateString())
+        const expiryDate = editJobData.expiryDate ? new Date(editJobData.expiryDate) : ""
+        if (expiryDate !== "") setExpiryDate(expiryDate.toDateString())
         setJobTags(tags)
         form.resetFields()
-    }, [editJobData.jobTags]);
+    }, [editJobData]);
 
     return (
         <Dashboard dashboardName="Employer">
@@ -354,26 +360,18 @@ const PostJob = () => {
                         fieldType: 'input',
                         initialValue: editJobData.externalLink
                     })} */}
+                    <h6>Posting Expiration Date</h6>
+                    <DatePicker
+                        value={moment(expiryDate)}
+                        onChange={(date, dateString) => setExpiryDate(dateString)}>
+                    </DatePicker>
+
                     {/* Minimum rate Field */}
-                    {FormItem({
-                        name: 'closingDate',
-                        label: 'Posting Expiration Date',
-                        type: 'date',
-                        optional: true,
-                        placeholder: 'e.g 20',
-                        fieldType: 'input',
-                        initialValue: editJobData.expiryDate
-                    })}
-                    {/* Minimum rate Field */}
-                    {FormItem({
-                        name: 'openingDate',
-                        label: 'Opening Date',
-                        type: 'date',
-                        optional: true,
-                        placeholder: 'e.g 20',
-                        fieldType: 'input',
-                        initialValue: editJobData.datePosted
-                    })}
+                    <h6 style={{ marginTop: '1rem' }}>Opening Date</h6>
+                    <DatePicker
+                        value={moment(datePosted)}
+                        onChange={(date, dateString) => setDatePosted(dateString)}>
+                    </DatePicker>
                     {/* Minimum rate Field */}
                     {FormItem({
                         name: 'minimumRate',

@@ -25,7 +25,11 @@ export default function SearchCandidate() {
   const [limit, setLimit] = useState(0);
   const [annualSalaryChecked, setAnnualSalaryChecked] = useState(false)
   const [hourlyRateChecked, setHourlyRateChecked] = useState(false)
-
+  const marks = {
+    0: '0',
+    100: '1000',
+    50: '500'
+  };
   const {
     candidateSearchErrorMessage,
     candidateSearchFailure,
@@ -141,13 +145,13 @@ export default function SearchCandidate() {
         <Row>
           <Col span={20}>
             <Checkbox onChange={(e) => setAnnualSalaryChecked(e.target.checked)}>Filter by Annual Salary</Checkbox>
-            <Slider defaultValue={30} disabled={!annualSalaryChecked} />
+            <Slider marks={marks} defaultValue={30} disabled={!annualSalaryChecked} />
           </Col>
         </Row>
         <Row style={{ marginTop: '1rem' }}>
           <Col span={20}>
             <Checkbox onChange={(e) => setHourlyRateChecked(e.target.checked)}>Filter by Hourly Rate</Checkbox>
-            <Slider defaultValue={30} disabled={!hourlyRateChecked} />
+            <Slider marks={marks} defaultValue={30} disabled={!hourlyRateChecked} />
           </Col>
         </Row>
       </Col>

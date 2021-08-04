@@ -18,7 +18,17 @@ export default function SearchJob() {
     const [message, setMessage] = useState("")
     const [annualSalaryChecked, setAnnualSalaryChecked] = useState(false)
     const [hourlyRateChecked, setHourlyRateChecked] = useState(false)
-
+    const [annualSliderValue, setAnnualSliderValue] = useState(0)
+    const [hourlySliderValue, setHourlySliderValue] = useState(0)
+    const marks = {
+        0: '0',
+        20: '100',
+        40: '400',
+        60: '600',
+        80: '800',
+        100: '1000',
+        // annualSliderValue: annualSliderValue !== 0 ? `${annualSliderValue * 100}` : 0
+    };
     const jobSearch = async () => {
         try {
             const response = await JobSearch.advanceSearch(state)
@@ -202,13 +212,15 @@ export default function SearchJob() {
                 <Row>
                     <Col span={20}>
                         <Checkbox onChange={(e) => setAnnualSalaryChecked(e.target.checked)}>Filter by Annual Salary</Checkbox>
-                        <Slider defaultValue={30} disabled={!annualSalaryChecked} />
+                        <Slider marks={marks} defaultValue={30} disabled={!annualSalaryChecked}
+                            onChange={(value: number) => setAnnualSliderValue(value)}
+                        />
                     </Col>
                 </Row>
                 <Row style={{ marginTop: '1rem' }}>
                     <Col span={20}>
                         <Checkbox onChange={(e) => setHourlyRateChecked(e.target.checked)}>Filter by Hourly Rate</Checkbox>
-                        <Slider defaultValue={30} disabled={!hourlyRateChecked} />
+                        <Slider marks={marks} defaultValue={30} disabled={!hourlyRateChecked} />
                     </Col>
                 </Row>
             </Col>

@@ -61,38 +61,7 @@ export default function SearchCandidate() {
     candidateSearchFailure,
     candidateSearchErrorMessage,
   ]);
-  // const candidateDataDummy = [
-  //   {
-  //     content: {
-  //       firstName: "Jackson",
-  //       lastName: "Smith",
-  //       minimumRate: "100",
-  //       professionalTitle: 'Developer',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   },
-  //   {
-  //     content: {
-  //       firstName: "Harris",
-  //       lastName: "Edwards",
-  //       minimumRate: "80",
-  //       professionalTitle: 'Bussiness Manager',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   },
-  //   {
-  //     content: {
-  //       firstName: "Liam",
-  //       lastName: "Cole",
-  //       minimumRate: "85",
-  //       professionalTitle: 'Senior Executive',
-  //       location: 'United States',
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget eleifend neque. Integer cursus nisi non laoreet interdum. Aenean in ex id nibh convallis aliquam eget mattis orci. Aliquam finibus semper rhoncus. Nulla facilisi. Suspendisse tristique egestas est, laoreet luctus ipsum feugiat ac. Quisque gravida blandit maximus. Nulla id lectus lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;'
-  //     }
-  //   }
-  // ]
+  useEffect(() => { console.log(candidateData) }, [candidateData])
   return (
     <Row style={{ margin: '1rem' }}>
       <Col span={6} style={{ backgroundColor: '' }}>
@@ -235,14 +204,44 @@ export default function SearchCandidate() {
                       <Descriptions.Item>
                         {candidate.content.minimumRate}$/hr
                       </Descriptions.Item>
+
                       <Descriptions.Item>
                         {candidate.content.professionalTitle}
                       </Descriptions.Item>
+
                       <Descriptions.Item label="Live">
                         {candidate.content.location}
                       </Descriptions.Item>
-                      <Descriptions.Item>{candidate.content.description}</Descriptions.Item>
+
+                      {candidate.content.skills && <Descriptions.Item label="Skills">{candidate.content.skills}</Descriptions.Item>}
+
+                      {candidate.content.education && <Descriptions.Item label="Education"><ul>{candidate.content.education.map((data: string) => {
+                        return <li>{data}</li>
+                      })}</ul>
+                      </Descriptions.Item>}
                     </Descriptions>
+                    {/* {
+                      candidate.content.experienceList && <Descriptions title="Experience">
+                        {candidate.content.experienceList.map((experience: any) => {
+                          return <><Descriptions.Item label="Employer">
+                            {experience.employer}
+                          </Descriptions.Item>
+
+                            <Descriptions.Item label="Job Title">
+                              {experience.jobTitle}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item label="Duration">
+                              {experience.startEndDate}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item label="Notes">
+                              {experience.notes}
+                            </Descriptions.Item>
+                          </>
+                        })}
+                      </Descriptions>
+                    } */}
                   </div>
                 </div>
               );

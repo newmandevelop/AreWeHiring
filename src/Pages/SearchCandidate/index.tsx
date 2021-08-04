@@ -6,7 +6,9 @@ import {
   Row,
   Col,
   Form,
-  Input
+  Input,
+  Checkbox,
+  Slider
 } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { IRootState } from '../../reducers';
@@ -21,6 +23,8 @@ export default function SearchCandidate() {
   const [state, setState] = useState({})
   let dispatch = useDispatch();
   const [limit, setLimit] = useState(0);
+  const [annualSalaryChecked, setAnnualSalaryChecked] = useState(false)
+  const [hourlyRateChecked, setHourlyRateChecked] = useState(false)
 
   const {
     candidateSearchErrorMessage,
@@ -134,8 +138,20 @@ export default function SearchCandidate() {
             </Form.Item>
           </Col>
         </Row>
+        <Row>
+          <Col span={20}>
+            <Checkbox onChange={(e) => setAnnualSalaryChecked(e.target.checked)}>Filter by Annual Salary</Checkbox>
+            <Slider defaultValue={30} disabled={!annualSalaryChecked} />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: '1rem' }}>
+          <Col span={20}>
+            <Checkbox onChange={(e) => setHourlyRateChecked(e.target.checked)}>Filter by Hourly Rate</Checkbox>
+            <Slider defaultValue={30} disabled={!hourlyRateChecked} />
+          </Col>
+        </Row>
       </Col>
-      <Col span={18} style={{ backgroundColor: 'white' }}>
+      <Col span={18} style={{ backgroundColor: 'white', minHeight: '100vh' }}>
         <Row>
           <Col span={24} style={{ margin: '1rem' }}>
             <h4>

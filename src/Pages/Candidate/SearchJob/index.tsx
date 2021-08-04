@@ -5,7 +5,7 @@ import { FormItem } from '../../../Containers/FormItem/index';
 import JobCard from '../../../Components/JobCard';
 import { getAllCompanies } from '../../../service/companies';
 import { JobSearch } from '../../../service'
-
+import { Checkbox, Slider } from 'antd'
 interface ICompanies {
     id: string;
     name: string;
@@ -16,6 +16,8 @@ export default function SearchJob() {
     const [companies, setCompanies] = useState<[]>([]);
     const [searchedJobs, setSearchedJobs] = useState([]);
     const [message, setMessage] = useState("")
+    const [annualSalaryChecked, setAnnualSalaryChecked] = useState(false)
+    const [hourlyRateChecked, setHourlyRateChecked] = useState(false)
 
     const jobSearch = async () => {
         try {
@@ -194,6 +196,19 @@ export default function SearchJob() {
                         >
                             <Input />
                         </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col span={20}>
+                        <Checkbox onChange={(e) => setAnnualSalaryChecked(e.target.checked)}>Filter by Annual Salary</Checkbox>
+                        <Slider defaultValue={30} disabled={!annualSalaryChecked} />
+                    </Col>
+                </Row>
+                <Row style={{ marginTop: '1rem' }}>
+                    <Col span={20}>
+                        <Checkbox onChange={(e) => setHourlyRateChecked(e.target.checked)}>Filter by Hourly Rate</Checkbox>
+                        <Slider defaultValue={30} disabled={!hourlyRateChecked} />
                     </Col>
                 </Row>
             </Col>

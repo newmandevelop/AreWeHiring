@@ -1,5 +1,5 @@
 import React from 'react'
-import { Upload, message } from 'antd';
+import { Upload, message, Form, Input } from 'antd';
 import { InboxOutlined } from '@ant-design/icons'
 const Dragger = Upload.Dragger
 
@@ -31,6 +31,26 @@ export default function AddResume() {
                 <p className="ant-upload-text">Click or drag file to this area to upload</p>
                 <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
             </Dragger>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Form layout="vertical" style={{ width: '60%', margin: '1rem' }}>
+                    <Form.Item
+                        label="Job Name">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Job Type">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Posting Date">
+                        <Input type="date" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Expiry Date">
+                        <Input type="date" />
+                    </Form.Item>
+                </Form>
+            </div>
         </div>
     )
 }

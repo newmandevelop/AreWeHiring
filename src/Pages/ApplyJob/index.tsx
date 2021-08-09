@@ -45,7 +45,7 @@ const ApplyJob = () => {
 
   const onFinish = (values: any) => {
     let valueForApi = {
-      email: sessionStorage.getItem('hiring_user'),
+      email: localStorage.getItem('email'),
       jobName: data.nameOfJob,
       messageToClient: values.message,
       dateApplied: moment(new Date()).format('YYYY-MM-DD'),

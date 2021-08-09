@@ -48,8 +48,8 @@ const ApplyJob = () => {
       email: sessionStorage.getItem('hiring_user'),
       jobName: data.nameOfJob,
       messageToClient: values.message,
-      dateApplied: moment(new Date()).format('YYYY-MM-D'),
-      dateYouCanStart: moment(values.dateYouCanStart).format('YYYY-MM-D'),
+      dateApplied: moment(new Date()).format('YYYY-MM-DD'),
+      dateYouCanStart: moment(values.dateYouCanStart).format('YYYY-MM-DD'),
       salaryExpected: values.salaryExpected,
       jobId: data.id,
     };

@@ -125,7 +125,7 @@ export const FormItem = (props: IProps) => {
               icon={props.icon}
               placeholder={props.placeholder}
               label={props.label}
-              optional
+              optional={props.optional}
               name={props.btnName}
             />{' '}
           </Upload>

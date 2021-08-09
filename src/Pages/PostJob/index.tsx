@@ -52,8 +52,8 @@ const PostJob = () => {
   } = useSelector((state: IRootState) => state.job);
 
   const onFinish = (values: any) => {
-    const index = recruiters.findIndex(recruiter => recruiter === values.employer)
-    values.employer = recruiterIds[index]
+    // const index = recruiters.findIndex(recruiter => recruiter === values.employer)
+    // values.employer = recruiterIds[index]
     let roles: string[] = [];
     if (values.rolesAndResponsibilities)
       values.rolesAndResponsibilities.map((d: IRoles) => {
@@ -86,6 +86,7 @@ const PostJob = () => {
         userId: userData,
       };
       formData.append('job', JSON.stringify(valueForApi));
+      console.log(valueForApi)
       dispatch(
         Actions.addJobProgress({
           data: formData,
@@ -182,7 +183,7 @@ const PostJob = () => {
             placeholder: 'Select Company',
             fieldType: 'dropDown',
             options: companies,
-            onChange: (value: string) => { getAllRecruiters(value) },
+            // onChange: (value: string) => { getAllRecruiters(value) },
             rules: [{ required: true, message: "This field is required" }]
           })}
           {FormItem({
@@ -249,7 +250,7 @@ const PostJob = () => {
             optional: true,
             placeholder: 'Enter Employer',
             fieldType: 'dropDown',
-            options: recruiters,
+            options: companies,
           })}
           {/*Industry Input Field */}
           {FormItem({
@@ -333,7 +334,7 @@ const PostJob = () => {
             fieldType: 'input',
           })}
           {/* Minimum rate Field */}
-          <h6>Posting Expiration Date</h6>
+          {/* <h6>Posting Expiration Date</h6>
           <Form.Item name="closingDate" rules={[
             {
               required: true,
@@ -344,24 +345,20 @@ const PostJob = () => {
               <Radio value={'No Expiry'}>No Expiry Date</Radio>
               <Radio value={expiryDate}>
                 <Input type='date' value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)}></Input>
-                {/* {FormItem({
-                  name: 'closingDate',
-                  label: 'Posting Expiration Date',
-                  type: 'date',
-                  optional: true,
-                  fieldType: 'input',
-                })} */}
               </Radio>
             </Radio.Group>
-          </Form.Item>
-
-          {/* Minimum rate Field */}
+          </Form.Item> */}
+          {FormItem({
+            name: 'closingDate',
+            label: 'Posting Expiration Date',
+            type: 'date',
+            fieldType: 'input',
+            rules: [{ required: true, message: "This field is required" }]
+          })}
           {FormItem({
             name: 'openingDate',
             label: 'Opening Date',
             type: 'date',
-            optional: true,
-            placeholder: 'e.g 20',
             fieldType: 'input',
           })}
           {/* Minimum rate Field */}
@@ -379,7 +376,6 @@ const PostJob = () => {
             fileProps: { ...logoProps },
             label: 'Logo',
             icon: <UploadOutlined />,
-            optional: true,
             fileType: 'picture',
             placeholder: 'Maximum file size: 50 MB.',
             fieldType: 'upload',
@@ -435,7 +431,6 @@ const PostJob = () => {
             name: 'headerImage',
             fileProps: { ...headerProps },
             label: 'Header Image',
-            optional: true,
             icon: <UploadOutlined />,
             placeholder: 'The header image size should be atleast 1750x425',
             fieldType: 'upload',

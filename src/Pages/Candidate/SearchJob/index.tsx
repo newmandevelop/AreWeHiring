@@ -35,6 +35,7 @@ export default function SearchJob() {
             if (response) {
                 setSearchedJobs(response.data)
                 if (response.data.length === 0) { setMessage("No Data Availabe") }
+                else setMessage('')
             }
         }
         catch (error) {

@@ -34,7 +34,6 @@ function* login(action: any) {
         Authentication.login,
         login,
       );
-      console.log('login responce', response);
       if (response) yield put(Actions.loginSuccess(response.data));
     }
   } catch (error) {

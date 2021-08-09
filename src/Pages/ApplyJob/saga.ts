@@ -14,7 +14,7 @@ function* applyJob(action: any) {
     }
   } catch (error) {
     console.log(error);
-    yield put(Actions.applyJobFailure(error.message));
+    yield put(Actions.applyJobFailure(error.response.data.message));
   }
 }
 

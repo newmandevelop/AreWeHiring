@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import Dashboard from '../../../../Containers/Dashboard';
-import { Divider, Form, Upload, notification, Typography, Space, DatePicker } from 'antd';
+import { Divider, Form, Upload, notification, Typography, Space, DatePicker, Tag, Input } from 'antd';
+import Label from '../../../../Components/Label';
 import { getAllCompanies } from '../../../../service/companies';
 import styles from './index.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -47,7 +48,22 @@ const PostJob = () => {
     const [recruiterIds, setRecruiterIds] = useState<[]>([]);
     const [datePosted, setDatePosted] = useState("")
     const [expiryDate, setExpiryDate] = useState("")
-    let [jobTags, setJobTags] = useState("")
+    const [tags, setTags] = useState<Array<string>>([]);
+
+    const [inputText, setInputText] = useState<string>('');
+
+    const inputKeyDown = (e: any) => {
+        if (e.key === 'Enter') {
+            const tagValue = tags;
+            if (tagValue.find(tag => tag.toLowerCase() === inputText.toLowerCase())) {
+                setInputText('');
+            } else {
+                tagValue.push(inputText);
+                setTags(tagValue);
+                setInputText('');
+            }
+        }
+    };
     let formData = new FormData();
     const {
         updateJobErrorMessage,
@@ -80,7 +96,7 @@ const PostJob = () => {
                 employer: values.employer,
                 datePosted: values.openingDate,
                 expiryDate: values.closingDate,
-                jobTags: ["Java", "PHP"],
+                jobTags: tags,
                 rolesAndResponsibilities: roles,
                 jobUrl: values.application,
                 hoursPerWeek: values.hours,
@@ -166,13 +182,13 @@ const PostJob = () => {
     }
 
     useEffect(() => {
-        let tags = ""
-        editJobData.jobTags?.map(job => { tags += job + ", "; })
+        let tags: [] = []
+        editJobData.jobTags?.map(tag => { tags.push(tag) })
         const datePosted = editJobData.datePosted ? new Date(editJobData.datePosted) : ""
         if (datePosted !== "") setDatePosted(datePosted.toDateString())
         const expiryDate = editJobData.expiryDate ? new Date(editJobData.expiryDate) : ""
         if (expiryDate !== "") setExpiryDate(expiryDate.toDateString())
-        setJobTags(tags)
+        setTags(tags)
         form.resetFields()
     }, [editJobData]);
 
@@ -197,7 +213,7 @@ const PostJob = () => {
                         placeholder: 'Select Company',
                         fieldType: 'dropDown',
                         options: companies,
-                        onChange: (value: string) => { getAllRecruiters(value) },
+                        // onChange: (value: string) => { getAllRecruiters(value) },
                         rules: [{ required: true, message: "This field is required" }],
                         initialValue: editJobData.company
                     })}
@@ -246,15 +262,35 @@ const PostJob = () => {
                         initialValue: editJobData.jobCategory
                     })}
                     {/* Job Tags Input Field */}
-
-                    {FormItem({
-                        name: 'jobTags',
-                        label: 'Job Tags',
-                        optional: true,
-                        placeholder: 'e.g PHP, Social Media Management',
-                        fieldType: 'tagField',
-                        initialValue: jobTags
-                    })}
+                    <div className={styles.tagsInput}>
+                        <Label label="Job Tags" />
+                        <div className={styles.input_tag}>
+                            <ul className={styles.input_tags_list}>
+                                {tags &&
+                                    tags.map((d: any) => {
+                                        return (
+                                            <li className={styles.tagItems} key={d}>
+                                                <Tag color="#3489cf">
+                                                    {' '}
+                                                    {/* <CloseOutlined className={styles.deleteIcon} /> */}
+                                                    {d}
+                                                </Tag>
+                                            </li>
+                                        );
+                                    })}
+                                <li>
+                                    <Input
+                                        className={styles.input}
+                                        value={inputText}
+                                        onChange={e => setInputText(e.target.value)}
+                                        onKeyDown={inputKeyDown}
+                                        type="text"
+                                        placeholder="e.g PHP, Social Media Management"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     {/* Recruiter Type Input Field */}
                     {FormItem({
                         name: 'recruiterType',
@@ -272,8 +308,8 @@ const PostJob = () => {
                         optional: true,
                         placeholder: 'Enter Employer',
                         fieldType: 'dropDown',
-                        options: recruiters,
-                        initialValue: editJobData.employer
+                        options: companies,
+                        // initialValue: editJobData.employer
                     })}
                     {/*Industry Input Field */}
                     {FormItem({

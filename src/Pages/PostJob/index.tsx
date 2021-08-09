@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Dashboard from '../../Containers/Dashboard';
-import { Radio, Divider, Form, Upload, notification, Typography, Space, Input } from 'antd';
+import { Radio, Divider, Form, Upload, notification, Typography, Space, Input, Tag } from 'antd';
+import Label from '../../Components/Label';
 import { getAllCompanies } from '../../service/companies';
 import styles from './index.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -43,6 +44,22 @@ const PostJob = () => {
   const [recruiterIds, setRecruiterIds] = useState<[]>([]);
   const [expiryDate, setExpiryDate] = useState('')
   const [value, setValue] = useState()
+  const [tags, setTags] = useState<Array<string>>([]);
+
+  const [inputText, setInputText] = useState<string>('');
+
+  const inputKeyDown = (e: any) => {
+    if (e.key === 'Enter') {
+      const tagValue = tags;
+      if (tagValue.find(tag => tag.toLowerCase() === inputText.toLowerCase())) {
+        setInputText('');
+      } else {
+        tagValue.push(inputText);
+        setTags(tagValue);
+        setInputText('');
+      }
+    }
+  };
   let formData = new FormData();
   const {
     addJobErrorMessage,
@@ -79,7 +96,7 @@ const PostJob = () => {
         datePosted: values.openingDate,
         expiryDate: values.closingDate,
         jobCategory: values.jobCategory,
-        jobTags: ['Java'],
+        jobTags: tags,
         jobUrl: values.application,
         hoursPerWeek: values.hours,
         externalLink: values.external,
@@ -226,13 +243,35 @@ const PostJob = () => {
               'Technology', 'Cyber Security', 'Software', 'Telecommunications', 'Transport and Logistics']
           })}
           {/* Job Tags Input Field */}
-          {FormItem({
-            name: 'jobTags',
-            label: 'Job Tags',
-            optional: true,
-            placeholder: 'e.g PHP, Social Media Management',
-            fieldType: 'tagField',
-          })}
+          <div className={styles.tagsInput}>
+            <Label label="Job Tags" />
+            <div className={styles.input_tag}>
+              <ul className={styles.input_tags_list}>
+                {tags &&
+                  tags.map((d: any) => {
+                    return (
+                      <li className={styles.tagItems} key={d}>
+                        <Tag color="#3489cf">
+                          {' '}
+                          {/* <CloseOutlined className={styles.deleteIcon} /> */}
+                          {d}
+                        </Tag>
+                      </li>
+                    );
+                  })}
+                <li>
+                  <Input
+                    className={styles.input}
+                    value={inputText}
+                    onChange={e => setInputText(e.target.value)}
+                    onKeyDown={inputKeyDown}
+                    type="text"
+                    placeholder="e.g PHP, Social Media Management"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
           {/* Recruiter Type Input Field */}
           {FormItem({
             name: 'recruiterType',
